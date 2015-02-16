@@ -27,8 +27,15 @@ SceneSP::~SceneSP()
 {
 }
 
-void SceneSP::Init()
+void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 {
+	xpos = w / 2;
+	ypos = h / 2;
+
+	glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetCursorPos(m_window, xpos, ypos);
+
+	
 	// Init VBO here
 
 	// Set background color to dark blue
@@ -150,9 +157,12 @@ void SceneSP::Init()
 }
 
 
-void SceneSP::Update(double dt)
+void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 {
-	
+	glfwGetCursorPos(m_window, &xpos, &ypos);
+	glfwSetCursorPos(m_window, w / 2, h / 2);
+		
+
 	if(Application::IsKeyPressed('1'))
 	{
 		glEnable(GL_CULL_FACE);
@@ -181,7 +191,7 @@ void SceneSP::Update(double dt)
 
 	if ( gamestate != MAINMENU )
 	{
-		camera.Update(dt);
+		camera.Update(dt, w / 2, h / 2, &xpos, &ypos);
 	}
 }
 

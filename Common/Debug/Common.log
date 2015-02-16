@@ -1,17 +1,17 @@
-﻿Build started 16/2/2015 1:41:17 PM.
-     1>Project "C:\Users\Admin.RP\Desktop\SP2\Common\Common.vcxproj" on node 2 (build target(s)).
+﻿Build started 16/2/2015 2:33:35 PM.
+     1>Project "C:\Users\job1997\Desktop\SP2Git\Common\Common.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\Common.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
          All outputs are up-to-date.
        Lib:
          All outputs are up-to-date.
-         Common.vcxproj -> C:\Users\Admin.RP\Desktop\SP2\Debug\Common.lib
+         Common.vcxproj -> C:\Users\job1997\Desktop\SP2Git\Debug\Common.lib
        FinalizeBuildStatus:
          Deleting file "Debug\Common.unsuccessfulbuild".
          Touching "Debug\Common.lastbuildstate".
-     1>Done Building Project "C:\Users\Admin.RP\Desktop\SP2\Common\Common.vcxproj" (build target(s)).
+     1>Done Building Project "C:\Users\job1997\Desktop\SP2Git\Common\Common.vcxproj" (build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.13
+Time Elapsed 00:00:00.06

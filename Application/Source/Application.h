@@ -4,6 +4,15 @@
 
 #include "timer.h"
 
+//Include GLEW
+#include <GL/glew.h>
+
+//Include GLFW
+#include <GLFW/glfw3.h>
+
+//Include the standard C++ headers
+#include <stdio.h>
+#include <stdlib.h>
 class Application
 {
 public:
@@ -14,7 +23,13 @@ public:
 	void Exit();
 	static bool IsKeyPressed(unsigned short key);
 
+	int getWidth();
+	int getHeight();
+
 private:
+
+	int width;
+	int height;
 
 	//Declare a window object
 	StopWatch m_timer;

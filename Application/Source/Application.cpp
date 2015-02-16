@@ -1,16 +1,6 @@
 
 #include "Application.h"
 
-//Include GLEW
-#include <GL/glew.h>
-
-//Include GLFW
-#include <GLFW/glfw3.h>
-
-//Include the standard C++ headers
-#include <stdio.h>
-#include <stdlib.h>
-
 #include "SceneSP.h"
 
 GLFWwindow* m_window;
@@ -51,6 +41,9 @@ Application::~Application()
 
 void Application::Init()
 {
+	width = 800;
+	height = 600;
+
 	//Set the error callback
 	glfwSetErrorCallback(error_callback);
 
@@ -98,16 +91,27 @@ void Application::Init()
 		glfwSetWindowSizeCallback(m_window, resize_callback);
 }
 
+int Application::getHeight()
+{
+	return height;
+}
+
+int Application::getWidth()
+{
+	return width;
+}
+
+
 void Application::Run()
 {
 	//Main Loop
 	Scene *scene = new SceneSP();
-	scene->Init();
+	scene->Init(m_window, width, height);
 
 	m_timer.startTimer();    // Start timer to calculate how long it takes to render this frame
 	while (!glfwWindowShouldClose(m_window) && !IsKeyPressed(VK_ESCAPE))
 	{
-		scene->Update(m_timer.getElapsedTime());
+		scene->Update(m_timer.getElapsedTime(), m_window, width, height);
 		scene->Render();
 		//Swap buffers
 		glfwSwapBuffers(m_window);

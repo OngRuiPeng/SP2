@@ -6,7 +6,7 @@
 #include "MeshBuilder.h"
 #include "MatrixStack.h"
 #include "Light.h"
-
+#include "GLFW\glfw3.h"
 
 class SceneSP : public Scene
 {
@@ -71,8 +71,8 @@ public:
 	SceneSP();
 	~SceneSP();
 
-	virtual void Init();
-	virtual void Update(double dt);
+	virtual void Init(GLFWwindow* m_window, float w, float h);
+	virtual void Update(double dt, GLFWwindow* m_window, float w, float h);
 	virtual void Render();
 	virtual void Exit();
 	float translateX;
@@ -87,6 +87,9 @@ public:
 	void RenderCharacter();
 	void RenderSkybox();
 	void RenderMainMenu();
+
+	double xpos;
+	double ypos;
 	
 private:
 	unsigned m_vertexArrayID;
