@@ -82,7 +82,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="InitLight.cpp" />
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\Camera2.cpp" />
@@ -93,6 +92,7 @@
     <ClCompile Include="Source\Mesh.cpp" />
     <ClCompile Include="Source\MeshBuilder.cpp" />
     <ClCompile Include="Source\RenderCharacter.cpp" />
+    <ClCompile Include="Source\RenderFunctions.cpp" />
     <ClCompile Include="Source\RenderSkybox.cpp" />
     <ClCompile Include="Source\SceneSP.cpp" />
     <ClCompile Include="Source\shader.cpp" />
@@ -109,8 +109,6 @@
     <ClInclude Include="Source\Material.h" />
     <ClInclude Include="Source\Mesh.h" />
     <ClInclude Include="Source\MeshBuilder.h" />
-    <ClInclude Include="Source\RenderCharacter.h" />
-    <ClInclude Include="Source\RenderSkybox.h" />
     <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\SceneSP.h" />
     <ClInclude Include="Source\shader.hpp" />
