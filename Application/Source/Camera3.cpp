@@ -109,64 +109,7 @@ void Camera3::Update(double dt)
 	}
 
 
-	// boundary for inside castle
-	if (position.x > -50 && position.x < 75 && position.z > -90 && position.z < 0 ) 
-	{
-		position.y = 35; 
-	
-		if ( position.z > -10 )
-			position.z = -10 ; 
-
-		if ( position.z < -80) 
-			position.z = -80;
-
-		if (position.x < -45) 
-			position.x = -45 ;
-
-	}
-	else
 	position.y = 20;
-
-	//collision for left of castle 
-	if (position.x < 75 && position.x > -80 && position.z > 120 )
-	{
-		if (position.z < 130 )
-			position.z = 130 ; 
-
-	}
-
-	//collision for right of castle
-	if (position.x < 75 && position.x > -80 && position.z < -120 )
-	{
-		if (position.z > -125 )
-			position.z = -125 ; 
-
-	}
-
-	//collision for back of castle 
-	if ( position.z < 120 && position.z > -120 && position.x < -70)
-	{
-		if (position.x > -80 )
-			position.x = -80;
-	}
-
-	//collision for front of castle left side 
-	if ( position.z > -10 && position.z < 130 && position.x > 75 ) 
-	{
-		if (position.x < 85 )
-		{
-			position.x = 85 ;
-		}
-	}
-
-	//collision for front of castle right side 
-	if ( position.z > -120 && position.z < -80 && position.x > 75 ) 
-	{
-		if (position.x < 85 )
-		{
-			position.x = 85 ;
-		}
-	}
 
 	if ( position.x >= 480) 
 	{

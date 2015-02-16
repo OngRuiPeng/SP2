@@ -13,12 +13,12 @@ class SceneSP : public Scene
 	enum GEOMETRY_TYPE
 	{
 		GEO_AXES,
-		GEO_QUAD,
+		GEO_MainMenuScreen,
 		GEO_CUBE,
 		GEO_CIRCLE,
 		GEO_RING,
 		GEO_SPHERE,
-		GEO_TEXT,
+		GEO_MainMenuText,
 		GEO_LEFT,
 		GEO_RIGHT,
 		GEO_TOP,
@@ -81,11 +81,12 @@ public:
 	float rotatedoor;
 	float scaleAll;
 	float scalekirby;
-	void RenderCharacter();
-	void RenderSkybox();
-
+	int gamestate;
 	Camera3 camera;	
 
+	void RenderCharacter();
+	void RenderSkybox();
+	void RenderMainMenu();
 	
 private:
 	unsigned m_vertexArrayID;

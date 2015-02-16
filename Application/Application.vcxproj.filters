@@ -71,6 +71,9 @@
     <ClCompile Include="Source\RenderFunctions.cpp">
       <Filter>Source Files\RenderStuff</Filter>
     </ClCompile>
+    <ClCompile Include="Source\RenderMainMenu.cpp">
+      <Filter>Source Files\RenderStuff</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">

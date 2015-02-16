@@ -100,7 +100,7 @@ void SceneSP::Init()
 	m_parameters[U_MVP] = glGetUniformLocation(m_programID, "MVP");
 
 	//Initialize camera settings
-	camera.Init(Vector3(200, 20, 100), Vector3(0, 0, 0), Vector3(0, 1, 0));
+	camera.Init(Vector3(20, 20, 10), Vector3(0, 20, 0), Vector3(0, 1, 0));
 
 	//After gluseprogram
 	glUniform1i(m_parameters[U_NUMLIGHTS], 2);
@@ -114,9 +114,13 @@ void SceneSP::Init()
 	glUniform1f(m_parameters[U_LIGHT0_COSINNER], lights[0].cosInner);
 	glUniform1f(m_parameters[U_LIGHT0_EXPONENT], lights[0].exponent);
 
+	//variables
+	gamestate = MAINMENU;
+
 	//remove all glGenBuffers, glBindBuffer, glBufferData code
 	meshList[GEO_AXES] = MeshBuilder::GenerateAxes("reference", 1000, 1000, 1000);
 
+	meshList[GEO_MainMenuScreen] = MeshBuilder::GenerateQuad("main menu screen", Color(1, 0, 0), 1000, 1000);
 
 	meshList[GEO_RIGHT] = MeshBuilder::GenerateQuad("right", Color(1, 1, 1), 1.f , 1.f);
 	meshList[GEO_RIGHT]->textureID = LoadTGA("Image//right3.tga");
@@ -136,17 +140,12 @@ void SceneSP::Init()
 	meshList[GEO_BACK] = MeshBuilder::GenerateQuad("back", Color(1, 1, 1),1.f ,  1.f);
 	meshList[GEO_BACK]->textureID = LoadTGA("Image//back3.tga");
 
-	meshList[GEO_TEXT] = MeshBuilder::GenerateText("text", 16, 16);
-	meshList[GEO_TEXT]->textureID = LoadTGA("Image//ExportedFont.tga");
-
-	
-	meshList[GEO_LIGHTBALL] = MeshBuilder::GenerateSphere("lightball", Color(1,1,1), 10, 10,1);
-
+	meshList[GEO_MainMenuText] = MeshBuilder::GenerateText("text", 16, 16);
+	meshList[GEO_MainMenuText]->textureID = LoadTGA("Image//ExportedFont.tga");
 
 	Mtx44 projection;
 	projection.SetToPerspective(45.0f,4.0f/3.0f, 0.01f, 100000.0f);
 	projectionStack.LoadMatrix(projection);
-
 
 }
 
@@ -170,25 +169,20 @@ void SceneSP::Update(double dt)
 	{
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
-
+	if(Application::IsKeyPressed('5'))
+	{
+		gamestate =	GAMEROAM;
+	}
+	if(Application::IsKeyPressed('6'))
+	{
+		gamestate = MAINMENU;
+	}
 	FPS = 1 / dt ; 
 
-
-	if(Application::IsKeyPressed('I'))
-		lights[0].position.z -= (float)(LSPEED * dt);
-	if(Application::IsKeyPressed('K'))
-		lights[0].position.z += (float)(LSPEED * dt);
-	if(Application::IsKeyPressed('J'))
-		lights[0].position.x -= (float)(LSPEED * dt);
-	if(Application::IsKeyPressed('L'))
-		lights[0].position.x += (float)(LSPEED * dt);
-	if(Application::IsKeyPressed('O'))
-		lights[0].position.y -= (float)(LSPEED * dt);
-	if(Application::IsKeyPressed('P'))
-		lights[0].position.y += (float)(LSPEED * dt);
-
-
-	camera.Update(dt);
+	if ( gamestate != MAINMENU )
+	{
+		camera.Update(dt);
+	}
 }
 
 void SceneSP::Render()
@@ -222,17 +216,17 @@ void SceneSP::Render()
 		glUniform3fv(m_parameters[U_LIGHT0_POSITION], 1, &lightPosition_cameraspace.x);
 	}
 
-	RenderSkybox();
+	if ( gamestate == MAINMENU )
+	{
+		RenderMainMenu();
+	}
+	else
+	{
+		RenderSkybox();
 
-	RenderCharacter();
+		RenderCharacter();
+	}
 
-	RenderTextOnScreen(meshList[GEO_TEXT], "Press Y to turn Coordinates display on/off" , Color(1, 0, 0), 2.5 , 1.5, 2.5);
-
-	RenderTextOnScreen(meshList[GEO_TEXT], "F P S =" , Color(1, 0, 0), 2.5, 1, 0.5);
-	RenderTextOnScreen(meshList[GEO_TEXT], Convert(FPS) , Color(1, 0, 0), 2.5, 5, 0.5);
-
-	RenderTextOnScreen(meshList[GEO_TEXT], "W ,A ,S,D to move,arrow keys to view , B to open/close door " , Color(1, 0, 0), 2.5, 1, 1.5);
-	//RenderTextOnScreen(meshList[GEO_TEXT], Convert(FPS) , Color(1, 0, 0), 2.5, 5.5, 0.5);
 }
 
 void SceneSP::Exit()
