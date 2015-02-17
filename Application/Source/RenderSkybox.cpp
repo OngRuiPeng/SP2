@@ -2,8 +2,6 @@
 
 void SceneSP::RenderSkybox()
 {
-	modelStack.PushMatrix();
-	modelStack.Translate(0, 18, 0);
 
 	modelStack.PushMatrix();
 	//scale, translate, rotate
@@ -58,5 +56,4 @@ void SceneSP::RenderSkybox()
 	modelStack.PopMatrix();
 
 
-	modelStack.PopMatrix();
 }

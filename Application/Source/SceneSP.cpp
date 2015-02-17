@@ -107,7 +107,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	m_parameters[U_MVP] = glGetUniformLocation(m_programID, "MVP");
 
 	//Initialize camera settings
-	camera.Init(Vector3(0, 20, -40), Vector3(0, 20, 0), Vector3(0, 1, 0));
+	camera.Init(Vector3(0, 9, -40), Vector3(0, 9, 0), Vector3(0, 1, 0));
 
 	//After gluseprogram
 	glUniform1i(m_parameters[U_NUMLIGHTS], 2);
@@ -132,11 +132,8 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 
 	initSkybox();
 
-
 	meshList[GEO_MainMenuText] = MeshBuilder::GenerateText("text", 16, 16);
 	meshList[GEO_MainMenuText]->textureID = LoadTGA("Image//ExportedFont.tga");
-
-
 
 	Mtx44 projection;
 	projection.SetToPerspective(45.0f,4.0f/3.0f, 0.01f, 100000.0f);
