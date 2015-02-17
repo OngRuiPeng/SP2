@@ -14,7 +14,7 @@ class SceneSP : public Scene
 	{
 		GEO_AXES,
 		GEO_MainMenuScreen,
-		GEO_PlayScreen,
+		GEO_ChooseScreen,
 		GEO_CUBE,
 		GEO_CIRCLE,
 		GEO_RING,
@@ -37,6 +37,7 @@ class SceneSP : public Scene
 		CHOOSEMODE,
 		GAMEROAM,
 		GAMECHECKOUT,
+		GAMETHIEF,
 		GAMEFUN,
 		MAX_STATES,
 	};

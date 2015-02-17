@@ -130,10 +130,13 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	meshList[GEO_MainMenuScreen] = MeshBuilder::GenerateQuad("main menu screen", Color(1, 0, 0), 100, 100);
 	meshList[GEO_MainMenuScreen]->textureID = LoadTGA("Image//MainMenu.tga");
 
+	meshList[GEO_ChooseScreen] = MeshBuilder::GenerateQuad("choose mode screen", Color( 1, 1, 1), 1, 1);
+	meshList[GEO_ChooseScreen]->textureID = LoadTGA("Image//PlayScreen.tga");
+
 	initSkybox();
 
-	meshList[GEO_MainMenuText] = MeshBuilder::GenerateText("text", 16, 16);
-	meshList[GEO_MainMenuText]->textureID = LoadTGA("Image//ExportedFont.tga");
+	meshList[GEO_SUPERMARKET] = MeshBuilder::GenerateOBJ("Supermarket", "OBJ//Supermarket.obj");
+	meshList[GEO_SUPERMARKET]->textureID = LoadTGA("Image//WallTxt.tga");
 
 	Mtx44 projection;
 	projection.SetToPerspective(45.0f,4.0f/3.0f, 0.01f, 100000.0f);
@@ -161,8 +164,6 @@ void SceneSP::initSkybox()
 	meshList[GEO_BACK] = MeshBuilder::GenerateQuad("back", Color(1, 1, 1), 1.f ,  1.f);
 	meshList[GEO_BACK]->textureID = LoadTGA("Image//back3.tga");
 
-	meshList[GEO_SUPERMARKET] = MeshBuilder::GenerateOBJ("Supermarket", "OBJ//Supermarket.obj");
-	meshList[GEO_SUPERMARKET]->textureID = LoadTGA("Image//WallTxt.tga");
 }
 
 
@@ -202,24 +203,46 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL); //enable cursor
 		/*camera.Update(dt, w / 2, h / 2, &xpos, &ypos);*/
 		int state = glfwGetMouseButton(m_window, GLFW_MOUSE_BUTTON_LEFT); // check for clicks
-		if( state == GLFW_PRESS && (*xposition > 44 && *xposition < 178 && *yposition > 46 && *yposition < 69) )
+		if( state == GLFW_PRESS && (*xposition > 285 && *xposition < 515 && *yposition > 185 && *yposition < 263) )
 		{
-			// gamestate == CHOOSEMODE , temp
-			gamestate =	GAMEROAM;
+			gamestate = CHOOSEMODE;
+		}
+		std::cout << xpos << std::endl;
+		std::cout << ypos << std::endl;
+	}
+
+	if ( gamestate == CHOOSEMODE )
+	{
+		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL); //enable cursor
+		/*camera.Update(dt, w / 2, h / 2, &xpos, &ypos);*/
+		int state = glfwGetMouseButton(m_window, GLFW_MOUSE_BUTTON_LEFT); // check for clicks
+		if( state == GLFW_PRESS && (*xposition > 54 && *xposition < 285 && *yposition > 101 && *yposition < 179))
+		{
+			gamestate = GAMEROAM;
+			xpos = w / 2;
+			ypos = h / 2;
+		}
+		if( state == GLFW_PRESS && (*xposition > 54 && *xposition < 285 && *yposition > 221 && *yposition < 279))
+		{
+			gamestate =	GAMECHECKOUT;
+			xpos = w / 2;
+			ypos = h / 2;
+		}
+		if( state == GLFW_PRESS && (*xposition > 54 && *xposition < 285 && *yposition > 341 && *yposition < 419))
+		{
+			gamestate = GAMETHIEF;
+			xpos = w / 2;
+			ypos = h / 2;
+		}
+		if( state == GLFW_PRESS && (*xposition > 54 && *xposition < 285 && *yposition > 466 && *yposition < 544))
+		{
+			gamestate = GAMEFUN;
 			xpos = w / 2;
 			ypos = h / 2;
 		}
 	}
-
-	else if ( gamestate == CHOOSEMODE )
-	{
-		int state = glfwGetMouseButton(m_window, GLFW_MOUSE_BUTTON_LEFT); // check for clicks
-		xpos = w / 2;
-		ypos = h / 2;
-		// choosemode & mouseclick here
-	}
 	
-	if ( gamestate != MAINMENU )
+	if ( gamestate != MAINMENU && gamestate != CHOOSEMODE)
 	{
 		glfwSetCursorPos(m_window, w / 2, h / 2); // set cursor to middle
 		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED); // disable cursor
@@ -264,7 +287,7 @@ void SceneSP::Render()
 	}
 	else if ( gamestate == CHOOSEMODE )
 	{
-		/*RenderChooseMode();*/
+		RenderChooseMode();
 	}
 	else 
 	{
