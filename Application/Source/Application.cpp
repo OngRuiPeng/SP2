@@ -20,7 +20,11 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GL_TRUE);
 }
-
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+{
+	if(button == GLFW_MOUSE_BUTTON_RIGHT);
+		
+}
 void resize_callback(GLFWwindow* window, int w,int h)
 {
 	glViewport(0,0,w,h);
@@ -75,8 +79,9 @@ void Application::Init()
 	//This function makes the context of the specified window current on the calling thread. 
 	glfwMakeContextCurrent(m_window);
 
-	//Sets the key callback
-	//glfwSetKeyCallback(m_window, key_callback);
+	//Sets the mouse callback
+	glfwSetMouseButtonCallback(m_window, mouse_button_callback);
+	glfwSetInputMode(m_window, GLFW_STICKY_MOUSE_BUTTONS, 1);	
 
 	glewExperimental = true; // Needed for core profile
 	//Initialize GLEW

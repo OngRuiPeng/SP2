@@ -17,6 +17,7 @@ using namespace std;
 
 #include "Camera3.h"
 
+#include "windows.h"
 #define LSPEED 20.f 
 
 SceneSP::SceneSP()
@@ -107,7 +108,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	m_parameters[U_MVP] = glGetUniformLocation(m_programID, "MVP");
 
 	//Initialize camera settings
-	camera.Init(Vector3(20, 20, 10), Vector3(0, 20, 0), Vector3(0, 1, 0));
+	camera.Init(Vector3(0, 20, -40), Vector3(0, 20, 0), Vector3(0, 1, 0));
 
 	//After gluseprogram
 	glUniform1i(m_parameters[U_NUMLIGHTS], 2);
@@ -127,7 +128,8 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	//remove all glGenBuffers, glBindBuffer, glBufferData code
 	meshList[GEO_AXES] = MeshBuilder::GenerateAxes("reference", 1000, 1000, 1000);
 
-	meshList[GEO_MainMenuScreen] = MeshBuilder::GenerateQuad("main menu screen", Color(1, 0, 0), 1000, 1000);
+	meshList[GEO_MainMenuScreen] = MeshBuilder::GenerateQuad("main menu screen", Color(1, 0, 0), 100, 100);
+	meshList[GEO_MainMenuScreen]->textureID = LoadTGA("Image//MainMenu.tga");
 
 	meshList[GEO_RIGHT] = MeshBuilder::GenerateQuad("right", Color(1, 1, 1), 1.f , 1.f);
 	meshList[GEO_RIGHT]->textureID = LoadTGA("Image//right3.tga");
@@ -144,7 +146,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	meshList[GEO_FRONT] = MeshBuilder::GenerateQuad("front", Color(1, 1, 1),1.f ,  1.f);
 	meshList[GEO_FRONT]->textureID = LoadTGA("Image//front3.tga");
 
-	meshList[GEO_BACK] = MeshBuilder::GenerateQuad("back", Color(1, 1, 1),1.f ,  1.f);
+	meshList[GEO_BACK] = MeshBuilder::GenerateQuad("back", Color(1, 1, 1), 1.f ,  1.f);
 	meshList[GEO_BACK]->textureID = LoadTGA("Image//back3.tga");
 
 	meshList[GEO_MainMenuText] = MeshBuilder::GenerateText("text", 16, 16);
@@ -160,8 +162,10 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 {
 	glfwGetCursorPos(m_window, &xpos, &ypos);
-	glfwSetCursorPos(m_window, w / 2, h / 2);
-		
+	xposition = &xpos;
+	yposition = &ypos;
+	
+	FPS = 1.0 / dt ; 
 
 	if(Application::IsKeyPressed('1'))
 	{
@@ -179,18 +183,39 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	{
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
-	if(Application::IsKeyPressed('5'))
-	{
-		gamestate =	GAMEROAM;
-	}
+	
 	if(Application::IsKeyPressed('6'))
 	{
 		gamestate = MAINMENU;
 	}
-	FPS = 1 / dt ; 
 
+	//Game states
+	if ( gamestate == MAINMENU )
+	{
+		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL); //enable cursor
+		/*camera.Update(dt, w / 2, h / 2, &xpos, &ypos);*/
+		int state = glfwGetMouseButton(m_window, GLFW_MOUSE_BUTTON_LEFT); // check for clicks
+		if( state == GLFW_PRESS && (*xposition > 44 && *xposition < 178 && *yposition > 46 && *yposition < 69) )
+		{
+			// gamestate == CHOOSEMODE , temp
+			gamestate =	GAMEROAM;
+			xpos = w / 2;
+			ypos = h / 2;
+		}
+	}
+
+	else if ( gamestate == CHOOSEMODE )
+	{
+		int state = glfwGetMouseButton(m_window, GLFW_MOUSE_BUTTON_LEFT); // check for clicks
+		xpos = w / 2;
+		ypos = h / 2;
+		// choosemode & mouseclick here
+	}
+	
 	if ( gamestate != MAINMENU )
 	{
+		glfwSetCursorPos(m_window, w / 2, h / 2); // set cursor to middle
+		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED); // disable cursor
 		camera.Update(dt, w / 2, h / 2, &xpos, &ypos);
 	}
 }
@@ -230,7 +255,11 @@ void SceneSP::Render()
 	{
 		RenderMainMenu();
 	}
-	else
+	else if ( gamestate == CHOOSEMODE )
+	{
+		/*RenderChooseMode();*/
+	}
+	else 
 	{
 		RenderSkybox();
 

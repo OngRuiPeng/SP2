@@ -26,7 +26,8 @@ void Camera3::Update(double dt,float width, float height, double* xpos, double* 
 {
 	double mouseX = width;
 	double mouseY = height;
-
+	std::cout << *xpos << std::endl;
+	std::cout << *ypos << std::endl;
 	static const float CAMERA_SPEED = 20.f;
 	static const float MOVE_SPEED = 100.0f;
 

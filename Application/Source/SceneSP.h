@@ -14,6 +14,7 @@ class SceneSP : public Scene
 	{
 		GEO_AXES,
 		GEO_MainMenuScreen,
+		GEO_PlayScreen,
 		GEO_CUBE,
 		GEO_CIRCLE,
 		GEO_RING,
@@ -32,6 +33,7 @@ class SceneSP : public Scene
 	enum GAME_STATE
 	{
 		MAINMENU,
+		CHOOSEMODE,
 		GAMEROAM,
 		GAMECHECKOUT,
 		GAMEFUN,
@@ -84,12 +86,23 @@ public:
 	int gamestate;
 	Camera3 camera;	
 
+	//Render
 	void RenderCharacter();
 	void RenderSkybox();
 	void RenderMainMenu();
+	void RenderChooseMode();
+	//update
+	void updateMainMenu();
+	void updateChooseMode();
+	void updateRoam();
+	void updateCheckOut();
+	void updateFun();
 
+	void mouseInput(double* xpos, double* ypos);
 	double xpos;
 	double ypos;
+	double* xposition;
+	double* yposition;
 	
 private:
 	unsigned m_vertexArrayID;
@@ -105,9 +118,8 @@ private:
 	void RenderText(Mesh* mesh, std::string text, Color color);
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
 
-	float FPS; 
+	double FPS; 
 
-	
 
 };
 #endif
