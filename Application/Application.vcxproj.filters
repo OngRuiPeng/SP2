@@ -74,6 +74,9 @@
     <ClCompile Include="Source\RenderMainMenu.cpp">
       <Filter>Source Files\RenderStuff</Filter>
     </ClCompile>
+    <ClCompile Include="Source\RenderSupermarket.cpp">
+      <Filter>Source Files\RenderStuff</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">

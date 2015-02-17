@@ -132,8 +132,11 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 
 	initSkybox();
 
+
 	meshList[GEO_MainMenuText] = MeshBuilder::GenerateText("text", 16, 16);
 	meshList[GEO_MainMenuText]->textureID = LoadTGA("Image//ExportedFont.tga");
+
+
 
 	Mtx44 projection;
 	projection.SetToPerspective(45.0f,4.0f/3.0f, 0.01f, 100000.0f);
@@ -160,7 +163,11 @@ void SceneSP::initSkybox()
 
 	meshList[GEO_BACK] = MeshBuilder::GenerateQuad("back", Color(1, 1, 1), 1.f ,  1.f);
 	meshList[GEO_BACK]->textureID = LoadTGA("Image//back3.tga");
+
+	meshList[GEO_SUPERMARKET] = MeshBuilder::GenerateOBJ("Supermarket", "OBJ//Supermarket.obj");
+	meshList[GEO_SUPERMARKET]->textureID = LoadTGA("Image//WallTxt.tga");
 }
+
 
 void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 {
@@ -265,7 +272,7 @@ void SceneSP::Render()
 	else 
 	{
 		RenderSkybox();
-
+		RenderSupermarket();
 		RenderCharacter();
 	}
 

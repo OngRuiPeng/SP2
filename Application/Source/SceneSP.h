@@ -26,6 +26,7 @@ class SceneSP : public Scene
 		GEO_BOTTOM,
 		GEO_FRONT,
 		GEO_BACK,
+		GEO_SUPERMARKET,
 		GEO_LIGHTBALL,
 		NUM_GEOMETRY,
 	};
@@ -87,7 +88,7 @@ public:
 	Camera3 camera;	
 	//Functions---------------------------------------
 	void initSkybox();
-
+	void initSupermarket();
 
 
 	//Render
@@ -95,6 +96,7 @@ public:
 	void RenderSkybox();
 	void RenderMainMenu();
 	void RenderChooseMode();
+	void RenderSupermarket();
 	//update
 	void updateMainMenu();
 	void updateChooseMode();

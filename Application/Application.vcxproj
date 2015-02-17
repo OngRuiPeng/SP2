@@ -95,6 +95,7 @@
     <ClCompile Include="Source\RenderFunctions.cpp" />
     <ClCompile Include="Source\RenderMainMenu.cpp" />
     <ClCompile Include="Source\RenderSkybox.cpp" />
+    <ClCompile Include="Source\RenderSupermarket.cpp" />
     <ClCompile Include="Source\SceneSP.cpp" />
     <ClCompile Include="Source\shader.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
