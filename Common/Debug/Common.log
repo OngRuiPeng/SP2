@@ -1,4 +1,4 @@
-﻿Build started 16/2/2015 2:33:35 PM.
+﻿Build started 17/2/2015 2:11:44 PM.
      1>Project "C:\Users\job1997\Desktop\SP2Git\Common\Common.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\Common.unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -14,4 +14,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.06
+Time Elapsed 00:00:00.11

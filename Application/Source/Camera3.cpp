@@ -29,7 +29,7 @@ void Camera3::Update(double dt,float width, float height, double* xpos, double* 
 	std::cout << *xpos << std::endl;
 	std::cout << *ypos << std::endl;
 	static const float CAMERA_SPEED = 20.f;
-	static const float MOVE_SPEED = 100.0f;
+	static const float MOVE_SPEED = 20.0f;
 
 	if(Application::IsKeyPressed('A')){
 		Vector3 view = (target - position).Normalize();
@@ -83,9 +83,10 @@ void Camera3::Update(double dt,float width, float height, double* xpos, double* 
 		temp_store += yaw;
 	}
 
-	if(Application::IsKeyPressed(VK_UP) && target.y < 200 || (*ypos < mouseY))
+	if(Application::IsKeyPressed(VK_UP) || (*ypos < mouseY))
 	{
 		float pitch = (float)(CAMERA_SPEED * dt * (mouseY - *ypos));
+
 		Vector3 view = (target - position).Normalized();
 		Vector3 right = view.Cross(up);
 		right.y = 0;
@@ -94,50 +95,45 @@ void Camera3::Update(double dt,float width, float height, double* xpos, double* 
 		Mtx44 rotation;
 		rotation.SetToRotation(pitch, right.x, right.y, right.z);
 		target = rotation * (target - position) + position;
-	}
 
-	if(Application::IsKeyPressed(VK_DOWN) && target.y > -100 || (*ypos > mouseY))
+	}
+	if(Application::IsKeyPressed(VK_DOWN) || (*ypos > mouseY))
 	{
 		float pitch = (float)(-CAMERA_SPEED * dt * (*ypos - mouseY));
-		Vector3 view = (target - position).Normalized();
-		Vector3 right = view.Cross(up);
-		right.y = 0;
-		right.Normalize();
-		up = right.Cross(view).Normalized();
-		Mtx44 rotation;
-		rotation.SetToRotation(pitch, right.x, right.y, right.z);
-		target = rotation * (target - position) + position;
+			Vector3 view = (target - position).Normalized();
+			Vector3 right = view.Cross(up);
+			right.y = 0;
+			right.Normalize();
+			up = right.Cross(view).Normalized();
+			Mtx44 rotation;
+			rotation.SetToRotation(pitch, right.x, right.y, right.z);
+			target = rotation * (target - position) + position;
+	}
+	if (position.x >= 49)
+	{
+		position.x = 49;
 	}
 
+	if (position.z <= -49)
+	{
+		position.z = -49;
+	}
+
+	if (position.x <= -49)
+	{
+		position.x = -49;
+	}
+
+	if (position.z >= 49)
+	{
+		position.z = 49;
+	}
 	if(Application::IsKeyPressed('R'))
 	{
 		Reset();
 	}
 
-
-	position.y = 20;
-
-	if ( position.x >= 480) 
-	{
-		position.x = 480; 
-	}
-
-	if ( position.x <= -480) 
-	{
-		position.x = -480; 
-	}
-
-	if ( position.z >= 480) 
-	{
-		position.z = 480; 
-	}
-
-	if ( position.z <= -480) 
-	{
-		position.z = -480; 
-	}
-	// end of boundary for skybox
-
+	std::cout << position.x << "\t" << position.y << "\t" << position.z << std::endl;
 }
 
 void Camera3::Reset()

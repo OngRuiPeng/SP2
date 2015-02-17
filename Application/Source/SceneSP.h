@@ -85,6 +85,10 @@ public:
 	float scalekirby;
 	int gamestate;
 	Camera3 camera;	
+	//Functions---------------------------------------
+	void initSkybox();
+
+
 
 	//Render
 	void RenderCharacter();

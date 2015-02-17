@@ -74,7 +74,6 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	m_parameters[U_LIGHTENABLED] = glGetUniformLocation(m_programID, "lightEnabled");
 	m_parameters[U_COLOR_TEXTURE_ENABLED] = glGetUniformLocation(m_programID, "colorTextureEnabled");
 	m_parameters[U_COLOR_TEXTURE] = glGetUniformLocation(m_programID, "colorTexture");
-		m_programID = LoadShaders( "Shader//Texture.vertexshader", "Shader//MultiLight.fragmentshader" );
 	m_parameters[U_LIGHT0_POSITION] = glGetUniformLocation(m_programID, "lights[0].position_cameraspace");
 	m_parameters[U_LIGHT0_COLOR] = glGetUniformLocation(m_programID, "lights[0].color");
 	m_parameters[U_LIGHT0_POWER] = glGetUniformLocation(m_programID, "lights[0].power");
@@ -131,23 +130,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	meshList[GEO_MainMenuScreen] = MeshBuilder::GenerateQuad("main menu screen", Color(1, 0, 0), 100, 100);
 	meshList[GEO_MainMenuScreen]->textureID = LoadTGA("Image//MainMenu.tga");
 
-	meshList[GEO_RIGHT] = MeshBuilder::GenerateQuad("right", Color(1, 1, 1), 1.f , 1.f);
-	meshList[GEO_RIGHT]->textureID = LoadTGA("Image//right3.tga");
-
-	meshList[GEO_LEFT] = MeshBuilder::GenerateQuad("left", Color(1, 1, 1), 1.f , 1.f);
-	meshList[GEO_LEFT]->textureID = LoadTGA("Image//left3.tga");
-
-	meshList[GEO_TOP] = MeshBuilder::GenerateQuad("top", Color(1, 1, 1), 1.f , 1.f);
-	meshList[GEO_TOP]->textureID = LoadTGA("Image//top3.tga");
-
-	meshList[GEO_BOTTOM] = MeshBuilder::GenerateQuad("bottom", Color(1, 1, 1), 0.3f , 0.3f);
-	meshList[GEO_BOTTOM]->textureID = LoadTGA("Image//bottom2.tga");
-
-	meshList[GEO_FRONT] = MeshBuilder::GenerateQuad("front", Color(1, 1, 1),1.f ,  1.f);
-	meshList[GEO_FRONT]->textureID = LoadTGA("Image//front3.tga");
-
-	meshList[GEO_BACK] = MeshBuilder::GenerateQuad("back", Color(1, 1, 1), 1.f ,  1.f);
-	meshList[GEO_BACK]->textureID = LoadTGA("Image//back3.tga");
+	initSkybox();
 
 	meshList[GEO_MainMenuText] = MeshBuilder::GenerateText("text", 16, 16);
 	meshList[GEO_MainMenuText]->textureID = LoadTGA("Image//ExportedFont.tga");
@@ -158,6 +141,26 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 
 }
 
+void SceneSP::initSkybox()
+{
+	meshList[GEO_RIGHT] = MeshBuilder::GenerateQuad("right", Color(1, 1, 1), 1.f , 1.f);
+	meshList[GEO_RIGHT]->textureID = LoadTGA("Image//right3.tga");
+
+	meshList[GEO_LEFT] = MeshBuilder::GenerateQuad("left", Color(1, 1, 1), 1.f , 1.f);
+	meshList[GEO_LEFT]->textureID = LoadTGA("Image//left3.tga");
+
+	meshList[GEO_TOP] = MeshBuilder::GenerateQuad("top", Color(1, 1, 1), 1.f , 1.f);
+	meshList[GEO_TOP]->textureID = LoadTGA("Image//top3.tga");
+
+	meshList[GEO_BOTTOM] = MeshBuilder::GenerateQuad("bottom", Color(1, 1, 1), 0.3f , 0.3f);
+	meshList[GEO_BOTTOM]->textureID = LoadTGA("Image//Base.tga");
+
+	meshList[GEO_FRONT] = MeshBuilder::GenerateQuad("front", Color(1, 1, 1),1.f ,  1.f);
+	meshList[GEO_FRONT]->textureID = LoadTGA("Image//front3.tga");
+
+	meshList[GEO_BACK] = MeshBuilder::GenerateQuad("back", Color(1, 1, 1), 1.f ,  1.f);
+	meshList[GEO_BACK]->textureID = LoadTGA("Image//back3.tga");
+}
 
 void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 {
