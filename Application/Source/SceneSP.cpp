@@ -87,7 +87,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	m_parameters[U_LIGHT0_EXPONENT] = glGetUniformLocation(m_programID, "lights[0].exponent");
 
 	m_parameters[U_NUMLIGHTS] = glGetUniformLocation(m_programID, "numLights");
-	
+
 	// Use our shader
 	glUseProgram(m_programID);
 
@@ -135,8 +135,18 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 
 	initSkybox();
 
+	meshList[GEO_MainMenuText] = MeshBuilder::GenerateText("text", 16, 16);
+	meshList[GEO_MainMenuText]->textureID = LoadTGA("Image//ExportedFont.tga");
+
 	meshList[GEO_SUPERMARKET] = MeshBuilder::GenerateOBJ("Supermarket", "OBJ//Supermarket.obj");
 	meshList[GEO_SUPERMARKET]->textureID = LoadTGA("Image//WallTxt.tga");
+
+	translateX = 0 ;
+	collision = false; 
+
+	box1.max = Vector3(translateX + 10,20,10);
+	box1.min = Vector3(translateX + -10,0,-10);
+	meshList[GEO_CUBE] = MeshBuilder::GenerateCube("cube" , (1,0,0), box1.max.x - box1.min.x , box1.max.y - box1.min.y , box1.max.z - box1.min.z);
 
 	Mtx44 projection;
 	projection.SetToPerspective(45.0f,4.0f/3.0f, 0.01f, 100000.0f);
@@ -172,7 +182,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	glfwGetCursorPos(m_window, &xpos, &ypos);
 	xposition = &xpos;
 	yposition = &ypos;
-	
+
 	FPS = 1.0 / dt ; 
 
 	if(Application::IsKeyPressed('1'))
@@ -191,7 +201,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	{
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
-	
+
 	if(Application::IsKeyPressed('6'))
 	{
 		gamestate = MAINMENU;
@@ -243,11 +253,15 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	}
 	
 	if ( gamestate != MAINMENU && gamestate != CHOOSEMODE)
+
 	{
 		glfwSetCursorPos(m_window, w / 2, h / 2); // set cursor to middle
 		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED); // disable cursor
 		camera.Update(dt, w / 2, h / 2, &xpos, &ypos);
 	}
+
+	updatecollision(dt ) ;
+
 }
 
 void SceneSP::Render()
@@ -294,6 +308,14 @@ void SceneSP::Render()
 		RenderSkybox();
 		RenderSupermarket();
 		RenderCharacter();
+
+		modelStack.PushMatrix();
+		modelStack.Translate(translateX,5,0);
+		RenderMesh(meshList[GEO_CUBE], true);
+		modelStack.PopMatrix();
+
+		if ( collision == true ) 
+			RenderTextOnScreen(meshList[GEO_MainMenuText], "COLLISION", (1, 0, 1),3, 2, 18);
 	}
 
 }

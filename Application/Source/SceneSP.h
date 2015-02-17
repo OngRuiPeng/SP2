@@ -7,6 +7,7 @@
 #include "MatrixStack.h"
 #include "Light.h"
 #include "GLFW\glfw3.h"
+#include "Obj.h"
 
 class SceneSP : public Scene
 {
@@ -104,6 +105,15 @@ public:
 	void updateRoam();
 	void updateCheckOut();
 	void updateFun();
+
+	//collision
+	bool AABBCheck(const Obj &box1,const Obj &box2);
+	void collisionprevent(Obj &boxA , Vector3 camerathing);
+	void collisionprevent2(Obj &boxA , Vector3 camerathing);
+	void updatecollision(double dt);
+	void updateobj();
+	bool collision ; 
+	Obj box1 , box2;
 
 	void mouseInput(double* xpos, double* ypos);
 	double xpos;

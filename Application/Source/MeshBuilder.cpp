@@ -148,28 +148,28 @@ Mesh* MeshBuilder::GenerateCube(const std::string &meshName, Color color ,float 
 {
 	Vertex v ;
 	std::vector<Vertex> vertex_buffer_data;
-	v.pos.Set( -0.5f,-0.5f,-0.5f);
+	v.pos.Set( -0.5f * lengthX ,-0.5f * lengthY,-0.5f * lengthZ);
 	v.color = color ;
 	vertex_buffer_data.push_back(v);
-	v.pos.Set(0.5f,-0.5f,-0.5f);
+	v.pos.Set(0.5f * lengthX,-0.5f * lengthY,-0.5f * lengthZ);
 	v.color = color ;
 	vertex_buffer_data.push_back(v);
-	v.pos.Set( 0.5f, 0.5f,-0.5f);
+	v.pos.Set( 0.5f * lengthX, 0.5f * lengthY,-0.5f * lengthZ);
 	v.color = color ;
 	vertex_buffer_data.push_back(v);
-	v.pos.Set( -0.5f, 0.5f,-0.5f);
+	v.pos.Set( -0.5f * lengthX, 0.5f * lengthY,-0.5f * lengthZ);
 	v.color = color ;
 	vertex_buffer_data.push_back(v);
-	v.pos.Set( -0.5f,-0.5f, 0.5f);
+	v.pos.Set( -0.5f * lengthX,-0.5f * lengthY, 0.5f * lengthZ);
 	v.color = color ;
 	vertex_buffer_data.push_back(v);
-	v.pos.Set( 0.5f,-0.5f, 0.5f);
+	v.pos.Set( 0.5f * lengthX,-0.5f * lengthY, 0.5f * lengthZ);
 	v.color = color ;
 	vertex_buffer_data.push_back(v);
-	v.pos.Set(  0.5f, 0.5f, 0.5f);
+	v.pos.Set(  0.5f * lengthX, 0.5f * lengthY, 0.5f * lengthZ);
 	v.color = color ;
 	vertex_buffer_data.push_back(v);
-	v.pos.Set( -0.5f, 0.5f, 0.5f);
+	v.pos.Set( -0.5f * lengthX, 0.5f * lengthY, 0.5f * lengthZ);
 	v.color = color ;
 	vertex_buffer_data.push_back(v);
 
@@ -235,7 +235,7 @@ Mesh* MeshBuilder::GenerateCube(const std::string &meshName, Color color ,float 
 
 
 	mesh->indexSize = 36;
-	mesh->mode = Mesh::DRAW_TRIANGLES; 
+	mesh->mode = Mesh::DRAW_LINES; 
 
 
 	return mesh;
