@@ -141,12 +141,76 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	meshList[GEO_SUPERMARKET] = MeshBuilder::GenerateOBJ("Supermarket", "OBJ//Supermarket.obj");
 	meshList[GEO_SUPERMARKET]->textureID = LoadTGA("Image//WallTxt.tga");
 
+	meshList[GEO_SUPERMARKETFLOOR] = MeshBuilder::GenerateOBJ("SupermarketFloor", "OBJ//SupermarketFloor.obj");
+	meshList[GEO_SUPERMARKETFLOOR]->textureID = LoadTGA("Image//SupermarketTiles.tga");
+
+	meshList[GEO_DISPLAYCABINET] = MeshBuilder::GenerateOBJ("DisplayCabinet", "OBJ//DisplayCabinet.obj");
+	meshList[GEO_DISPLAYCABINET]->textureID = LoadTGA("Image//DisplayCabinet.tga");
+
+	meshList[GEO_SCANNER] = MeshBuilder::GenerateOBJ("Scanner", "OBJ//Scanner.obj");
+	meshList[GEO_SCANNER]->textureID = LoadTGA("Image//Scanner.tga");
+
+	meshList[GEO_DIVIDER] = MeshBuilder::GenerateOBJ("Divider", "OBJ//Divider.obj");
+	meshList[GEO_DIVIDER]->textureID = LoadTGA("Image//Scanner.tga");
+
+	meshList[GEO_DOOR] = MeshBuilder::GenerateOBJ("Door", "OBJ//Door.obj");
+	meshList[GEO_DOOR]->textureID = LoadTGA("Image//Door.tga");
+
+	meshList[GEO_BACKDOOR] = MeshBuilder::GenerateOBJ("Backdoor", "OBJ//Backdoor.obj");
+	meshList[GEO_BACKDOOR]->textureID = LoadTGA("Image//Door.tga");
+
+	meshList[GEO_SHELF] = MeshBuilder::GenerateOBJ("Shelf", "OBJ//Shelf.obj");
+	meshList[GEO_SHELF]->textureID = LoadTGA("Image//shelf.tga");
+
+	meshList[GEO_SHELF2] = MeshBuilder::GenerateOBJ("Shelf2", "OBJ//Shelf2.obj");
+	meshList[GEO_SHELF2]->textureID = LoadTGA("Image//Shelf2.tga");
+
+	meshList[GEO_SHELF3] = MeshBuilder::GenerateOBJ("Shelf3", "OBJ//Shelf3.obj");
+	meshList[GEO_SHELF3]->textureID = LoadTGA("Image//Shelf3Txt.tga");
+
+	meshList[GEO_CASHIERTABLE] = MeshBuilder::GenerateOBJ("Cashier table", "OBJ//CashierTable.obj");
+	meshList[GEO_CASHIERTABLE]->textureID = LoadTGA("Image//CashierTxt.tga");
+
+	meshList[GEO_REGISTER] = MeshBuilder::GenerateOBJ("Register", "OBJ//Register.obj");
+	meshList[GEO_REGISTER]->textureID = LoadTGA("Image//Register.tga");
+
+	meshList[GEO_CAN1] = MeshBuilder::GenerateOBJ("Can1", "OBJ//Can1.obj");
+	meshList[GEO_CAN1]->textureID = LoadTGA("Image//Can1.tga");
+
+	meshList[GEO_CAN2] = MeshBuilder::GenerateOBJ("Can2", "OBJ//Can2.obj");
+	meshList[GEO_CAN2]->textureID = LoadTGA("Image//Can2.tga");
+
+	meshList[GEO_CAN3] = MeshBuilder::GenerateOBJ("Can3", "OBJ//Can3.obj");
+	meshList[GEO_CAN3]->textureID = LoadTGA("Image//Can3.tga");
+
+	meshList[GEO_BOX1] = MeshBuilder::GenerateOBJ("Box1", "OBJ//Box1.obj");
+	meshList[GEO_BOX1]->textureID = LoadTGA("Image//Box1.tga");
+
+	meshList[GEO_BOX2] = MeshBuilder::GenerateOBJ("Box2", "OBJ//Box2.obj");
+	meshList[GEO_BOX2]->textureID = LoadTGA("Image//Box2.tga");
+
+	meshList[GEO_PACK1] = MeshBuilder::GenerateOBJ("Pack1", "OBJ//Pack1.obj");
+	meshList[GEO_PACK1]->textureID = LoadTGA("Image//Pack1.tga");
+
+	meshList[GEO_PACK2] = MeshBuilder::GenerateOBJ("Pack2", "OBJ//Pack2.obj");
+	meshList[GEO_PACK2]->textureID = LoadTGA("Image//Pack2.tga");
+
+	meshList[GEO_PACK3] = MeshBuilder::GenerateOBJ("Pack3", "OBJ//Pack3.obj");
+	meshList[GEO_PACK3]->textureID = LoadTGA("Image//Pack3.tga");
+
+	meshList[GEO_PACK4] = MeshBuilder::GenerateOBJ("Pack4", "OBJ//Pack4.obj");
+	meshList[GEO_PACK4]->textureID = LoadTGA("Image//Pack4.tga");
+
+
+	meshList[GEO_DOORMAN] = MeshBuilder::GenerateOBJ("Doorman", "OBJ//doorman.obj");
+	meshList[GEO_DOORMAN]->textureID = LoadTGA("Image//doorman.tga");
+
 	translateX = 0 ;
 	collision = false; 
 
-	box1.max = Vector3(translateX + 10,20,10);
-	box1.min = Vector3(translateX + -10,0,-10);
-	meshList[GEO_CUBE] = MeshBuilder::GenerateCube("cube" , (1,0,0), box1.max.x - box1.min.x , box1.max.y - box1.min.y , box1.max.z - box1.min.z);
+	//box1.max = Vector3(translateX + 10,20,10);
+	//box1.min = Vector3(translateX + -10,0,-10);
+//	meshList[GEO_CUBE] = MeshBuilder::GenerateCube("cube" , (1,0,0), box1.max.x - box1.min.x , box1.max.y - box1.min.y , box1.max.z - box1.min.z);
 
 	Mtx44 projection;
 	projection.SetToPerspective(45.0f,4.0f/3.0f, 0.01f, 100000.0f);
@@ -175,7 +239,6 @@ void SceneSP::initSkybox()
 	meshList[GEO_BACK]->textureID = LoadTGA("Image//back3.tga");
 
 }
-
 
 void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 {
@@ -308,14 +371,7 @@ void SceneSP::Render()
 		RenderSkybox();
 		RenderSupermarket();
 		RenderCharacter();
-
-		modelStack.PushMatrix();
-		modelStack.Translate(translateX,5,0);
-		RenderMesh(meshList[GEO_CUBE], true);
-		modelStack.PopMatrix();
-
-		if ( collision == true ) 
-			RenderTextOnScreen(meshList[GEO_MainMenuText], "COLLISION", (1, 0, 1),3, 2, 18);
+		RenderInteractableObjs();
 	}
 
 }

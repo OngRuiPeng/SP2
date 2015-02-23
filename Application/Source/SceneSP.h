@@ -16,22 +16,57 @@ class SceneSP : public Scene
 		GEO_AXES,
 		GEO_MainMenuScreen,
 		GEO_ChooseScreen,
-		GEO_CUBE,
-		GEO_CIRCLE,
-		GEO_RING,
-		GEO_SPHERE,
 		GEO_MainMenuText,
+
+		//Skybox------------------------------------------------
 		GEO_LEFT,
 		GEO_RIGHT,
 		GEO_TOP,
 		GEO_BOTTOM,
 		GEO_FRONT,
 		GEO_BACK,
+		//Skybox------------------------------------------------
+
+		//Supermarket stuff=====================================
 		GEO_SUPERMARKET,
+		GEO_SUPERMARKETFLOOR,
+		GEO_DISPLAYCABINET,
+		GEO_SCANNER,
+		GEO_DOOR,
+		GEO_BACKDOOR,
+		GEO_DIVIDER,
+		GEO_SHELF,
+		GEO_SHELF2,
+		GEO_SHELF3,
+		GEO_CASHIERTABLE,
+		GEO_REGISTER,
+		GEO_CAN1,
+		GEO_CAN2,
+		GEO_CAN3,
+		GEO_BOX1,
+		GEO_BOX2,
+		GEO_PACK1,
+		GEO_PACK2,
+		GEO_PACK3,
+		GEO_PACK4,
+		//Supermarket stuff=====================================
+
+		//NPCs=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+		//-------Insert npcs here-------
+		GEO_DOORMAN,
+		//NPCs=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
 		GEO_LIGHTBALL,
 		NUM_GEOMETRY,
 	};
-	
+	//
+	//enum GEOMETRY_TYPE2
+	//{
+	//	
+	//	NUM_GEOMETRY2,
+	//};
+
+
 	enum GAME_STATE
 	{
 		MAINMENU,
@@ -99,6 +134,8 @@ public:
 	void RenderMainMenu();
 	void RenderChooseMode();
 	void RenderSupermarket();
+	void RenderInteractableObjs();
+	void RenderPacks ();
 	//update
 	void updateMainMenu();
 	void updateChooseMode();
@@ -125,6 +162,7 @@ private:
 	unsigned m_vertexArrayID;
 
 	Mesh* meshList[NUM_GEOMETRY];
+	//Mesh* meshList2[NUM_GEOMETRY2];
 	unsigned m_programID;
 	unsigned m_parameters[U_TOTAL];
 	MS modelStack , viewStack , projectionStack;
