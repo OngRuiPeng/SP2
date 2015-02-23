@@ -130,7 +130,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	meshList[GEO_MainMenuScreen] = MeshBuilder::GenerateQuad("main menu screen", Color(1, 0, 0), 100, 100);
 	meshList[GEO_MainMenuScreen]->textureID = LoadTGA("Image//MainMenu.tga");
 
-	meshList[GEO_ChooseScreen] = MeshBuilder::GenerateQuad("choose mode screen", Color( 1, 1, 1), 1, 1);
+	meshList[GEO_ChooseScreen] = MeshBuilder::GenerateQuad("choose mode screen", Color(1, 1, 1), 1, 1);
 	meshList[GEO_ChooseScreen]->textureID = LoadTGA("Image//PlayScreen.tga");
 
 	initSkybox();
@@ -140,6 +140,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 
 	meshList[GEO_SUPERMARKET] = MeshBuilder::GenerateOBJ("Supermarket", "OBJ//Supermarket.obj");
 	meshList[GEO_SUPERMARKET]->textureID = LoadTGA("Image//WallTxt.tga");
+
 
 	meshList[GEO_SUPERMARKETFLOOR] = MeshBuilder::GenerateOBJ("SupermarketFloor", "OBJ//SupermarketFloor.obj");
 	meshList[GEO_SUPERMARKETFLOOR]->textureID = LoadTGA("Image//SupermarketTiles.tga");
@@ -204,6 +205,25 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 
 	meshList[GEO_DOORMAN] = MeshBuilder::GenerateOBJ("Doorman", "OBJ//doorman.obj");
 	meshList[GEO_DOORMAN]->textureID = LoadTGA("Image//doorman.tga");
+//
+	meshList[GEO_HEAD] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//head.obj");
+	meshList[GEO_HEAD]->textureID = LoadTGA("image//NpcPink.tga");
+
+	meshList[GEO_BODY] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//body.obj");
+	meshList[GEO_BODY]->textureID = LoadTGA("image//NpcPink.tga");
+	
+	meshList[GEO_LEFTHAND] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//lefthand.obj");
+	meshList[GEO_LEFTHAND]->textureID = LoadTGA("image//NpcPink.tga");
+
+	meshList[GEO_RIGHTHAND] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//righthand.obj");
+	meshList[GEO_RIGHTHAND]->textureID = LoadTGA("image//NpcPink.tga");
+
+	meshList[GEO_LEFTLEG] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//leftleg.obj");
+	meshList[GEO_LEFTLEG]->textureID = LoadTGA("image//NpcPink.tga");
+
+	meshList[GEO_RIGHTLEG] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//rightleg.obj");
+	meshList[GEO_RIGHTLEG]->textureID = LoadTGA("image//NpcPink.tga");
+
 
 	translateX = 0 ;
 	collision = false; 
@@ -280,6 +300,10 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		{
 			gamestate = CHOOSEMODE;
 		}
+		if( state == GLFW_PRESS && (*xposition > 285 && *xposition < 515 && *yposition > 308 && *yposition < 383) )
+		{
+			exit(0);
+		}
 		std::cout << xpos << std::endl;
 		std::cout << ypos << std::endl;
 	}
@@ -315,7 +339,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		}
 	}
 	
-	if ( gamestate != MAINMENU && gamestate != CHOOSEMODE)
+	if ( gamestate != MAINMENU && gamestate != CHOOSEMODE && gamestate != EXIT)
 
 	{
 		glfwSetCursorPos(m_window, w / 2, h / 2); // set cursor to middle
@@ -323,7 +347,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		camera.Update(dt, w / 2, h / 2, &xpos, &ypos);
 	}
 
-	updatecollision(dt ) ;
+	updatecollision(dt) ;
 
 }
 
@@ -366,6 +390,10 @@ void SceneSP::Render()
 	{
 		RenderChooseMode();
 	}
+	else if ( gamestate == EXIT )
+	{
+
+	}
 	else 
 	{
 		RenderSkybox();
@@ -379,7 +407,6 @@ void SceneSP::Render()
 void SceneSP::Exit()
 {
 	// Cleanup VBO here
-
 	glDeleteVertexArrays(1, &m_vertexArrayID);
 	glDeleteProgram(m_programID);
 }

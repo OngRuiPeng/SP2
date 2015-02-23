@@ -23,7 +23,6 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 {
 	if(button == GLFW_MOUSE_BUTTON_RIGHT);
-		
 }
 void resize_callback(GLFWwindow* window, int w,int h)
 {
@@ -96,12 +95,12 @@ void Application::Init()
 		glfwSetWindowSizeCallback(m_window, resize_callback);
 }
 
-int Application::getHeight()
+double Application::getHeight()
 {
 	return height;
 }
 
-int Application::getWidth()
+double Application::getWidth()
 {
 	return width;
 }
@@ -112,9 +111,9 @@ void Application::Run()
 	//Main Loop
 	Scene *scene = new SceneSP();
 	scene->Init(m_window, width, height);
-
+	
 	m_timer.startTimer();    // Start timer to calculate how long it takes to render this frame
-	while (!glfwWindowShouldClose(m_window) && !IsKeyPressed(VK_ESCAPE))
+	while (!glfwWindowShouldClose(m_window) && !Application::IsKeyPressed(VK_ESCAPE))
 	{
 		scene->Update(m_timer.getElapsedTime(), m_window, width, height);
 		scene->Render();

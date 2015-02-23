@@ -23,13 +23,13 @@ public:
 	void Exit();
 	static bool IsKeyPressed(unsigned short key);
 
-	int getWidth();
-	int getHeight();
+	double getWidth();
+	double getHeight();
 
 private:
 
-	int width;
-	int height;
+	double width;
+	double height;
 
 	//Declare a window object
 	StopWatch m_timer;

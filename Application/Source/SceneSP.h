@@ -57,6 +57,12 @@ class SceneSP : public Scene
 		//NPCs=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 		GEO_LIGHTBALL,
+		GEO_HEAD,
+		GEO_BODY,
+		GEO_LEFTHAND,
+		GEO_RIGHTHAND,
+		GEO_LEFTLEG,
+		GEO_RIGHTLEG,
 		NUM_GEOMETRY,
 	};
 	//
@@ -75,6 +81,7 @@ class SceneSP : public Scene
 		GAMECHECKOUT,
 		GAMETHIEF,
 		GAMEFUN,
+		EXIT,
 		MAX_STATES,
 	};
 
@@ -177,4 +184,5 @@ private:
 
 
 };
+
 #endif
