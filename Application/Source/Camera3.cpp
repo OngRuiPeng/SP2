@@ -19,6 +19,7 @@ void Camera3::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
 	right.y = 0;
 	right.Normalize();
 	this->up = defaultUp = right.Cross(view).Normalized();
+	targetwhere = Vector3(0,target.y,-38);
 
 }
 
@@ -26,42 +27,10 @@ void Camera3::Update(double dt,float width, float height, double* xpos, double* 
 {
 	double mouseX = width;
 	double mouseY = height;
-	std::cout << *xpos << std::endl;
-	std::cout << *ypos << std::endl;
+	//std::cout << *xpos << std::endl;
+	//std::cout << *ypos << std::endl;
 	static const float CAMERA_SPEED = 20.f;
 	static const float MOVE_SPEED = 20.0f;
-
-	if(Application::IsKeyPressed('A')){
-		Vector3 view = (target - position).Normalize();
-		Vector3 right = view.Cross(up);
-		position -= right* MOVE_SPEED * dt;
-		target -= right * MOVE_SPEED * dt;
-
-	}
-
-	if(Application::IsKeyPressed('D')){
-		Vector3 view = (target - position).Normalize();
-		Vector3 right = view.Cross(up);
-		position += right* MOVE_SPEED * dt;
-		target += right * MOVE_SPEED * dt;
-
-	}
-
-	if(Application::IsKeyPressed('W')){
-		Vector3 view = (target - position).Normalize();
-		view.y = 0 ;
-		position += view * MOVE_SPEED * dt;
-		target += view * MOVE_SPEED * dt;
-
-	}
-
-	if(Application::IsKeyPressed('S')){
-		Vector3 view = (target - position).Normalize();
-		view.y = 0 ;
-		position -= view * MOVE_SPEED * dt;
-		target -= view * MOVE_SPEED * dt;
-
-	}
 
 	if(Application::IsKeyPressed(VK_LEFT) || (*xpos < mouseX))
 	{
@@ -69,6 +38,7 @@ void Camera3::Update(double dt,float width, float height, double* xpos, double* 
 		Mtx44 rotation;
 		rotation.SetToRotation(yaw, 0, 1, 0);
 		target = rotation * (target - position) + position;
+		targetwhere = rotation * (targetwhere - position) + position;
 		up = rotation * up;
 		temp_store += yaw;
 	}
@@ -79,6 +49,7 @@ void Camera3::Update(double dt,float width, float height, double* xpos, double* 
 		Mtx44 rotation;
 		rotation.SetToRotation(yaw, 0, 1, 0);
 		target = rotation * (target - position) + position;
+		targetwhere = rotation * (targetwhere - position) + position;
 		up = rotation * up;
 		temp_store += yaw;
 	}
@@ -95,6 +66,7 @@ void Camera3::Update(double dt,float width, float height, double* xpos, double* 
 		Mtx44 rotation;
 		rotation.SetToRotation(pitch, right.x, right.y, right.z);
 		target = rotation * (target - position) + position;
+		targetwhere = rotation * (targetwhere - position) + position;
 
 	}
 	if(Application::IsKeyPressed(VK_DOWN) || (*ypos > mouseY))
@@ -108,7 +80,9 @@ void Camera3::Update(double dt,float width, float height, double* xpos, double* 
 			Mtx44 rotation;
 			rotation.SetToRotation(pitch, right.x, right.y, right.z);
 			target = rotation * (target - position) + position;
+			targetwhere = rotation * (targetwhere - position) + position;
 	}
+
 	if (position.x >= 49)
 	{
 		position.x = 49;
@@ -133,7 +107,7 @@ void Camera3::Update(double dt,float width, float height, double* xpos, double* 
 		Reset();
 	}
 
-	std::cout << position.x << "\t" << position.y << "\t" << position.z << std::endl;
+	/*std::cout << position.x << "\t" << position.y << "\t" << position.z << std::endl;*/
 }
 
 void Camera3::Reset()

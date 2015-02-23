@@ -10,9 +10,9 @@ Obj::~Obj()
 {
 }
 
-void Obj::set(Vector3 minumum,Vector3 maximum)
+void Obj::set(Vector3 maximum,Vector3 minimum)
 {
-	min = minumum; 
+	min = minimum; 
 	max = maximum;
 }
 

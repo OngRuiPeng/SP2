@@ -135,6 +135,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 
 	initSkybox();
 
+
 	meshList[GEO_MainMenuText] = MeshBuilder::GenerateText("text", 16, 16);
 	meshList[GEO_MainMenuText]->textureID = LoadTGA("Image//ExportedFont.tga");
 
@@ -227,10 +228,18 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 
 	translateX = 0 ;
 	collision = false; 
+	collisionsia = false;
 
-	//box1.max = Vector3(translateX + 10,20,10);
-	//box1.min = Vector3(translateX + -10,0,-10);
-//	meshList[GEO_CUBE] = MeshBuilder::GenerateCube("cube" , (1,0,0), box1.max.x - box1.min.x , box1.max.y - box1.min.y , box1.max.z - box1.min.z);
+	box1.set(camera.position + Vector3(1,1,1),camera.position - Vector3(1,1,1));
+	OBJ.push_back(box1);
+
+	box1.set(Vector3(translateX + 10,20,10),Vector3(translateX + -10,0,-10));
+	meshList[GEO_CUBE] = MeshBuilder::GenerateCube("cube" , (1,0,0), box1.max.x - box1.min.x , box1.max.y - box1.min.y , box1.max.z - box1.min.z);
+	OBJ.push_back(box1);
+
+
+	seewhere.set(camera.targetwhere + Vector3(0.2,0.1,0.2),camera.targetwhere - Vector3(0.2,0.1,0.2));
+	meshList[GEO_SEE] = MeshBuilder::GenerateCube("cube" , (0,0,0), seewhere.max.x - seewhere.min.x , seewhere.max.y - seewhere.min.y , seewhere.max.z - seewhere.min.z);
 
 	Mtx44 projection;
 	projection.SetToPerspective(45.0f,4.0f/3.0f, 0.01f, 100000.0f);
@@ -399,8 +408,29 @@ void SceneSP::Render()
 		RenderSkybox();
 		RenderSupermarket();
 		RenderCharacter();
+
 		RenderInteractableObjs();
+
+		modelStack.PushMatrix();
+		modelStack.Translate(translateX,10,0);
+		RenderMesh(meshList[GEO_CUBE], true);
+		modelStack.PopMatrix();
+
+		modelStack.PushMatrix();
+		modelStack.Translate(camera.targetwhere.x,camera.targetwhere.y,camera.targetwhere.z);
+		RenderMesh(meshList[GEO_SEE], true);
+		modelStack.PopMatrix();
+
+		if ( collision == true ) 
+			RenderTextOnScreen(meshList[GEO_MainMenuText], "COLLISION", (1, 0, 1),3, 2, 18);
+
+		if ( collisionsia == true ) 
+			RenderTextOnScreen(meshList[GEO_MainMenuText], "TARGET DONG DAO LIAO", (1, 0, 1),3, 2, 16);
+
+
 	}
+
+	cout << camera.targetwhere.y << endl ; 
 
 }
 

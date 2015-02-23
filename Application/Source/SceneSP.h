@@ -8,6 +8,7 @@
 #include "Light.h"
 #include "GLFW\glfw3.h"
 #include "Obj.h"
+#include <vector>
 
 class SceneSP : public Scene
 {
@@ -16,6 +17,7 @@ class SceneSP : public Scene
 		GEO_AXES,
 		GEO_MainMenuScreen,
 		GEO_ChooseScreen,
+		GEO_CUBE,
 		GEO_MainMenuText,
 
 		//Skybox------------------------------------------------
@@ -52,27 +54,23 @@ class SceneSP : public Scene
 		//Supermarket stuff=====================================
 
 		//NPCs=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-		//-------Insert npcs here-------
-		GEO_DOORMAN,
-		//NPCs=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-
-		GEO_LIGHTBALL,
 		GEO_HEAD,
 		GEO_BODY,
 		GEO_LEFTHAND,
 		GEO_RIGHTHAND,
 		GEO_LEFTLEG,
 		GEO_RIGHTLEG,
+		GEO_DOORMAN,
+		//NPCs=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+		GEO_LIGHTBALL,
+
+		
+		GEO_SEE,
+
 		NUM_GEOMETRY,
 	};
-	//
-	//enum GEOMETRY_TYPE2
-	//{
-	//	
-	//	NUM_GEOMETRY2,
-	//};
-
-
+	
 	enum GAME_STATE
 	{
 		MAINMENU,
@@ -152,12 +150,18 @@ public:
 
 	//collision
 	bool AABBCheck(const Obj &box1,const Obj &box2);
-	void collisionprevent(Obj &boxA , Vector3 camerathing);
-	void collisionprevent2(Obj &boxA , Vector3 camerathing);
+	void collisionprevent(vector <Obj>, Vector3 camerathing);
 	void updatecollision(double dt);
 	void updateobj();
 	bool collision ; 
-	Obj box1 , box2;
+
+	bool collisionsia; 
+
+	vector <Obj> OBJ ;
+
+	Obj box1 ;
+	Obj seewhere;
+
 
 	void mouseInput(double* xpos, double* ypos);
 	double xpos;

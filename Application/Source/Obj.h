@@ -12,5 +12,5 @@ public:
 	Obj();
 	~Obj();
 
-	void set(Vector3 minumum,Vector3 maximum);
+	void set(Vector3 maximum,Vector3 minimum);
 };

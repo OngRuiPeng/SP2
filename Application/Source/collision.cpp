@@ -14,46 +14,48 @@ bool SceneSP::AABBCheck(const Obj &box1,const Obj &box2)
 
 }
 
-void SceneSP::collisionprevent(Obj &boxA, Vector3 camerathing) 
+void SceneSP::collisionprevent(vector<Obj>, Vector3 camerathing) 
 {
-	Vector3 player = camerathing + camera.position;
-	box2.max = player + Vector3(1,1,1);
-	box2.min = player - Vector3(1,0,1);
+	bool moveX = true ;
 
-	if ( AABBCheck(boxA,box2) == true ) 
+	Vector3 player = camerathing + camera.position; 
+
+	Obj checkColli , forX , forZ;
+
+	checkColli.max = player ;
+	checkColli.min = player ;
+
+	forX.max = Vector3(player.x , camera.position.y , camera.position.z ) ;
+	forX.min = Vector3(player.x , camera.position.y , camera.position.z ) ;
+
+	forZ.max = Vector3(camera.position.x , camera.position.y , player.z );
+	forZ.min = Vector3(camera.position.x , camera.position.y , player.z );
+
+	for(int x = 1 ; x < OBJ.size() ; ++x)
 	{
-		box2.max = camerathing + Vector3(1,1,1);
-		box2.min = camerathing - Vector3(1,0,1);
-		if ( AABBCheck(boxA , box2) == true ) 
+		if ( AABBCheck(OBJ[x],checkColli)) 
 		{
-			Obj forX , forY, forZ ; 
-
-			forX.max.x = camerathing.x + 1;
-			forX.min.x = camerathing.x - 1;
-
-			forY.max.y = camerathing.y + 1;
-			forY.min.y = camerathing.y ;
-
-			forZ.max.z = camerathing.z + 1;
-			forZ.min.z = camerathing.z - 1;
-
 			//if x axis is the one touching
-			if ( AABBCheck ( boxA, forX) == true ) 
+			if ( AABBCheck ( OBJ[x], forX)) 
+			{
 				camerathing.x = 0 ;
-			//if y axis is the one touching
-			if ( AABBCheck ( boxA, forY) == true ) 
-				camerathing.y = 0 ;
+				moveX = false;
+			}
+
 			//if z axis is the one touching
-			if ( AABBCheck ( boxA, forZ) == true ) 
+			if ( AABBCheck ( OBJ[x], forZ)) 
+			{
 				camerathing.z = 0 ;
-
-			camera.position.x -= camerathing.x ;
-			camera.position.z -= camerathing.z;
-			camera.target.x -= camerathing.x;
-			camera.target.z -= camerathing.z;
+				moveX = true;
+			}
 		}
-
 	}
+	camera.position.x += camerathing.x ;
+	camera.position.z += camerathing.z ;
+	camera.target.x += camerathing.x ;
+	camera.target.z += camerathing.z ;
+	camera.targetwhere.x += camerathing.x;
+	camera.targetwhere.z += camerathing.z;
 
 }
 
@@ -63,53 +65,49 @@ void SceneSP::updatecollision(double dt)
 
 	updateobj();
 
-	if ( AABBCheck(box1,box2) == true  && Application::IsKeyPressed('W')) 
+	if (Application::IsKeyPressed('W')) 
 	{
-		collision = true ; 
 
 		Vector3 view = (camera.target - camera.position).Normalize();
-		Vector3 precollide = view * dt * MOVE_SPEED;
+		view.y = 0;
+		Vector3 precollide = view * dt * MOVE_SPEED; // if it moved it will be here 
 
-		collisionprevent(box1,precollide);
+		collisionprevent(OBJ,precollide);
 
-		cout << collision << "got collision" << dt << endl ;
 	}
-	else if ( AABBCheck(box1,box2) == true  && Application::IsKeyPressed('S')) 
+	else if (Application::IsKeyPressed('S')) 
 	{
-		collision = true ; 
 
 		Vector3 view = (camera.target - camera.position).Normalize();
+		view.y = 0;
 		Vector3 backside = -view * dt * MOVE_SPEED;
 
-		collisionprevent(box1,backside);
+		collisionprevent(OBJ,backside);
 
-		cout << collision << "got collision" << dt << endl ;
 	}
-	else if ( AABBCheck(box1,box2) == true  && Application::IsKeyPressed('D')) 
+	else if (Application::IsKeyPressed('D')) 
 	{
-		collision = true ; 
 
 		Vector3 view = (camera.target - camera.position).Normalize();
+		view.y = 0;
 		Vector3 right = view.Cross(camera.up);
-		right *= dt * MOVE_SPEED;
+		right = right * dt * MOVE_SPEED;
 
-		collisionprevent(box1,right);
+		collisionprevent(OBJ,right);
 
-		cout << collision << "got collision" << dt << endl ;
 	}
-	else if ( AABBCheck(box1,box2) == true  && Application::IsKeyPressed('A')) 
+	else if (Application::IsKeyPressed('A')) 
 	{
-		collision = true ; 
 
 		Vector3 view = (camera.target - camera.position).Normalize();
-		Vector3 left = -view.Cross(camera.up);
-		left *= dt * MOVE_SPEED;
+		view.y = 0 ;
+		Vector3 left = view.Cross(camera.up);
+		left = -left * dt * MOVE_SPEED;
 
-		collisionprevent(box1,left);
-
-		cout << collision << "got collision" << dt << endl ;
+		collisionprevent(OBJ,left);
 	}
-	else if ( AABBCheck(box1,box2) == true ) 
+
+	if ( AABBCheck(OBJ[0],OBJ[1]) == true ) 
 	{
 		collision = true ; 
 	}
@@ -117,24 +115,29 @@ void SceneSP::updatecollision(double dt)
 	{
 		collision = false;
 
-	/*	if ( translateX < 50 ) 
+		if ( translateX < 50 ) 
 			translateX += (float)(8 * dt) ; 
 		else 
-			translateX = 0 */;
-
-		cout << collision << " no collision" << dt << endl ;
+			translateX = 0 ;
 
 	}
+
+	if ( AABBCheck(seewhere,OBJ[1]) == true )
+		collisionsia = true;
+	else
+		collisionsia = false;
 
 }
 
 void SceneSP::updateobj()
 {
-	box1.max = Vector3(translateX + 10,10,10);
-	box1.min = Vector3(translateX + -10,0,-10);
+	OBJ[1].max = Vector3(translateX + 10,20,10);
+	OBJ[1].min = Vector3(translateX + -10,0,-10);
 
-	box2.max = camera.position + Vector3(1,1,1);
-	box2.min = camera.position - Vector3(1,0,1);
+	OBJ[0].max = camera.position + Vector3(1,1,1);
+	OBJ[0].min = camera.position - Vector3(1,1,1);
 
+	seewhere.max = camera.targetwhere + Vector3(0.2,0.1,0.2);
+	seewhere.min = camera.targetwhere - Vector3(0.2,0.1,0.2);
 
 }
