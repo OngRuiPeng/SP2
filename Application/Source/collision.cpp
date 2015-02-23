@@ -107,20 +107,6 @@ void SceneSP::updatecollision(double dt)
 		collisionprevent(OBJ,left);
 	}
 
-	if ( AABBCheck(OBJ[0],OBJ[1]) == true ) 
-	{
-		collision = true ; 
-	}
-	else
-	{
-		collision = false;
-
-		if ( translateX < 50 ) 
-			translateX += (float)(8 * dt) ; 
-		else 
-			translateX = 0 ;
-
-	}
 
 	if ( AABBCheck(seewhere,OBJ[1]) == true )
 		collisionsia = true;
@@ -131,9 +117,6 @@ void SceneSP::updatecollision(double dt)
 
 void SceneSP::updateobj()
 {
-	OBJ[1].max = Vector3(translateX + 10,20,10);
-	OBJ[1].min = Vector3(translateX + -10,0,-10);
-
 	OBJ[0].max = camera.position + Vector3(1,1,1);
 	OBJ[0].min = camera.position - Vector3(1,1,1);
 

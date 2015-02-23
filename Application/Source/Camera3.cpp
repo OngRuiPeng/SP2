@@ -54,7 +54,7 @@ void Camera3::Update(double dt,float width, float height, double* xpos, double* 
 		temp_store += yaw;
 	}
 
-	if(Application::IsKeyPressed(VK_UP) || (*ypos < mouseY))
+	if(Application::IsKeyPressed(VK_UP) && target.y < 40 || (*ypos < mouseY) && target.y < 40)
 	{
 		float pitch = (float)(CAMERA_SPEED * dt * (mouseY - *ypos));
 
@@ -69,7 +69,7 @@ void Camera3::Update(double dt,float width, float height, double* xpos, double* 
 		targetwhere = rotation * (targetwhere - position) + position;
 
 	}
-	if(Application::IsKeyPressed(VK_DOWN) || (*ypos > mouseY))
+	if(Application::IsKeyPressed(VK_DOWN) && target.y > -20 || (*ypos > mouseY) && target.y > -20 )
 	{
 		float pitch = (float)(-CAMERA_SPEED * dt * (*ypos - mouseY));
 			Vector3 view = (target - position).Normalized();

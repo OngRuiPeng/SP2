@@ -233,8 +233,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	box1.set(camera.position + Vector3(1,1,1),camera.position - Vector3(1,1,1));
 	OBJ.push_back(box1);
 
-	box1.set(Vector3(translateX + 10,20,10),Vector3(translateX + -10,0,-10));
-	meshList[GEO_CUBE] = MeshBuilder::GenerateCube("cube" , (1,0,0), box1.max.x - box1.min.x , box1.max.y - box1.min.y , box1.max.z - box1.min.z);
+	box1.set(Vector3(51,51,51),Vector3(49,0,-49));
 	OBJ.push_back(box1);
 
 
@@ -410,11 +409,6 @@ void SceneSP::Render()
 		RenderCharacter();
 
 		RenderInteractableObjs();
-
-		modelStack.PushMatrix();
-		modelStack.Translate(translateX,10,0);
-		RenderMesh(meshList[GEO_CUBE], true);
-		modelStack.PopMatrix();
 
 		modelStack.PushMatrix();
 		modelStack.Translate(camera.targetwhere.x,camera.targetwhere.y,camera.targetwhere.z);

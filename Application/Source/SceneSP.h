@@ -158,6 +158,7 @@ public:
 	bool collisionsia; 
 
 	vector <Obj> OBJ ;
+	vector <Obj> Items ;
 
 	Obj box1 ;
 	Obj seewhere;
