@@ -165,6 +165,7 @@ public:
 	//collision
 	bool AABBCheck(const Obj &box1,const Obj &box2);
 	void collisionprevent(vector <Obj>, Vector3 camerathing);
+	Obj Targetcollision();
 	void updatecollision(double dt);
 	void updateobj();
 	bool collision ; 
@@ -180,6 +181,7 @@ public:
 	vector <Obj> Items ;
 	Obj box1 ;
 	Obj seewhere;
+<<<<<<< Updated upstream
 	//
 	bool inSupermarket;
 	//npcs
@@ -189,13 +191,16 @@ public:
 	CNpc Passerby1;
 	CNpc Passerby2;
 
+	void collisionOBJinit(void);
+	void collisionITEMSinit(void);
+
+
 	void mouseInput(double* xpos, double* ypos);
 	double xpos;
 	double ypos;
 	double* xposition;
 	double* yposition;
-
-
+	
 private:
 	unsigned m_vertexArrayID;
 

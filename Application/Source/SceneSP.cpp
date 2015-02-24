@@ -37,7 +37,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	glfwSetCursorPos(m_window, xpos, ypos);
 
-	
+
 	// Init VBO here
 
 	// Set background color to dark blue
@@ -108,7 +108,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	m_parameters[U_MVP] = glGetUniformLocation(m_programID, "MVP");
 
 	//Initialize camera settings
-	camera.Init(Vector3(0, 9, -40), Vector3(0, 9, 0), Vector3(0, 1, 0));
+	camera.Init(Vector3(0, 6, -40), Vector3(0, 6, 0), Vector3(0, 1, 0));
 
 	//After gluseprogram
 	glUniform1i(m_parameters[U_NUMLIGHTS], 2);
@@ -269,19 +269,243 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	collision = false; 
 	collisionsia = false;
 
+	//**********************************************************   collisions 
 	box1.set(camera.position + Vector3(1,1,1),camera.position - Vector3(1,1,1));
 	OBJ.push_back(box1);
 
-	box1.set(Vector3(51,51,51),Vector3(49,0,-49));
-	OBJ.push_back(box1);
+	collisionOBJinit();
 
-
-	seewhere.set(camera.targetwhere + Vector3(0.2,0.1,0.2),camera.targetwhere - Vector3(0.2,0.1,0.2));
-	meshList[GEO_SEE] = MeshBuilder::GenerateCube("cube" , (0,0,0), seewhere.max.x - seewhere.min.x , seewhere.max.y - seewhere.min.y , seewhere.max.z - seewhere.min.z);
+	collisionITEMSinit();
 
 	Mtx44 projection;
 	projection.SetToPerspective(45.0f,4.0f/3.0f, 0.01f, 100000.0f);
 	projectionStack.LoadMatrix(projection);
+
+}
+
+void SceneSP::collisionOBJinit()
+{
+	//*****************************************(SKYBOX)
+	box1.set(Vector3(51,51,51),Vector3(49,0,-51)); // skybox (left)
+	OBJ.push_back(box1);
+
+	box1.set(Vector3(51,51,51),Vector3(-51,0,49)); // skybox (front)
+	OBJ.push_back(box1);
+
+	box1.set(Vector3(-49,51,51),Vector3(-51,0,-51)); // skybox (right)
+	OBJ.push_back(box1);
+
+	box1.set(Vector3(51,51,-49),Vector3(-51,0,-51)); // skybox (back)
+	OBJ.push_back(box1);
+	//******************************************(SUPERMARKET)
+
+	box1.set(Vector3(30,25,51),Vector3(26,0,-6)); // supermarket(left)
+	OBJ.push_back(box1);
+
+	box1.set(Vector3(30,25,51),Vector3(-26,0,47)); // supermarket (back)
+	OBJ.push_back(box1);
+
+	box1.set(Vector3(-24,25,51),Vector3(-27.5,0,-7.5)); // supermarket (right)
+	OBJ.push_back(box1);
+
+	box1.set(Vector3(-7,25,-5),Vector3(-27.5,0,-7.5)); // supermarket (front right)
+	OBJ.push_back(box1);
+
+	box1.set(Vector3(30,25,-5),Vector3(9,0,-7.5)); // supermarket (front left)
+	OBJ.push_back(box1);
+
+
+	// *************************************(BLOCKAGE)
+	box1.set(Vector3(-7,10,2),Vector3(-8.2,0,-6)); // block right 
+	OBJ.push_back(box1);
+
+	box1.set(Vector3(10,10,0),Vector3(9.3,0,-6)); // block left
+	OBJ.push_back(box1);
+
+	// ************************************(DETECTORS)
+	box1.set(Vector3(-2.5,10,-1),Vector3(-4,0,-4)); // detector right
+	OBJ.push_back(box1);
+
+	box1.set(Vector3(6,10,-1),Vector3(4.5,0,-4)); // detector left
+	OBJ.push_back(box1);
+
+	//****************************************(CASHIERS)
+	box1.set(Vector3(17.5,10,6.5),Vector3(12,0,4)); // right cashier part 1
+	OBJ.push_back(box1);
+
+	box1.set(Vector3(15,10,13),Vector3(12,0,4)); // right cashier part 2 
+	OBJ.push_back(box1);
+
+	box1.set(Vector3(27,10,6.5),Vector3(21,0,4)); // left cashier part 1
+	OBJ.push_back(box1);
+
+	box1.set(Vector3(24.5,10,13),Vector3(21,0,4)); // left cashier part 2 
+	OBJ.push_back(box1);
+
+	// ************************************** ( right side shelves )
+	box1.set(Vector3(-19.5,20,8.5),Vector3(-27,0,-1.5)); // front shelf  
+	OBJ.push_back(box1);
+
+	box1.set(Vector3(-19.5,20,20),Vector3(-27,0,9.5)); // back shelf
+	OBJ.push_back(box1);
+
+	// ************************************** ( shelf right at the back )
+	box1.set(Vector3(5,20,49),Vector3(-5,0,42)); // way back shelf
+	OBJ.push_back(box1);
+
+	// *************************************  ( center shelves  )
+	box1.set(Vector3(18,20,33),Vector3(11,0,22)); // left shelf 
+	OBJ.push_back(box1);
+
+	box1.set(Vector3(5,20,33),Vector3(-2,0,22)); // middle shelf 
+	OBJ.push_back(box1);
+
+	box1.set(Vector3(-8,20,33),Vector3(-15.5,0,22)); // right shelf 
+	OBJ.push_back(box1);
+
+	// ***************************************** ( center small shelves )
+	box1.set(Vector3(17,20,23),Vector3(13,0,19)); // left shelf 
+	OBJ.push_back(box1);
+
+	box1.set(Vector3(4,20,23),Vector3(-0.5,0,19)); // middle shelf 
+	OBJ.push_back(box1);
+
+	box1.set(Vector3(-9.5,20,23),Vector3(-13.5,0,19)); // right shelf 
+	OBJ.push_back(box1);
+}
+
+void SceneSP::collisionITEMSinit()
+{
+	// ******************************** (left shelf)
+	for ( int z = 0 ; z < 3 ; z++ ) 
+	{
+		for ( int y = 0 ; y < 3 ; y++ )
+		{
+			for ( int x = 0 ; x < 2 ; x++ )
+			{
+				box1.set(Vector3(17 - x * 3 ,6.3 - y * 2 ,30.5 - z * 2.3 ),Vector3(15.5 - x * 3 ,5.3 - y * 2 ,29 - z * 2.3));
+				Items.push_back(box1);
+			}
+		}
+	}
+
+	//*********************************(middle shelf)
+	// top shelf
+	for ( int x = 0 ; x < 3 ; x++ )
+	{
+		box1.set(Vector3(4.3,6,31 - x * 3 ),Vector3(3,5.2,29 - x * 3 ));
+		Items.push_back(box1);
+	}
+	// middle and bottom 
+	for ( int y = 0 ; y < 2 ; y++ ) 
+	{
+		box1.set(Vector3(4,4.1 - y * 2.5 ,31.5 ),Vector3(3,3 - y * 2.5 ,29.5));
+		Items.push_back(box1);
+		box1.set(Vector3(4,4.1 - y * 2.5 ,28.5 ),Vector3(3,3 - y * 2.5 ,27));
+		Items.push_back(box1);
+		box1.set(Vector3(4,4.1 - y * 2.5 ,26.2 ),Vector3(3,3 - y * 2.5 ,24.5));
+		Items.push_back(box1);
+	}
+
+	// ******************** other side + right shelf's other side 
+	for ( int z = 0 ; z < 2 ; z++)
+	{
+		for ( int x = 0 ; x < 3 ; x++)
+		{
+			for ( int y = 0 ; y < 3 ; y++ )
+			{
+				box1.set(Vector3(0.5 - z * 13,6 - y * 1.5 , 25.5 + x * 2.5),Vector3(-0.5 - z * 13 ,5 - y * 1.5 , 24.5 + x * 2.5));
+				Items.push_back(box1);
+			}
+		}
+	}
+	// ************************* right side shelf 
+	for ( int y = 0 ; y < 3 ; y++ )
+	{
+		if ( y == 0 ) 
+		{
+			box1.set(Vector3(-9.5,6 - y * 1.5,31),Vector3(-10.5,5 - y * 1.5,29));
+			Items.push_back(box1);
+			box1.set(Vector3(-9.5,6 - y * 1.5,28.5),Vector3(-10.5,5 - y * 1.5,27.5));
+			Items.push_back(box1);
+			box1.set(Vector3(-9.5,6 - y * 1.5,26),Vector3(-10.5,5 - y * 1.5,23.5));
+			Items.push_back(box1);
+		}
+		if ( y == 1 ) 
+		{
+			box1.set(Vector3(-9.5,6 - y * 1.5,32),Vector3(-10.5,5 - y * 1.5,29.5));
+			Items.push_back(box1);
+			box1.set(Vector3(-9.5,6 - y * 1.5,28.5),Vector3(-10.5,5 - y * 1.5,27.5));
+			Items.push_back(box1);
+			box1.set(Vector3(-9.5,6 - y * 1.5,26.5),Vector3(-10.5,5 - y * 1.5,25));
+			Items.push_back(box1);
+		}
+		if ( y == 2 ) 
+		{
+			box1.set(Vector3(-9.5,6 - y * 1.5,31),Vector3(-10.5,5 - y * 1.5,29.5));
+			Items.push_back(box1);
+			box1.set(Vector3(-9.5,6 - y * 1.5,29),Vector3(-10.5,5 - y * 1.5,26.5));
+			Items.push_back(box1);
+			box1.set(Vector3(-9.5,6 - y * 1.5,26),Vector3(-10.5,5 - y * 1.5,25));
+			Items.push_back(box1);
+		}
+	}
+
+	// ********************************* ( maggie shelves) 
+	for ( int x = 0 ; x < 2 ; x++ )
+	{
+		for ( int y = 0 ; y < 3 ; y++ )
+		{
+			box1.set(Vector3(6 - x * 4,7 - y * 3 ,46 ),Vector3(1.5 - x * 4 ,5.5 - y * 3,44));
+			Items.push_back(box1);
+		}
+	}
+
+	//************************************ ( left display cabinet ) 
+	box1.set(Vector3(16.2,4.5,22),Vector3(15.7,4,20)) ;
+	Items.push_back(box1);
+
+	for ( int x = 0 ; x < 2 ; x++)
+	{
+		for ( int y = 0 ; y < 2 ; y++ )
+		{
+			box1.set(Vector3(16.2 - x * 1.4 ,3.5 - y * 1.5 ,22),Vector3(15.7 - x * 1.4 ,2.8 - y * 1.5 ,20)) ;
+			Items.push_back(box1);
+		}
+	}
+
+	//************************************* ( middle display cabinet)
+	for ( int y = 0 ; y < 2 ; y++)
+	{
+		box1.set(Vector3(2,3.7 - y * 1.5 ,21 ),Vector3(0.5,3 - y * 1.5 ,20));
+		Items.push_back(box1);
+	}
+
+	//************************************ ( right display cabinet) 
+
+	for ( int y = 0 ; y < 2 ; y++ )
+	{
+		box1.set(Vector3(-9.7, 3 - y * 1.4 ,21.5 ),Vector3(-10.7, 2.3 - y * 1.4 ,21));
+		Items.push_back(box1);
+	}
+
+	//******************************** ( right side pizza shelf part 1 ) 
+	box1.set(Vector3(-20, 4.4 , 17 ),Vector3(-23.5, 3.95 ,14.5));
+	Items.push_back(box1);
+
+	box1.set(Vector3(-20, 3.9 , 13.5 ),Vector3(-23.5, 3 ,11.5));
+	Items.push_back(box1);
+
+	box1.set(Vector3(-20, 2 , 17 ),Vector3(-23.5, 1.2 ,14.5));
+	Items.push_back(box1);
+
+	//******************************** ( right side pizza shelf part 2 ) 
+	box1.set(Vector3(-20, 6.6 , 6.2 ),Vector3(-23.5, 5.4 ,4.3));
+	Items.push_back(box1);
+	box1.set(Vector3(-20, 6.6 , 2 ),Vector3(-23.5, 5.4 , 0.2 ));
+	Items.push_back(box1);
+	box1.set(Vector3(-20, 4.4 , 6.2 ),Vector3(-23.5, 3.95 , 4.3 ));
+	Items.push_back(box1);
 
 }
 
@@ -389,7 +613,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 			ypos = h / 2;
 		}
 	}
-	
+
 	if ( gamestate != MAINMENU && gamestate != CHOOSEMODE && gamestate != EXIT)
 
 	{
@@ -450,11 +674,6 @@ void SceneSP::Render()
 		RenderCharacter();
 
 		RenderInteractableObjs();
-
-		modelStack.PushMatrix();
-		modelStack.Translate(camera.targetwhere.x,camera.targetwhere.y,camera.targetwhere.z);
-		RenderMesh(meshList[GEO_SEE], true);
-		modelStack.PopMatrix();
 
 		if ( collision == true ) 
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "COLLISION", (1, 0, 1),3, 2, 18);

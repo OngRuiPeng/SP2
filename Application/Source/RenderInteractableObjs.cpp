@@ -96,7 +96,7 @@ void SceneSP::RenderInteractableObjs()
 	modelStack.PushMatrix();		//RIGHT DISPLAY CABINET
 
 	modelStack.PushMatrix();
-	modelStack.Translate(-10, 1.95, 19);
+	modelStack.Translate(-10, 1.95, 19.5);
 	RenderMesh(meshList[GEO_CAN3], true);
 	modelStack.PopMatrix();
 
@@ -105,10 +105,6 @@ void SceneSP::RenderInteractableObjs()
 	RenderMesh(meshList[GEO_CAN3], true);
 	modelStack.PopMatrix();
 
-	modelStack.PushMatrix();
-	modelStack.Translate(-10, 1.95, 18.5);
-	RenderMesh(meshList[GEO_CAN3], true);
-	modelStack.PopMatrix();
 
 	modelStack.PopMatrix();			//RIGHT DISPLAY CABINET END
 

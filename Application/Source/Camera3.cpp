@@ -19,7 +19,7 @@ void Camera3::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
 	right.y = 0;
 	right.Normalize();
 	this->up = defaultUp = right.Cross(view).Normalized();
-	targetwhere = Vector3(0,target.y,-38);
+	targetwhere = Vector3(0,target.y,-30);
 
 }
 
@@ -69,7 +69,7 @@ void Camera3::Update(double dt,float width, float height, double* xpos, double* 
 		targetwhere = rotation * (targetwhere - position) + position;
 
 	}
-	if(Application::IsKeyPressed(VK_DOWN) && target.y > -20 || (*ypos > mouseY) && target.y > -20 )
+	if(Application::IsKeyPressed(VK_DOWN) && target.y > -30 || (*ypos > mouseY) && target.y > -30 )
 	{
 		float pitch = (float)(-CAMERA_SPEED * dt * (*ypos - mouseY));
 			Vector3 view = (target - position).Normalized();
@@ -83,25 +83,6 @@ void Camera3::Update(double dt,float width, float height, double* xpos, double* 
 			targetwhere = rotation * (targetwhere - position) + position;
 	}
 
-	if (position.x >= 49)
-	{
-		position.x = 49;
-	}
-
-	if (position.z <= -49)
-	{
-		position.z = -49;
-	}
-
-	if (position.x <= -49)
-	{
-		position.x = -49;
-	}
-
-	if (position.z >= 49)
-	{
-		position.z = 49;
-	}
 	if(Application::IsKeyPressed('R'))
 	{
 		Reset();

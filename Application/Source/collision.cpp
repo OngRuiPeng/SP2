@@ -65,7 +65,7 @@ void SceneSP::updatecollision(double dt)
 
 	updateobj();
 
-	if (Application::IsKeyPressed('W')) 
+	if (Application::IsKeyPressed('W') && gamestate != MAINMENU && gamestate != CHOOSEMODE) 
 	{
 
 		Vector3 view = (camera.target - camera.position).Normalize();
@@ -73,9 +73,8 @@ void SceneSP::updatecollision(double dt)
 		Vector3 precollide = view * dt * MOVE_SPEED; // if it moved it will be here 
 
 		collisionprevent(OBJ,precollide);
-
 	}
-	else if (Application::IsKeyPressed('S')) 
+	else if (Application::IsKeyPressed('S') && gamestate != MAINMENU && gamestate != CHOOSEMODE) 
 	{
 
 		Vector3 view = (camera.target - camera.position).Normalize();
@@ -83,9 +82,8 @@ void SceneSP::updatecollision(double dt)
 		Vector3 backside = -view * dt * MOVE_SPEED;
 
 		collisionprevent(OBJ,backside);
-
 	}
-	else if (Application::IsKeyPressed('D')) 
+	else if (Application::IsKeyPressed('D') && gamestate != MAINMENU && gamestate != CHOOSEMODE) 
 	{
 
 		Vector3 view = (camera.target - camera.position).Normalize();
@@ -94,9 +92,8 @@ void SceneSP::updatecollision(double dt)
 		right = right * dt * MOVE_SPEED;
 
 		collisionprevent(OBJ,right);
-
 	}
-	else if (Application::IsKeyPressed('A')) 
+	else if (Application::IsKeyPressed('A') && gamestate != MAINMENU && gamestate != CHOOSEMODE) 
 	{
 
 		Vector3 view = (camera.target - camera.position).Normalize();
@@ -107,11 +104,7 @@ void SceneSP::updatecollision(double dt)
 		collisionprevent(OBJ,left);
 	}
 
-
-	if ( AABBCheck(seewhere,OBJ[1]) == true )
-		collisionsia = true;
-	else
-		collisionsia = false;
+	Targetcollision();
 
 }
 
@@ -119,8 +112,32 @@ void SceneSP::updateobj()
 {
 	OBJ[0].max = camera.position + Vector3(1,1,1);
 	OBJ[0].min = camera.position - Vector3(1,1,1);
+}
 
-	seewhere.max = camera.targetwhere + Vector3(0.2,0.1,0.2);
-	seewhere.min = camera.targetwhere - Vector3(0.2,0.1,0.2);
+Obj SceneSP::Targetcollision()
+{
+	Vector3 targetline = camera.position;
+	Vector3 view = (camera.targetwhere - camera.position).Normalized();
+	view *= 0.5;
+	Obj see ;
+
+	for ( int z = 0 ; z < 20 ; z++) 
+	{
+		targetline += view;
+		see.set(targetline + Vector3(0.2,0.2,0.2),targetline - Vector3(0.2,0.2,0.2));
+
+		for ( int x = 0 ; x < Items.size() ; x++ )
+		{
+			if ( AABBCheck(see,Items[x]) == true )
+			{
+				collisionsia = true;
+				return Items[x];
+			}
+			else
+			{
+				collisionsia = false;
+			}
+		}
+	}
 
 }
