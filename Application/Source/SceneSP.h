@@ -8,7 +8,11 @@
 #include "Light.h"
 #include "GLFW\glfw3.h"
 #include "Obj.h"
+#include "Npc.h"
 #include <vector>
+#include <string>
+#include "timer.h"
+using namespace std;
 
 class SceneSP : public Scene
 {
@@ -19,7 +23,7 @@ class SceneSP : public Scene
 		GEO_ChooseScreen,
 		GEO_CUBE,
 		GEO_MainMenuText,
-
+		GEO_NPCText,
 		//Skybox------------------------------------------------
 		GEO_LEFT,
 		GEO_RIGHT,
@@ -62,10 +66,13 @@ class SceneSP : public Scene
 		GEO_RIGHTLEG,
 		GEO_DOORMAN,
 		//NPCs=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-
+		//NPC text
+		GEO_CUSTOMERTEXT,
+		GEO_CASHIERTEXT,
+		GEO_SECURITYTEXT,
+		//
 		GEO_LIGHTBALL,
 
-		
 		GEO_SEE,
 
 		NUM_GEOMETRY,
@@ -128,12 +135,15 @@ public:
 	float scalekirby;
 	int gamestate;
 	Camera3 camera;	
+	
 	//Functions---------------------------------------
 	void initSkybox();
 	void initSupermarket();
-
-
+	
 	//Render
+	void RenderMesh(Mesh *mesh, bool enableLight);
+	void RenderText(Mesh* mesh, std::string text, Color color);
+	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
 	void RenderCharacter();
 	void RenderSkybox();
 	void RenderMainMenu();
@@ -159,17 +169,24 @@ public:
 
 	vector <Obj> OBJ ;
 	vector <Obj> Items ;
-
 	Obj box1 ;
 	Obj seewhere;
-
+	//
+	bool inSupermarket;
+	//npcs
+	CNpc Cashier;
+	CNpc Guard;
+	CNpc Customer;
+	CNpc Passerby1;
+	CNpc Passerby2;
 
 	void mouseInput(double* xpos, double* ypos);
 	double xpos;
 	double ypos;
 	double* xposition;
 	double* yposition;
-	
+
+
 private:
 	unsigned m_vertexArrayID;
 
@@ -181,13 +198,9 @@ private:
 
 	Light lights[2];
 
-	void RenderMesh(Mesh *mesh, bool enableLight);
-	void RenderText(Mesh* mesh, std::string text, Color color);
-	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
-
 	double FPS; 
 
-
+	StopWatch m_timer;
 };
 
 #endif

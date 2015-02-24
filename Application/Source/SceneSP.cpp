@@ -16,8 +16,8 @@ using namespace std;
 #include "LoadTGA.h"
 
 #include "Camera3.h"
-
 #include "windows.h"
+
 #define LSPEED 20.f 
 
 SceneSP::SceneSP()
@@ -90,7 +90,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 
 	// Use our shader
 	glUseProgram(m_programID);
-
+	
 	lights[0].type = Light::LIGHT_DIRECTIONAL;
 	lights[0].position.Set(0, 1000, 0);
 	lights[0].color.Set(1, 1, 1);
@@ -123,7 +123,17 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 
 	//variables
 	gamestate = MAINMENU;
-
+	inSupermarket = false;
+	Cashier.setName("Jill");
+	Cashier.setType("Cashier");
+	Guard.setName("Bobby");
+	Guard.setType("SecurityGuard");
+	Customer.setName("James");
+	Customer.setType("Customer");
+	Passerby1.setName("Andrew");
+	Passerby1.setType("Passerby");
+	Passerby2.setName("Peter");
+	Passerby2.setType("Passerby");
 	//remove all glGenBuffers, glBindBuffer, glBufferData code
 	meshList[GEO_AXES] = MeshBuilder::GenerateAxes("reference", 1000, 1000, 1000);
 
@@ -135,14 +145,26 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 
 	initSkybox();
 
-
+	//TEXT
 	meshList[GEO_MainMenuText] = MeshBuilder::GenerateText("text", 16, 16);
 	meshList[GEO_MainMenuText]->textureID = LoadTGA("Image//ExportedFont.tga");
+
+	meshList[GEO_NPCText] = MeshBuilder::GenerateText("text", 16, 16);
+	meshList[GEO_NPCText]->textureID = LoadTGA("Image//ExportedFont.tga");
 
 	meshList[GEO_SUPERMARKET] = MeshBuilder::GenerateOBJ("Supermarket", "OBJ//Supermarket.obj");
 	meshList[GEO_SUPERMARKET]->textureID = LoadTGA("Image//WallTxt.tga");
 
+	meshList[GEO_CUSTOMERTEXT] = MeshBuilder::GenerateText("Customer text", 16, 16);
+	meshList[GEO_CUSTOMERTEXT]->textureID = LoadTGA("Image//ExportedFont.tga");
 
+	meshList[GEO_CASHIERTEXT] = MeshBuilder::GenerateText("Cashier text", 16, 16);
+	meshList[GEO_CASHIERTEXT]->textureID = LoadTGA("Image//ExportedFont.tga");
+
+	meshList[GEO_SECURITYTEXT] = MeshBuilder::GenerateText("Security guard text", 16, 16);
+	meshList[GEO_SECURITYTEXT]->textureID = LoadTGA("Image//ExportedFont.tga");
+
+	//Supermarket
 	meshList[GEO_SUPERMARKETFLOOR] = MeshBuilder::GenerateOBJ("SupermarketFloor", "OBJ//SupermarketFloor.obj");
 	meshList[GEO_SUPERMARKETFLOOR]->textureID = LoadTGA("Image//SupermarketTiles.tga");
 
@@ -203,26 +225,26 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	meshList[GEO_PACK4] = MeshBuilder::GenerateOBJ("Pack4", "OBJ//Pack4.obj");
 	meshList[GEO_PACK4]->textureID = LoadTGA("Image//Pack4.tga");
 
-
+	//NPC
 	meshList[GEO_DOORMAN] = MeshBuilder::GenerateOBJ("Doorman", "OBJ//doorman.obj");
 	meshList[GEO_DOORMAN]->textureID = LoadTGA("Image//doorman.tga");
-//
+
 	meshList[GEO_HEAD] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//head.obj");
 	meshList[GEO_HEAD]->textureID = LoadTGA("image//NpcPink.tga");
 
 	meshList[GEO_BODY] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//body.obj");
 	meshList[GEO_BODY]->textureID = LoadTGA("image//NpcPink.tga");
 	
-	meshList[GEO_LEFTHAND] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//lefthand.obj");
+	meshList[GEO_LEFTHAND] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//hand.obj");
 	meshList[GEO_LEFTHAND]->textureID = LoadTGA("image//NpcPink.tga");
 
-	meshList[GEO_RIGHTHAND] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//righthand.obj");
+	meshList[GEO_RIGHTHAND] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//hand.obj");
 	meshList[GEO_RIGHTHAND]->textureID = LoadTGA("image//NpcPink.tga");
 
-	meshList[GEO_LEFTLEG] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//leftleg.obj");
+	meshList[GEO_LEFTLEG] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//leg.obj");
 	meshList[GEO_LEFTLEG]->textureID = LoadTGA("image//NpcPink.tga");
 
-	meshList[GEO_RIGHTLEG] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//rightleg.obj");
+	meshList[GEO_RIGHTLEG] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//leg.obj");
 	meshList[GEO_RIGHTLEG]->textureID = LoadTGA("image//NpcPink.tga");
 
 
@@ -292,17 +314,22 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	{
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
-
+	if(Application::IsKeyPressed('E'))
+	{
+		inSupermarket = true;
+	}
+	
+	
 	if(Application::IsKeyPressed('6'))
 	{
 		gamestate = MAINMENU;
 	}
 
-	//Game states
+	//Game states	 
 	if ( gamestate == MAINMENU )
 	{
 		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL); //enable cursor
-		/*camera.Update(dt, w / 2, h / 2, &xpos, &ypos);*/
+		camera.Reset();
 		int state = glfwGetMouseButton(m_window, GLFW_MOUSE_BUTTON_LEFT); // check for clicks
 		if( state == GLFW_PRESS && (*xposition > 285 && *xposition < 515 && *yposition > 185 && *yposition < 263) )
 		{
@@ -312,8 +339,6 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		{
 			exit(0);
 		}
-		std::cout << xpos << std::endl;
-		std::cout << ypos << std::endl;
 	}
 
 	if ( gamestate == CHOOSEMODE )
@@ -398,10 +423,6 @@ void SceneSP::Render()
 	{
 		RenderChooseMode();
 	}
-	else if ( gamestate == EXIT )
-	{
-
-	}
 	else 
 	{
 		RenderSkybox();
@@ -420,12 +441,9 @@ void SceneSP::Render()
 
 		if ( collisionsia == true ) 
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "TARGET DONG DAO LIAO", (1, 0, 1),3, 2, 16);
-
-
+		if ( inSupermarket == true )
+			RenderTextOnScreen(meshList[GEO_NPCText], Cashier.CashierWelcome(), (1, 0, 1), 2, 20, 20);
 	}
-
-	cout << camera.targetwhere.y << endl ; 
-
 }
 
 void SceneSP::Exit()
