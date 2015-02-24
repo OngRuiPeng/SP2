@@ -133,6 +133,36 @@ void SceneSP::RenderSupermarket()
 
 	modelStack.PopMatrix();	//CASHIER SET2 POP
 
+	modelStack.PushMatrix();
+	modelStack.Translate(2, 0, 19);
+	modelStack.Rotate(90, 0, 1, 0);
+	modelStack.Scale(3.5, 2.5, 3.5);
+	RenderMesh(meshList[GEO_CONTROLPANEL], true);
+	modelStack.PopMatrix();	
+
+	modelStack.PushMatrix();
+	modelStack.Translate(2, 0, 19);
+	modelStack.Rotate(90, 0, 1, 0);
+	modelStack.Scale(3.5, 2.5, 3.5);
+	RenderMesh(meshList[GEO_SINK], true);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(2, 0, 19);
+	modelStack.Rotate(90, 0, 1, 0);
+	modelStack.Scale(3.5, 2.5, 3.5);
+	RenderMesh(meshList[GEO_TOILET], true);
+	modelStack.PopMatrix();	
+
+	modelStack.PushMatrix();
+	modelStack.Translate(2, 0, 19);
+	modelStack.Rotate(90, 0, 1, 0);
+	modelStack.Scale(3.5, 2.5, 3.5);
+	RenderMesh(meshList[GEO_WATER], true);
+	modelStack.PopMatrix();	
+
+
+
 
 	modelStack.PopMatrix();
 	//All pop

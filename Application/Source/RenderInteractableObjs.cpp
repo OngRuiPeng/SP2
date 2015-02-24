@@ -12,28 +12,28 @@ void SceneSP::RenderInteractableObjs()
 	modelStack.PushMatrix();
 	modelStack.Scale(3.5, 2.5, 3.5);
 	modelStack.Rotate(90, 0, 1, 0);
-	modelStack.Translate(1.9, 0, -0.75);
+	modelStack.Translate(1.9, 0, -DoorSlideR + 0.6);
 	RenderMesh(meshList[GEO_DOOR], true);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Scale(3.5, 2.5, 3.5);
 	modelStack.Rotate(90, 0, 1, 0);
-	modelStack.Translate(1.9, 0, 1.4);
+	modelStack.Translate(1.9, 0, DoorSlideR);
 	RenderMesh(meshList[GEO_DOOR], true);
 	modelStack.PopMatrix();
 	//!DOORS
 
 
 	modelStack.PushMatrix();		//LEFT DOOR
-	modelStack.Translate(17.8, 0, 34.2);
-	modelStack.Scale(3.5, 2.5, 1.5);
+	modelStack.Translate(18, 0, 34.2);
+	modelStack.Scale(2.7, 2.5, 1.5);
 	modelStack.Rotate(90, 0, 1, 0);
 	RenderMesh(meshList[GEO_BACKDOOR], true);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();	   //RIGHT DOOR
-	modelStack.Translate(-12.4, 0, 34.2);
+	modelStack.Translate(-12.8, 0, 34.2);
 	modelStack.Scale(3.5, 2.5, 1.5);
 	modelStack.Rotate(90, 0, 1, 0);
 	RenderMesh(meshList[GEO_BACKDOOR], true);

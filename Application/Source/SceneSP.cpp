@@ -16,6 +16,7 @@ using namespace std;
 #include "LoadTGA.h"
 
 #include "Camera3.h"
+
 #include "windows.h"
 
 #define LSPEED 20.f 
@@ -123,6 +124,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 
 	//variables
 	gamestate = MAINMENU;
+
 	inSupermarket = false;
 	Cashier.setName("Jill");
 	Cashier.setType("Cashier");
@@ -134,6 +136,9 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	Passerby1.setType("Passerby");
 	Passerby2.setName("Peter");
 	Passerby2.setType("Passerby");
+
+	DoorSlideR = -0.75;
+
 	//remove all glGenBuffers, glBindBuffer, glBufferData code
 	meshList[GEO_AXES] = MeshBuilder::GenerateAxes("reference", 1000, 1000, 1000);
 
@@ -176,6 +181,18 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 
 	meshList[GEO_DIVIDER] = MeshBuilder::GenerateOBJ("Divider", "OBJ//Divider.obj");
 	meshList[GEO_DIVIDER]->textureID = LoadTGA("Image//Scanner.tga");
+
+	meshList[GEO_CONTROLPANEL] = MeshBuilder::GenerateOBJ("Control Panel", "OBJ//ControlPanel.obj");
+	meshList[GEO_CONTROLPANEL]->textureID = LoadTGA("Image//ControlPanel.tga");
+
+	meshList[GEO_SINK] = MeshBuilder::GenerateOBJ("Sink", "OBJ//Sink.obj");
+	meshList[GEO_SINK]->textureID = LoadTGA("Image//ToiletTxt.tga");
+
+	meshList[GEO_TOILET] = MeshBuilder::GenerateOBJ("Toilet", "OBJ//Toilet.obj");
+	meshList[GEO_TOILET]->textureID = LoadTGA("Image//ToiletTxt.tga");
+
+	meshList[GEO_WATER] = MeshBuilder::GenerateOBJ("Water", "OBJ//Water.obj");
+	meshList[GEO_WATER]->textureID = LoadTGA("Image//WaterTxt.tga");
 
 	meshList[GEO_DOOR] = MeshBuilder::GenerateOBJ("Door", "OBJ//Door.obj");
 	meshList[GEO_DOOR]->textureID = LoadTGA("Image//Door.tga");
@@ -339,6 +356,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		{
 			exit(0);
 		}
+
 	}
 
 	if ( gamestate == CHOOSEMODE )
@@ -381,7 +399,9 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	}
 
 	updatecollision(dt) ;
+	//Interaction functions
 
+	SlidingDoor(dt);
 }
 
 void SceneSP::Render()

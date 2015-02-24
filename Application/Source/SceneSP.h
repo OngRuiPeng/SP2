@@ -41,6 +41,10 @@ class SceneSP : public Scene
 		GEO_DOOR,
 		GEO_BACKDOOR,
 		GEO_DIVIDER,
+		GEO_CONTROLPANEL,
+		GEO_SINK,
+		GEO_WATER,
+		GEO_TOILET,
 		GEO_SHELF,
 		GEO_SHELF2,
 		GEO_SHELF3,
@@ -164,6 +168,11 @@ public:
 	void updatecollision(double dt);
 	void updateobj();
 	bool collision ; 
+
+	//interactions and their other variables
+	void SlidingDoor(double);
+	float DoorSlideL;
+	float DoorSlideR;
 
 	bool collisionsia; 
 
