@@ -266,16 +266,16 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 
 
 	translateX = 0 ;
-	collision = false; 
 	collisionsia = false;
+	interactmah = false;
 
 	//**********************************************************   collisions 
 	box1.set(camera.position + Vector3(1,1,1),camera.position - Vector3(1,1,1));
 	OBJ.push_back(box1);
 
 	collisionOBJinit();
-
 	collisionITEMSinit();
+	collisionInteractionsinit();
 
 	Mtx44 projection;
 	projection.SetToPerspective(45.0f,4.0f/3.0f, 0.01f, 100000.0f);
@@ -372,18 +372,38 @@ void SceneSP::collisionOBJinit()
 
 	box1.set(Vector3(-9.5,20,23),Vector3(-13.5,0,19)); // right shelf 
 	OBJ.push_back(box1);
+
+	// ***************************************** ( toilet ) 
+	box1.set(Vector3(17.5,20,49),Vector3(15.8,0,36.8)); // right wall 
+	OBJ.push_back(box1);
+
+	box1.set(Vector3(29,20,38.5),Vector3(22,0,36.8)); // front left shelf 
+	OBJ.push_back(box1);
+
+	box1.set(Vector3(18,20,38.5),Vector3(15.8,0,36.8)); // front right shelf 
+	OBJ.push_back(box1);
+
+	// ******************************************* ( security room )
+	box1.set(Vector3(-8.6,20,49),Vector3(-11,0,36.8)); // left wall 
+	OBJ.push_back(box1);
+
+	box1.set(Vector3(-8.6,20,39),Vector3(-11.3,0,36.8)); // front left wall 
+	OBJ.push_back(box1);
+
+	box1.set(Vector3(-16,20,39),Vector3(-26,0,36.8)); // front right wall 
+	OBJ.push_back(box1);
 }
 
 void SceneSP::collisionITEMSinit()
 {
 	// ******************************** (left shelf)
-	for ( int z = 0 ; z < 3 ; z++ ) 
+	for ( float x = 0.0f ; x < 2 ; x++ ) 
 	{
-		for ( int y = 0 ; y < 3 ; y++ )
+		for ( float y = 0.0f ; y < 3 ; y++ )
 		{
-			for ( int x = 0 ; x < 2 ; x++ )
+			for ( float z = 0.0f ; z < 3 ; z++ )
 			{
-				box1.set(Vector3(17 - x * 3 ,6.3 - y * 2 ,30.5 - z * 2.3 ),Vector3(15.5 - x * 3 ,5.3 - y * 2 ,29 - z * 2.3));
+				box1.set(Vector3(17.0f - x * 3.0f ,6.3f - y * 2.0f ,30.5f - z * 2.3f ),Vector3(15.5f - x * 3.0f ,5.3f - y * 2.0f ,29.0f - z * 2.3f));
 				Items.push_back(box1);
 			}
 		}
@@ -391,13 +411,13 @@ void SceneSP::collisionITEMSinit()
 
 	//*********************************(middle shelf)
 	// top shelf
-	for ( int x = 0 ; x < 3 ; x++ )
+	for ( float x = 0 ; x < 3 ; x++ )
 	{
 		box1.set(Vector3(4.3,6,31 - x * 3 ),Vector3(3,5.2,29 - x * 3 ));
 		Items.push_back(box1);
 	}
 	// middle and bottom 
-	for ( int y = 0 ; y < 2 ; y++ ) 
+	for ( float y = 0 ; y < 2 ; y++ ) 
 	{
 		box1.set(Vector3(4,4.1 - y * 2.5 ,31.5 ),Vector3(3,3 - y * 2.5 ,29.5));
 		Items.push_back(box1);
@@ -408,11 +428,11 @@ void SceneSP::collisionITEMSinit()
 	}
 
 	// ******************** other side + right shelf's other side 
-	for ( int z = 0 ; z < 2 ; z++)
+	for ( float z = 0 ; z < 2 ; z++)
 	{
-		for ( int x = 0 ; x < 3 ; x++)
+		for ( float x = 0 ; x < 3 ; x++)
 		{
-			for ( int y = 0 ; y < 3 ; y++ )
+			for ( float y = 0 ; y < 3 ; y++ )
 			{
 				box1.set(Vector3(0.5 - z * 13,6 - y * 1.5 , 25.5 + x * 2.5),Vector3(-0.5 - z * 13 ,5 - y * 1.5 , 24.5 + x * 2.5));
 				Items.push_back(box1);
@@ -420,7 +440,7 @@ void SceneSP::collisionITEMSinit()
 		}
 	}
 	// ************************* right side shelf 
-	for ( int y = 0 ; y < 3 ; y++ )
+	for ( float y = 0 ; y < 3 ; y++ )
 	{
 		if ( y == 0 ) 
 		{
@@ -452,9 +472,9 @@ void SceneSP::collisionITEMSinit()
 	}
 
 	// ********************************* ( maggie shelves) 
-	for ( int x = 0 ; x < 2 ; x++ )
+	for ( float x = 0 ; x < 2 ; x++ )
 	{
-		for ( int y = 0 ; y < 3 ; y++ )
+		for ( float y = 0 ; y < 3 ; y++ )
 		{
 			box1.set(Vector3(6 - x * 4,7 - y * 3 ,46 ),Vector3(1.5 - x * 4 ,5.5 - y * 3,44));
 			Items.push_back(box1);
@@ -465,9 +485,9 @@ void SceneSP::collisionITEMSinit()
 	box1.set(Vector3(16.2,4.5,22),Vector3(15.7,4,20)) ;
 	Items.push_back(box1);
 
-	for ( int x = 0 ; x < 2 ; x++)
+	for ( float x = 0 ; x < 2 ; x++)
 	{
-		for ( int y = 0 ; y < 2 ; y++ )
+		for ( float y = 0 ; y < 2 ; y++ )
 		{
 			box1.set(Vector3(16.2 - x * 1.4 ,3.5 - y * 1.5 ,22),Vector3(15.7 - x * 1.4 ,2.8 - y * 1.5 ,20)) ;
 			Items.push_back(box1);
@@ -475,7 +495,7 @@ void SceneSP::collisionITEMSinit()
 	}
 
 	//************************************* ( middle display cabinet)
-	for ( int y = 0 ; y < 2 ; y++)
+	for ( float y = 0 ; y < 2 ; y++)
 	{
 		box1.set(Vector3(2,3.7 - y * 1.5 ,21 ),Vector3(0.5,3 - y * 1.5 ,20));
 		Items.push_back(box1);
@@ -483,7 +503,7 @@ void SceneSP::collisionITEMSinit()
 
 	//************************************ ( right display cabinet) 
 
-	for ( int y = 0 ; y < 2 ; y++ )
+	for ( float y = 0 ; y < 2 ; y++ )
 	{
 		box1.set(Vector3(-9.7, 3 - y * 1.4 ,21.5 ),Vector3(-10.7, 2.3 - y * 1.4 ,21));
 		Items.push_back(box1);
@@ -506,6 +526,26 @@ void SceneSP::collisionITEMSinit()
 	Items.push_back(box1);
 	box1.set(Vector3(-20, 4.4 , 6.2 ),Vector3(-23.5, 3.95 , 4.3 ));
 	Items.push_back(box1);
+
+}
+
+void SceneSP::collisionInteractionsinit()
+{
+	box1.set(Vector3(10,20,-5.5),Vector3(0.5,0,-7.5)); // left sliding door  
+	Interactables.push_back(box1);
+
+	box1.set(Vector3(1,20,-5.5),Vector3(-8,0,-7.5)); // right sliding door  
+	Interactables.push_back(box1);
+
+	box1.set(Vector3(29,20,49),Vector3(22.5,0,43)); // sink  
+	Interactables.push_back(box1);
+
+	box1.set(Vector3(23,20,49),Vector3(15.8,0,42.5)); // toilet bowl
+	Interactables.push_back(box1);
+
+	box1.set(Vector3(-20.5,20,49),Vector3(-26,0,36.8)); // control panel 
+	Interactables.push_back(box1);
+
 
 }
 
@@ -626,6 +666,13 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	//Interaction functions
 
 	SlidingDoor(dt);
+
+	if(Application::IsKeyPressed('G') && ItemTargetcollision().getEmpty() == false)
+	{
+		ItemTargetcollision().setEmpty(1);
+		cout << ItemTargetcollision().getEmpty() << endl;
+	}
+
 }
 
 void SceneSP::Render()
@@ -675,11 +722,12 @@ void SceneSP::Render()
 
 		RenderInteractableObjs();
 
-		if ( collision == true ) 
-			RenderTextOnScreen(meshList[GEO_MainMenuText], "COLLISION", (1, 0, 1),3, 2, 18);
-
 		if ( collisionsia == true ) 
-			RenderTextOnScreen(meshList[GEO_MainMenuText], "TARGET DONG DAO LIAO", (1, 0, 1),3, 2, 16);
+			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press E to pick up item", (1, 0, 1),2.5, 5, 4);
+
+		if ( interactmah == true ) 
+			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press E to interact", (1, 0, 1),2.5, 5, 4);
+
 		if ( inSupermarket == true )
 			RenderTextOnScreen(meshList[GEO_NPCText], Cashier.CashierWelcome(), (1, 0, 1), 2, 20, 20);
 	}

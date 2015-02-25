@@ -75,8 +75,8 @@ void SceneSP::RenderInteractableObjs()
 	modelStack.Translate(14, 4.1, 19);
 	RenderMesh(meshList[GEO_CAN1], true);
 	modelStack.PopMatrix();			//Top layer end
-	
-	
+
+
 	modelStack.PopMatrix();			//LEFT DISPLAY CABINET END
 
 	modelStack.PushMatrix();		//MIDDLE DISPLAY CABINET
@@ -92,7 +92,7 @@ void SceneSP::RenderInteractableObjs()
 	modelStack.PopMatrix();
 
 	modelStack.PopMatrix();			//MIDDLE DISPLAY CABINET END
-	
+
 	modelStack.PushMatrix();		//RIGHT DISPLAY CABINET
 
 	modelStack.PushMatrix();
@@ -111,20 +111,29 @@ void SceneSP::RenderInteractableObjs()
 
 	modelStack.PushMatrix();		//PIZZA BOXES
 
-	modelStack.PushMatrix();
-	modelStack.Translate(-20, 5, 0.8);
-	RenderMesh(meshList[GEO_BOX1], true);
-	modelStack.PopMatrix();
+	if ( Items[73].getEmpty() == false)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(-20, 5, 0.8);
+		RenderMesh(meshList[GEO_BOX1], true);
+		modelStack.PopMatrix();
+	}
 
+	if ( Items[72].getEmpty() == false)
+	{
 	modelStack.PushMatrix();
 	modelStack.Translate(-20, 5, 4);
 	RenderMesh(meshList[GEO_BOX1], true);
 	modelStack.PopMatrix();
+	}
 
+	if ( Items[74].getEmpty() == false)
+	{
 	modelStack.PushMatrix();
 	modelStack.Translate(-20, 4, 4);
 	RenderMesh(meshList[GEO_BOX1], true);
 	modelStack.PopMatrix();
+	}
 
 	modelStack.PushMatrix();
 	modelStack.Translate(-20, 2.3, 10.8);

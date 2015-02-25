@@ -14,7 +14,7 @@ bool SceneSP::AABBCheck(const Obj &box1,const Obj &box2)
 
 }
 
-void SceneSP::collisionprevent(vector<Obj>, Vector3 camerathing) 
+void SceneSP::collisionprevent(vector<Obj> a, Vector3 camerathing , vector<Obj> b ) 
 {
 	bool moveX = true ;
 
@@ -31,7 +31,7 @@ void SceneSP::collisionprevent(vector<Obj>, Vector3 camerathing)
 	forZ.max = Vector3(camera.position.x , camera.position.y , player.z );
 	forZ.min = Vector3(camera.position.x , camera.position.y , player.z );
 
-	for(int x = 1 ; x < OBJ.size() ; ++x)
+	for(int x = 1 ; x < a.size() ; ++x)
 	{
 		if ( AABBCheck(OBJ[x],checkColli)) 
 		{
@@ -50,12 +50,33 @@ void SceneSP::collisionprevent(vector<Obj>, Vector3 camerathing)
 			}
 		}
 	}
+
+	for(int x = 0 ; x < b.size() ; ++x)
+	{
+		if ( AABBCheck(Interactables[x],checkColli)) 
+		{
+			//if x axis is the one touching
+			if ( AABBCheck ( Interactables[x], forX)) 
+			{
+				camerathing.x = 0 ;
+				moveX = false;
+			}
+
+			//if z axis is the one touching
+			if ( AABBCheck ( Interactables[x], forZ)) 
+			{
+				camerathing.z = 0 ;
+				moveX = true;
+			}
+		}
+	}
+
 	camera.position.x += camerathing.x ;
 	camera.position.z += camerathing.z ;
 	camera.target.x += camerathing.x ;
 	camera.target.z += camerathing.z ;
-	camera.targetwhere.x += camerathing.x;
-	camera.targetwhere.z += camerathing.z;
+	camera.targetwhere.x += camerathing.x ;
+	camera.targetwhere.z += camerathing.z ;
 
 }
 
@@ -72,7 +93,7 @@ void SceneSP::updatecollision(double dt)
 		view.y = 0;
 		Vector3 precollide = view * dt * MOVE_SPEED; // if it moved it will be here 
 
-		collisionprevent(OBJ,precollide);
+		collisionprevent(OBJ,precollide,Interactables);
 	}
 	else if (Application::IsKeyPressed('S') && gamestate != MAINMENU && gamestate != CHOOSEMODE) 
 	{
@@ -81,7 +102,7 @@ void SceneSP::updatecollision(double dt)
 		view.y = 0;
 		Vector3 backside = -view * dt * MOVE_SPEED;
 
-		collisionprevent(OBJ,backside);
+		collisionprevent(OBJ,backside,Interactables);
 	}
 	else if (Application::IsKeyPressed('D') && gamestate != MAINMENU && gamestate != CHOOSEMODE) 
 	{
@@ -91,7 +112,7 @@ void SceneSP::updatecollision(double dt)
 		Vector3 right = view.Cross(camera.up);
 		right = right * dt * MOVE_SPEED;
 
-		collisionprevent(OBJ,right);
+		collisionprevent(OBJ,right,Interactables);
 	}
 	else if (Application::IsKeyPressed('A') && gamestate != MAINMENU && gamestate != CHOOSEMODE) 
 	{
@@ -101,10 +122,11 @@ void SceneSP::updatecollision(double dt)
 		Vector3 left = view.Cross(camera.up);
 		left = -left * dt * MOVE_SPEED;
 
-		collisionprevent(OBJ,left);
+		collisionprevent(OBJ,left,Interactables);
 	}
 
-	Targetcollision();
+	ItemTargetcollision();
+	InteractableTargetcollision();
 
 }
 
@@ -112,9 +134,12 @@ void SceneSP::updateobj()
 {
 	OBJ[0].max = camera.position + Vector3(1,1,1);
 	OBJ[0].min = camera.position - Vector3(1,1,1);
+
+	Interactables[0].set(Vector3(9.5 + DoorSlideR,20,-5.5),Vector3(1 + DoorSlideR,0,-7.5));
+	Interactables[1].set(Vector3(1 - DoorSlideR ,20,-5.5),Vector3(-8 - DoorSlideR,0,-7.5));
 }
 
-Obj SceneSP::Targetcollision()
+Obj SceneSP::ItemTargetcollision()
 {
 	Vector3 targetline = camera.position;
 	Vector3 view = (camera.targetwhere - camera.position).Normalized();
@@ -138,6 +163,36 @@ Obj SceneSP::Targetcollision()
 				collisionsia = false;
 			}
 		}
+
+	}
+
+}
+
+Obj SceneSP::InteractableTargetcollision()
+{
+	Vector3 targetline = camera.position;
+	Vector3 view = (camera.targetwhere - camera.position).Normalized();
+	view *= 0.5;
+	Obj see ;
+
+	for ( int z = 0 ; z < 20 ; z++) 
+	{
+		targetline += view;
+		see.set(targetline + Vector3(0.2,0.2,0.2),targetline - Vector3(0.2,0.2,0.2));
+
+		for ( int x = 2 ; x < Interactables.size() ; x++ )
+		{
+			if ( AABBCheck(see,Interactables[x]) == true )
+			{
+				interactmah = true;
+				return Interactables[x];
+			}
+			else
+			{
+				interactmah = false;
+			}
+		}
+
 	}
 
 }

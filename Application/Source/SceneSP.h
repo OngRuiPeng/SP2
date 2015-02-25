@@ -164,11 +164,11 @@ public:
 
 	//collision
 	bool AABBCheck(const Obj &box1,const Obj &box2);
-	void collisionprevent(vector <Obj>, Vector3 camerathing);
-	Obj Targetcollision();
+	void collisionprevent(vector <Obj> a ,Vector3 camerathing, vector <Obj> b );
+	Obj ItemTargetcollision();
+	Obj InteractableTargetcollision();
 	void updatecollision(double dt);
 	void updateobj();
-	bool collision ; 
 
 	//interactions and their other variables
 	void SlidingDoor(double);
@@ -176,12 +176,14 @@ public:
 	float DoorSlideR;
 
 	bool collisionsia; 
+	bool interactmah ;
 
 	vector <Obj> OBJ ;
 	vector <Obj> Items ;
+	vector <Obj> Interactables ;
+
 	Obj box1 ;
 	Obj seewhere;
-<<<<<<< Updated upstream
 	//
 	bool inSupermarket;
 	//npcs
@@ -193,6 +195,7 @@ public:
 
 	void collisionOBJinit(void);
 	void collisionITEMSinit(void);
+	void collisionInteractionsinit(void);
 
 
 	void mouseInput(double* xpos, double* ypos);
