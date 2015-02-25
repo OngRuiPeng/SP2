@@ -135,11 +135,11 @@ void SceneSP::updateobj()
 	OBJ[0].max = camera.position + Vector3(1,1,1);
 	OBJ[0].min = camera.position - Vector3(1,1,1);
 
-	Interactables[0].set(Vector3(9.5 + DoorSlideR,20,-5.5),Vector3(1 + DoorSlideR,0,-7.5));
-	Interactables[1].set(Vector3(1 - DoorSlideR ,20,-5.5),Vector3(-8 - DoorSlideR,0,-7.5));
+	Interactables[0].set(Vector3(10 - DoorSlideR * 2 + 0.75 ,20,-5.5),Vector3(0.5 - DoorSlideR * 2 + 0.75,0,-7.5));
+	Interactables[1].set(Vector3(1 + DoorSlideR * 2 + 0.75 ,20,-5.5),Vector3(-8 + DoorSlideR * 2 + 0.75 ,0,-7.5));
 }
 
-Obj SceneSP::ItemTargetcollision()
+Obj SceneSP::ItemTargetcollision() // returns the item that the target has collided with ( Obj format)
 {
 	Vector3 targetline = camera.position;
 	Vector3 view = (camera.targetwhere - camera.position).Normalized();
@@ -168,7 +168,36 @@ Obj SceneSP::ItemTargetcollision()
 
 }
 
-Obj SceneSP::InteractableTargetcollision()
+int SceneSP::NoItemTargetcollision() // returns the item that the target has collided with ( Obj format)
+{
+	Vector3 targetline = camera.position;
+	Vector3 view = (camera.targetwhere - camera.position).Normalized();
+	view *= 0.5;
+	Obj see ;
+
+	for ( int z = 0 ; z < 20 ; z++) 
+	{
+		targetline += view;
+		see.set(targetline + Vector3(0.2,0.2,0.2),targetline - Vector3(0.2,0.2,0.2));
+
+		for ( int x = 0 ; x < Items.size() ; x++ )
+		{
+			if ( AABBCheck(see,Items[x]) == true )
+			{
+				collisionsia = true;
+				return x ;
+			}
+			else
+			{
+				collisionsia = false;
+			}
+		}
+
+	}
+
+}
+
+Obj SceneSP::InteractableTargetcollision() // returns the Interactable that the target has collided with ( Obj format)
 {
 	Vector3 targetline = camera.position;
 	Vector3 view = (camera.targetwhere - camera.position).Normalized();
@@ -186,6 +215,35 @@ Obj SceneSP::InteractableTargetcollision()
 			{
 				interactmah = true;
 				return Interactables[x];
+			}
+			else
+			{
+				interactmah = false;
+			}
+		}
+
+	}
+
+}
+
+int SceneSP::NoInteractableTargetcollision() // returns the Interactable that the target has collided with ( Obj format)
+{
+	Vector3 targetline = camera.position;
+	Vector3 view = (camera.targetwhere - camera.position).Normalized();
+	view *= 0.5;
+	Obj see ;
+
+	for ( int z = 0 ; z < 20 ; z++) 
+	{
+		targetline += view;
+		see.set(targetline + Vector3(0.2,0.2,0.2),targetline - Vector3(0.2,0.2,0.2));
+
+		for ( int x = 2 ; x < Interactables.size() ; x++ )
+		{
+			if ( AABBCheck(see,Interactables[x]) == true )
+			{
+				interactmah = true;
+				return x;
 			}
 			else
 			{

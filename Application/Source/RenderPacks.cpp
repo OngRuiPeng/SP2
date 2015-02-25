@@ -316,35 +316,53 @@ void SceneSP::RenderPacks()
 
 	modelStack.PushMatrix();		//PACK3 1 
 
+	if ( Items[54].getEmpty() == false)
+	{
 	modelStack.PushMatrix();
 	modelStack.Translate(2, 5.8, 40);
 	RenderMesh(meshList[GEO_PACK3], true);
 	modelStack.PopMatrix();
+	}
 
+	if ( Items[55].getEmpty() == false)
+	{
 	modelStack.PushMatrix();
 	modelStack.Translate(-2, 5.8, 40);
 	RenderMesh(meshList[GEO_PACK3], true);
 	modelStack.PopMatrix();
+	}
 
+	if ( Items[56].getEmpty() == false)
+	{
 	modelStack.PushMatrix();
 	modelStack.Translate(2, 3.4, 40);
 	RenderMesh(meshList[GEO_PACK3], true);
 	modelStack.PopMatrix();
+	}
 
+	if ( Items[57].getEmpty() == false)
+	{
 	modelStack.PushMatrix();
 	modelStack.Translate(-2, 3.4, 40);
 	RenderMesh(meshList[GEO_PACK3], true);
 	modelStack.PopMatrix();
+	}
 
+	if ( Items[58].getEmpty() == false)
+	{
 	modelStack.PushMatrix();
 	modelStack.Translate(2, 1, 40);
 	RenderMesh(meshList[GEO_PACK3], true);
 	modelStack.PopMatrix();
+	}
 
+	if ( Items[59].getEmpty() == false)
+	{
 	modelStack.PushMatrix();
 	modelStack.Translate(-2, 1, 40);
 	RenderMesh(meshList[GEO_PACK3], true);
 	modelStack.PopMatrix();
+	}
 
 	modelStack.PopMatrix();			//PACK3 1 END
 

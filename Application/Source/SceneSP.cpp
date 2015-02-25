@@ -91,7 +91,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 
 	// Use our shader
 	glUseProgram(m_programID);
-	
+
 	lights[0].type = Light::LIGHT_DIRECTIONAL;
 	lights[0].position.Set(0, 1000, 0);
 	lights[0].color.Set(1, 1, 1);
@@ -251,7 +251,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 
 	meshList[GEO_BODY] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//body.obj");
 	meshList[GEO_BODY]->textureID = LoadTGA("image//NpcPink.tga");
-	
+
 	meshList[GEO_LEFTHAND] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//hand.obj");
 	meshList[GEO_LEFTHAND]->textureID = LoadTGA("image//NpcPink.tga");
 
@@ -472,9 +472,9 @@ void SceneSP::collisionITEMSinit()
 	}
 
 	// ********************************* ( maggie shelves) 
-	for ( float x = 0 ; x < 2 ; x++ )
+	for ( float y = 0 ; y < 3 ; y++ )
 	{
-		for ( float y = 0 ; y < 3 ; y++ )
+		for ( float x = 0 ; x < 2 ; x++ )
 		{
 			box1.set(Vector3(6 - x * 4,7 - y * 3 ,46 ),Vector3(1.5 - x * 4 ,5.5 - y * 3,44));
 			Items.push_back(box1);
@@ -485,9 +485,9 @@ void SceneSP::collisionITEMSinit()
 	box1.set(Vector3(16.2,4.5,22),Vector3(15.7,4,20)) ;
 	Items.push_back(box1);
 
-	for ( float x = 0 ; x < 2 ; x++)
+	for ( float y = 0 ; y < 2 ; y++)
 	{
-		for ( float y = 0 ; y < 2 ; y++ )
+		for ( float x = 0 ; x < 2 ; x++ )
 		{
 			box1.set(Vector3(16.2 - x * 1.4 ,3.5 - y * 1.5 ,22),Vector3(15.7 - x * 1.4 ,2.8 - y * 1.5 ,20)) ;
 			Items.push_back(box1);
@@ -505,7 +505,7 @@ void SceneSP::collisionITEMSinit()
 
 	for ( float y = 0 ; y < 2 ; y++ )
 	{
-		box1.set(Vector3(-9.7, 3 - y * 1.4 ,21.5 ),Vector3(-10.7, 2.3 - y * 1.4 ,21));
+		box1.set(Vector3(-9.7, 5 - y * 1.4 ,21.5 ),Vector3(-10.7, 4 - y * 1.4 ,21));
 		Items.push_back(box1);
 	}
 
@@ -599,8 +599,8 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	{
 		inSupermarket = true;
 	}
-	
-	
+
+
 	if(Application::IsKeyPressed('6'))
 	{
 		gamestate = MAINMENU;
@@ -667,10 +667,13 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 
 	SlidingDoor(dt);
 
-	if(Application::IsKeyPressed('G') && ItemTargetcollision().getEmpty() == false)
+	if(Application::IsKeyPressed('E') && collisionsia == true)
 	{
-		ItemTargetcollision().setEmpty(1);
-		cout << ItemTargetcollision().getEmpty() << endl;
+		if ( Items[NoItemTargetcollision()].getEmpty() == false) 
+		Items[NoItemTargetcollision()].setEmpty(true);
+
+		else if ( Items[NoItemTargetcollision()].getEmpty() == true) 
+		Items[NoItemTargetcollision()].setEmpty(false);
 	}
 
 }

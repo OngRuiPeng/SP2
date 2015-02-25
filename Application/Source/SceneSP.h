@@ -166,7 +166,9 @@ public:
 	bool AABBCheck(const Obj &box1,const Obj &box2);
 	void collisionprevent(vector <Obj> a ,Vector3 camerathing, vector <Obj> b );
 	Obj ItemTargetcollision();
+	int NoItemTargetcollision();
 	Obj InteractableTargetcollision();
+	int NoInteractableTargetcollision();
 	void updatecollision(double dt);
 	void updateobj();
 
