@@ -181,90 +181,114 @@ void SceneSP::RenderInteractableObjs()
 
 	modelStack.PushMatrix();		//MACNCHEESE BOXES
 
+	if ( Items[2].getEmpty() == false)
+	{
 	modelStack.PushMatrix();
 	modelStack.Translate(14.5, 4.5, 23);
 	modelStack.Rotate(90, 0, 1, 0);
 	RenderMesh(meshList[GEO_BOX2], true);
 	modelStack.PopMatrix();
-
+	}
+	if ( Items[0].getEmpty() == false)
+	{
 	modelStack.PushMatrix();
 	modelStack.Translate(14.5, 4.5, 27);
 	modelStack.Rotate(90, 0, 1, 0);
 	RenderMesh(meshList[GEO_BOX2], true);
 	modelStack.PopMatrix();
-
+	}
+	if ( Items[4].getEmpty() == false)
+	{
 	modelStack.PushMatrix();
 	modelStack.Translate(14.5, 3, 25);
 	modelStack.Rotate(90, 0, 1, 0);
 	RenderMesh(meshList[GEO_BOX2], true);
 	modelStack.PopMatrix();
+	} 
 
 	modelStack.PopMatrix();			//MACNCHEESE BOXES END
 
 	modelStack.PushMatrix();		//MACNCHEESE BOXES 2
 
+	if ( Items[27].getEmpty() == false)
+	{
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 4.5, 23);
 	modelStack.Rotate(-90, 0, 1, 0);
 	RenderMesh(meshList[GEO_BOX2], true);
 	modelStack.PopMatrix();
-
+	}
+	if ( Items[29].getEmpty() == false)
+	{
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 4.5, 27);
 	modelStack.Rotate(-90, 0, 1, 0);
 	RenderMesh(meshList[GEO_BOX2], true);
 	modelStack.PopMatrix();
-
+	}
+	if ( Items[31].getEmpty() == false)
+	{
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 3, 25);
 	modelStack.Rotate(-90, 0, 1, 0);
 	RenderMesh(meshList[GEO_BOX2], true);
 	modelStack.PopMatrix();
-
+	}
 	modelStack.PopMatrix();			//MACNCHEESE BOXES 2 END
 
 	modelStack.PushMatrix();		//MACNCHEESE BOXES 3
 
+	if ( Items[23].getEmpty() == false)
+	{
 	modelStack.PushMatrix();
 	modelStack.Translate(2.5, 3, 23);
 	modelStack.Rotate(90, 0, 1, 0);
 	RenderMesh(meshList[GEO_BOX2], true);
 	modelStack.PopMatrix();
-
+	}
+	if ( Items[21].getEmpty() == false)
+	{
 	modelStack.PushMatrix();
 	modelStack.Translate(2.5, 3, 27);
 	modelStack.Rotate(90, 0, 1, 0);
 	RenderMesh(meshList[GEO_BOX2], true);
 	modelStack.PopMatrix();
-
+	}
+	if ( Items[25].getEmpty() == false)
+	{
 	modelStack.PushMatrix();
 	modelStack.Translate(2.5, 1.5, 25);
 	modelStack.Rotate(90, 0, 1, 0);
 	RenderMesh(meshList[GEO_BOX2], true);
 	modelStack.PopMatrix();
-
+	}
 	modelStack.PopMatrix();			//MACNCHEESE BOXES 3 END
 
 	modelStack.PushMatrix();		//MACNCHEESE BOXES 4
-
+	if ( Items[39].getEmpty() == false)
+	{
 	modelStack.PushMatrix();
 	modelStack.Translate(-12, 3, 23);
 	modelStack.Rotate(-90, 0, 1, 0);
 	RenderMesh(meshList[GEO_BOX2], true);
 	modelStack.PopMatrix();
-
+	}
+	if ( Items[41].getEmpty() == false)
+	{
 	modelStack.PushMatrix();
 	modelStack.Translate(-12, 3, 27);
 	modelStack.Rotate(-90, 0, 1, 0);
 	RenderMesh(meshList[GEO_BOX2], true);
 	modelStack.PopMatrix();
-
+	}
+	if ( Items[43].getEmpty() == false)
+	{
 	modelStack.PushMatrix();
 	modelStack.Translate(-12, 1.5, 25);
 	modelStack.Rotate(-90, 0, 1, 0);
 	RenderMesh(meshList[GEO_BOX2], true);
 	modelStack.PopMatrix();
-
+	}
 	modelStack.PopMatrix();			//MACNCHEESE BOXES 4 END
 
 

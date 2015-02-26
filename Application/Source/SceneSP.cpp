@@ -266,7 +266,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 
 
 	translateX = 0 ;
-	collisionsia = false;
+	PickUpItem = false;
 	interactmah = false;
 
 	//**********************************************************   collisions 
@@ -276,6 +276,12 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	collisionOBJinit();
 	collisionITEMSinit();
 	collisionInteractionsinit();
+
+	SecurityCam = false;
+	cam_state = NORMAL;
+	CamTime = 0 ;
+
+	ChooseWhich = false ;
 
 	Mtx44 projection;
 	projection.SetToPerspective(45.0f,4.0f/3.0f, 0.01f, 100000.0f);
@@ -430,9 +436,9 @@ void SceneSP::collisionITEMSinit()
 	// ******************** other side + right shelf's other side 
 	for ( float z = 0 ; z < 2 ; z++)
 	{
-		for ( float x = 0 ; x < 3 ; x++)
+		for ( float y = 0 ; y < 3 ; y++)
 		{
-			for ( float y = 0 ; y < 3 ; y++ )
+			for ( float x = 0 ; x < 3 ; x++ )
 			{
 				box1.set(Vector3(0.5 - z * 13,6 - y * 1.5 , 25.5 + x * 2.5),Vector3(-0.5 - z * 13 ,5 - y * 1.5 , 24.5 + x * 2.5));
 				Items.push_back(box1);
@@ -595,11 +601,6 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	{
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
-	if(Application::IsKeyPressed('E'))
-	{
-		inSupermarket = true;
-	}
-
 
 	if(Application::IsKeyPressed('6'))
 	{
@@ -667,13 +668,45 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 
 	SlidingDoor(dt);
 
-	if(Application::IsKeyPressed('E') && collisionsia == true)
+	if(Application::IsKeyPressed('E') && PickUpItem == true && SecurityCam == false)
 	{
 		if ( Items[NoItemTargetcollision()].getEmpty() == false) 
 		Items[NoItemTargetcollision()].setEmpty(true);
+	}
 
-		else if ( Items[NoItemTargetcollision()].getEmpty() == true) 
+	if(Application::IsKeyPressed('Q') && canput == true && SecurityCam == false)
+	{
+		if ( Items[NoItemTargetcollision()].getEmpty() == true) 
 		Items[NoItemTargetcollision()].setEmpty(false);
+	}
+
+	if(Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 4 && ChooseWhich == false) 
+	{
+		ChooseWhich = true;
+	}
+
+	// choose to deactivate detectors
+
+	if (Application::IsKeyPressed('T') && ChooseWhich == true ) // choose to escape 
+	{
+		ChooseWhich = false;
+	}
+
+	if (Application::IsKeyPressed('C') && ChooseWhich == true ) // choose camera 
+	{
+		StorePos = camera.position ; 
+		StoreTarget1 = camera.target ;
+		StoreTarget2 = camera.targetwhere;
+
+		cam_state = CAM1;
+
+		SecurityCam = true ;
+		ChooseWhich = false;
+	}
+
+	if ( SecurityCam == true )
+	{
+		updateCam(dt);
 	}
 
 }
@@ -725,10 +758,22 @@ void SceneSP::Render()
 
 		RenderInteractableObjs();
 
-		if ( collisionsia == true ) 
+		if ( ChooseWhich == true ) 
+		{
+			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press C to use camera", (1, 0, 1),2.5, 5, 4);
+			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press SuiBian to use camera", (1, 0, 1),2.5, 5, 6);
+			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press T to escape", (1, 0, 1),2.5, 5, 5);
+		}
+		if ( PickUpItem == true ) 
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press E to pick up item", (1, 0, 1),2.5, 5, 4);
 
-		if ( interactmah == true ) 
+		if ( cam_state != NORMAL ) 
+			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press N for next , Y for previous", (0, 1, 0),2, 3, 4);
+
+		if ( canput == true ) 
+			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press Q to put back item", (1, 0, 1),2.5, 5, 4);
+
+		if ( interactmah == true && ChooseWhich == false) 
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press E to interact", (1, 0, 1),2.5, 5, 4);
 
 		if ( inSupermarket == true )

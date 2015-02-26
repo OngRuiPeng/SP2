@@ -125,7 +125,7 @@ void SceneSP::updatecollision(double dt)
 		collisionprevent(OBJ,left,Interactables);
 	}
 
-	ItemTargetcollision();
+	NoItemTargetcollision();
 	InteractableTargetcollision();
 
 }
@@ -155,12 +155,12 @@ Obj SceneSP::ItemTargetcollision() // returns the item that the target has colli
 		{
 			if ( AABBCheck(see,Items[x]) == true )
 			{
-				collisionsia = true;
+				PickUpItem = true;
 				return Items[x];
 			}
 			else
 			{
-				collisionsia = false;
+				PickUpItem = false;
 			}
 		}
 
@@ -184,17 +184,23 @@ int SceneSP::NoItemTargetcollision() // returns the item that the target has col
 		{
 			if ( AABBCheck(see,Items[x]) == true )
 			{
-				collisionsia = true;
+				if ( Items[x].getEmpty() == false )
+					PickUpItem = true;
+				else
+					canput = true ; 
+
 				return x ;
 			}
 			else
 			{
-				collisionsia = false;
+				PickUpItem = false;
+				canput = false;
 			}
 		}
 
 	}
 
+	return 0 ;
 }
 
 Obj SceneSP::InteractableTargetcollision() // returns the Interactable that the target has collided with ( Obj format)
@@ -253,4 +259,5 @@ int SceneSP::NoInteractableTargetcollision() // returns the Interactable that th
 
 	}
 
+	return 0 ;
 }

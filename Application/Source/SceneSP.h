@@ -94,6 +94,17 @@ class SceneSP : public Scene
 		MAX_STATES,
 	};
 
+	enum CAM_STATE
+	{
+		NORMAL,
+		CAM1,
+		CAM2,
+		CAM3,
+		CAM4,
+		CAM5,
+		MAX_CAM,
+	};
+
 	enum UNIFORM_TYPE
 	{
 		U_MVP = 0,
@@ -177,7 +188,8 @@ public:
 	float DoorSlideL;
 	float DoorSlideR;
 
-	bool collisionsia; 
+	bool canput ;
+	bool PickUpItem; 
 	bool interactmah ;
 
 	vector <Obj> OBJ ;
@@ -199,6 +211,15 @@ public:
 	void collisionITEMSinit(void);
 	void collisionInteractionsinit(void);
 
+	//Security camera
+	bool SecurityCam ;
+	int cam_state;
+	void updateCam(double dt);
+	Vector3 StorePos, StoreTarget1 , StoreTarget2;
+	double CamTime;
+
+	bool ChooseWhich;
+	int WhichMode ;
 
 	void mouseInput(double* xpos, double* ypos);
 	double xpos;
