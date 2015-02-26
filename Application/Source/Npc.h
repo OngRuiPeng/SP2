@@ -13,6 +13,7 @@ public:
 	~CNpc(void);
 	void setName(string);
 	void setType(string);
+	string getName(void);
 	string CashierWelcome(void);
 	string CashierLeave(void);
 	string CSpeech(void);

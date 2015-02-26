@@ -1,7 +1,8 @@
 #include <iostream>
 
 #include "Vector3.h"
-
+#include <string>
+#include "Npc.h"
 using namespace std; 
 
 class Obj
@@ -9,8 +10,7 @@ class Obj
 private:
 	bool empty;
 public: 
-	Vector3 min,max; 
-
+	Vector3 min,max;
 	Obj();
 	~Obj();
 

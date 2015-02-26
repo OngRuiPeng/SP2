@@ -21,6 +21,11 @@ void CNpc::setType(string temptype)
 	type = temptype;
 }
 
+string CNpc::getName(void)
+{
+	return name;
+}
+
 string CNpc::CashierWelcome(void)
 {
 	return "Welcome to J Mart";
@@ -33,7 +38,6 @@ string CNpc::CashierLeave(void)
 
 string CNpc::CSpeech(void)
 {
-	srand(0);
 	int temp = rand() % 2;
 	if ( temp == 1 )
 	{
@@ -47,7 +51,6 @@ string CNpc::CSpeech(void)
 
 string CNpc::SSpeech(void)
 {
-	srand(0);
 	int temp = rand() % 2;
 	if ( temp == 1 )
 	{

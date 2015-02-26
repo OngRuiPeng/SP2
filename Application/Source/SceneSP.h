@@ -68,6 +68,21 @@ class SceneSP : public Scene
 		GEO_RIGHTHAND,
 		GEO_LEFTLEG,
 		GEO_RIGHTLEG,
+
+		GEO_CHEAD,
+		GEO_CBODY,
+		GEO_CLEFTHAND,
+		GEO_CRIGHTHAND,
+		GEO_CLEFTLEG,
+		GEO_CRIGHTLEG,
+
+		GEO_SHEAD,
+		GEO_SBODY,
+		GEO_SLEFTHAND,
+		GEO_SRIGHTHAND,
+		GEO_SLEFTLEG,
+		GEO_SRIGHTLEG,
+
 		GEO_DOORMAN,
 		//NPCs=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 		//NPC text
@@ -166,12 +181,6 @@ public:
 	void RenderSupermarket();
 	void RenderInteractableObjs();
 	void RenderPacks ();
-	//update
-	void updateMainMenu();
-	void updateChooseMode();
-	void updateRoam();
-	void updateCheckOut();
-	void updateFun();
 
 	//collision
 	bool AABBCheck(const Obj &box1,const Obj &box2);
@@ -183,14 +192,25 @@ public:
 	void updatecollision(double dt);
 	void updateobj();
 
-	//interactions and their other variables
+	//Interactions and their other variables
 	void SlidingDoor(double);
-	float DoorSlideL;
-	float DoorSlideR;
 
 	bool canput ;
 	bool PickUpItem; 
-	bool interactmah ;
+	bool interactmah;
+	bool DetectorsOn;
+
+	float DoorSlideL; // Variable to move left door
+	float DoorSlideR; // Variable to move right door
+	bool inSupermarket; // Variable to check whether player is in the supermarket
+
+	//NPC interactions, // Variable to check whether NPC is interacted with
+	bool CashierText;  
+	bool SecurityText; 
+	bool CustomerText; 
+
+	double time; // timer
+	//Collision
 
 	vector <Obj> OBJ ;
 	vector <Obj> Items ;
@@ -198,9 +218,8 @@ public:
 
 	Obj box1 ;
 	Obj seewhere;
-	//
-	bool inSupermarket;
-	//npcs
+
+	//Npcs
 	CNpc Cashier;
 	CNpc Guard;
 	CNpc Customer;
@@ -231,7 +250,6 @@ private:
 	unsigned m_vertexArrayID;
 
 	Mesh* meshList[NUM_GEOMETRY];
-	//Mesh* meshList2[NUM_GEOMETRY2];
 	unsigned m_programID;
 	unsigned m_parameters[U_TOTAL];
 	MS modelStack , viewStack , projectionStack;
@@ -240,7 +258,7 @@ private:
 
 	double FPS; 
 
-	StopWatch m_timer;
+	StopWatch mytimer;
 };
 
 #endif

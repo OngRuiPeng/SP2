@@ -7,7 +7,6 @@ void SceneSP::RenderInteractableObjs()
 	modelStack.Translate(0, -0.1, 0);
 	modelStack.Scale(1.1, 1.1, 1.1);
 
-
 	//DOORS
 	modelStack.PushMatrix();
 	modelStack.Scale(3.5, 2.5, 3.5);

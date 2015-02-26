@@ -122,24 +122,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	glUniform1f(m_parameters[U_LIGHT0_COSINNER], lights[0].cosInner);
 	glUniform1f(m_parameters[U_LIGHT0_EXPONENT], lights[0].exponent);
 
-	//variables
-	gamestate = MAINMENU;
-
-	inSupermarket = false;
-	Cashier.setName("Jill");
-	Cashier.setType("Cashier");
-	Guard.setName("Bobby");
-	Guard.setType("SecurityGuard");
-	Customer.setName("James");
-	Customer.setType("Customer");
-	Passerby1.setName("Andrew");
-	Passerby1.setType("Passerby");
-	Passerby2.setName("Peter");
-	Passerby2.setType("Passerby");
-
-	DoorSlideR = -0.75;
-
-	//remove all glGenBuffers, glBindBuffer, glBufferData code
+	//Inits
 	meshList[GEO_AXES] = MeshBuilder::GenerateAxes("reference", 1000, 1000, 1000);
 
 	meshList[GEO_MainMenuScreen] = MeshBuilder::GenerateQuad("main menu screen", Color(1, 0, 0), 100, 100);
@@ -246,6 +229,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	meshList[GEO_DOORMAN] = MeshBuilder::GenerateOBJ("Doorman", "OBJ//doorman.obj");
 	meshList[GEO_DOORMAN]->textureID = LoadTGA("Image//doorman.tga");
 
+	//Customer
 	meshList[GEO_HEAD] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//head.obj");
 	meshList[GEO_HEAD]->textureID = LoadTGA("image//NpcPink.tga");
 
@@ -264,7 +248,64 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	meshList[GEO_RIGHTLEG] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//leg.obj");
 	meshList[GEO_RIGHTLEG]->textureID = LoadTGA("image//NpcPink.tga");
 
+	//Cashier
+	meshList[GEO_CHEAD] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//head.obj");
+	meshList[GEO_CHEAD]->textureID = LoadTGA("image//NpcBlue.tga");
 
+	meshList[GEO_CBODY] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//body.obj");
+	meshList[GEO_CBODY]->textureID = LoadTGA("image//NpcBlue.tga");
+	
+	meshList[GEO_CLEFTHAND] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//hand.obj");
+	meshList[GEO_CLEFTHAND]->textureID = LoadTGA("image//NpcBlue.tga");
+
+	meshList[GEO_CRIGHTHAND] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//hand.obj");
+	meshList[GEO_CRIGHTHAND]->textureID = LoadTGA("image//NpcBlue.tga");
+
+	meshList[GEO_CLEFTLEG] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//leg.obj");
+	meshList[GEO_CLEFTLEG]->textureID = LoadTGA("image//NpcBlue.tga");
+
+	meshList[GEO_CRIGHTLEG] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//leg.obj");
+	meshList[GEO_CRIGHTLEG]->textureID = LoadTGA("image//NpcBlue.tga");
+
+	//Security guard
+	meshList[GEO_SHEAD] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//head.obj");
+	meshList[GEO_SHEAD]->textureID = LoadTGA("image//NpcBlack.tga");
+
+	meshList[GEO_SBODY] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//body.obj");
+	meshList[GEO_SBODY]->textureID = LoadTGA("image//NpcBlack.tga");
+	
+	meshList[GEO_SLEFTHAND] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//hand.obj");
+	meshList[GEO_SLEFTHAND]->textureID = LoadTGA("image//NpcBlack.tga");
+
+	meshList[GEO_SRIGHTHAND] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//hand.obj");
+	meshList[GEO_SRIGHTHAND]->textureID = LoadTGA("image//NpcBlack.tga");
+
+	meshList[GEO_SLEFTLEG] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//leg.obj");
+	meshList[GEO_SLEFTLEG]->textureID = LoadTGA("image//NpcBlack.tga");
+
+	meshList[GEO_SRIGHTLEG] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//leg.obj");
+	meshList[GEO_SRIGHTLEG]->textureID = LoadTGA("image//NpcBlack.tga");
+
+	//variables
+	gamestate = MAINMENU;
+
+	inSupermarket = false;
+	CashierText = false;
+	DetectorsOn = true;
+
+	Cashier.setName("Jill");
+	Cashier.setType("Cashier");
+	Guard.setName("Bobby");
+	Guard.setType("SecurityGuard");
+	Customer.setName("James");
+	Customer.setType("Customer");
+	Passerby1.setName("Andrew");
+	Passerby1.setType("Passerby");
+	Passerby2.setName("Peter");
+	Passerby2.setType("Passerby");
+
+	DoorSlideR = -0.75;
+	time = 0;
 	translateX = 0 ;
 	PickUpItem = false;
 	interactmah = false;
@@ -552,7 +593,23 @@ void SceneSP::collisionInteractionsinit()
 	box1.set(Vector3(-20.5,20,49),Vector3(-26,0,36.8)); // control panel 
 	Interactables.push_back(box1);
 
+	box1.set(Vector3(16.8,20,9.3),Vector3(14.5,0,6)); // cashier1
+	Interactables.push_back(box1);
 
+	box1.set(Vector3(25.8,20,9.3),Vector3(23.5,0,6)); // cashier2
+	Interactables.push_back(box1);
+
+	box1.set(Vector3(-10.5,20,1.5),Vector3(-13.5,0,-1.5)); // security guard
+	Interactables.push_back(box1);
+
+	box1.set(Vector3(6.5,20,26.5),Vector3(3.5,0,23.5)); // customer
+	Interactables.push_back(box1);
+
+	box1.set(Vector3(-43.5,20,-13.5),Vector3(-47.5,0,-16.5)); // passerby1
+	Interactables.push_back(box1);
+
+	box1.set(Vector3(47.5,20,-28.5),Vector3(43.5,0,-31.5)); // passerb2
+	Interactables.push_back(box1);
 }
 
 void SceneSP::initSkybox()
@@ -663,6 +720,16 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		camera.Update(dt, w / 2, h / 2, &xpos, &ypos);
 	}
 
+	//Entering
+	if ( camera.position.z > -7 && camera.position.z < 49 && camera.position.x < 28 && camera.position.x > -27 )
+	{
+		inSupermarket = true;
+	}
+	else
+	{
+		inSupermarket = false;
+	}
+	
 	updatecollision(dt) ;
 	//Interaction functions
 
@@ -678,7 +745,29 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	{
 		if ( Items[NoItemTargetcollision()].getEmpty() == true) 
 		Items[NoItemTargetcollision()].setEmpty(false);
+
 	}
+	if(Application::IsKeyPressed('E') && interactmah == true )
+	{
+		if ( NoInteractableTargetcollision() == 5 || NoInteractableTargetcollision() == 6 ) // Cashier
+		{
+			time = 0;
+			CashierText = true;
+		}
+		if ( NoInteractableTargetcollision() == 7 ) // Security Guard
+		{
+			time = 0;
+			SecurityText = true;
+		}
+		if ( NoInteractableTargetcollision() == 8 || NoInteractableTargetcollision() == 9 || NoInteractableTargetcollision() == 10 )
+		{
+			time = 0;
+			CustomerText = true;
+		}
+		
+		
+	}
+
 
 	if(Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 4 && ChooseWhich == false) 
 	{
@@ -686,6 +775,10 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	}
 
 	// choose to deactivate detectors
+	if(Application::IsKeyPressed('E') && ChooseWhich == true )
+	{
+		DetectorsOn = false;
+	}
 
 	if (Application::IsKeyPressed('T') && ChooseWhich == true ) // choose to escape 
 	{
@@ -707,6 +800,21 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	if ( SecurityCam == true )
 	{
 		updateCam(dt);
+	}
+
+
+	time += dt;
+	if ( time > 2 && CashierText == true)
+	{
+		CashierText = false;
+	}
+	if ( time > 2 && SecurityText == true)
+	{
+		SecurityText = false;
+	}
+	if ( time > 2 && CustomerText == true)
+	{
+		CustomerText = false;
 	}
 
 }
@@ -755,7 +863,6 @@ void SceneSP::Render()
 		RenderSkybox();
 		RenderSupermarket();
 		RenderCharacter();
-
 		RenderInteractableObjs();
 
 		if ( ChooseWhich == true ) 
@@ -778,6 +885,17 @@ void SceneSP::Render()
 
 		if ( inSupermarket == true )
 			RenderTextOnScreen(meshList[GEO_NPCText], Cashier.CashierWelcome(), (1, 0, 1), 2, 20, 20);
+
+		if ( interactmah == true ) 
+			RenderTextOnScreen(meshList[GEO_MainMenuText], "TARGET DONG DAO LIAO", (1, 0, 1),3, 2, 16);
+
+		if ( CashierText == true )
+			RenderTextOnScreen(meshList[GEO_CASHIERTEXT], Cashier.CashierWelcome(), (1, 0, 1), 2, 2, 5);
+		if ( SecurityText == true ) 
+			RenderTextOnScreen(meshList[GEO_SECURITYTEXT], Guard.SSpeech(), (1, 0, 1), 2, 2, 5);
+		if ( CustomerText == true )
+			RenderTextOnScreen(meshList[GEO_CUSTOMERTEXT], Customer.CSpeech(), (1, 0, 1), 2, 2, 5);
+
 	}
 }
 
