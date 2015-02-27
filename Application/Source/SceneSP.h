@@ -11,9 +11,12 @@
 #include "Npc.h"
 #include <vector>
 #include <string>
-#include "timer.h"
+#include <stdio.h>
 
+#include <irrKlang.h>
+#include "timer.h"
 #include "Item.h"
+//Music include
 
 using namespace std;
 
@@ -240,6 +243,7 @@ public:
 	void RenderFlush();
 
 
+	int Renderirr();
 	//update
 	void updateMainMenu();
 	void updateChooseMode();
@@ -349,6 +353,8 @@ public:
 	double* xposition;
 	double* yposition;
 	
+	bool music;
+
 private:
 	unsigned m_vertexArrayID;
 

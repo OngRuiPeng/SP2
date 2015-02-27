@@ -1,7 +1,6 @@
 #include <iostream>
 #include "SceneSP.h"
 
-using namespace std;
 
 #include "SceneSP.h"
 #include "GL\glew.h"
@@ -18,11 +17,18 @@ using namespace std;
 #include "Camera3.h"
 
 #include "windows.h"
+#pragma comment(lib, "irrKlang.lib")
 
 #define LSPEED 20.f 
+using namespace irrklang;
+
+ISoundEngine* engine = createIrrKlangDevice(ESOD_AUTO_DETECT,ESEO_MULTI_THREADED | ESEO_LOAD_PLUGINS | ESEO_USE_3D_BUFFERS);
+
+using namespace std;
 
 SceneSP::SceneSP()
 {
+
 }
 
 SceneSP::~SceneSP()
@@ -435,6 +441,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	projection.SetToPerspective(45.0f,4.0f/3.0f, 0.01f, 100000.0f);
 	projectionStack.LoadMatrix(projection);
 
+	music = false;
 }
 
 void SceneSP::collisionOBJinit()
@@ -809,6 +816,16 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	}
 	
 
+	if(Application::IsKeyPressed('Z'))
+	{
+		music = true;
+		cout << " Music Start!" << endl;
+	}
+	if(Application::IsKeyPressed('X'))
+	{
+		music = false;
+		cout << "Music Stop!" << endl;
+	}
 	//Game states	 
 	if ( gamestate == MAINMENU )
 	{
@@ -1011,8 +1028,32 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		updateItemSlide(dt,WhichCashier);
 
 
+	Vector3 view = (camera.target - camera.position).Normalized();
+	Vector3 right = view.Cross(camera.up);
+	right.y = 0;
+	right.Normalize();
+	camera.up = right.Cross(view).Normalized();
+	engine->setListenerPosition(vec3df(camera.position.x,camera.position.y,camera.position.z),vec3df(view.x,view.y,view.z),vec3df(0,0,0),vec3df(camera.up.x,camera.up.y,camera.up.z));
+
 }
 
+int SceneSP::Renderirr()
+{
+	if(!engine)
+	{
+		return 0;
+	}
+
+	ISound* sound = engine->play3D("../irrKlang/media/icejj.mp3",vec3df(0.f,0.f,0.f), false);
+
+	if(sound)
+	{
+		engine->setDefault3DSoundMaxDistance(1000000000.f);
+		sound->setMinDistance(0.f);
+	}
+
+	return 0;
+}
 void SceneSP::Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -1060,6 +1101,12 @@ void SceneSP::Render()
 		RenderInteractableObjs();
 
 		RenderInventory();
+
+		if(music == true)
+		{
+			Renderirr();
+			music = false;
+		}
 
 		if ( ChooseWhich == true ) 
 		{
