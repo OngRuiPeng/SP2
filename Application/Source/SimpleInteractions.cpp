@@ -53,3 +53,76 @@ void SceneSP::Jump (double dt)
 	}
 
 }
+
+void SceneSP::updateItemSlide(double dt, int a )
+{
+	// to see which cashier table to render
+	if ( a == 11 ) 
+	{
+		translateItemX = 0 ;
+	}
+	else if ( a == 12 )
+	{
+		translateItemX = 9 ; 
+	}
+
+	// so that it only runs once throughout the update and also to update checkoutlist 
+	if ( Deletemah == true )
+	{
+		whichItem = InventoryData[0]; 
+
+		for(int x = 0 ; x < CheckoutList.size() ; x++ )
+		{
+			if ( CheckoutList[x].getItemName() != "" )
+			{
+				if ( CheckoutList[x].getItemName() == whichItem.getItemName() )
+				{
+					CheckoutList[x].setItemCount( CheckoutList[x].getItemCount() + whichItem.getItemCount() ); 
+					break;
+				}
+				else if ( x + 1 == CheckoutList.size() )
+				{
+					if ( CheckoutList[x].getItemCount() == 0 ) 
+					{
+						CheckoutList[x] = whichItem; 
+						CheckoutList[x].setItemCount(whichItem.getItemCount());
+					}
+					else
+					{
+						CheckoutList.push_back(whichItem);
+						CheckoutList[x + 1].setItemCount(0);
+					}
+				}
+			}
+		}
+
+		InventoryData[0].setItemCount(0) ;  
+		Deletemah = false;
+	}
+
+	// to move everything up inventory if there is an item with 0 count 
+	for ( int x = 0 ; x < 100 ; x++ )
+	{
+		for ( int y = 0 ; y < InventoryData.size() - 1 ; y++ )
+		{
+			if ( InventoryData[y].getItemCount() == 0 && InventoryData[y + 1].getItemCount() > 0 ) 
+			{
+				InventoryData[y] = InventoryData[y + 1] ; 
+				InventoryData[y+1].setItemCount(0);
+			}
+		}
+	}
+
+	// translation and also a stop point 
+	if ( translateItemZ < 5 ) 
+		translateItemZ += (float)(10 * dt);
+	else 
+	{
+		whichItem = nullthis; 
+		translateItemZ = 0 ;
+		translateItemX = 0 ;
+		ItemSlide = false;
+	}
+
+
+}

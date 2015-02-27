@@ -20,7 +20,7 @@ void SceneSP::RenderSupermarket()
 	modelStack.Scale(3.5, 2.5, 3.5);
 	RenderMesh(meshList[GEO_SUPERMARKETFLOOR], true);
 	modelStack.PopMatrix();
-		
+
 	//SCANNERS push
 	modelStack.PushMatrix();				
 
@@ -35,10 +35,10 @@ void SceneSP::RenderSupermarket()
 	modelStack.Rotate(90, 0, 1, 0);
 	RenderMesh(meshList[GEO_SCANNER], true);
 	modelStack.PopMatrix();
-	
+
 	modelStack.PopMatrix();
 	//SCANNERS pop
-	
+
 	//DIVIDERS
 	modelStack.PushMatrix();
 	modelStack.Translate(8.9, 0, -2);
@@ -163,7 +163,74 @@ void SceneSP::RenderSupermarket()
 
 
 
+	if ( whichItem.getItemName() == "Reditos" )
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(12 + translateItemX , 4 , 12 - translateItemZ) ;
+		RenderMesh(meshList[GEO_PACK1], true);
+		modelStack.PopMatrix();
+	}
+	else if ( whichItem.getItemName() == "Campbella" )
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(12 + translateItemX , 4 , 12 - translateItemZ) ;
+		RenderMesh(meshList[GEO_CAN2], true);
+		modelStack.PopMatrix();
+	}
+	else if ( whichItem.getItemName() == "Toblerone" )
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(12 + translateItemX , 4 , 12 - translateItemZ) ;
+		RenderMesh(meshList[GEO_PACK4], true);
+		modelStack.PopMatrix();
+	}
+	else if ( whichItem.getItemName() == "Dewtos" )
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(12 + translateItemX , 4 , 12 - translateItemZ) ;
+		RenderMesh(meshList[GEO_PACK2], true);
+		modelStack.PopMatrix();
+	}
+	else if ( whichItem.getItemName() == "Pizza" )
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(12 + translateItemX , 4 , 12 - translateItemZ) ;
+		RenderMesh(meshList[GEO_BOX1], true);
+		modelStack.PopMatrix();
+	}
+	else if ( whichItem.getItemName() == "Cactus juice" )
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(12 + translateItemX , 4 , 12 - translateItemZ) ;
+		RenderMesh(meshList[GEO_CAN3], true);
+		modelStack.PopMatrix();
+	}
+	else if ( whichItem.getItemName() == "Chicken soup" )
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(12 + translateItemX , 4 , 12 - translateItemZ) ;
+		RenderMesh(meshList[GEO_CAN1], true);
+		modelStack.PopMatrix();
+	}
+	else if ( whichItem.getItemName() == "Maggie mien" )
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(12 + translateItemX , 4 , 12 - translateItemZ) ;
+		RenderMesh(meshList[GEO_PACK3], true);
+		modelStack.PopMatrix();
+	}
+	else if ( whichItem.getItemName() == "Macaroni" )
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(12 + translateItemX , 4 , 12 - translateItemZ) ;
+		RenderMesh(meshList[GEO_BOX2], true);
+		modelStack.PopMatrix();
+	}
+
+
+
 
 	modelStack.PopMatrix();
 	//All pop
+
 }

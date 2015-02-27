@@ -305,6 +305,18 @@ public:
 	
 	vector <CItem> InventoryData;
 
+	CItem nullthis;
+
+	// cashier slide
+	bool ItemSlide;
+	bool Deletemah;
+	float translateItemZ;
+	float translateItemX;
+	int WhichCashier;
+	CItem whichItem;
+	void updateItemSlide(double dt, int a);
+	vector <CItem> CheckoutList;
+
 	void mouseInput(double* xpos, double* ypos);
 	double xpos;
 	double ypos;

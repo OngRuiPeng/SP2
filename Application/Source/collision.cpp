@@ -135,8 +135,8 @@ void SceneSP::updateobj()
 	OBJ[0].max = camera.position + Vector3(1,1,1);
 	OBJ[0].min = camera.position - Vector3(1,1,1);
 
-	Interactables[0].set(Vector3(10 - DoorSlideR * 2 + 0.75 ,20,-5.5),Vector3(0.5 - DoorSlideR * 2 + 0.75,0,-7.5));
-	Interactables[1].set(Vector3(1 + DoorSlideR * 2 + 0.75 ,20,-5.5),Vector3(-8 + DoorSlideR * 2 + 0.75 ,0,-7.5));
+	Interactables[0].set(Vector3(10 - DoorSlide * 2 + 0.75 ,20,-5.5),Vector3(0.5 - DoorSlide * 2 + 0.75,0,-7.5));
+	Interactables[1].set(Vector3(1 + DoorSlide * 2 + 0.75 ,20,-5.5),Vector3(-8 + DoorSlide * 2 + 0.75 ,0,-7.5));
 }
 
 Obj SceneSP::ItemTargetcollision() // returns the item that the target has collided with ( Obj format)
