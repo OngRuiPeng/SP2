@@ -154,16 +154,65 @@ void SceneSP::RenderSupermarket()
 	RenderMesh(meshList[GEO_TOILET], true);
 	modelStack.PopMatrix();	
 
+
+	if ( TapSwitch == true)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(2, 0, 19);
+		modelStack.Rotate(90, 0, 1, 0);
+		modelStack.Scale(3.5, 2.5, 3.5);
+		RenderMesh(meshList[GEO_WATER], true);
+		modelStack.PopMatrix();
+	}
+	else
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(2, -10, 19);
+		modelStack.Rotate(90, 0, 1, 0);
+		modelStack.Scale(3.5, 2.5, 3.5);
+		RenderMesh(meshList[GEO_WATER], true);
+		modelStack.PopMatrix();	
+	}
+	
+	
 	modelStack.PushMatrix();
-	modelStack.Translate(2, 0, 19);
+	modelStack.Translate(2, flushUp, 19);
 	modelStack.Rotate(90, 0, 1, 0);
 	modelStack.Scale(3.5, 2.5, 3.5);
-	RenderMesh(meshList[GEO_WATER], true);
+	RenderMesh(meshList[GEO_BIGWATER], true);
 	modelStack.PopMatrix();	
 
+	RenderFlush();
 
-
-
+	
 	modelStack.PopMatrix();
 	//All pop
+}
+
+void SceneSP::RenderFlush()
+{
+	if (flushUp < -0.1)
+	{
+		FlushDir = false;
+	}
+
+	if (FlushDir == true && Flush == true)
+	{
+		flushUp -= 0.01;
+	}
+
+	else if (FlushDir == false && Flush == true)
+	{
+		if (flushUp < 0.7)
+		{
+			flushUp += 0.01;
+		}
+		else if (flushUp > 0.7)
+		{
+			Flush = false;
+		}
+	}
+	
+
+
 }

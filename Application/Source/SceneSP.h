@@ -47,6 +47,7 @@ class SceneSP : public Scene
 		GEO_CONTROLPANEL,
 		GEO_SINK,
 		GEO_WATER,
+		GEO_BIGWATER,
 		GEO_TOILET,
 		GEO_SHELF,
 		GEO_SHELF2,
@@ -62,6 +63,7 @@ class SceneSP : public Scene
 		GEO_PACK2,
 		GEO_PACK3,
 		GEO_PACK4,
+		GEO_LIGHTSWITCH,
 		//Supermarket stuff=====================================
 
 		//NPCs=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -161,23 +163,42 @@ class SceneSP : public Scene
 		U_MATERIAL_DIFFUSE,
 		U_MATERIAL_SPECULAR,
 		U_MATERIAL_SHININESS,
+		U_LIGHTENABLED,
+
+		//Light 0
 		U_LIGHT0_POSITION,
 		U_LIGHT0_COLOR,
 		U_LIGHT0_POWER,
 		U_LIGHT0_KC,
 		U_LIGHT0_KL,
 		U_LIGHT0_KQ,
-		U_LIGHTENABLED,
-		U_NUMLIGHTS, 
-		U_COLOR_TEXTURE_ENABLED,
-		U_COLOR_TEXTURE,
-		U_TEXT_ENABLED,
-		U_TEXT_COLOR,
 		U_LIGHT0_TYPE,
 		U_LIGHT0_SPOTDIRECTION,
 		U_LIGHT0_COSCUTOFF,
 		U_LIGHT0_COSINNER,
 		U_LIGHT0_EXPONENT,
+		//Light 0
+
+		//Light 1
+		U_LIGHT1_POSITION,
+		U_LIGHT1_COLOR,
+		U_LIGHT1_POWER,
+		U_LIGHT1_KC,
+		U_LIGHT1_KL,
+		U_LIGHT1_KQ,
+		U_LIGHT1_TYPE,
+		U_LIGHT1_SPOTDIRECTION,
+		U_LIGHT1_COSCUTOFF,
+		U_LIGHT1_COSINNER,
+		U_LIGHT1_EXPONENT,
+		//Light 1
+
+
+		U_NUMLIGHTS, 
+		U_COLOR_TEXTURE_ENABLED,
+		U_COLOR_TEXTURE,
+		U_TEXT_ENABLED,
+		U_TEXT_COLOR,
 		U_TOTAL,
 	};
 
@@ -215,6 +236,9 @@ public:
 	void RenderPacks ();
 	void RenderInventory();
 	void RenderPictureOnScreen(Mesh* mesh, float sizeX , float sizeY , float x, float y);
+	void RenderTapWater();
+	void RenderFlush();
+
 
 	//update
 	void updateMainMenu();
@@ -244,8 +268,10 @@ public:
 	bool JumpDirection;
 	bool JumpState;
 	bool JumpSwitch;
-
-
+	bool TapSwitch;
+	bool Flush;
+	bool FlushDir;
+	float flushUp;
 
 	bool PlaceItem ;
 	bool PickUpItem; 
