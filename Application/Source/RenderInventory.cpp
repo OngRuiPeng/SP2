@@ -1,4 +1,5 @@
 #include "SceneSP.h"
+#include "Utility.h"
 
 void SceneSP::RenderInventory()
 {
@@ -16,8 +17,6 @@ void SceneSP::RenderInventory()
 	}
 	modelStack.PopMatrix();*/
 
-
-
 	modelStack.PushMatrix();
 	RenderPictureOnScreen(meshList[GEO_INVENTORY],45,5.5,0.9,0.5);
 	modelStack.PopMatrix();
@@ -31,11 +30,20 @@ void SceneSP::RenderInventory()
 				modelStack.PushMatrix();
 				RenderPictureOnScreen(meshList[GEO_REDITOS],7, 4.5, 2.875 + x * 0.75 , 0.65);
 				modelStack.PopMatrix();
+
+				modelStack.PushMatrix();
+				RenderTextOnScreen(meshList[GEO_MainMenuText],Convert(InventoryData[x].getItemCount()), (1,0,0) , 2 , 11 + x * 2.5 , 0.65);
+				modelStack.PopMatrix();
+
 			}
 			else if ( InventoryData[x].getItemName() == "Campbella" )
 			{
 				modelStack.PushMatrix();
 				RenderPictureOnScreen(meshList[GEO_CAMPBELLA],7, 4.5, 2.875 + x * 0.75, 0.65);
+				modelStack.PopMatrix();
+
+				modelStack.PushMatrix();
+				RenderTextOnScreen(meshList[GEO_MainMenuText],Convert(InventoryData[x].getItemCount()), (1,0,0) , 2 , 11 + x * 2.5 , 0.65);
 				modelStack.PopMatrix();
 			}
 			else if ( InventoryData[x].getItemName() == "Toblerone" )
@@ -43,11 +51,19 @@ void SceneSP::RenderInventory()
 				modelStack.PushMatrix();
 				RenderPictureOnScreen(meshList[GEO_TOBLERONE],7, 4.5, 2.875 + x * 0.75, 0.65);
 				modelStack.PopMatrix();
+
+				modelStack.PushMatrix();
+				RenderTextOnScreen(meshList[GEO_MainMenuText],Convert(InventoryData[x].getItemCount()), (1,0,0) , 2 , 11 + x * 2.5 , 0.65);
+				modelStack.PopMatrix();
 			}
 			else if ( InventoryData[x].getItemName() == "Dewtos" )
 			{
 				modelStack.PushMatrix();
 				RenderPictureOnScreen(meshList[GEO_DEWTOS],7, 4.5, 2.875 + x * 0.75, 0.65);
+				modelStack.PopMatrix();
+
+				modelStack.PushMatrix();
+				RenderTextOnScreen(meshList[GEO_MainMenuText],Convert(InventoryData[x].getItemCount()), (1,0,0) , 2 , 11 + x * 2.5 , 0.65);
 				modelStack.PopMatrix();
 			}
 			else if ( InventoryData[x].getItemName() == "Pizza" )
@@ -55,11 +71,19 @@ void SceneSP::RenderInventory()
 				modelStack.PushMatrix();
 				RenderPictureOnScreen(meshList[GEO_PIZZA],7, 4.5, 2.875 + x * 0.75, 0.65);
 				modelStack.PopMatrix();
+
+				modelStack.PushMatrix();
+				RenderTextOnScreen(meshList[GEO_MainMenuText],Convert(InventoryData[x].getItemCount()), (1,0,0) , 2 , 11 + x * 2.5 , 0.65);
+				modelStack.PopMatrix();
 			}
 			else if ( InventoryData[x].getItemName() == "Cactus juice" )
 			{
 				modelStack.PushMatrix();
 				RenderPictureOnScreen(meshList[GEO_CACTUS],7, 4.5, 2.875 + x * 0.75, 0.65);
+				modelStack.PopMatrix();
+
+				modelStack.PushMatrix();
+				RenderTextOnScreen(meshList[GEO_MainMenuText],Convert(InventoryData[x].getItemCount()), (1,0,0) , 2 , 11 + x * 2.5 , 0.65);
 				modelStack.PopMatrix();
 			}
 			else if ( InventoryData[x].getItemName() == "Chicken soup" )
@@ -67,17 +91,29 @@ void SceneSP::RenderInventory()
 				modelStack.PushMatrix();
 				RenderPictureOnScreen(meshList[GEO_CHICKEN],7, 4.5, 2.875 + x * 0.75, 0.65);
 				modelStack.PopMatrix();
+
+				modelStack.PushMatrix();
+				RenderTextOnScreen(meshList[GEO_MainMenuText],Convert(InventoryData[x].getItemCount()), (1,0,0) , 2 , 11 + x * 2.5 , 0.65);
+				modelStack.PopMatrix();
 			}
 			else if ( InventoryData[x].getItemName() == "Maggie mien" )
 			{
 				modelStack.PushMatrix();
 				RenderPictureOnScreen(meshList[GEO_MAGGI],7, 4.5, 2.875 + x * 0.75, 0.65);
 				modelStack.PopMatrix();
+
+				modelStack.PushMatrix();
+				RenderTextOnScreen(meshList[GEO_MainMenuText],Convert(InventoryData[x].getItemCount()), (1,0,0) , 2 , 11 + x * 2.5 , 0.65);
+				modelStack.PopMatrix();
 			}
 			else if ( InventoryData[x].getItemName() == "Macaroni" )
 			{
 				modelStack.PushMatrix();
 				RenderPictureOnScreen(meshList[GEO_MACARONI],7, 4.5, 2.875 + x * 0.75, 0.65);
+				modelStack.PopMatrix();
+
+				modelStack.PushMatrix();
+				RenderTextOnScreen(meshList[GEO_MainMenuText],Convert(InventoryData[x].getItemCount()), (1,0,0) , 2 , 11 + x * 2.5 , 0.65);
 				modelStack.PopMatrix();
 			}
 		}

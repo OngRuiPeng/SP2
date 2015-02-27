@@ -421,7 +421,15 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 
 	ItemNo = 0;
 
-	CItem nullthis("lol","",0); InventoryData.push_back(nullthis);
+	nullthis.Set("lol","",0); 
+	InventoryData.push_back(nullthis);
+	CheckoutList.push_back(nullthis);
+
+	ItemSlide = false;
+	translateItemZ = 0 ;
+	translateItemX = 0 ;
+	WhichCashier = 0 ;
+	Deletemah = false;
 
 	Mtx44 projection;
 	projection.SetToPerspective(45.0f,4.0f/3.0f, 0.01f, 100000.0f);
@@ -883,9 +891,16 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	if(Application::IsKeyPressed('Q') && PlaceItem == true && SecurityCam == false)
 	{
 		if ( Items[NoItemTargetcollision()].getEmpty() == true) 
-			Items[NoItemTargetcollision()].setEmpty(false);
-
-		updateInventory(ItemData[Items[NoItemTargetcollision()].getNo()] , false ) ;
+		{
+			for ( int x = 0 ; x < InventoryData.size() ; x++)
+			{
+				if ( InventoryData[x].getItemName() == ItemData[ItemTargetcollision().getNo()].getItemName() &&  InventoryData[x].getItemCount() > 0)
+				{
+					Items[NoItemTargetcollision()].setEmpty(false);
+					updateInventory(ItemData[Items[NoItemTargetcollision()].getNo()] , false ) ;
+				}
+			}
+		}
 	}
 
 	if(Application::IsKeyPressed('E') && interactmah == true )
@@ -979,11 +994,21 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 
 	if ( Application::IsKeyPressed('V'))
 	{
-		for ( int x = 0; x < InventoryData.size() ; x++ )
+		for ( int x = 0; x < CheckoutList.size() ; x++ )
 		{
-			cout << InventoryData[x].getItemName() << " " << InventoryData[x].getItemCount() << endl;
+			cout << CheckoutList[x].getItemName() << " " << CheckoutList[x].getItemCount() << endl;
 		}
 	}
+
+	if ( Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 11 && InventoryData[0].getItemCount() != 0 && ItemSlide == false || Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 12 && InventoryData[0].getItemCount() != 0 && ItemSlide == false )
+	{
+		ItemSlide = true;
+		Deletemah = true;
+		WhichCashier = NoInteractableTargetcollision();
+	}
+
+	if (ItemSlide == true)
+		updateItemSlide(dt,WhichCashier);
 
 
 }
