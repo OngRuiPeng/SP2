@@ -2,13 +2,14 @@
 
 #include "Vector3.h"
 #include <string>
-#include "Npc.h"
+
 using namespace std; 
 
 class Obj
 {
 private:
 	bool empty;
+	int number;
 public: 
 	Vector3 min,max;
 	Obj();
@@ -19,4 +20,9 @@ public:
 	bool getEmpty();
 
 	void set(Vector3 maximum,Vector3 minimum);
+
+	void set(int a );
+
+	int getNo();
+
 };

@@ -119,3 +119,39 @@ void SceneSP::RenderTextOnScreen(Mesh* mesh, std::string text, Color color, floa
 
 	glEnable(GL_DEPTH_TEST);
 }
+
+void SceneSP::RenderPictureOnScreen(Mesh* mesh, float sizeX , float sizeY, float x, float y)
+{
+	if(!mesh || mesh->textureID <= 0) //Proper error check
+		return;
+
+	glDisable(GL_DEPTH_TEST);
+	Mtx44 ortho;
+	ortho.SetToOrtho(0, 80, 0, 60, -0.1, 0.1); //size of screen UI
+	projectionStack.PushMatrix();
+	projectionStack.LoadMatrix(ortho);
+	viewStack.PushMatrix();
+	viewStack.LoadIdentity(); //No need camera for ortho mode
+	modelStack.PushMatrix();
+	modelStack.LoadIdentity(); //Reset modelStack
+	modelStack.Scale(sizeX, sizeY, 1);
+	modelStack.Translate(x, y, 0);
+
+	glUniform1i(m_parameters[U_LIGHTENABLED], 0);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, mesh->textureID);
+	glUniform1i(m_parameters[U_COLOR_TEXTURE], 0);
+
+	Mtx44 MVP = projectionStack.Top() * viewStack.Top() * modelStack.Top() ;
+	glUniformMatrix4fv(m_parameters[U_MVP], 1, GL_FALSE, &MVP.a[0]);
+	mesh->Render();
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glUniform1i(m_parameters[U_TEXT_ENABLED], 0);
+
+	projectionStack.PopMatrix();
+	viewStack.PopMatrix();
+	modelStack.PopMatrix();
+
+	glEnable(GL_DEPTH_TEST);
+}

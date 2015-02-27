@@ -12,6 +12,9 @@
 #include <vector>
 #include <string>
 #include "timer.h"
+
+#include "Item.h"
+
 using namespace std;
 
 class SceneSP : public Scene
@@ -90,6 +93,21 @@ class SceneSP : public Scene
 		GEO_CASHIERTEXT,
 		GEO_SECURITYTEXT,
 		//
+		
+		//INVENTORY STUFF~~~~~~~~~~~~~~~~~~~~
+		GEO_INVENTORYTEXT,
+		GEO_INVENTORY,
+		GEO_TOBLERONE,
+		GEO_MACARONI,
+		GEO_REDITOS,
+		GEO_CAMPBELLA,
+		GEO_CACTUS,
+		GEO_CHICKEN,
+		GEO_PIZZA,
+		GEO_MAGGI,
+		GEO_DEWTOS,
+		//
+		
 		GEO_LIGHTBALL,
 
 		GEO_SEE,
@@ -118,6 +136,20 @@ class SceneSP : public Scene
 		CAM4,
 		CAM5,
 		MAX_CAM,
+	};
+
+	enum ITEM
+	{
+		Reditos, // PACK1 
+		Campbella, // CAN2
+		Toblerone, // PACK4
+		Dewtos, // PACK2
+		Pizza, // GEO_BOX1
+		Cactus, // CAN3
+		Chicken, // CAN1
+		Maggi, // PACK3
+		Macaroni, // GEO_BOX2
+		MAX_ITEM,
 	};
 
 	enum UNIFORM_TYPE
@@ -181,6 +213,8 @@ public:
 	void RenderSupermarket();
 	void RenderInteractableObjs();
 	void RenderPacks ();
+	void RenderInventory();
+	void RenderPictureOnScreen(Mesh* mesh, float sizeX , float sizeY , float x, float y);
 
 	//collision
 	bool AABBCheck(const Obj &box1,const Obj &box2);
@@ -195,7 +229,7 @@ public:
 	//Interactions and their other variables
 	void SlidingDoor(double);
 
-	bool canput ;
+	bool PlaceItem ;
 	bool PickUpItem; 
 	bool interactmah;
 	bool DetectorsOn;
@@ -219,6 +253,10 @@ public:
 	Obj box1 ;
 	Obj seewhere;
 
+	int ItemNo;
+
+	vector <CItem> ItemData;
+
 	//Npcs
 	CNpc Cashier;
 	CNpc Guard;
@@ -239,6 +277,11 @@ public:
 
 	bool ChooseWhich;
 	int WhichMode ;
+
+	//Inventory 
+	void updateInventory( CItem a , bool b );
+	
+	vector <CItem> InventoryData;
 
 	void mouseInput(double* xpos, double* ypos);
 	double xpos;

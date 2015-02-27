@@ -254,7 +254,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 
 	meshList[GEO_CBODY] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//body.obj");
 	meshList[GEO_CBODY]->textureID = LoadTGA("image//NpcBlue.tga");
-	
+
 	meshList[GEO_CLEFTHAND] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//hand.obj");
 	meshList[GEO_CLEFTHAND]->textureID = LoadTGA("image//NpcBlue.tga");
 
@@ -273,7 +273,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 
 	meshList[GEO_SBODY] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//body.obj");
 	meshList[GEO_SBODY]->textureID = LoadTGA("image//NpcBlack.tga");
-	
+
 	meshList[GEO_SLEFTHAND] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//hand.obj");
 	meshList[GEO_SLEFTHAND]->textureID = LoadTGA("image//NpcBlack.tga");
 
@@ -285,6 +285,38 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 
 	meshList[GEO_SRIGHTLEG] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//leg.obj");
 	meshList[GEO_SRIGHTLEG]->textureID = LoadTGA("image//NpcBlack.tga");
+
+	// inventory init 
+
+	meshList[GEO_INVENTORY] = MeshBuilder::GenerateText("Slots",1,1);
+	meshList[GEO_INVENTORY]->textureID = LoadTGA("image//Inventory.tga");
+
+	meshList[GEO_TOBLERONE] = MeshBuilder::GenerateText("toblerone",1,1);
+	meshList[GEO_TOBLERONE]->textureID = LoadTGA("image//InvenToblerone.tga");
+
+	meshList[GEO_MACARONI] = MeshBuilder::GenerateText("macaroni",1,1);
+	meshList[GEO_MACARONI]->textureID = LoadTGA("image//Macaroni.tga");
+
+	meshList[GEO_REDITOS] = MeshBuilder::GenerateText("reditos",1,1);
+	meshList[GEO_REDITOS]->textureID = LoadTGA("image//Reditos.tga");
+
+	meshList[GEO_CAMPBELLA] = MeshBuilder::GenerateText("campbella",1,1);
+	meshList[GEO_CAMPBELLA]->textureID = LoadTGA("image//campbella.tga");
+
+	meshList[GEO_CACTUS] = MeshBuilder::GenerateText("cactus",1,1);
+	meshList[GEO_CACTUS]->textureID = LoadTGA("image//CactusJuice.tga");
+
+	meshList[GEO_CHICKEN] = MeshBuilder::GenerateText("chicken",1,1);
+	meshList[GEO_CHICKEN]->textureID = LoadTGA("image//Chicken.tga");
+
+	meshList[GEO_PIZZA] = MeshBuilder::GenerateText("pizza",1,1);
+	meshList[GEO_PIZZA]->textureID = LoadTGA("image//Pizza.tga");
+
+	meshList[GEO_MAGGI] = MeshBuilder::GenerateText("maggi",1,1);
+	meshList[GEO_MAGGI]->textureID = LoadTGA("image//Maggi.tga");
+
+	meshList[GEO_DEWTOS] = MeshBuilder::GenerateText("dewtos",1,1);
+	meshList[GEO_DEWTOS]->textureID = LoadTGA("image//Dewtos.tga");
 
 	//variables
 	gamestate = MAINMENU;
@@ -323,6 +355,20 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	CamTime = 0 ;
 
 	ChooseWhich = false ;
+
+	CItem reditos("Reditos" , "red color lai de",0); ItemData.push_back(reditos);
+	CItem campbella("Campbella" , " campmes" ,0); ItemData.push_back(campbella);
+	CItem toblerone("Toblerone" ,  " sadsad " ,0 ); ItemData.push_back(toblerone);
+	CItem dewtos("Dewtos" , "sadadsasd" ,0); ItemData.push_back(dewtos);
+	CItem pizza("Pizza" , "asdasddsadsad" ,0); ItemData.push_back(pizza);
+	CItem cactus("Cactus juice" , "1254321532" ,0); ItemData.push_back(cactus);
+	CItem chicken("Chicken soup" ,  "sadsadsad" ,0); ItemData.push_back(chicken);
+	CItem maggi("Maggie mien" ,  "sadsafgew" ,0); ItemData.push_back(maggi);
+	CItem macaroni("Macaroni" ,  "sadsadsadsada" ,0); ItemData.push_back(macaroni);
+
+	ItemNo = 0;
+
+	CItem nullthis("lol","",0); InventoryData.push_back(nullthis);
 
 	Mtx44 projection;
 	projection.SetToPerspective(45.0f,4.0f/3.0f, 0.01f, 100000.0f);
@@ -377,7 +423,7 @@ void SceneSP::collisionOBJinit()
 	OBJ.push_back(box1);
 
 	//****************************************(CASHIERS)
-	box1.set(Vector3(17.5,10,6.5),Vector3(12,0,4)); // right cashier part 1
+	box1.set(Vector3(17.5,10,6.5),Vector3(12,0,4)); // right cashier part 1 
 	OBJ.push_back(box1);
 
 	box1.set(Vector3(15,10,13),Vector3(12,0,4)); // right cashier part 2 
@@ -578,37 +624,43 @@ void SceneSP::collisionITEMSinit()
 
 void SceneSP::collisionInteractionsinit()
 {
-	box1.set(Vector3(10,20,-5.5),Vector3(0.5,0,-7.5)); // left sliding door  
+	box1.set(Vector3(10,20,-5.5),Vector3(0.5,0,-7.5)); // left sliding door  0
 	Interactables.push_back(box1);
 
-	box1.set(Vector3(1,20,-5.5),Vector3(-8,0,-7.5)); // right sliding door  
+	box1.set(Vector3(1,20,-5.5),Vector3(-8,0,-7.5)); // right sliding door  1
 	Interactables.push_back(box1);
 
-	box1.set(Vector3(29,20,49),Vector3(22.5,0,43)); // sink  
+	box1.set(Vector3(29,20,49),Vector3(22.5,0,43)); // sink  2
 	Interactables.push_back(box1);
 
-	box1.set(Vector3(23,20,49),Vector3(15.8,0,42.5)); // toilet bowl
+	box1.set(Vector3(23,20,49),Vector3(15.8,0,42.5)); // toilet bowl   3
 	Interactables.push_back(box1);
 
-	box1.set(Vector3(-20.5,20,49),Vector3(-26,0,36.8)); // control panel 
+	box1.set(Vector3(-20.5,20,49),Vector3(-26,0,36.8)); // control panel    4
 	Interactables.push_back(box1);
 
-	box1.set(Vector3(16.8,20,9.3),Vector3(14.5,0,6)); // cashier1
+	box1.set(Vector3(16.8,20,9.3),Vector3(14.5,0,6)); // cashier1    5
 	Interactables.push_back(box1);
 
-	box1.set(Vector3(25.8,20,9.3),Vector3(23.5,0,6)); // cashier2
+	box1.set(Vector3(25.8,20,9.3),Vector3(23.5,0,6)); // cashier2    6
 	Interactables.push_back(box1);
 
-	box1.set(Vector3(-10.5,20,1.5),Vector3(-13.5,0,-1.5)); // security guard
+	box1.set(Vector3(-10.5,20,1.5),Vector3(-13.5,0,-1.5)); // security guard     7
 	Interactables.push_back(box1);
 
-	box1.set(Vector3(6.5,20,26.5),Vector3(3.5,0,23.5)); // customer
+	box1.set(Vector3(6.5,20,26.5),Vector3(3.5,0,23.5)); // customer     8 
 	Interactables.push_back(box1);
 
-	box1.set(Vector3(-43.5,20,-13.5),Vector3(-47.5,0,-16.5)); // passerby1
+	box1.set(Vector3(-43.5,20,-13.5),Vector3(-47.5,0,-16.5)); // passerby1     9 
 	Interactables.push_back(box1);
 
-	box1.set(Vector3(47.5,20,-28.5),Vector3(43.5,0,-31.5)); // passerb2
+	box1.set(Vector3(47.5,20,-28.5),Vector3(43.5,0,-31.5)); // passerb2     10 
+	Interactables.push_back(box1);
+
+	box1.set(Vector3(15,4,13),Vector3(12,0,4)); // right cashier conveyor 11 
+	Interactables.push_back(box1);
+
+	box1.set(Vector3(24.5,4,13),Vector3(21,0,4)); // left cashier conveyor 12 
 	Interactables.push_back(box1);
 }
 
@@ -729,7 +781,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	{
 		inSupermarket = false;
 	}
-	
+
 	updatecollision(dt) ;
 	//Interaction functions
 
@@ -738,15 +790,19 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	if(Application::IsKeyPressed('E') && PickUpItem == true && SecurityCam == false)
 	{
 		if ( Items[NoItemTargetcollision()].getEmpty() == false) 
-		Items[NoItemTargetcollision()].setEmpty(true);
+			Items[NoItemTargetcollision()].setEmpty(true);
+
+		updateInventory(ItemData[Items[NoItemTargetcollision()].getNo()] , true ) ;
 	}
 
-	if(Application::IsKeyPressed('Q') && canput == true && SecurityCam == false)
+	if(Application::IsKeyPressed('Q') && PlaceItem == true && SecurityCam == false)
 	{
 		if ( Items[NoItemTargetcollision()].getEmpty() == true) 
-		Items[NoItemTargetcollision()].setEmpty(false);
+			Items[NoItemTargetcollision()].setEmpty(false);
 
+		updateInventory(ItemData[Items[NoItemTargetcollision()].getNo()] , false ) ;
 	}
+
 	if(Application::IsKeyPressed('E') && interactmah == true )
 	{
 		if ( NoInteractableTargetcollision() == 5 || NoInteractableTargetcollision() == 6 ) // Cashier
@@ -764,8 +820,8 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 			time = 0;
 			CustomerText = true;
 		}
-		
-		
+
+
 	}
 
 
@@ -817,6 +873,18 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		CustomerText = false;
 	}
 
+	ItemNo = Items[NoItemTargetcollision()].getNo() ;
+
+
+	if ( Application::IsKeyPressed('V'))
+	{
+		for ( int x = 0; x < InventoryData.size() ; x++ )
+		{
+			cout << InventoryData[x].getItemName() << " " << InventoryData[x].getItemCount() << endl;
+		}
+	}
+
+
 }
 
 void SceneSP::Render()
@@ -865,6 +933,8 @@ void SceneSP::Render()
 		RenderCharacter();
 		RenderInteractableObjs();
 
+		RenderInventory();
+
 		if ( ChooseWhich == true ) 
 		{
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press C to use camera", (1, 0, 1),2.5, 5, 4);
@@ -877,17 +947,11 @@ void SceneSP::Render()
 		if ( cam_state != NORMAL ) 
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press N for next , Y for previous", (0, 1, 0),2, 3, 4);
 
-		if ( canput == true ) 
+		if ( PlaceItem == true ) 
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press Q to put back item", (1, 0, 1),2.5, 5, 4);
 
 		if ( interactmah == true && ChooseWhich == false) 
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press E to interact", (1, 0, 1),2.5, 5, 4);
-
-		if ( inSupermarket == true )
-			RenderTextOnScreen(meshList[GEO_NPCText], Cashier.CashierWelcome(), (1, 0, 1), 2, 20, 20);
-
-		if ( interactmah == true ) 
-			RenderTextOnScreen(meshList[GEO_MainMenuText], "TARGET DONG DAO LIAO", (1, 0, 1),3, 2, 16);
 
 		if ( CashierText == true )
 			RenderTextOnScreen(meshList[GEO_CASHIERTEXT], Cashier.CashierWelcome(), (1, 0, 1), 2, 2, 5);
@@ -895,6 +959,12 @@ void SceneSP::Render()
 			RenderTextOnScreen(meshList[GEO_SECURITYTEXT], Guard.SSpeech(), (1, 0, 1), 2, 2, 5);
 		if ( CustomerText == true )
 			RenderTextOnScreen(meshList[GEO_CUSTOMERTEXT], Customer.CSpeech(), (1, 0, 1), 2, 2, 5);
+
+		if ( PickUpItem == true || PlaceItem == true )
+		{
+			RenderTextOnScreen(meshList[GEO_MainMenuText], ItemData[ItemNo].getItemName() , (1, 0, 1),2.5, 2, 20);
+			RenderTextOnScreen(meshList[GEO_MainMenuText], ItemData[ItemNo].getItemDesc() , (1, 0, 1),2.5, 2, 19);
+		}
 
 	}
 }

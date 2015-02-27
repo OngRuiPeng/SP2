@@ -5,244 +5,270 @@ void SceneSP::RenderPacks()
 	modelStack.PushMatrix();		//ALL PUSH
 
 	modelStack.PushMatrix();		//PACK1 1
-	
+
 	if ( Items[1].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(14.5, 5, 25);
-	modelStack.Rotate(90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK1], true);
-	modelStack.PopMatrix();
+		Items[1].set(Reditos);
+		modelStack.PushMatrix();
+		modelStack.Translate(14.5, 5, 25);
+		modelStack.Rotate(90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK1], true);
+		modelStack.PopMatrix();
 	}
 	if ( Items[5].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(14.5, 3.6, 23);
-	modelStack.Rotate(90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK1], true);
-	modelStack.PopMatrix();
+		Items[5].set(Reditos);
+		modelStack.PushMatrix();
+		modelStack.Translate(14.5, 3.6, 23);
+		modelStack.Rotate(90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK1], true);
+		modelStack.PopMatrix();
 	}
 	if ( Items[3].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(14.5, 3.6, 27);
-	modelStack.Rotate(90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK1], true);
-	modelStack.PopMatrix();
+		Items[3].set(Reditos);
+		modelStack.PushMatrix();
+		modelStack.Translate(14.5, 3.6, 27);
+		modelStack.Rotate(90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK1], true);
+		modelStack.PopMatrix();
 	}
 	modelStack.PopMatrix();			//PACK1 1 END
 
 	modelStack.PushMatrix();		//PACK1 2
-	
+
 	if ( Items[10].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(12, 5, 25);
-	modelStack.Rotate(-90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK1], true);
-	modelStack.PopMatrix();
+		Items[10].set(Reditos);
+		modelStack.PushMatrix();
+		modelStack.Translate(12, 5, 25);
+		modelStack.Rotate(-90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK1], true);
+		modelStack.PopMatrix();
 	}
 	if ( Items[14].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(12, 3.6, 23);
-	modelStack.Rotate(-90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK1], true);
-	modelStack.PopMatrix();
+		Items[14].set(Reditos);
+		modelStack.PushMatrix();
+		modelStack.Translate(12, 3.6, 23);
+		modelStack.Rotate(-90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK1], true);
+		modelStack.PopMatrix();
 	}
 	if ( Items[12].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(12, 3.6, 27);
-	modelStack.Rotate(-90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK1], true);
-	modelStack.PopMatrix();
+		Items[12].set(Reditos);
+		modelStack.PushMatrix();
+		modelStack.Translate(12, 3.6, 27);
+		modelStack.Rotate(-90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK1], true);
+		modelStack.PopMatrix();
 	}
 	modelStack.PopMatrix();			//PACK1 2 END
 
 	modelStack.PushMatrix();		//PACK1 2
-	
+
 	if ( Items[28].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(0, 5, 25);
-	modelStack.Rotate(-90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK1], true);
-	modelStack.PopMatrix();
+		Items[28].set(Reditos);
+		modelStack.PushMatrix();
+		modelStack.Translate(0, 5, 25);
+		modelStack.Rotate(-90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK1], true);
+		modelStack.PopMatrix();
 	}
 	if ( Items[30].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(0, 3.6, 23);
-	modelStack.Rotate(-90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK1], true);
-	modelStack.PopMatrix();
+		Items[30].set(Reditos);
+		modelStack.PushMatrix();
+		modelStack.Translate(0, 3.6, 23);
+		modelStack.Rotate(-90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK1], true);
+		modelStack.PopMatrix();
 	}
 	if ( Items[32].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(0, 3.6, 27);
-	modelStack.Rotate(-90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK1], true);
-	modelStack.PopMatrix();
+		Items[32].set(Reditos);
+		modelStack.PushMatrix();
+		modelStack.Translate(0, 3.6, 27);
+		modelStack.Rotate(-90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK1], true);
+		modelStack.PopMatrix();
 	}
 
 	modelStack.PopMatrix();			//PACK1 2 END
 
 	modelStack.PushMatrix();		//PACK1 2
-	
+
 	if ( Items[46].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(-9.5, 5, 25);
-	modelStack.Rotate(90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK1], true);
-	modelStack.PopMatrix();
+		Items[46].set(Reditos);
+		modelStack.PushMatrix();
+		modelStack.Translate(-9.5, 5, 25);
+		modelStack.Rotate(90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK1], true);
+		modelStack.PopMatrix();
 	}
 
 	if ( Items[49].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(-9.5, 3.6, 25);
-	modelStack.Rotate(90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK1], true);
-	modelStack.PopMatrix();
+		Items[49].set(Reditos);
+		modelStack.PushMatrix();
+		modelStack.Translate(-9.5, 3.6, 25);
+		modelStack.Rotate(90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK1], true);
+		modelStack.PopMatrix();
 	}
 	modelStack.PopMatrix();			//PACK1 2 END
 
 	modelStack.PushMatrix();		//PACK4 1
-	
+
 	if ( Items[52].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(-9.5, 2, 25);
-	modelStack.Rotate(90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK4], true);
-	modelStack.PopMatrix();
+		Items[52].set(Toblerone);
+		modelStack.PushMatrix();
+		modelStack.Translate(-9.5, 2, 25);
+		modelStack.Rotate(90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK4], true);
+		modelStack.PopMatrix();
 	}
 	if ( Items[48].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(-9.5, 3.4, 28);
-	modelStack.Rotate(90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK4], true);
-	modelStack.PopMatrix();
+		Items[48].set(Toblerone);
+		modelStack.PushMatrix();
+		modelStack.Translate(-9.5, 3.4, 28);
+		modelStack.Rotate(90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK4], true);
+		modelStack.PopMatrix();
 	}
 	if ( Items[47].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(-9.5, 4.9, 22);
-	modelStack.Rotate(90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK4], true);
-	modelStack.PopMatrix();
+		Items[47].set(Toblerone);
+		modelStack.PushMatrix();
+		modelStack.Translate(-9.5, 4.9, 22);
+		modelStack.Rotate(90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK4], true);
+		modelStack.PopMatrix();
 	}
 	modelStack.PopMatrix();			//PACK4 1 END
 
 	modelStack.PushMatrix();		//PACK4 2
-	
+
 	if ( Items[7].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(14.5, 2, 25);
-	modelStack.Rotate(90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK4], true);
-	modelStack.PopMatrix();
+		Items[7].set(Toblerone);
+		modelStack.PushMatrix();
+		modelStack.Translate(14.5, 2, 25);
+		modelStack.Rotate(90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK4], true);
+		modelStack.PopMatrix();
 	}
 	if ( Items[6].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(14.5, 2, 28);
-	modelStack.Rotate(90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK4], true);
-	modelStack.PopMatrix();
+		Items[6].set(Toblerone);
+		modelStack.PushMatrix();
+		modelStack.Translate(14.5, 2, 28);
+		modelStack.Rotate(90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK4], true);
+		modelStack.PopMatrix();
 	}
 
 	if ( Items[8].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(14.5, 2, 22);
-	modelStack.Rotate(90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK4], true);
-	modelStack.PopMatrix();
+		Items[8].set(Toblerone);
+		modelStack.PushMatrix();
+		modelStack.Translate(14.5, 2, 22);
+		modelStack.Rotate(90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK4], true);
+		modelStack.PopMatrix();
 	}
 	modelStack.PopMatrix();			//PACK4 2 END
 
 	modelStack.PushMatrix();		//PACK4 3
 	if ( Items[19].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(3, 4.9, 25);
-	modelStack.Rotate(90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK4], true);
-	modelStack.PopMatrix();
+		Items[19].set(Toblerone);
+		modelStack.PushMatrix();
+		modelStack.Translate(3, 4.9, 25);
+		modelStack.Rotate(90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK4], true);
+		modelStack.PopMatrix();
 	}
 	if ( Items[18].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(3, 4.9, 28);
-	modelStack.Rotate(90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK4], true);
-	modelStack.PopMatrix();
+		Items[18].set(Toblerone);
+		modelStack.PushMatrix();
+		modelStack.Translate(3, 4.9, 28);
+		modelStack.Rotate(90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK4], true);
+		modelStack.PopMatrix();
 	}
 	if ( Items[20].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(3, 4.9, 22);
-	modelStack.Rotate(90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK4], true);
-	modelStack.PopMatrix();
+		Items[20].set(Toblerone);
+		modelStack.PushMatrix();
+		modelStack.Translate(3, 4.9, 22);
+		modelStack.Rotate(90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK4], true);
+		modelStack.PopMatrix();
 	}
 	modelStack.PopMatrix();			//PACK4 3 END
 
 	modelStack.PushMatrix();		//PACK2 1
-	
+
 	if ( Items[13].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(12, 3.6, 25);
-	modelStack.Rotate(-90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK2], true);
-	modelStack.PopMatrix();
+		Items[13].set(Dewtos);
+		modelStack.PushMatrix();
+		modelStack.Translate(12, 3.6, 25);
+		modelStack.Rotate(-90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK2], true);
+		modelStack.PopMatrix();
 	}
 	if ( Items[9].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(12, 5, 27);
-	modelStack.Rotate(-90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK2], true);
-	modelStack.PopMatrix();
+		Items[9].set(Dewtos);
+		modelStack.PushMatrix();
+		modelStack.Translate(12, 5, 27);
+		modelStack.Rotate(-90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK2], true);
+		modelStack.PopMatrix();
 	}
 	if ( Items[11].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(12, 5, 23);
-	modelStack.Rotate(-90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK2], true);
-	modelStack.PopMatrix();
+		Items[11].set(Dewtos);
+		modelStack.PushMatrix();
+		modelStack.Translate(12, 5, 23);
+		modelStack.Rotate(-90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK2], true);
+		modelStack.PopMatrix();
 	}
 	if ( Items[16].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(12, 2.1, 25);
-	modelStack.Rotate(-90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK2], true);
-	modelStack.PopMatrix();
+		Items[16].set(Dewtos);
+		modelStack.PushMatrix();
+		modelStack.Translate(12, 2.1, 25);
+		modelStack.Rotate(-90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK2], true);
+		modelStack.PopMatrix();
 	}
 	if ( Items[15].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(12, 2.1, 27);
-	modelStack.Rotate(-90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK2], true);
-	modelStack.PopMatrix();
+		Items[15].set(Dewtos);
+		modelStack.PushMatrix();
+		modelStack.Translate(12, 2.1, 27);
+		modelStack.Rotate(-90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK2], true);
+		modelStack.PopMatrix();
 	}
 	if ( Items[17].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(12, 2.1, 23);
-	modelStack.Rotate(-90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK2], true);
-	modelStack.PopMatrix();
+		Items[17].set(Dewtos);
+		modelStack.PushMatrix();
+		modelStack.Translate(12, 2.1, 23);
+		modelStack.Rotate(-90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK2], true);
+		modelStack.PopMatrix();
 	}
 	modelStack.PopMatrix();			//PACK2 1 END
 
@@ -250,54 +276,60 @@ void SceneSP::RenderPacks()
 
 	if ( Items[34].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(0, 2.1, 25);
-	modelStack.Rotate(-90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK2], true);
-	modelStack.PopMatrix();
+		Items[34].set(Dewtos);
+		modelStack.PushMatrix();
+		modelStack.Translate(0, 2.1, 25);
+		modelStack.Rotate(-90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK2], true);
+		modelStack.PopMatrix();
 	}
 	if ( Items[35].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(0, 2.1, 27);
-	modelStack.Rotate(-90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK2], true);
-	modelStack.PopMatrix();
+		Items[35].set(Dewtos);
+		modelStack.PushMatrix();
+		modelStack.Translate(0, 2.1, 27);
+		modelStack.Rotate(-90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK2], true);
+		modelStack.PopMatrix();
 	}
 	if ( Items[33].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(0, 2.1, 23);
-	modelStack.Rotate(-90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK2], true);
-	modelStack.PopMatrix();
+		Items[33].set(Dewtos);
+		modelStack.PushMatrix();
+		modelStack.Translate(0, 2.1, 23);
+		modelStack.Rotate(-90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK2], true);
+		modelStack.PopMatrix();
 	}
 	modelStack.PopMatrix();			//PACK2 2 END
 
 	modelStack.PushMatrix();		//PACK2 3
 	if ( Items[37].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(-12, 5, 25);
-	modelStack.Rotate(-90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK2], true);
-	modelStack.PopMatrix();
+		Items[37].set(Dewtos);
+		modelStack.PushMatrix();
+		modelStack.Translate(-12, 5, 25);
+		modelStack.Rotate(-90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK2], true);
+		modelStack.PopMatrix();
 	}
 	if ( Items[38].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(-12, 5, 27);
-	modelStack.Rotate(-90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK2], true);
-	modelStack.PopMatrix();
+		Items[38].set(Dewtos);
+		modelStack.PushMatrix();
+		modelStack.Translate(-12, 5, 27);
+		modelStack.Rotate(-90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK2], true);
+		modelStack.PopMatrix();
 	}
 	if ( Items[36].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(-12, 5, 23);
-	modelStack.Rotate(-90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK2], true);
-	modelStack.PopMatrix();
+		Items[36].set(Dewtos);
+		modelStack.PushMatrix();
+		modelStack.Translate(-12, 5, 23);
+		modelStack.Rotate(-90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK2], true);
+		modelStack.PopMatrix();
 	}
 
 	modelStack.PopMatrix();			//PACK2 3 END
@@ -306,28 +338,31 @@ void SceneSP::RenderPacks()
 
 	if ( Items[40].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(-12, 3.6, 25);
-	modelStack.Rotate(-90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK2], true);
-	modelStack.PopMatrix();
+		Items[40].set(Dewtos);
+		modelStack.PushMatrix();
+		modelStack.Translate(-12, 3.6, 25);
+		modelStack.Rotate(-90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK2], true);
+		modelStack.PopMatrix();
 	}
 
 	if ( Items[44].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(-12, 2.1, 27);
-	modelStack.Rotate(-90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK2], true);
-	modelStack.PopMatrix();
+		Items[44].set(Dewtos);
+		modelStack.PushMatrix();
+		modelStack.Translate(-12, 2.1, 27);
+		modelStack.Rotate(-90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK2], true);
+		modelStack.PopMatrix();
 	}
 	if ( Items[42].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(-12, 2.1, 23);
-	modelStack.Rotate(-90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK2], true);
-	modelStack.PopMatrix();
+		Items[42].set(Dewtos);
+		modelStack.PushMatrix();
+		modelStack.Translate(-12, 2.1, 23);
+		modelStack.Rotate(-90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK2], true);
+		modelStack.PopMatrix();
 	}
 	modelStack.PopMatrix();			//PACK2 4 END
 
@@ -335,27 +370,30 @@ void SceneSP::RenderPacks()
 
 	if ( Items[22].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(2.5, 3.6, 25);
-	modelStack.Rotate(90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK2], true);
-	modelStack.PopMatrix();
+		Items[22].set(Dewtos);
+		modelStack.PushMatrix();
+		modelStack.Translate(2.5, 3.6, 25);
+		modelStack.Rotate(90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK2], true);
+		modelStack.PopMatrix();
 	}
 	if ( Items[24].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(2.5, 2.1, 27);
-	modelStack.Rotate(90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK2], true);
-	modelStack.PopMatrix();
+		Items[24].set(Dewtos);
+		modelStack.PushMatrix();
+		modelStack.Translate(2.5, 2.1, 27);
+		modelStack.Rotate(90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK2], true);
+		modelStack.PopMatrix();
 	}
 	if ( Items[26].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(2.5, 2.1, 23);
-	modelStack.Rotate(90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK2], true);
-	modelStack.PopMatrix();
+		Items[26].set(Dewtos);
+		modelStack.PushMatrix();
+		modelStack.Translate(2.5, 2.1, 23);
+		modelStack.Rotate(90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK2], true);
+		modelStack.PopMatrix();
 	}
 	modelStack.PopMatrix();			//PACK2 5 END
 
@@ -363,35 +401,39 @@ void SceneSP::RenderPacks()
 
 	if ( Items[45].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(-9.5, 5, 27);
-	modelStack.Rotate(90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK2], true);
-	modelStack.PopMatrix();
+		Items[45].set(Dewtos);
+		modelStack.PushMatrix();
+		modelStack.Translate(-9.5, 5, 27);
+		modelStack.Rotate(90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK2], true);
+		modelStack.PopMatrix();
 	}
 	if ( Items[50].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(-9.5, 3.6, 23);
-	modelStack.Rotate(90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK2], true);
-	modelStack.PopMatrix();
+		Items[50].set(Dewtos);
+		modelStack.PushMatrix();
+		modelStack.Translate(-9.5, 3.6, 23);
+		modelStack.Rotate(90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK2], true);
+		modelStack.PopMatrix();
 	}
 	if ( Items[53].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(-9.5, 2.1, 23);
-	modelStack.Rotate(90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK2], true);
-	modelStack.PopMatrix();
+		Items[53].set(Dewtos);
+		modelStack.PushMatrix();
+		modelStack.Translate(-9.5, 2.1, 23);
+		modelStack.Rotate(90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK2], true);
+		modelStack.PopMatrix();
 	}
 	if ( Items[51].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(-9.5, 2.1, 27);
-	modelStack.Rotate(90, 0, 1, 0);
-	RenderMesh(meshList[GEO_PACK2], true);
-	modelStack.PopMatrix();
+		Items[51].set(Dewtos);
+		modelStack.PushMatrix();
+		modelStack.Translate(-9.5, 2.1, 27);
+		modelStack.Rotate(90, 0, 1, 0);
+		RenderMesh(meshList[GEO_PACK2], true);
+		modelStack.PopMatrix();
 	}
 	modelStack.PopMatrix();			//PACK2 6 END
 
@@ -399,50 +441,56 @@ void SceneSP::RenderPacks()
 
 	if ( Items[54].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(2, 5.8, 40);
-	RenderMesh(meshList[GEO_PACK3], true);
-	modelStack.PopMatrix();
+		Items[54].set(Maggi);
+		modelStack.PushMatrix();
+		modelStack.Translate(2, 5.8, 40);
+		RenderMesh(meshList[GEO_PACK3], true);
+		modelStack.PopMatrix();
 	}
 
 	if ( Items[55].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(-2, 5.8, 40);
-	RenderMesh(meshList[GEO_PACK3], true);
-	modelStack.PopMatrix();
+		Items[55].set(Maggi);
+		modelStack.PushMatrix();
+		modelStack.Translate(-2, 5.8, 40);
+		RenderMesh(meshList[GEO_PACK3], true);
+		modelStack.PopMatrix();
 	}
 
 	if ( Items[56].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(2, 3.4, 40);
-	RenderMesh(meshList[GEO_PACK3], true);
-	modelStack.PopMatrix();
+		Items[56].set(Maggi);
+		modelStack.PushMatrix();
+		modelStack.Translate(2, 3.4, 40);
+		RenderMesh(meshList[GEO_PACK3], true);
+		modelStack.PopMatrix();
 	}
 
 	if ( Items[57].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(-2, 3.4, 40);
-	RenderMesh(meshList[GEO_PACK3], true);
-	modelStack.PopMatrix();
+		Items[57].set(Maggi);
+		modelStack.PushMatrix();
+		modelStack.Translate(-2, 3.4, 40);
+		RenderMesh(meshList[GEO_PACK3], true);
+		modelStack.PopMatrix();
 	}
 
 	if ( Items[58].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(2, 1, 40);
-	RenderMesh(meshList[GEO_PACK3], true);
-	modelStack.PopMatrix();
+		Items[58].set(Maggi);
+		modelStack.PushMatrix();
+		modelStack.Translate(2, 1, 40);
+		RenderMesh(meshList[GEO_PACK3], true);
+		modelStack.PopMatrix();
 	}
 
 	if ( Items[59].getEmpty() == false)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(-2, 1, 40);
-	RenderMesh(meshList[GEO_PACK3], true);
-	modelStack.PopMatrix();
+		Items[59].set(Maggi);
+		modelStack.PushMatrix();
+		modelStack.Translate(-2, 1, 40);
+		RenderMesh(meshList[GEO_PACK3], true);
+		modelStack.PopMatrix();
 	}
 
 	modelStack.PopMatrix();			//PACK3 1 END

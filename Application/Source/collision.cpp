@@ -187,14 +187,14 @@ int SceneSP::NoItemTargetcollision() // returns the item that the target has col
 				if ( Items[x].getEmpty() == false )
 					PickUpItem = true;
 				else
-					canput = true ; 
+					PlaceItem = true ; 
 
 				return x ;
 			}
 			else
 			{
 				PickUpItem = false;
-				canput = false;
+				PlaceItem = false;
 			}
 		}
 

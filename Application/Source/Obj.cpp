@@ -2,9 +2,10 @@
 
 Obj::Obj() 
 {
-	min = Vector3(0,0,0);
 	max = Vector3(0,0,0);
+	min = Vector3(0,0,0);
 	empty = false;
+	number = 9;
 }
 
 Obj::~Obj()
@@ -27,3 +28,12 @@ bool Obj::getEmpty()
 	return empty;
 }
 
+void Obj::set(int a)
+{
+	number = a ;
+}
+
+int Obj::getNo()
+{
+	return number;
+}
