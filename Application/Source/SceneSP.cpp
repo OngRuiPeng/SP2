@@ -336,11 +336,14 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	Passerby2.setName("Peter");
 	Passerby2.setType("Passerby");
 
-	DoorSlideR = -0.75;
+	DoorSlide = -0.75;
 	time = 0;
 	translateX = 0 ;
 	PickUpItem = false;
 	interactmah = false;
+
+	JumpDirection = false;
+	JumpState = false;
 
 	//**********************************************************   collisions 
 	box1.set(camera.position + Vector3(1,1,1),camera.position - Vector3(1,1,1));
@@ -390,6 +393,7 @@ void SceneSP::collisionOBJinit()
 
 	box1.set(Vector3(51,51,-49),Vector3(-51,0,-51)); // skybox (back)
 	OBJ.push_back(box1);
+
 	//******************************************(SUPERMARKET)
 
 	box1.set(Vector3(30,25,51),Vector3(26,0,-6)); // supermarket(left)
@@ -714,6 +718,29 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	if(Application::IsKeyPressed('6'))
 	{
 		gamestate = MAINMENU;
+	}
+
+	if (Application::IsKeyPressed(VK_SPACE) && JumpState == false)
+	{
+		JumpState = true;
+		JumpDirection = true;
+	}
+
+	if (JumpState == true)
+		Jump(dt);
+
+	if(Application::IsKeyPressed('8'))
+	{
+		//SWITCH OFF
+		lights[0].power = 0.5;
+		glUniform1f(m_parameters[U_LIGHT0_POWER], lights[0].power);
+	}
+
+	if(Application::IsKeyPressed('9'))
+	{
+		//SWITCH OFF
+		lights[0].power = 0;
+		glUniform1f(m_parameters[U_LIGHT0_POWER], lights[0].power);
 	}
 
 	//Game states	 

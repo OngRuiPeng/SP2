@@ -2,21 +2,54 @@
 
 void SceneSP::SlidingDoor(double dt)
 {
-	if (camera.position.x <= 9 && camera.position.x >= -7 && camera.position.z >= -15 && camera.position.z <= -3)
+	if (camera.position.x <= 9 && camera.position.x >= -7 && camera.position.z >= -16 && camera.position.z <= 2)
 	{
-		if (DoorSlideR >= -5)
+		if (DoorSlide >= -5)
 		{
-			DoorSlideR -= (float)(1 * dt);
+			DoorSlide -= (double)(3 * dt);
 		}
 	}
 
 	else
 	{
-		if (DoorSlideR < -0.75  )
+		if (DoorSlide < -0.75  )
 		{	
-			DoorSlideR += (float)(1 * dt);
+			DoorSlide += (double)(3 * dt);
 		}
-		
+
+	}
+
+}
+
+void SceneSP::Jump (double dt)
+{
+
+	if (camera.position.y > 10 )
+	{
+		JumpDirection = false;
+	}
+
+	if (JumpDirection == true && JumpState == true)
+	{
+		camera.target.y += (double)(12 * dt);
+		camera.targetwhere.y += (double)(12 * dt);
+		camera.position.y += (double)(12 * dt);
+	}
+
+	else if (JumpDirection == false && JumpState == true)
+	{
+		if ( camera.position.y > 6 )
+		{
+			camera.target.y -= (double)(12 * dt);
+			camera.targetwhere.y -= (double)(12 * dt);
+			camera.position.y -= (double)(12 * dt);
+		}
+		else if (camera.position.y < 7 )
+		{
+			JumpState = false;
+		}
+
+
 	}
 
 }

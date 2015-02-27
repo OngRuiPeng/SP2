@@ -216,6 +216,14 @@ public:
 	void RenderInventory();
 	void RenderPictureOnScreen(Mesh* mesh, float sizeX , float sizeY , float x, float y);
 
+	//update
+	void updateMainMenu();
+	void updateChooseMode();
+	void updateRoam();
+	void updateCheckOut();
+	void updateFun();
+
+	
 	//collision
 	bool AABBCheck(const Obj &box1,const Obj &box2);
 	void collisionprevent(vector <Obj> a ,Vector3 camerathing, vector <Obj> b );
@@ -228,6 +236,16 @@ public:
 
 	//Interactions and their other variables
 	void SlidingDoor(double);
+
+
+	double DoorSlide;
+
+	void Jump (double);
+	bool JumpDirection;
+	bool JumpState;
+	bool JumpSwitch;
+
+
 
 	bool PlaceItem ;
 	bool PickUpItem; 
@@ -253,11 +271,15 @@ public:
 	Obj box1 ;
 	Obj seewhere;
 
+
 	int ItemNo;
 
 	vector <CItem> ItemData;
 
 	//Npcs
+
+	//npcs
+
 	CNpc Cashier;
 	CNpc Guard;
 	CNpc Customer;
