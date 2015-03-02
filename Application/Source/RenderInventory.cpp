@@ -7,6 +7,8 @@ void SceneSP::RenderInventory()
 	glEnable(GL_BLEND);
 	glDisable(GL_DEPTH_TEST);
 
+	RenderTextOnScreen(meshList[GEO_MainMenuText],"+",Color(1,0,0),5,8.5,6);
+
 	/*modelStack.PushMatrix();
 	for(alpha = 0.0; alpha < 1.0; alpha += 0.05)
 	{
@@ -20,7 +22,7 @@ void SceneSP::RenderInventory()
 
 
 	modelStack.PushMatrix();
-	RenderPictureOnScreen(meshList[GEO_INVENTORY],45,5.5,0.9,0.5);
+	RenderPictureOnScreen(meshList[GEO_INVENTORY],47.5,5.5,0.872,0.5);
 	modelStack.PopMatrix();
 
 	for ( int x = 0 ; x < InventoryData.size() ; x++ )

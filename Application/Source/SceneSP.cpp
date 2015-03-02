@@ -17,16 +17,17 @@
 #include "Camera3.h"
 
 #include "windows.h"
-#pragma comment(lib, "irrKlang.lib")
 
 #include <sstream>
 #include <fstream>
 
 #define LSPEED 20.f 
-using namespace irrklang;
 
 ISoundEngine* engine = createIrrKlangDevice(ESOD_AUTO_DETECT,ESEO_MULTI_THREADED | ESEO_LOAD_PLUGINS | ESEO_USE_3D_BUFFERS);
-
+ISound* jump = engine->play2D("../irrKlang/media/Jump2.mp3", true,true);
+ISound* mainmenu = engine->play2D("../irrKlang/media/MMbutt.mp3", false,true);
+ISound* mainmenu2 = engine->play2D("../irrKlang/media/MMbutt.mp3", false,true);
+ISound* simlish = engine->play2D("../irrKlang/media/Simlishm.mp3", true,true);
 using namespace std;
 
 SceneSP::SceneSP()
@@ -884,13 +885,39 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 
 	if (Application::IsKeyPressed(VK_SPACE) && JumpState == false)
 	{
+		
 		JumpState = true;
 		JumpDirection = true;
 	}
-
+	else
+		jump->setIsPaused(true);
 	if (JumpState == true)
+	{
+		jump->setIsPaused(false); 
 		Jump(dt);
 
+	}
+	if(Application::IsKeyPressed('8'))
+	{
+		//SWITCH OFF
+		lights[0].power = 0.5;
+		glUniform1f(m_parameters[U_LIGHT0_POWER], lights[0].power);
+	}
+
+	if(Application::IsKeyPressed('9'))
+	{
+		//SWITCH OFF
+		lights[0].power = 0;
+		glUniform1f(m_parameters[U_LIGHT0_POWER], lights[0].power);
+	}
+
+	if(Application::IsKeyPressed('M'))
+	{
+		//SWITCH OFF
+		lights[1].power = 3;
+		glUniform1f(m_parameters[U_LIGHT1_POWER], lights[1].power);
+	}
+	
 
 	if(Application::IsKeyPressed('Z'))
 	{
@@ -910,40 +937,47 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		int state = glfwGetMouseButton(m_window, GLFW_MOUSE_BUTTON_LEFT); // check for clicks
 		if( state == GLFW_PRESS && (*xposition > 285 && *xposition < 515 && *yposition > 185 && *yposition < 263) )
 		{
+			mainmenu->setIsPaused(false);
 			gamestate = CHOOSEMODE;
 		}
-		if( state == GLFW_PRESS && (*xposition > 285 && *xposition < 515 && *yposition > 308 && *yposition < 383) )
+		else if( state == GLFW_PRESS && (*xposition > 285 && *xposition < 515 && *yposition > 308 && *yposition < 383) )
 		{
+			mainmenu->setIsPaused(false);
 			exit(0);
 		}
 
 	}
-
 	if ( gamestate == CHOOSEMODE )
 	{
+		mainmenu->setPlaybackSpeed(1.f);
 		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL); //enable cursor
 		/*camera.Update(dt, w / 2, h / 2, &xpos, &ypos);*/
 		int state = glfwGetMouseButton(m_window, GLFW_MOUSE_BUTTON_LEFT); // check for clicks
 		if( state == GLFW_PRESS && (*xposition > 54 && *xposition < 285 && *yposition > 101 && *yposition < 179))
 		{
+
+			mainmenu2->setIsPaused(false);
 			gamestate = GAMEROAM;
 			xpos = w / 2;
 			ypos = h / 2;
 		}
-		if( state == GLFW_PRESS && (*xposition > 54 && *xposition < 285 && *yposition > 221 && *yposition < 279))
+		else if( state == GLFW_PRESS && (*xposition > 54 && *xposition < 285 && *yposition > 221 && *yposition < 279))
 		{
+			mainmenu2->setIsPaused(false);
 			gamestate =	GAMECHECKOUT;
 			xpos = w / 2;
 			ypos = h / 2;
 		}
-		if( state == GLFW_PRESS && (*xposition > 54 && *xposition < 285 && *yposition > 341 && *yposition < 419))
+		else if( state == GLFW_PRESS && (*xposition > 54 && *xposition < 285 && *yposition > 341 && *yposition < 419))
 		{
+			mainmenu2->setIsPaused(false);
 			gamestate = GAMETHIEF;
 			xpos = w / 2;
 			ypos = h / 2;
 		}
-		if( state == GLFW_PRESS && (*xposition > 54 && *xposition < 285 && *yposition > 466 && *yposition < 544))
+		else if( state == GLFW_PRESS && (*xposition > 54 && *xposition < 285 && *yposition > 466 && *yposition < 544))
 		{
+			mainmenu2->setIsPaused(false);
 			gamestate = GAMEFUN;
 			xpos = w / 2;
 			ypos = h / 2;
@@ -996,6 +1030,8 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	//Talking with NPCs & door
 	if(Application::IsKeyPressed('E') && interactmah == true )
 	{
+		simlish->setIsPaused(false);
+
 		if ( NoInteractableTargetcollision() == 5 || NoInteractableTargetcollision() == 6 ) // Cashier
 		{
 			time = 0;
@@ -1035,6 +1071,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 				CashierText = false;
 			}
 		}
+		
 		if ( NoInteractableTargetcollision() == 11 && toiletDoor == false && time > 1)
 		{
 			toiletDoor = true;
@@ -1059,6 +1096,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 			securityDoorMove = 0;
 			time = 0;
 		}
+		simlish->setIsPaused(true);
 	}
 
 	//Conveyor belt @ cashier
@@ -1191,23 +1229,29 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	right.Normalize();
 	camera.up = right.Cross(view).Normalized();
 	engine->setListenerPosition(vec3df(camera.position.x,camera.position.y,camera.position.z),vec3df(view.x,view.y,view.z),vec3df(0,0,0),vec3df(-camera.up.x,-camera.up.y,-camera.up.z));
+	//engine->setListenerPosition(vec3df(camera.position.x,camera.position.y,camera.position.z),vec3df(view.x,view.y,view.z),vec3df(0,0,0),vec3df(-camera.up.x,-camera.up.y,-camera.up.z));
+
+	cout << camera.position.x << " " << camera.position.y << " " << camera.position.z << endl;
+
 }
 
 int SceneSP::Renderirr()
 {
+
+	Vector3 view = (camera.target - camera.position).Normalized();
 	if(!engine)
 	{
 		return 0;
 	}
 
-	ISound* sound = engine->play3D("../irrKlang/media/icejj.mp3",vec3df(0.f,0.f,0.f), false);
+	ISound* sound = engine->play3D("../irrKlang/media/icejj.mp3",vec3df(0.f,0.f,20.f), false);
 
 	if(sound)
 	{
 		engine->setDefault3DSoundMaxDistance(1000000000.f);
 		sound->setMinDistance(0.f);
 	}
-
+	engine->setListenerPosition(vec3df(camera.position.x,camera.position.y,camera.position.z),vec3df(view.x,view.y,view.z),vec3df(0,0,0),vec3df(-camera.up.x,-camera.up.y,-camera.up.z));
 	return 0;
 }
 void SceneSP::Render()

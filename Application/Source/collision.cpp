@@ -1,5 +1,7 @@
 #include "SceneSP.h"
 #include "Application.h"
+ISoundEngine* walk = createIrrKlangDevice(ESOD_AUTO_DETECT,ESEO_MULTI_THREADED | ESEO_LOAD_PLUGINS | ESEO_USE_3D_BUFFERS);
+ISound* sound = walk->play2D("../irrKlang/media/walkm2.mp3", true,true);
 
 bool SceneSP::AABBCheck(const Obj &box1,const Obj &box2)
 {
@@ -85,10 +87,21 @@ void SceneSP::updatecollision(double dt)
 	float MOVE_SPEED = 20.0f;
 
 	updateobj();
-
+	
 	if (Application::IsKeyPressed('W') && gamestate != MAINMENU && gamestate != CHOOSEMODE) 
 	{
+		
+		walk->setAllSoundsPaused(false);
 
+	
+	
+	if(sound)
+		{
+			//walk->setDefault3DSoundMaxDistance(1000000000.f);
+			sound->setMinDistance(0.f);
+		}
+			
+		
 		Vector3 view = (camera.target - camera.position).Normalize();
 		view.y = 0;
 		Vector3 precollide = view * dt * MOVE_SPEED; // if it moved it will be here 
@@ -124,7 +137,10 @@ void SceneSP::updatecollision(double dt)
 
 		collisionprevent(OBJ,left,Interactables);
 	}
-
+	else
+	{
+		walk->setAllSoundsPaused(true);
+	}
 	NoItemTargetcollision();
 	InteractableTargetcollision();
 

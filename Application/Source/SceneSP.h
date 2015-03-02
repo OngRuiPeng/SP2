@@ -17,9 +17,11 @@
 #include "timer.h"
 #include "Item.h"
 //Music include
-
+#pragma comment(lib, "irrKlang.lib")
+using namespace irrklang;
 using namespace std;
 
+static float pop;
 class SceneSP : public Scene
 {
 	enum GEOMETRY_TYPE
@@ -389,6 +391,7 @@ public:
 	double* yposition;
 	
 	bool music;
+	bool walkm;
 
 private:
 	unsigned m_vertexArrayID;
