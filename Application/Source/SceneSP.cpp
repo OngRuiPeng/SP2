@@ -400,6 +400,10 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	WhichCashier = 0 ;
 	Deletemah = false;
 
+	// security guard
+
+	Caught = false;
+
 	Mtx44 projection;
 	projection.SetToPerspective(45.0f,4.0f/3.0f, 0.01f, 100000.0f);
 	projectionStack.LoadMatrix(projection);
@@ -706,6 +710,9 @@ void SceneSP::collisionInteractionsinit()
 	box1.set(Vector3(-10.5,20,1.5),Vector3(-13.5,0,-1.5)); // security guard     7
 	Interactables.push_back(box1);
 
+	box1.set(Vector3(-8.5,20,2),Vector3(-15.5,0,-3.5)); // security guard warning BB
+	NpcBB.push_back(box1);
+
 	box1.set(Vector3(6.5,20,26.5),Vector3(3.5,0,23.5)); // customer     8 
 	Interactables.push_back(box1);
 
@@ -715,16 +722,16 @@ void SceneSP::collisionInteractionsinit()
 	box1.set(Vector3(47.5,20,-28.5),Vector3(43.5,0,-31.5)); // passerb2     10 
 	Interactables.push_back(box1);
 
-	box1.set(Vector3(23,20,38.5),Vector3(17.8,0,36.8)); // toiletdoor
+	box1.set(Vector3(23,20,38.5),Vector3(17.8,0,36.8)); // toiletdoor 11
 	Interactables.push_back(box1);
 
-	box1.set(Vector3(-10.7,20,39),Vector3(-16,0,36.8)); // security room door
+	box1.set(Vector3(-10.7,20,39),Vector3(-16,0,36.8)); // security room door 12
 	Interactables.push_back(box1);
 
-	box1.set(Vector3(15,4,13),Vector3(12,0,4)); // right cashier conveyor 11 
+	box1.set(Vector3(15,4,13),Vector3(12,0,4)); // right cashier conveyor 13 
 	Interactables.push_back(box1);
 
-	box1.set(Vector3(24.5,4,13),Vector3(21,0,4)); // left cashier conveyor 12 
+	box1.set(Vector3(24.5,4,13),Vector3(21,0,4)); // left cashier conveyor 14 
 	Interactables.push_back(box1);
 }
 
@@ -1115,9 +1122,9 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 
 	if ( Application::IsKeyPressed('V'))
 	{
-		for ( int x = 0; x < InventoryData.size() ; x++ )
+		for ( int x = 0; x < CheckoutList.size() ; x++ )
 		{
-			cout << InventoryData[x].getItemName() << " " << InventoryData[x].getItemCount() << endl;
+			cout << CheckoutList[x].getItemName() << " " << CheckoutList[x].getItemCount() << endl;
 		}
 	}
 
@@ -1132,6 +1139,8 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	right.Normalize();
 	camera.up = right.Cross(view).Normalized();
 	engine->setListenerPosition(vec3df(camera.position.x,camera.position.y,camera.position.z),vec3df(view.x,view.y,view.z),vec3df(0,0,0),vec3df(-camera.up.x,-camera.up.y,-camera.up.z));
+
+	cout << camera.position.x << " " << camera.position.y << " " << camera.position.z << endl;
 
 }
 
@@ -1242,6 +1251,9 @@ void SceneSP::Render()
 			RenderTextOnScreen(meshList[GEO_MainMenuText], ItemData[ItemNo].getItemName() , (1, 0, 1),2.5, 2, 20);
 			RenderTextOnScreen(meshList[GEO_MainMenuText], ItemData[ItemNo].getItemDesc() , (1, 0, 1),2.5, 2, 19);
 		}
+
+		if ( Caught == true ) 
+			RenderTextOnScreen(meshList[GEO_MainMenuText], "You have been caught", (1, 0, 1),2.5, 5, 16);
 
 	}
 }

@@ -14,7 +14,7 @@ public:
 
 	CItem(string Name,string Desc,int counter);
 
-	void Set(string Name,string Desc);
+	void Set(string Name,string Desc, int counter);
 
 	void setItemName(string Name);
 	void setItemDesc(string Desc);

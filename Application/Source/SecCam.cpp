@@ -38,12 +38,26 @@ void SceneSP::updateCam(double dt)
 	{
 		cam_state = (cam_state - 1 ) % 6 ;
 		CamTime = 0 ;
+
+		if ( cam_state == CAM5 )
+		{
+		camera.target = Vector3(0,6,-31);
+		}
+		else
+		camera.target = Vector3(4,6,21);
 	}
 
 	if (Application::IsKeyPressed('N') && CamTime > 1 )
 	{
 		cam_state = (cam_state + 1 ) % 6 ;
 		CamTime = 0 ;
+		
+		if ( cam_state == CAM5 )
+		{
+		camera.target = Vector3(0,6,-31);
+		}
+		else
+		camera.target = Vector3(4,6,21);
 	}
 
 }

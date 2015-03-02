@@ -138,6 +138,7 @@ void SceneSP::updateobj()
 	Interactables[0].set(Vector3(10 - DoorSlide * 2 + 0.75 ,20,-5.5),Vector3(0.5 - DoorSlide * 2 + 0.75,0,-7.5));
 	Interactables[1].set(Vector3(1 + DoorSlide * 2 + 0.75 ,20,-5.5),Vector3(-8 + DoorSlide * 2 + 0.75 ,0,-7.5));
 
+
 		if ( toiletDoor == false )
 	{
 		Interactables[11].set(Vector3(23,20,38.5),Vector3(17.8,0,36.8));
@@ -154,6 +155,14 @@ void SceneSP::updateobj()
 	{
 		Interactables[12].set(Vector3(-11.5,20,42.7),Vector3(-12.4,0,37.2));
 	}
+
+	// thief mode
+	if (AABBCheck(OBJ[0],NpcBB[0])) // Security guard's range
+		Caught = true;
+	else
+		Caught = false;
+
+
 }
 
 Obj SceneSP::ItemTargetcollision() // returns the item that the target has collided with ( Obj format)
