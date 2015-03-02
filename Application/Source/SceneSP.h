@@ -214,18 +214,14 @@ public:
 	virtual void Render();
 	virtual void Exit();
 	float translateX;
-	float rotateAngle2;
-	float rotateAngle3;
-	float rotatedoor;
-	float scaleAll;
-	float scalekirby;
 	int gamestate;
 	Camera3 camera;	
 	
 	//Functions---------------------------------------
 	void initSkybox();
 	void initSupermarket();
-	
+	void initNPC();
+
 	//Render
 	void RenderMesh(Mesh *mesh, bool enableLight);
 	void RenderText(Mesh* mesh, std::string text, Color color);
@@ -241,16 +237,7 @@ public:
 	void RenderPictureOnScreen(Mesh* mesh, float sizeX , float sizeY , float x, float y);
 	void RenderTapWater();
 	void RenderFlush();
-
-
 	int Renderirr();
-	//update
-	void updateMainMenu();
-	void updateChooseMode();
-	void updateRoam();
-	void updateCheckOut();
-	void updateFun();
-
 	
 	//collision
 	bool AABBCheck(const Obj &box1,const Obj &box2);
@@ -262,10 +249,20 @@ public:
 	void updatecollision(double dt);
 	void updateobj();
 
+	vector <Obj> OBJ ;
+	vector <Obj> Items ;
+	vector <Obj> Interactables ;
+
+	Obj box1 ;
+	Obj seewhere;
+
+
+	int ItemNo;
+
+	vector <CItem> ItemData;
+
 	//Interactions and their other variables
 	void SlidingDoor(double);
-
-
 	double DoorSlide;
 
 	void Jump (double);
@@ -281,35 +278,33 @@ public:
 	bool PickUpItem; 
 	bool interactmah;
 	bool DetectorsOn;
+	bool toiletDoor;
+	bool securityDoor;
+
+	float toiletDoorMove;
+	float securityDoorMove;
 
 	float DoorSlideL; // Variable to move left door
 	float DoorSlideR; // Variable to move right door
 	bool inSupermarket; // Variable to check whether player is in the supermarket
+
+	//Npc movement
+	float Passerby2Left;
+	float Passerby2Right;
+	float Passerby2Dist;
 
 	//NPC interactions, // Variable to check whether NPC is interacted with
 	bool CashierText;  
 	bool SecurityText; 
 	bool CustomerText; 
 
-	double time; // timer
+	//timer
+	double time; 
+
 	//Collision
+	
 
-	vector <Obj> OBJ ;
-	vector <Obj> Items ;
-	vector <Obj> Interactables ;
-
-	Obj box1 ;
-	Obj seewhere;
-
-
-	int ItemNo;
-
-	vector <CItem> ItemData;
-
-	//Npcs
-
-	//npcs
-
+	//NPC
 	CNpc Cashier;
 	CNpc Guard;
 	CNpc Customer;

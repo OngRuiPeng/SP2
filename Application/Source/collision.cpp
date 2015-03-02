@@ -137,6 +137,23 @@ void SceneSP::updateobj()
 
 	Interactables[0].set(Vector3(10 - DoorSlide * 2 + 0.75 ,20,-5.5),Vector3(0.5 - DoorSlide * 2 + 0.75,0,-7.5));
 	Interactables[1].set(Vector3(1 + DoorSlide * 2 + 0.75 ,20,-5.5),Vector3(-8 + DoorSlide * 2 + 0.75 ,0,-7.5));
+
+		if ( toiletDoor == false )
+	{
+		Interactables[11].set(Vector3(23,20,38.5),Vector3(17.8,0,36.8));
+	}
+	if ( toiletDoor == true )
+	{
+		Interactables[11].set(Vector3(18.6,20,41.3),Vector3(17,0,37.7));
+	}
+	if ( securityDoor == false )
+	{
+		Interactables[12].set(Vector3(-10.7,20,39.0),Vector3(-16.0,0,36.8));
+	}
+	if ( securityDoor == true )
+	{
+		Interactables[12].set(Vector3(-11.5,20,42.7),Vector3(-12.4,0,37.2));
+	}
 }
 
 Obj SceneSP::ItemTargetcollision() // returns the item that the target has collided with ( Obj format)

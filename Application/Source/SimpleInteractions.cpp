@@ -57,11 +57,11 @@ void SceneSP::Jump (double dt)
 void SceneSP::updateItemSlide(double dt, int a )
 {
 	// to see which cashier table to render
-	if ( a == 11 ) 
+	if ( a == 13 ) 
 	{
 		translateItemX = 0 ;
 	}
-	else if ( a == 12 )
+	else if ( a == 14 )
 	{
 		translateItemX = 9 ; 
 	}

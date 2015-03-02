@@ -26,6 +26,10 @@ string CNpc::getName(void)
 	return name;
 }
 
+string CNpc::getType(void)
+{
+	return type;
+}
 string CNpc::CashierWelcome(void)
 {
 	return "Welcome to J Mart";
@@ -38,26 +42,10 @@ string CNpc::CashierLeave(void)
 
 string CNpc::CSpeech(void)
 {
-	int temp = rand() % 2;
-	if ( temp == 1 )
-	{
-		return "Hello";
-	}
-	else
-	{
-		return "Fine day";
-	}
+	return "Hello";
 }
 
 string CNpc::SSpeech(void)
 {
-	int temp = rand() % 2;
-	if ( temp == 1 )
-	{
-		return "What ya looking at?";
-	}
-	else
-	{
-		return "I got my eyes on you";
-	}
+	return "What ya looking at?";
 }
