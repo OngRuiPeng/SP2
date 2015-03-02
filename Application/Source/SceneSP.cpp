@@ -1109,7 +1109,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	{
 		CashierText = false;
 	}
-	if ( time > 2 && SecurityText == true)
+	if ( time > 2 && SecurityText == true)	
 	{
 		SecurityText = false;
 	}
