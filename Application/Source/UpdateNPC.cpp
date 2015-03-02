@@ -2,7 +2,11 @@
 
 bool PB2LForward = true;
 bool PB2RForward = false;
-float WalkingSpeed = 100.f;
+
+bool CashROn = false;
+
+float WalkingSpeed = 50.f;
+float limit = 30;
 void SceneSP::UpdateNPC(double dt)
 {
 	//Passerby2
@@ -43,6 +47,7 @@ void SceneSP::UpdateNPC(double dt)
 	{
 		Passerby2Dist = 0;
 	}
+
 
 	//Passerby1
 	Obj PB(PBPos + Vector3(1,20,1),PBPos - Vector3(1,4,1)); 
@@ -203,6 +208,32 @@ void SceneSP::UpdateSG(double dt)
 		}
 
 		InitSGOnce = true;
+	}
+
+
+	UpdateCustomer(dt);
+}
+
+void SceneSP::UpdateCustomer(double dt)
+{
+	if (StareEnd == true)
+	{
+		if ( CashROn == true )
+		{
+			CashRight += (WalkingSpeed * dt);
+			if ( CashRight > limit )
+			{
+				CashROn = false;
+			}
+		}
+		else
+		{
+			CashRight -= (WalkingSpeed * dt);
+			if ( CashRight < -limit )
+			{
+				CashROn = true;
+			}
+		}
 	}
 
 }

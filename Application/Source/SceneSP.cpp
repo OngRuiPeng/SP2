@@ -365,6 +365,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	Passerby2Left = 0;
 	Passerby2Right = 0;
 	Passerby2Dist = 0;
+
 	
 	// security guard
 	SGPos = Vector3(-12,4,0);
@@ -390,6 +391,12 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	InitPBOnce = false;
 	MovePBLegs = true;
 	MovePBLegsOrNot = false;
+
+	//Customer
+	CashRight = 0;
+	StareEnd = false;
+
+
 	//**********************************************************   collisions 
 	box1.set(camera.position + Vector3(1,1,1),camera.position - Vector3(1,1,1));
 	OBJ.push_back(box1);
@@ -414,6 +421,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	nullthis.Set("lol","",0); 
 	InventoryData.push_back(nullthis);
 	CheckoutList.push_back(nullthis);
+	
 
 	// cashier slider init
 
@@ -752,6 +760,9 @@ void SceneSP::collisionInteractionsinit()
 
 	box1.set(Vector3(24.5,4,13),Vector3(21,0,4)); // left cashier conveyor 14 
 	Interactables.push_back(box1);
+
+	box1.set(Vector3(-15,8,49),Vector3(-16,6,46)); // switch 15 
+	Interactables.push_back(box1);
 }
 
 void SceneSP::initSkybox()
@@ -848,7 +859,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	yposition = &ypos;
 
 	FPS = 1.0 / dt ; 
-
+	UpdateNPC(dt);
 	if(Application::IsKeyPressed('1'))
 	{
 		glEnable(GL_CULL_FACE);
@@ -880,27 +891,6 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	if (JumpState == true)
 		Jump(dt);
 
-	if(Application::IsKeyPressed('8'))
-	{
-		//SWITCH OFF
-		lights[0].power = 0.5;
-		glUniform1f(m_parameters[U_LIGHT0_POWER], lights[0].power);
-	}
-
-	if(Application::IsKeyPressed('9'))
-	{
-		//SWITCH OFF
-		lights[0].power = 0;
-		glUniform1f(m_parameters[U_LIGHT0_POWER], lights[0].power);
-	}
-
-	if(Application::IsKeyPressed('M'))
-	{
-		//SWITCH OFF
-		lights[1].power = 3;
-		glUniform1f(m_parameters[U_LIGHT1_POWER], lights[1].power);
-	}
-	
 
 	if(Application::IsKeyPressed('Z'))
 	{
@@ -1072,16 +1062,20 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		WhichCashier = NoInteractableTargetcollision();
 	}
 	//Toilet
-	if(Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 2 && TapSwitch == false && TapTurn == false) //Tap water switch on
+	if(Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 2) //Tap water switch on
 	{
-		TapSwitch = true;
-		TapTurn = true;
+		if (TapSwitch == false && TapTurn == false)
+		{
+			TapSwitch = true;
+			TapTurn = true;
+		}
+		
+		if (TapTurn == true)
+		{
+			TapTurn = false;
+		}
 	}
-	if(Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 2 && TapSwitch == true && TapTurn == true) //Tap water switch off
-	{
-		TapTurn = false;
-	}
-	
+	cout << TapSwitch << endl;
 	if(Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 3  && Flush == false ) //Flush On
 	{
 		Flush = true;
@@ -1148,6 +1142,31 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	if (ItemSlide == true)
 		updateItemSlide(dt,WhichCashier);
 
+	
+	if (Application::IsKeyPressed('L'))
+	{
+		StareEnd = true;
+	}
+
+	if (Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 15)
+	{
+		//SWITCH OFF
+		lights[0].power = 0;
+		glUniform1f(m_parameters[U_LIGHT0_POWER], lights[0].power);
+
+		lights[1].power = 0;
+		glUniform1f(m_parameters[U_LIGHT1_POWER], lights[1].power);
+	}
+
+	if (Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 15 && lights[0].power == 0 && lights[1].power == 0)
+	{
+		lights[0].power = 0.5;
+		glUniform1f(m_parameters[U_LIGHT0_POWER], lights[0].power);
+
+		lights[1].power = 2;
+		glUniform1f(m_parameters[U_LIGHT1_POWER], lights[1].power);
+	}
+	
 	UpdateSG(dt);
 	UpdateNPC(dt);
 	time += dt;
@@ -1210,6 +1229,26 @@ void SceneSP::Render()
 		Position lightPosition_cameraspace = viewStack.Top() * lights[0].position;
 		glUniform3fv(m_parameters[U_LIGHT0_POSITION], 1, &lightPosition_cameraspace.x);
 	}
+
+	if(lights[1].type == Light::LIGHT_DIRECTIONAL)
+	{
+		Vector3 lightDir(lights[1].position.x, lights[1].position.y, lights[1].position.z);
+		Vector3 lightDirection_cameraspace = viewStack.Top() * lightDir;
+		glUniform3fv(m_parameters[U_LIGHT1_POSITION], 1, &lightDirection_cameraspace.x);
+	}
+	else if(lights[1].type == Light::LIGHT_SPOT)
+	{
+		Position lightPosition_cameraspace = viewStack.Top() * lights[1].position;
+		glUniform3fv(m_parameters[U_LIGHT1_POSITION], 1, &lightPosition_cameraspace.x);
+		Vector3 spotDirection_cameraspace = viewStack.Top() * lights[1].spotDirection;
+		glUniform3fv(m_parameters[U_LIGHT1_SPOTDIRECTION], 1, &spotDirection_cameraspace.x);
+	}
+	else if(lights[1].type == Light::LIGHT_POINT)
+	{
+		Position lightPosition_cameraspace = viewStack.Top() * lights[1].position;
+		glUniform3fv(m_parameters[U_LIGHT1_POSITION], 1, &lightPosition_cameraspace.x);
+	}
+
 
 	if ( gamestate == MAINMENU )
 	{

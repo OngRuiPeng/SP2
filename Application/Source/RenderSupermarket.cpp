@@ -289,6 +289,7 @@ void SceneSP::RenderTapWater()
 	if (sinkUp < 1.1)
 	{
 		TapSwitch = false;
+		TapTurn = false;
 	}
 
 	if (TapSwitch == true && TapTurn == true)

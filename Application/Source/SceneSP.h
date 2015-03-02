@@ -239,7 +239,8 @@ public:
 	void RenderFlush();
 	int Renderirr();
 	
-	void UpdateNPC(double dt);
+	void UpdateNPC(double);
+	void UpdateCustomer(double);
 	//collision
 	bool AABBCheck(const Obj &box1,const Obj &box2);
 	void collisionprevent(vector <Obj> a ,Vector3 camerathing, vector <Obj> b );
@@ -261,6 +262,9 @@ public:
 	int ItemNo;
 
 	vector <CItem> ItemData;
+
+	
+
 
 	//Interactions and their other variables
 	void SlidingDoor(double);
@@ -301,7 +305,8 @@ public:
 	float Passerby2Right;
 	float Passerby2Dist;
 
-
+	float CashRight;
+	bool StareEnd;
 	//NPC interactions, // Variable to check whether NPC is interacted with
 	bool CashierText;  
 	bool SecurityText; 
