@@ -1042,24 +1042,20 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		}
 		if ( NoInteractableTargetcollision() == 12 && securityDoor == true && time > 1)
 		{
-			securityDoor = true;
+			securityDoor = false;
 			securityDoorMove = 0;
 			time = 0;
 		}
 	}
 
+	//Conveyor belt @ cashier
 	if ( Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 13 && InventoryData[0].getItemCount() != 0 && ItemSlide == false || Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 14 && InventoryData[0].getItemCount() != 0 && ItemSlide == false )
 	{
 		ItemSlide = true;
 		Deletemah = true;
 		WhichCashier = NoInteractableTargetcollision();
 	}
-
-	if(Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 4 && ChooseWhich == false) 
-	{
-		ChooseWhich = true;
-	}
-
+	//Toilet
 	if(Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 2 && TapSwitch == false && TapTurn == false) //Tap water switch on
 	{
 		TapSwitch = true;
@@ -1078,9 +1074,15 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	}
 
 	//Control panel
-	if(Application::IsKeyPressed('E') && ChooseWhich == true ) // deactivate detectors
+	if(Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 4 && ChooseWhich == false && gamestate != GAMEROAM) 
+	{
+		ChooseWhich = true;
+	}
+
+	if(Application::IsKeyPressed('G') && ChooseWhich == true && gamestate == GAMETHIEF) // choose to deactivate detectors
 	{
 		DetectorsOn = false;
+		ChooseWhich = false;
 	}
 
 	if (Application::IsKeyPressed('T') && ChooseWhich == true ) // choose to escape 
@@ -1104,7 +1106,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	{
 		updateCam(dt);
 	}
-
+	//Timer for NPC text
 	if ( time > 2 && CashierText == true)
 	{
 		CashierText = false;
@@ -1132,6 +1134,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		updateItemSlide(dt,WhichCashier);
 
 	time += dt;
+
 	//irrKlang
 	Vector3 view = (camera.target - camera.position).Normalized();
 	Vector3 right = view.Cross(camera.up);
@@ -1139,9 +1142,6 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	right.Normalize();
 	camera.up = right.Cross(view).Normalized();
 	engine->setListenerPosition(vec3df(camera.position.x,camera.position.y,camera.position.z),vec3df(view.x,view.y,view.z),vec3df(0,0,0),vec3df(-camera.up.x,-camera.up.y,-camera.up.z));
-
-	cout << camera.position.x << " " << camera.position.y << " " << camera.position.z << endl;
-
 }
 
 int SceneSP::Renderirr()
@@ -1217,16 +1217,17 @@ void SceneSP::Render()
 
 		if ( ChooseWhich == true ) 
 		{
-			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press C to use camera", (1, 0, 1),2.5, 5, 4);
-			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press SuiBian to use camera", (1, 0, 1),2.5, 5, 6);
-			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press T to escape", (1, 0, 1),2.5, 5, 5);
+			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press C to use camera", (1, 0, 1),2, 5, 4);
+			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press G to deactivate detectors", (1, 0, 1),2, 5, 6);
+			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press T to escape", (1, 0, 1),2, 5, 5);
 		}
 		if ( PickUpItem == true ) 
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press E to pick up item", (1, 0, 1),2.5, 5, 4);
 
 		if ( cam_state != NORMAL ) 
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press N for next , Y for previous", (0, 1, 0),2, 3, 4);
-
+		if ( DetectorsOn == false)
+			RenderTextOnScreen(meshList[GEO_MainMenuText], "Detectors successfully deactivated", (0, 1, 0), 2, 3, 25);
 		if ( PlaceItem == true ) 
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press Q to put back item", (1, 0, 1),2.5, 5, 4);
 
