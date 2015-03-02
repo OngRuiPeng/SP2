@@ -19,6 +19,9 @@
 #include "windows.h"
 #pragma comment(lib, "irrKlang.lib")
 
+#include <sstream>
+#include <fstream>
+
 #define LSPEED 20.f 
 using namespace irrklang;
 
@@ -409,27 +412,24 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	collisionITEMSinit();
 	collisionInteractionsinit();
 
+	//************ Camera
+
 	SecurityCam = false;
 	cam_state = NORMAL;
 	CamTime = 0 ;
 
 	ChooseWhich = false ;
 
-	CItem reditos("Reditos" , "red color lai de",0); ItemData.push_back(reditos);
-	CItem campbella("Campbella" , " campmes" ,0); ItemData.push_back(campbella);
-	CItem toblerone("Toblerone" ,  " sadsad " ,0 ); ItemData.push_back(toblerone);
-	CItem dewtos("Dewtos" , "sadadsasd" ,0); ItemData.push_back(dewtos);
-	CItem pizza("Pizza" , "asdasddsadsad" ,0); ItemData.push_back(pizza);
-	CItem cactus("Cactus juice" , "1254321532" ,0); ItemData.push_back(cactus);
-	CItem chicken("Chicken soup" ,  "sadsadsad" ,0); ItemData.push_back(chicken);
-	CItem maggi("Maggie mien" ,  "sadsafgew" ,0); ItemData.push_back(maggi);
-	CItem macaroni("Macaroni" ,  "sadsadsadsada" ,0); ItemData.push_back(macaroni);
+	// Items init 
+	InitItemData();
 
 	ItemNo = 0;
 
 	nullthis.Set("lol","",0); 
 	InventoryData.push_back(nullthis);
 	CheckoutList.push_back(nullthis);
+
+	// cashier slider init
 
 	ItemSlide = false;
 	translateItemZ = 0 ;
@@ -442,6 +442,32 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	projectionStack.LoadMatrix(projection);
 
 	music = false;
+}
+
+void SceneSP::InitItemData()
+{
+	ifstream datafile;
+	string line;
+
+	string name , description ;
+	int counter = 0 ;
+
+	datafile.open("ItemData.txt");
+
+	if(datafile.is_open() )
+	{ 
+
+		while (!datafile.eof())
+		{
+			getline(datafile, name, ',');
+			getline(datafile, description);
+
+			CItem newitem(name, description , 0 ) ;
+			ItemData.push_back(newitem);
+		}
+
+		datafile.close();
+	}
 }
 
 void SceneSP::collisionOBJinit()
@@ -1013,7 +1039,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	{
 		for ( int x = 0; x < CheckoutList.size() ; x++ )
 		{
-			cout << CheckoutList[x].getItemName() << " " << CheckoutList[x].getItemCount() << endl;
+			cout << CheckoutList[x].getItemName() << endl;
 		}
 	}
 

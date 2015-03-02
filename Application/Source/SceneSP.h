@@ -331,6 +331,7 @@ public:
 	int WhichMode ;
 
 	//Inventory 
+	void InitItemData();
 	void updateInventory( CItem a , bool b );
 	
 	vector <CItem> InventoryData;

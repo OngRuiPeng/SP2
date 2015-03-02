@@ -185,40 +185,6 @@ void SceneSP::RenderSupermarket()
 	RenderFlush();
 
 
-	
-	modelStack.PopMatrix();
-	//All pop
-}
-
-void SceneSP::RenderFlush()
-{
-	if (flushUp < -0.1)
-	{
-		FlushDir = false;
-	}
-
-	if (FlushDir == true && Flush == true)
-	{
-		flushUp -= 0.01;
-	}
-
-	else if (FlushDir == false && Flush == true)
-	{
-		if (flushUp < 0.7)
-		{
-			flushUp += 0.01;
-		}
-		else if (flushUp > 0.7)
-		{
-			Flush = false;
-		}
-	}
-	
-
-
-}
-
-
 	if ( whichItem.getItemName() == "Reditos" )
 	{
 		modelStack.PushMatrix();
@@ -284,10 +250,37 @@ void SceneSP::RenderFlush()
 	}
 
 
-
-
+	
 	modelStack.PopMatrix();
 	//All pop
+}
+
+void SceneSP::RenderFlush()
+{
+	if (flushUp < -0.1)
+	{
+		FlushDir = false;
+	}
+
+	if (FlushDir == true && Flush == true)
+	{
+		flushUp -= 0.01;
+	}
+
+	else if (FlushDir == false && Flush == true)
+	{
+		if (flushUp < 0.7)
+		{
+			flushUp += 0.01;
+		}
+		else if (flushUp > 0.7)
+		{
+			Flush = false;
+		}
+	}
+	
+
 
 }
+
 
