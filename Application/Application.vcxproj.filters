@@ -24,15 +24,18 @@
     <Filter Include="Source Files\RenderStuff">
       <UniqueIdentifier>{f771c58d-89f8-46a2-9c12-5bebf5a86f23}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\collision">
+      <UniqueIdentifier>{f2cca407-0a59-4c24-9fcb-3d3598791561}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\collision">
+      <UniqueIdentifier>{2ab37465-ee67-4b37-9d8c-734b1b6d5e34}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp">
       <Filter>Source Files\Others</Filter>
     </ClCompile>
     <ClCompile Include="Source\Camera.cpp">
-      <Filter>Source Files\Others</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Camera2.cpp">
       <Filter>Source Files\Others</Filter>
     </ClCompile>
     <ClCompile Include="Source\Camera3.cpp">
@@ -77,6 +80,39 @@
     <ClCompile Include="Source\RenderSupermarket.cpp">
       <Filter>Source Files\RenderStuff</Filter>
     </ClCompile>
+    <ClCompile Include="Source\collision.cpp">
+      <Filter>Source Files\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Obj.cpp">
+      <Filter>Source Files\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RenderChooseMode.cpp">
+      <Filter>Source Files\RenderStuff</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RenderInteractableObjs.cpp">
+      <Filter>Source Files\RenderStuff</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RenderPacks.cpp">
+      <Filter>Source Files\RenderStuff</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Npc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SimpleInteractions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SecCam.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Item.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Inventory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RenderInventory.cpp">
+      <Filter>Source Files\RenderStuff</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -109,9 +145,6 @@
     <ClInclude Include="Source\Utility.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Camera2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\LoadTGA.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -123,6 +156,15 @@
     </ClInclude>
     <ClInclude Include="Source\SceneSP.h">
       <Filter>Header Files\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Obj.h">
+      <Filter>Header Files\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Npc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Item.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

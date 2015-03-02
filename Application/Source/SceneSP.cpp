@@ -1039,7 +1039,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	{
 		for ( int x = 0; x < CheckoutList.size() ; x++ )
 		{
-			cout << CheckoutList[x].getItemName() << endl;
+			cout << CheckoutList[x].getItemName() << " " << CheckoutList[x].getItemCount() << endl;
 		}
 	}
 
@@ -1059,7 +1059,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	right.y = 0;
 	right.Normalize();
 	camera.up = right.Cross(view).Normalized();
-	engine->setListenerPosition(vec3df(camera.position.x,camera.position.y,camera.position.z),vec3df(view.x,view.y,view.z),vec3df(0,0,0),vec3df(camera.up.x,camera.up.y,camera.up.z));
+	engine->setListenerPosition(vec3df(camera.position.x,camera.position.y,camera.position.z),vec3df(view.x,view.y,view.z),vec3df(0,0,0),vec3df(-camera.up.x,-camera.up.y,-camera.up.z));
 
 }
 
