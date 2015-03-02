@@ -15,6 +15,8 @@ public:
 	Obj();
 	~Obj();
 
+	Obj(Vector3 maximum , Vector3 minimum ) ;
+
 	void setEmpty(bool isit);
 
 	bool getEmpty();

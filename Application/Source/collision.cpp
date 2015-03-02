@@ -162,6 +162,9 @@ void SceneSP::updateobj()
 	else
 		Caught = false;
 
+	NpcBB[0].set(SGPos + Vector3(2,20,2),SGPos - Vector3(2,4,2));
+	Interactables[7].set(SGPos + Vector3(1.5,20,1.5),SGPos - Vector3(1.5,4,1.5));
+
 
 }
 

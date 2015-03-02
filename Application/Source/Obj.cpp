@@ -12,6 +12,12 @@ Obj::~Obj()
 {
 }
 
+Obj::Obj(Vector3 maximum , Vector3 minimum)
+{
+	max = maximum ; 
+	min = minimum ; 
+}
+
 void Obj::set(Vector3 maximum,Vector3 minimum)
 {
 	min = minimum; 

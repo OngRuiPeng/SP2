@@ -239,6 +239,7 @@ public:
 	void RenderFlush();
 	int Renderirr();
 	
+	void UpdateNPC(double dt);
 	//collision
 	bool AABBCheck(const Obj &box1,const Obj &box2);
 	void collisionprevent(vector <Obj> a ,Vector3 camerathing, vector <Obj> b );
@@ -308,9 +309,6 @@ public:
 	//timer
 	double time; 
 
-	
-	
-
 	//NPC
 	CNpc Cashier;
 	CNpc Guard;
@@ -352,7 +350,14 @@ public:
 
 	// Security guard 
 	bool Caught;
+	Vector3 SGPos;
+	Vector3 SGMov;
+	Vector3 SGTar;
 	vector <Obj> NpcBB ;
+	float securityStay;
+	int whichPoint;
+	bool InitSGOnce;
+	void UpdateSG(double dt) ;
 
 	void mouseInput(double* xpos, double* ypos);
 	double xpos;

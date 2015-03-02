@@ -366,6 +366,14 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	Passerby2Right = 0;
 	Passerby2Dist = 0;
 	
+	// security guard
+	SGPos = Vector3(-12,4,0);
+	SGMov = Vector3(0,0,0);
+	SGTar = Vector3(0,0,0);
+	Caught = false;
+	securityStay = 11 ;
+	whichPoint = 0 ;
+	InitSGOnce = false;
 
 	//**********************************************************   collisions 
 	box1.set(camera.position + Vector3(1,1,1),camera.position - Vector3(1,1,1));
@@ -399,10 +407,6 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	translateItemX = 0 ;
 	WhichCashier = 0 ;
 	Deletemah = false;
-
-	// security guard
-
-	Caught = false;
 
 	Mtx44 projection;
 	projection.SetToPerspective(45.0f,4.0f/3.0f, 0.01f, 100000.0f);
@@ -710,7 +714,7 @@ void SceneSP::collisionInteractionsinit()
 	box1.set(Vector3(-10.5,20,1.5),Vector3(-13.5,0,-1.5)); // security guard     7
 	Interactables.push_back(box1);
 
-	box1.set(Vector3(-8.5,20,2),Vector3(-15.5,0,-3.5)); // security guard warning BB
+	box1.set(Vector3(-8.5,20,3.5),Vector3(-15.5,0,-3.5)); // security guard warning BB
 	NpcBB.push_back(box1);
 
 	box1.set(Vector3(6.5,20,26.5),Vector3(3.5,0,23.5)); // customer     8 
@@ -1061,7 +1065,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		TapSwitch = true;
 		TapTurn = true;
 	}
-	cout << TapTurn << endl;
+
 	if(Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 2 && TapSwitch == true && TapTurn == true) //Tap water switch off
 	{
 		TapTurn = false;
@@ -1133,6 +1137,8 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	if (ItemSlide == true)
 		updateItemSlide(dt,WhichCashier);
 
+	UpdateSG(dt);
+	UpdateNPC(dt);
 	time += dt;
 
 	//irrKlang

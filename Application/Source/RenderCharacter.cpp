@@ -145,7 +145,7 @@ void SceneSP::RenderCharacter()
 
 	//Security Guard
 	modelStack.PushMatrix();
-	modelStack.Translate(-12, 4, 0);
+	modelStack.Translate(SGPos.x, SGPos.y, SGPos.z);
 	modelStack.Rotate(90, 0, 1, 0);
 	modelStack.Rotate(0, 0, 1, 0);
 	RenderMesh(meshList[GEO_SBODY], true);
