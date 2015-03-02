@@ -44,6 +44,89 @@ void SceneSP::UpdateNPC(double dt)
 		Passerby2Dist = 0;
 	}
 
+	//Passerby1
+	Obj PB(PBPos + Vector3(1,20,1),PBPos - Vector3(1,4,1)); 
+	Obj TarPB(PBTar + Vector3(1,20,1), PBTar - Vector3(1,4,1));
+
+	if ( InitPBOnce == true )
+	{
+		PBMov = PBTar - PBPos ; 
+		PBMov *= 0.1;
+		InitPBOnce = false;
+	}
+
+	if (AABBCheck(PB,TarPB)) 
+	{
+		PBStay += dt;
+		if ( PBPoint == 2 )
+		{
+			RotatePB = 90;
+		}
+		MovePBLegsOrNot = false;
+	}
+	else
+	{
+		if ( AABBCheck(OBJ[0],PB) == false )
+			PBPos += PBMov * dt  ; 
+		MovePBLegsOrNot = true; 
+	}
+
+	if ( MovePBLegsOrNot == true ) 
+	{
+		if ( MovePBLegs == true )
+		{
+			if ( RotatePBLegs > 45 )
+				MovePBLegs = false;
+			else
+			{
+				RotatePBLegs += (20 * dt);
+			}
+		}
+		else if ( MovePBLegs == false ) 
+		{ 
+			if ( RotatePBLegs < -45 )
+				MovePBLegs = true;
+			else
+				RotatePBLegs -= (20 * dt);
+		}
+	}
+
+	if (PBStay > 10 ) 
+	{
+		PBPoint = ( PBPoint + 1 ) % 5 ; 
+		PBStay = 0 ;
+
+		if ( PBPoint == 0 )
+		{
+			PBPos = Vector3(-45,4,-15);
+			PBTar = Vector3(-45, 4, -15);
+			RotatePB = 90;
+		}
+		if ( PBPoint == 1 )
+		{
+			PBTar = Vector3(-4,4,-15);
+			RotatePB = 90;
+			PBStay = 9;
+		}
+		if ( PBPoint == 2 )
+		{
+			PBTar = Vector3(-5,4,27);
+			RotatePB = 0;
+		}
+		if ( PBPoint == 3 )
+		{
+			PBTar = Vector3(-5,4,-16);
+			RotatePB = 0;
+			PBStay = 9;
+		}
+		if ( PBPoint == 4 )
+		{
+			PBTar = Vector3(45,4,-15);
+			RotatePB = 90;	
+		}
+		InitPBOnce = true;
+	}
+	
 }
 
 void SceneSP::UpdateSG(double dt)
@@ -55,7 +138,6 @@ void SceneSP::UpdateSG(double dt)
 	{
 		SGMov = SGTar - SGPos ; 
 		SGMov *= 0.1;
-
 		InitSGOnce = false;
 	}
 

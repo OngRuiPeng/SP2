@@ -135,11 +135,11 @@ void SceneSP::updateobj()
 	OBJ[0].max = camera.position + Vector3(1,1,1);
 	OBJ[0].min = camera.position - Vector3(1,1,1);
 
-	Interactables[0].set(Vector3(10 - DoorSlide * 2 + 0.75 ,20,-5.5),Vector3(0.5 - DoorSlide * 2 + 0.75,0,-7.5));
-	Interactables[1].set(Vector3(1 + DoorSlide * 2 + 0.75 ,20,-5.5),Vector3(-8 + DoorSlide * 2 + 0.75 ,0,-7.5));
+	Interactables[0].set(Vector3(10 - DoorSlide * 2 + 0.75 ,20,-5.5),Vector3(0.5 - DoorSlide * 2 + 0.75,0,-7.5)); //front door
+	Interactables[1].set(Vector3(1 + DoorSlide * 2 + 0.75 ,20,-5.5),Vector3(-8 + DoorSlide * 2 + 0.75 ,0,-7.5)); //front door
+	Interactables[10].set(PBPos + Vector3(1.5,20,1.5),PBPos - Vector3(1.5,4,1.5)); // Passerby2
 
-
-		if ( toiletDoor == false )
+	if ( toiletDoor == false )
 	{
 		Interactables[11].set(Vector3(23,20,38.5),Vector3(17.8,0,36.8));
 	}

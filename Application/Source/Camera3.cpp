@@ -88,7 +88,7 @@ void Camera3::Update(double dt,float width, float height, double* xpos, double* 
 		Reset();
 	}
 
-	/*std::cout << position.x << "\t" << position.y << "\t" << position.z << std::endl;*/
+	std::cout << position.x << "\t" << position.y << "\t" << position.z << std::endl;
 }
 
 void Camera3::Reset()

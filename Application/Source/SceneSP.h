@@ -301,6 +301,7 @@ public:
 	float Passerby2Right;
 	float Passerby2Dist;
 
+
 	//NPC interactions, // Variable to check whether NPC is interacted with
 	bool CashierText;  
 	bool SecurityText; 
@@ -358,11 +359,24 @@ public:
 	int SGPoint;
 	bool InitSGOnce;
 	void UpdateSG(double dt) ;
-	int RotateSG;
+	float RotateSG;
 	float RotateSGLegs;
 	bool MoveSGLegs;
 	bool MoveSGLegsOrNot;
 
+	//Passerby1
+	Vector3 PBPos;
+	Vector3 PBMov;
+	Vector3 PBTar;
+	float PBStay;
+	int PBPoint;
+	bool InitPBOnce;
+	float RotatePB;
+	float RotatePBLegs;
+	bool MovePBLegs;
+	bool MovePBLegsOrNot;
+
+	//Position
 	void mouseInput(double* xpos, double* ypos);
 	double xpos;
 	double ypos;

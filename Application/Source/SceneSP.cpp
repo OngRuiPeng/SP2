@@ -356,11 +356,11 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	Flush = false;
 	FlushDir = false;
 	flushUp = 0.55;
-		//door
-		toiletDoorMove = 0;
-		toiletDoor = false;
-		securityDoorMove = 0;
-		securityDoor = false;
+	//door
+	toiletDoorMove = 0;
+	toiletDoor = false;
+	securityDoorMove = 0;
+	securityDoor = false;
 	//Npc variables
 	Passerby2Left = 0;
 	Passerby2Right = 0;
@@ -379,6 +379,17 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	MoveSGLegs = true;
 	MoveSGLegsOrNot = false;
 
+	//Passerby1
+	PBPos = Vector3(-45,4,-15);
+	PBMov = Vector3(0,0,0);
+	PBTar = Vector3(0,0,0);
+	PBStay = 11;
+	PBPoint = 0;
+	RotatePB = 0;
+	RotatePBLegs = 0;
+	InitPBOnce = false;
+	MovePBLegs = true;
+	MovePBLegsOrNot = false;
 	//**********************************************************   collisions 
 	box1.set(camera.position + Vector3(1,1,1),camera.position - Vector3(1,1,1));
 	OBJ.push_back(box1);
@@ -727,7 +738,7 @@ void SceneSP::collisionInteractionsinit()
 	box1.set(Vector3(-43.5,20,-13.5),Vector3(-47.5,0,-16.5)); // passerby1     9 
 	Interactables.push_back(box1);
 
-	box1.set(Vector3(47.5,20,-28.5),Vector3(43.5,0,-31.5)); // passerb2     10 
+	box1.set(Vector3(47.5,20,-28.5),Vector3(43.5,0,-31.5)); // passerby2     10 
 	Interactables.push_back(box1);
 
 	box1.set(Vector3(23,20,38.5),Vector3(17.8,0,36.8)); // toiletdoor 11
@@ -968,9 +979,6 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	}
 
 	updatecollision(dt) ;
-	//Interaction functions
-
-	SlidingDoor(dt);
 
 	if(Application::IsKeyPressed('E') && PickUpItem == true && SecurityCam == false)
 	{
@@ -1042,13 +1050,13 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 			toiletDoorMove = 0;
 			time = 0;
 		}
-		if ( NoInteractableTargetcollision() == 12  && securityDoor == false && time > 1)
+		if ( NoInteractableTargetcollision() == 12  && securityDoor == false && time > 0.5)
 		{
 			securityDoor = true;
 			securityDoorMove = 90;
 			time = 0;
 		}
-		if ( NoInteractableTargetcollision() == 12 && securityDoor == true && time > 1)
+		if ( NoInteractableTargetcollision() == 12 && securityDoor == true && time > 0.5)
 		{
 			securityDoor = false;
 			securityDoorMove = 0;
@@ -1069,7 +1077,6 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		TapSwitch = true;
 		TapTurn = true;
 	}
-
 	if(Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 2 && TapSwitch == true && TapTurn == true) //Tap water switch off
 	{
 		TapTurn = false;
@@ -1145,6 +1152,8 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	UpdateNPC(dt);
 	time += dt;
 
+	UpdateNPC(dt);
+	SlidingDoor(dt);
 	//irrKlang
 	Vector3 view = (camera.target - camera.position).Normalized();
 	Vector3 right = view.Cross(camera.up);
