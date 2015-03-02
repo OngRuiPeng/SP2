@@ -15,11 +15,10 @@ CItem::CItem(string Name,string Desc,int counter)
 	count = counter;
 }
 
-void CItem::Set(string Name,string Desc,int counter)
+void CItem::Set(string Name,string Desc)
 {
 	Item_Name = Name ;
 	Item_Desc = Desc;
-	count = counter;
 }
 
 CItem::~CItem(void)

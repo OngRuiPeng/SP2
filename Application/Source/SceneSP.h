@@ -270,9 +270,16 @@ public:
 	bool JumpState;
 	bool JumpSwitch;
 	bool TapSwitch;
+	bool TapTurn;
+	bool SinkDrain;
+	bool SinkDrainDir;
 	bool Flush;
 	bool FlushDir;
 	float flushUp;
+	float sinkUp;
+	float waterTurn;
+	float waterScale;
+	float waterTrans;
 
 	bool PlaceItem ;
 	bool PickUpItem; 
@@ -330,18 +337,6 @@ public:
 	void updateInventory( CItem a , bool b );
 	
 	vector <CItem> InventoryData;
-
-	CItem nullthis;
-
-	// cashier slide
-	bool ItemSlide;
-	bool Deletemah;
-	float translateItemZ;
-	float translateItemX;
-	int WhichCashier;
-	CItem whichItem;
-	void updateItemSlide(double dt, int a);
-	vector <CItem> CheckoutList;
 
 	void mouseInput(double* xpos, double* ypos);
 	double xpos;

@@ -130,7 +130,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	lights[0].spotDirection.Set(0.f, 1.f, 0.f);
 
 	lights[1].type = Light::LIGHT_POINT;
-	lights[1].position.Set(0, 10, 0);
+	lights[1].position.Set(0, 25, 0);
 	lights[1].color.Set(1, 1, 1);
 	lights[1].power = 1;
 	lights[1].kC = 1.f;
@@ -333,10 +333,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	Passerby2.setType("Passerby");
 
 	DoorSlide = -0.75;
-	toiletDoorMove = 0;
-	toiletDoor = false;
-	securityDoorMove = 0;
-	securityDoor = false;
+	
 	time = 0;
 	translateX = 0 ;
 	PickUpItem = false;
@@ -344,14 +341,32 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 
 	JumpDirection = false;
 	JumpState = false;
+
+	//interaction
+		//sink and toiletbowl
 	TapSwitch = false;
+	TapTurn = false;
+	SinkDrain = false;
+	SinkDrainDir = false;
+	sinkUp = 1.2;
+	waterTurn = 90;
+	waterScale = 2;
+	waterTrans = 1.68;
+
 	Flush = false;
 	FlushDir = false;
-	flushUp = 0.7;
-
+	flushUp = 0.55;
+		//door
+		toiletDoorMove = 0;
+		toiletDoor = false;
+		securityDoorMove = 0;
+		securityDoor = false;
+	//Npc variables
 	Passerby2Left = 0;
 	Passerby2Right = 0;
 	Passerby2Dist = 0;
+	
+
 	//**********************************************************   collisions 
 	box1.set(camera.position + Vector3(1,1,1),camera.position - Vector3(1,1,1));
 	OBJ.push_back(box1);
@@ -856,7 +871,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	if(Application::IsKeyPressed('M'))
 	{
 		//SWITCH OFF
-		lights[1].power = 100;
+		lights[1].power = 3;
 		glUniform1f(m_parameters[U_LIGHT1_POWER], lights[1].power);
 	}
 	
@@ -953,16 +968,9 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	if(Application::IsKeyPressed('Q') && PlaceItem == true && SecurityCam == false)
 	{
 		if ( Items[NoItemTargetcollision()].getEmpty() == true) 
-		{
-			for ( int x = 0 ; x < InventoryData.size() ; x++)
-			{
-				if ( InventoryData[x].getItemName() == ItemData[ItemTargetcollision().getNo()].getItemName() &&  InventoryData[x].getItemCount() > 0)
-				{
-					Items[NoItemTargetcollision()].setEmpty(false);
-					updateInventory(ItemData[Items[NoItemTargetcollision()].getNo()] , false ) ;
-				}
-			}
-		}
+			Items[NoItemTargetcollision()].setEmpty(false);
+
+		updateInventory(ItemData[Items[NoItemTargetcollision()].getNo()] , false ) ;
 	}
 
 	//Talking with NPCs & door
@@ -1045,14 +1053,15 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		ChooseWhich = true;
 	}
 
-	if(Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 2) //Tap water switch on
+	if(Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 2 && TapSwitch == false && TapTurn == false) //Tap water switch on
 	{
 		TapSwitch = true;
+		TapTurn = true;
 	}
-
-	if(Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 2 && TapSwitch == true) //Tap water switch off
+	cout << TapTurn << endl;
+	if(Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 2 && TapSwitch == true && TapTurn == true) //Tap water switch off
 	{
-		TapSwitch = false;
+		TapTurn = false;
 	}
 	
 	if(Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 3  && Flush == false ) //Flush On
@@ -1106,9 +1115,9 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 
 	if ( Application::IsKeyPressed('V'))
 	{
-		for ( int x = 0; x < CheckoutList.size() ; x++ )
+		for ( int x = 0; x < InventoryData.size() ; x++ )
 		{
-			cout << CheckoutList[x].getItemName() << " " << CheckoutList[x].getItemCount() << endl;
+			cout << InventoryData[x].getItemName() << " " << InventoryData[x].getItemCount() << endl;
 		}
 	}
 
