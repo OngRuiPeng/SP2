@@ -355,9 +355,13 @@ public:
 	Vector3 SGTar;
 	vector <Obj> NpcBB ;
 	float securityStay;
-	int whichPoint;
+	int SGPoint;
 	bool InitSGOnce;
 	void UpdateSG(double dt) ;
+	int RotateSG;
+	float RotateSGLegs;
+	bool MoveSGLegs;
+	bool MoveSGLegsOrNot;
 
 	void mouseInput(double* xpos, double* ypos);
 	double xpos;

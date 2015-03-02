@@ -372,8 +372,12 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	SGTar = Vector3(0,0,0);
 	Caught = false;
 	securityStay = 11 ;
-	whichPoint = 0 ;
+	SGPoint = 0 ;
 	InitSGOnce = false;
+	RotateSG = 0 ;
+	RotateSGLegs = 0 ;
+	MoveSGLegs = true;
+	MoveSGLegsOrNot = false;
 
 	//**********************************************************   collisions 
 	box1.set(camera.position + Vector3(1,1,1),camera.position - Vector3(1,1,1));

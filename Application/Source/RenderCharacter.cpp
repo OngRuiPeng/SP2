@@ -146,7 +146,7 @@ void SceneSP::RenderCharacter()
 	//Security Guard
 	modelStack.PushMatrix();
 	modelStack.Translate(SGPos.x, SGPos.y, SGPos.z);
-	modelStack.Rotate(90, 0, 1, 0);
+	modelStack.Rotate(RotateSG, 0, 1, 0);
 	modelStack.Rotate(0, 0, 1, 0);
 	RenderMesh(meshList[GEO_SBODY], true);
 		modelStack.PushMatrix();
@@ -162,10 +162,12 @@ void SceneSP::RenderCharacter()
 		RenderMesh(meshList[GEO_SRIGHTHAND], true);
 		modelStack.PopMatrix();
 		modelStack.PushMatrix();
+		modelStack.Rotate(-RotateSGLegs,1,0,0);
 		modelStack.Translate(-0.5, -2.75, 0);
 		RenderMesh(meshList[GEO_SLEFTLEG], true);
 		modelStack.PopMatrix();
 		modelStack.PushMatrix();
+		modelStack.Rotate(RotateSGLegs,1,0,0);
 		modelStack.Translate(0.5, -2.75, 0);
 		RenderMesh(meshList[GEO_SRIGHTLEG], true);
 		modelStack.PopMatrix();
