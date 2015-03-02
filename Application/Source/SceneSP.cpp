@@ -981,9 +981,16 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	if(Application::IsKeyPressed('Q') && PlaceItem == true && SecurityCam == false)
 	{
 		if ( Items[NoItemTargetcollision()].getEmpty() == true) 
-			Items[NoItemTargetcollision()].setEmpty(false);
-
-		updateInventory(ItemData[Items[NoItemTargetcollision()].getNo()] , false ) ;
+		{
+			for ( int x = 0 ; x < InventoryData.size() ; x++)
+			{
+				if ( InventoryData[x].getItemName() == ItemData[ItemTargetcollision().getNo()].getItemName() &&  InventoryData[x].getItemCount() > 0)
+				{
+					Items[NoItemTargetcollision()].setEmpty(false);
+					updateInventory(ItemData[Items[NoItemTargetcollision()].getNo()] , false ) ;
+				}
+			}
+		}
 	}
 
 	//Talking with NPCs & door
@@ -1075,7 +1082,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 			TapTurn = false;
 		}
 	}
-	cout << TapSwitch << endl;
+
 	if(Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 3  && Flush == false ) //Flush On
 	{
 		Flush = true;
@@ -1148,7 +1155,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		StareEnd = true;
 	}
 
-	if (Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 15)
+	if (Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 15 && lights[0].power != 0 && lights[1].power != 0)
 	{
 		//SWITCH OFF
 		lights[0].power = 0;
@@ -1156,6 +1163,8 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 
 		lights[1].power = 0;
 		glUniform1f(m_parameters[U_LIGHT1_POWER], lights[1].power);
+
+		cout << " lights off " << endl;
 	}
 
 	if (Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 15 && lights[0].power == 0 && lights[1].power == 0)
@@ -1165,6 +1174,8 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 
 		lights[1].power = 2;
 		glUniform1f(m_parameters[U_LIGHT1_POWER], lights[1].power);
+
+		cout << " lights on " << endl;
 	}
 	
 	UpdateSG(dt);
