@@ -174,7 +174,7 @@ void SceneSP::updateobj()
 	}
 
 	// thief mode
-	if (AABBCheck(OBJ[0],NpcBB[0])) // Security guard's range
+	if (AABBCheck(OBJ[0],NpcBB[0]) && gamestate == GAMETHIEF) // Security guard's range
 		Caught = true;
 	else
 		Caught = false;

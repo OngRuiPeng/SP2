@@ -187,7 +187,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	meshList[GEO_ThiefWinScreen]->textureID = LoadTGA("Image//WinThief.tga");
 
 	meshList[GEO_CheckoutWinScreen] = MeshBuilder::GenerateQuad("Checkout win screen", Color(1, 1, 1), 1, 1);
-	meshList[GEO_ThiefWinScreen]->textureID = LoadTGA("Image//WinCheckout.tga");
+	meshList[GEO_CheckoutWinScreen]->textureID = LoadTGA("Image//WinCheckout.tga");
 
 	initSkybox();
 
@@ -328,6 +328,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	inSupermarket = false;
 	CashierText = false;
 	DetectorsOn = true;
+	CheckListDone = false;
 
 	Cashier.setName("Jill");
 	Cashier.setType("Cashier");
@@ -425,9 +426,13 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 
 	ChooseWhich = false ;
 
+	//Inventory
+	ItemsInInventory = false;
+	Inventorytimer = 0;
+
 	// Items init 
 	InitItemData();
-
+	
 	ItemNo = 0;
 
 	nullthis.Set("lol","",0); 
@@ -447,6 +452,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	genCheckList();
 	toggleCheck = false;
 
+	ItemsStolen = 0;
 	meshList[GEO_CHECKLIST] = MeshBuilder::GeneratePicture("checklist",1,1);
 	meshList[GEO_CHECKLIST]->textureID = LoadTGA("image//checklist.tga");
 
@@ -958,9 +964,9 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
 
-	if(Application::IsKeyPressed('6'))
+	if(Application::IsKeyPressed('5'))
 	{
-		gamestate = MAINMENU;
+		CheckListDone = true;
 	}
 
 	if (Application::IsKeyPressed(VK_SPACE) && JumpState == false)
@@ -974,27 +980,6 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	{
 		Jump(dt);
 	}
-	if(Application::IsKeyPressed('8'))
-	{
-		//SWITCH OFF
-		lights[0].power = 0.5;
-		glUniform1f(m_parameters[U_LIGHT0_POWER], lights[0].power);
-	}
-
-	if(Application::IsKeyPressed('9'))
-	{
-		//SWITCH OFF
-		lights[0].power = 0;
-		glUniform1f(m_parameters[U_LIGHT0_POWER], lights[0].power);
-	}
-
-	if(Application::IsKeyPressed('M'))
-	{
-		//SWITCH OFF
-		lights[1].power = 3;
-		glUniform1f(m_parameters[U_LIGHT1_POWER], lights[1].power);
-	}
-
 
 	if(Application::IsKeyPressed('Z'))
 	{
@@ -1011,6 +996,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	{
 		gamestate = MAINMENU;
 		DetectorsOn = true;
+
 		genCheckList();
 
 		for ( int x = 0 ; x < InventoryData.size() ; x++ )
@@ -1033,6 +1019,13 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 			Items[x].setEmpty(false);
 		}
 
+
+		Caught = false;
+		CheckListDone = false;
+		Alarm = false;
+		ItemsInInventory = false;
+		Inventorytimer = 0;
+		ItemsStolen = false;
 	}
 
 	//Game states	 
@@ -1047,7 +1040,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 			ISound* mainmenu = engine->play2D("../irrKlang/media/MMbutt.mp3", false); // Main main menu
 			gamestate = CHOOSEMODE;
 		}
-		else if( state == GLFW_PRESS && (*xposition > 285 && *xposition < 515 && *yposition > 308 && *yposition < 383) )
+		else if( state == GLFW_PRESS && (*xposition > 285 && *xposition < 515 && *yposition > 308 && *yposition < 383))
 		{
 
 			ISound* mainmenu = engine->play2D("../irrKlang/media/MMbutt.mp3", false); // Main main menu	
@@ -1091,16 +1084,25 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		}
 	}
 	if ( gamestate != MAINMENU && gamestate != CHOOSEMODE && gamestate != GAMEWINCHECKOUT && gamestate != GAMEWINTHIEF && gamestate != GAMEBUSTED && gamestate != EXIT )
-
 	{
 		glfwSetCursorPos(m_window, w / 2, h / 2); // set cursor to middle
 		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED); // disable cursor
 		camera.Update(dt, w / 2, h / 2, &xpos, &ypos);
 	}
 
-	if ( Caught == true )
+	if ( gamestate == GAMEBUSTED )
+	{
+		camera.Reset();
+	}
+
+	if ( Caught == true ) // Caught by security guard in Thief Mode
 	{
 		gamestate = GAMEBUSTED;
+	}
+
+	if ( CheckListDone == true )
+	{
+		gamestate = GAMEWINCHECKOUT;
 		camera.Reset();
 	}
 	//Entering
@@ -1113,8 +1115,34 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		inSupermarket = false;
 	}
 
+	if ( ItemsInInventory == true && inSupermarket == false && DetectorsOn == true ) // if players leave supermarket with items
+	{
+		Alarm = true;
+		Inventorytimer += dt;
+		if ( Inventorytimer > 5 && gamestate != GAMEBUSTED)
+		{
+			gamestate = GAMEBUSTED;
+		}
+	}
+	if ( ItemsInInventory == true && inSupermarket == false && DetectorsOn == false && gamestate == GAMETHIEF)
+	{
+		gamestate = GAMEWINTHIEF;
+		for ( int x = 0; x < InventoryData.size(); ++x )
+		{
+			ItemsStolen += InventoryData[x].getItemCount();
+		}
+		cout << ItemsStolen << endl;
+		camera.Reset();
+	}
+	if ( ItemsInInventory == true && inSupermarket == true ) // if players return to the supermarket
+	{
+		Alarm = false;
+		Inventorytimer = 0;
+	}
+
 	updatecollision(dt) ;
 
+	//Interaction
 	if(Application::IsKeyPressed('E') && PickUpItem == true && SecurityCam == false)
 	{
 		if ( Items[NoItemTargetcollision()].getEmpty() == false) 
@@ -1304,10 +1332,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 
 	ItemNo = Items[NoItemTargetcollision()].getNo();
 
-	if ( Application::IsKeyPressed('K'))
-		genCheckList();
-
-	if ( Application::IsKeyPressed('B') && time > 1)
+	if ( Application::IsKeyPressed('B') && time > 1) // Checklist
 	{
 		if ( toggleCheck == true )
 			toggleCheck = false;
@@ -1317,7 +1342,11 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		time = 0 ;
 	}
 
-	if (ItemSlide == true)
+	
+	if ( Application::IsKeyPressed('K')) // Randomize checklist
+		genCheckList();
+
+	if (ItemSlide == true) //Conveyor belt
 		updateItemSlide(dt,WhichCashier);
 
 
@@ -1362,8 +1391,6 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	right.Normalize();
 	camera.up = right.Cross(view).Normalized();
 	engine->setListenerPosition(vec3df(camera.position.x,camera.position.y,camera.position.z),vec3df(view.x,view.y,view.z),vec3df(0,0,0),vec3df(-camera.up.x,-camera.up.y,-camera.up.z));
-
-
 }
 
 int SceneSP::Renderirr()
@@ -1480,7 +1507,6 @@ void SceneSP::Render()
 		}
 		if ( PickUpItem == true && Interact == false) 
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press E to pick up item", (1, 0, 1),2.5, 5, 4);
-
 		if ( cam_state != NORMAL ) 
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press N for next , Y for previous", (0, 1, 0),2, 3, 4);
 		if ( DetectorsOn == false)
@@ -1513,8 +1539,8 @@ void SceneSP::Render()
 			RenderTextOnScreen(meshList[GEO_MainMenuText], ItemData[ItemNo].getItemDesc() , (1, 0, 1),2, 10, 27);
 		}
 
-		if ( Caught == true ) 
-			RenderTextOnScreen(meshList[GEO_MainMenuText], "You have been caught", (1, 0, 1),2.5, 5, 16);
+		if ( Alarm == true ) 
+			RenderTextOnScreen(meshList[GEO_MainMenuText], "Please return in 5 seconds", (1, 0, 1),2, 5, 16);
 
 		if ( toggleCheck == true )
 		{

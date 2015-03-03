@@ -217,7 +217,6 @@ void SceneSP::UpdateSG(double dt)
 void SceneSP::UpdateCustomer(double dt)
 {
 	CashTimer += dt;
-	cout << CashTimer << endl;
 	if (CashWalk == true)					//Legs anim
 	{
 		if ( CashROn == true )

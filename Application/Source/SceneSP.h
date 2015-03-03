@@ -281,9 +281,6 @@ public:
 
 	vector <CItem> ItemData;
 
-	
-
-
 	//Interactions and their other variables
 	void SlidingDoor(double);
 	double DoorSlide;
@@ -366,7 +363,8 @@ public:
 	vector <CItem> InventoryData;
 
 	CItem nullthis;
-
+	bool ItemsInInventory;
+	double Inventorytimer;
 	// cashier slide
 	bool ItemSlide;
 	bool Deletemah;
@@ -376,6 +374,7 @@ public:
 	CItem whichItem;
 	void updateItemSlide(double dt, int a);
 	vector <CItem> CheckoutList;
+	bool CheckListDone;
 
 	// Security guard 
 	bool Caught;
@@ -422,6 +421,10 @@ public:
 	
 	//Music
 	bool music;
+
+	//Gamemode 
+	bool Alarm;
+	int ItemsStolen;
 
 private:
 	unsigned m_vertexArrayID;

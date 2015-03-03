@@ -136,9 +136,28 @@ void SceneSP::updateCheckList()
 					CheckCheckOut[y] = true ; 
 				else
 					CheckCheckOut[y] = false ; 
-
 				break; 
 			}
+		}
+	}
+	for ( int x = 0; x < InventoryData.size(); ++x )
+	{
+		if ( InventoryData[x].getItemCount() > 0 )
+		{
+			ItemsInInventory = true;
+		}
+	}
+	
+	int counter = 0;
+	for ( int y = 0; y < 9; y++ )
+	{
+		if ( CheckCheckOut[y] == true )
+		{
+			++counter;
+		}
+		if ( counter == 9 )
+		{
+			CheckListDone = true;
 		}
 	}
 }
