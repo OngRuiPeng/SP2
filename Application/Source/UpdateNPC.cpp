@@ -5,15 +5,15 @@ bool PB2RForward = false;
 
 bool CashROn = false;
 
-float WalkingSpeed = 50.f;
-float limit = 30;
+float WalkingSpeed = 10.f;
+float limit = 35;
 void SceneSP::UpdateNPC(double dt)
 {
 	//Passerby2
 	if ( PB2LForward == true )
 	{
 		Passerby2Left += (WalkingSpeed * dt);
-		if ( Passerby2Left > 45 )
+		if ( Passerby2Left > limit )
 		{
 			PB2LForward = false;
 		}
@@ -21,7 +21,7 @@ void SceneSP::UpdateNPC(double dt)
 	else
 	{
 		Passerby2Left -= (WalkingSpeed * dt);
-		if ( Passerby2Left < -45 )
+		if ( Passerby2Left < -limit )
 		{
 			PB2LForward = true;
 		}
@@ -29,7 +29,7 @@ void SceneSP::UpdateNPC(double dt)
 	if ( PB2RForward == true )
 	{
 		Passerby2Right += (WalkingSpeed * dt);
-		if ( Passerby2Right > 45 )
+		if ( Passerby2Right > limit )
 		{
 			PB2RForward = false;
 		}
@@ -37,17 +37,20 @@ void SceneSP::UpdateNPC(double dt)
 	else
 	{
 		Passerby2Right -= (WalkingSpeed * dt);
-		if ( Passerby2Right < -45 )
+		if ( Passerby2Right < -limit )
 		{
 			PB2RForward = true;
 		}
 	}
-	Passerby2Dist += (5 * dt);
-	if ( Passerby2Dist > 100 )
+	if ( (AABBCheck(OBJ[0], Interactables[10])) == false)
 	{
-		Passerby2Dist = 0;
-	}
+		Passerby2Dist += (5 * dt);
+		if ( Passerby2Dist > 100 )
+		{
+			Passerby2Dist = 0;
 
+		}
+	}
 
 	//Passerby1
 	Obj PB(PBPos + Vector3(1,20,1),PBPos - Vector3(1,4,1)); 
@@ -68,6 +71,8 @@ void SceneSP::UpdateNPC(double dt)
 			RotatePB = 90;
 		}
 		MovePBLegsOrNot = false;
+		RotatePBLegs = 0;
+		RotatePBHands = 0;
 	}
 	else
 	{
@@ -80,19 +85,21 @@ void SceneSP::UpdateNPC(double dt)
 	{
 		if ( MovePBLegs == true )
 		{
-			if ( RotatePBLegs > 45 )
+			if ( RotatePBLegs > limit )
 				MovePBLegs = false;
 			else
 			{
+				RotatePBHands -= (20 * dt);
 				RotatePBLegs += (20 * dt);
 			}
 		}
 		else if ( MovePBLegs == false ) 
 		{ 
-			if ( RotatePBLegs < -45 )
+			if ( RotatePBLegs < -limit )
 				MovePBLegs = true;
 			else
 				RotatePBLegs -= (20 * dt);
+				RotatePBHands += (20 * dt);
 		}
 	}
 
@@ -103,8 +110,8 @@ void SceneSP::UpdateNPC(double dt)
 
 		if ( PBPoint == 0 )
 		{
-			PBPos = Vector3(-45,4,-15);
-			PBTar = Vector3(-45, 4, -15);
+			PBPos = Vector3(-55,4,-15);
+			PBTar = Vector3(-55, 4, -15);
 			RotatePB = 90;
 		}
 		if ( PBPoint == 1 )
@@ -126,12 +133,12 @@ void SceneSP::UpdateNPC(double dt)
 		}
 		if ( PBPoint == 4 )
 		{
-			PBTar = Vector3(45,4,-15);
+			PBTar = Vector3(55,4,-15);
 			RotatePB = 90;	
 		}
 		InitPBOnce = true;
 	}
-	
+	UpdateCustomer(dt);
 }
 
 void SceneSP::UpdateSG(double dt)
@@ -162,7 +169,7 @@ void SceneSP::UpdateSG(double dt)
 	{
 		if ( MoveSGLegs == true )
 		{
-			if ( RotateSGLegs > 45 )
+			if ( RotateSGLegs > limit )
 				MoveSGLegs = false;
 			else
 			{
@@ -171,7 +178,7 @@ void SceneSP::UpdateSG(double dt)
 		}
 		else if ( MoveSGLegs == false ) 
 		{ 
-			if ( RotateSGLegs < -45 )
+			if ( RotateSGLegs < -limit )
 				MoveSGLegs = true;
 			else
 				RotateSGLegs -= (20 * dt);
@@ -211,7 +218,7 @@ void SceneSP::UpdateSG(double dt)
 	}
 
 
-	UpdateCustomer(dt);
+	
 }
 
 void SceneSP::UpdateCustomer(double dt)

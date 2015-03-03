@@ -182,6 +182,15 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	meshList[GEO_ChooseScreen] = MeshBuilder::GenerateQuad("choose mode screen", Color(1, 1, 1), 1, 1);
 	meshList[GEO_ChooseScreen]->textureID = LoadTGA("Image//PlayScreen.tga");
 
+	meshList[GEO_BustedScreen] = MeshBuilder::GenerateQuad("Busted screen", Color(1, 1, 1), 1, 1);
+	meshList[GEO_BustedScreen]->textureID = LoadTGA("Image//Busted.tga");
+
+	meshList[GEO_ThiefWinScreen] = MeshBuilder::GenerateQuad("Thief win screen", Color(1, 1, 1), 1, 1);
+	meshList[GEO_ThiefWinScreen]->textureID = LoadTGA("Image//WinThief.tga");
+
+	meshList[GEO_CheckoutWinScreen] = MeshBuilder::GenerateQuad("Checkout win screen", Color(1, 1, 1), 1, 1);
+	meshList[GEO_ThiefWinScreen]->textureID = LoadTGA("Image//WinCheckout.tga");
+
 	initSkybox();
 
 	//TEXT
@@ -367,7 +376,6 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	Passerby2Right = 0;
 	Passerby2Dist = 0;
 
-	
 	// security guard
 	SGPos = Vector3(-12,4,0);
 	SGMov = Vector3(0,0,0);
@@ -382,13 +390,14 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	MoveSGLegsOrNot = false;
 
 	//Passerby1
-	PBPos = Vector3(-45,4,-15);
+	PBPos = Vector3(-55,4,-15);
 	PBMov = Vector3(0,0,0);
 	PBTar = Vector3(0,0,0);
 	PBStay = 11;
 	PBPoint = 0;
 	RotatePB = 0;
 	RotatePBLegs = 0;
+	RotatePBHands = 0;
 	InitPBOnce = false;
 	MovePBLegs = true;
 	MovePBLegsOrNot = false;
@@ -744,7 +753,7 @@ void SceneSP::collisionInteractionsinit()
 	box1.set(Vector3(6.5,20,26.5),Vector3(3.5,0,23.5)); // customer     8 
 	Interactables.push_back(box1);
 
-	box1.set(Vector3(-43.5,20,-13.5),Vector3(-47.5,0,-16.5)); // passerby1     9 
+	box1.set(PBPos + Vector3(1,20,1),PBPos - Vector3(1,4,1)); // passerby1     9 
 	Interactables.push_back(box1);
 
 	box1.set(Vector3(47.5,20,-28.5),Vector3(43.5,0,-31.5)); // passerby2     10 
@@ -929,6 +938,13 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		music = false;
 		cout << "Music Stop!" << endl;
 	}
+
+	if(Application::IsKeyPressed(VK_ESCAPE) && ChooseWhich == false)
+	{
+		gamestate = MAINMENU;
+		DetectorsOn = true;
+	}
+
 	//Game states	 
 	if ( gamestate == MAINMENU )
 	{
@@ -983,8 +999,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 			ypos = h / 2;
 		}
 	}
-
-	if ( gamestate != MAINMENU && gamestate != CHOOSEMODE && gamestate != EXIT)
+	if ( gamestate != MAINMENU && gamestate != CHOOSEMODE && gamestate != GAMEWINCHECKOUT && gamestate != GAMEWINTHIEF && gamestate != GAMEBUSTED && gamestate != EXIT )
 
 	{
 		glfwSetCursorPos(m_window, w / 2, h / 2); // set cursor to middle
@@ -992,6 +1007,11 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		camera.Update(dt, w / 2, h / 2, &xpos, &ypos);
 	}
 
+	if ( Caught == true )
+	{
+		gamestate = GAMEBUSTED;
+		camera.Reset();
+	}
 	//Entering
 	if ( camera.position.z > -7 && camera.position.z < 49 && camera.position.x < 28 && camera.position.x > -27 )
 	{
@@ -1312,6 +1332,18 @@ void SceneSP::Render()
 	else if ( gamestate == CHOOSEMODE )
 	{
 		RenderChooseMode();
+	}
+	else if ( gamestate == GAMEWINCHECKOUT )
+	{
+		RenderCheckoutWin();
+	}
+	else if ( gamestate == GAMEWINTHIEF )
+	{
+		RenderThiefWin();
+	}
+	else if ( gamestate == GAMEBUSTED )
+	{
+		RenderBusted();
 	}
 	else 
 	{

@@ -27,10 +27,13 @@ class SceneSP : public Scene
 	enum GEOMETRY_TYPE
 	{
 		GEO_AXES,
+		GEO_CUBE,
 		GEO_MainMenuScreen,
 		GEO_ChooseScreen,
-		GEO_CUBE,
 		GEO_MainMenuText,
+		GEO_BustedScreen,
+		GEO_ThiefWinScreen,
+		GEO_CheckoutWinScreen,
 		GEO_NPCText,
 		//Skybox------------------------------------------------
 		GEO_LEFT,
@@ -130,6 +133,9 @@ class SceneSP : public Scene
 		GAMECHECKOUT,
 		GAMETHIEF,
 		GAMEFUN,
+		GAMEWINCHECKOUT,
+		GAMEWINTHIEF,
+		GAMEBUSTED,
 		EXIT,
 		MAX_STATES,
 	};
@@ -232,6 +238,9 @@ public:
 	void RenderSkybox();
 	void RenderMainMenu();
 	void RenderChooseMode();
+	void RenderBusted();
+	void RenderThiefWin();
+	void RenderCheckoutWin();
 	void RenderSupermarket();
 	void RenderInteractableObjs();
 	void RenderPacks ();
@@ -380,6 +389,7 @@ public:
 	bool InitPBOnce;
 	float RotatePB;
 	float RotatePBLegs;
+	float RotatePBHands;
 	bool MovePBLegs;
 	bool MovePBLegsOrNot;
 

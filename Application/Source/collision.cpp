@@ -88,7 +88,7 @@ void SceneSP::updatecollision(double dt)
 
 	updateobj();
 	
-	if (Application::IsKeyPressed('W') && gamestate != MAINMENU && gamestate != CHOOSEMODE) 
+	if (Application::IsKeyPressed('W') && gamestate != MAINMENU && gamestate != CHOOSEMODE && gamestate != GAMEWINCHECKOUT && gamestate != GAMEWINTHIEF && gamestate != GAMEBUSTED) 
 	{
 		
 		walk->setAllSoundsPaused(false);
@@ -108,7 +108,7 @@ void SceneSP::updatecollision(double dt)
 
 		collisionprevent(OBJ,precollide,Interactables);
 	}
-	else if (Application::IsKeyPressed('S') && gamestate != MAINMENU && gamestate != CHOOSEMODE) 
+	else if (Application::IsKeyPressed('S') && gamestate != MAINMENU && gamestate != CHOOSEMODE && gamestate != GAMEWINCHECKOUT && gamestate != GAMEWINTHIEF && gamestate != GAMEBUSTED) 
 	{
 
 		Vector3 view = (camera.target - camera.position).Normalize();
@@ -117,7 +117,7 @@ void SceneSP::updatecollision(double dt)
 
 		collisionprevent(OBJ,backside,Interactables);
 	}
-	else if (Application::IsKeyPressed('D') && gamestate != MAINMENU && gamestate != CHOOSEMODE) 
+	else if (Application::IsKeyPressed('D') && gamestate != MAINMENU && gamestate != CHOOSEMODE && gamestate != GAMEWINCHECKOUT && gamestate != GAMEWINTHIEF && gamestate != GAMEBUSTED) 
 	{
 
 		Vector3 view = (camera.target - camera.position).Normalize();
@@ -127,7 +127,7 @@ void SceneSP::updatecollision(double dt)
 
 		collisionprevent(OBJ,right,Interactables);
 	}
-	else if (Application::IsKeyPressed('A') && gamestate != MAINMENU && gamestate != CHOOSEMODE) 
+	else if (Application::IsKeyPressed('A') && gamestate != MAINMENU && gamestate != CHOOSEMODE && gamestate != GAMEWINCHECKOUT && gamestate != GAMEWINTHIEF && gamestate != GAMEBUSTED) 
 	{
 
 		Vector3 view = (camera.target - camera.position).Normalize();
@@ -153,7 +153,8 @@ void SceneSP::updateobj()
 
 	Interactables[0].set(Vector3(10 - DoorSlide * 2 + 0.75 ,20,-5.5),Vector3(0.5 - DoorSlide * 2 + 0.75,0,-7.5)); //front door
 	Interactables[1].set(Vector3(1 + DoorSlide * 2 + 0.75 ,20,-5.5),Vector3(-8 + DoorSlide * 2 + 0.75 ,0,-7.5)); //front door
-	Interactables[10].set(PBPos + Vector3(1.5,20,1.5),PBPos - Vector3(1.5,4,1.5)); // Passerby2
+	Interactables[9].set(PBPos + Vector3(1,20,1),PBPos - Vector3(1,4,1)); //Passerby1
+	Interactables[10].set(Vector3(47.5 - Passerby2Dist,20,-28.5),Vector3(43.5 - Passerby2Dist,0,-31.5)); // Passerby2
 
 	if ( toiletDoor == false )
 	{

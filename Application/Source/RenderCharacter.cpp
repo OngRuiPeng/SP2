@@ -51,10 +51,12 @@ void SceneSP::RenderCharacter()
 		RenderMesh(meshList[GEO_HEAD], true);	
 		modelStack.PopMatrix();
 		modelStack.PushMatrix();
+		modelStack.Rotate(-RotatePBHands, 1, 0, 0);
 		modelStack.Translate(-1, 0, 0);
 		RenderMesh(meshList[GEO_LEFTHAND], true);
 		modelStack.PopMatrix();
 		modelStack.PushMatrix();
+		modelStack.Rotate(RotatePBHands, 1, 0, 0);
 		modelStack.Translate(1, 0, 0);
 		RenderMesh(meshList[GEO_RIGHTHAND], true);
 		modelStack.PopMatrix();
