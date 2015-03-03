@@ -122,6 +122,8 @@ class SceneSP : public Scene
 
 		GEO_SEE,
 
+		GEO_CHECKLIST,
+
 		NUM_GEOMETRY,
 	};
 	
@@ -225,6 +227,10 @@ public:
 	int gamestate;
 	Camera3 camera;	
 	
+	//fontsize
+	float fontSize[256];
+	void readFontSize() ;
+
 	//Functions---------------------------------------
 	void initSkybox();
 	void initSupermarket();
@@ -397,6 +403,14 @@ public:
 	float RotatePBHands;
 	bool MovePBLegs;
 	bool MovePBLegsOrNot;
+
+	//Checklist 
+	void genCheckList();
+	CItem CheckList[9] ; 
+	CItem checklistitem;
+	bool CheckCheckOut[9];
+	void updateCheckList();
+	bool toggleCheck;
 
 	//Position
 	void mouseInput(double* xpos, double* ypos);

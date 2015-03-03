@@ -123,3 +123,22 @@ void SceneSP::RenderInventory()
 		}
 	}
 }
+
+void SceneSP::updateCheckList()
+{
+	for ( int y = 0 ; y < 9 ; y++ )
+	{
+		for ( int x = 0 ; x < CheckoutList.size() ; x++ )
+		{
+			if ( CheckoutList[x].getItemName() == CheckList[y].getItemName() ) 
+			{
+				if ( CheckoutList[x].getItemCount() >= CheckList[y].getItemCount()) 
+					CheckCheckOut[y] = true ; 
+				else
+					CheckCheckOut[y] = false ; 
+
+				break; 
+			}
+		}
+	}
+}

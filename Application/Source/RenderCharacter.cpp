@@ -85,10 +85,12 @@ void SceneSP::RenderCharacter()
 		RenderMesh(meshList[GEO_HEAD], true);	
 		modelStack.PopMatrix();
 		modelStack.PushMatrix();
+		modelStack.Rotate(-Passerby2Left, 1, 0, 0);
 		modelStack.Translate(-1, 0, 0);
 		RenderMesh(meshList[GEO_LEFTHAND], true);
 		modelStack.PopMatrix();
 		modelStack.PushMatrix();
+		modelStack.Rotate(Passerby2Left, 1, 0, 0);
 		modelStack.Translate(1, 0, 0);
 		RenderMesh(meshList[GEO_RIGHTHAND], true);
 		modelStack.PopMatrix();
@@ -98,7 +100,7 @@ void SceneSP::RenderCharacter()
 		RenderMesh(meshList[GEO_LEFTLEG], true);
 		modelStack.PopMatrix();
 		modelStack.PushMatrix();
-		modelStack.Rotate(Passerby2Right, 1, 0, 0);
+		modelStack.Rotate(-Passerby2Left, 1, 0, 0);
 		modelStack.Translate(0.5, -2.75, 0);
 		RenderMesh(meshList[GEO_RIGHTLEG], true);
 		modelStack.PopMatrix();
@@ -171,10 +173,12 @@ void SceneSP::RenderCharacter()
 		RenderMesh(meshList[GEO_SHEAD], true);	
 		modelStack.PopMatrix();
 		modelStack.PushMatrix();
+		modelStack.Rotate(RotateSGLegs,1,0,0);
 		modelStack.Translate(-1, 0, 0);
 		RenderMesh(meshList[GEO_SLEFTHAND], true);
 		modelStack.PopMatrix();
 		modelStack.PushMatrix();
+		modelStack.Rotate(-RotateSGLegs,1,0,0);
 		modelStack.Translate(1, 0, 0);
 		RenderMesh(meshList[GEO_SRIGHTHAND], true);
 		modelStack.PopMatrix();

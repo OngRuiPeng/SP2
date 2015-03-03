@@ -71,26 +71,10 @@ void SceneSP::updateItemSlide(double dt, int a )
 
 		for(int x = 0 ; x < CheckoutList.size() ; x++ )
 		{
-			if ( CheckoutList[x].getItemName() != "" )
+			if ( CheckoutList[x].getItemName() == whichItem.getItemName() )
 			{
-				if ( CheckoutList[x].getItemName() == whichItem.getItemName() )
-				{
-					CheckoutList[x].setItemCount( CheckoutList[x].getItemCount() + whichItem.getItemCount() ); 
-					break;
-				}
-				else if ( x + 1 == CheckoutList.size() )
-				{
-					if ( CheckoutList[x].getItemCount() == 0 ) 
-					{
-						CheckoutList[x] = whichItem; 
-						CheckoutList[x].setItemCount(whichItem.getItemCount());
-					}
-					else
-					{
-						CheckoutList.push_back(whichItem);
-						CheckoutList[x + 1].setItemCount(0);
-					}
-				}
+				CheckoutList[x].setItemCount( CheckoutList[x].getItemCount() + whichItem.getItemCount() ); 
+				break;
 			}
 		}
 

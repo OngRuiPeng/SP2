@@ -26,22 +26,7 @@ void SceneSP::UpdateNPC(double dt)
 			PB2LForward = true;
 		}
 	}
-	if ( PB2RForward == true )
-	{
-		Passerby2Right += (WalkingSpeed * dt);
-		if ( Passerby2Right > limit )
-		{
-			PB2RForward = false;
-		}
-	}
-	else
-	{
-		Passerby2Right -= (WalkingSpeed * dt);
-		if ( Passerby2Right < -limit )
-		{
-			PB2RForward = true;
-		}
-	}
+
 	if ( (AABBCheck(OBJ[0], Interactables[10])) == false)
 	{
 		Passerby2Dist += (5 * dt);
@@ -173,7 +158,7 @@ void SceneSP::UpdateSG(double dt)
 				MoveSGLegs = false;
 			else
 			{
-				RotateSGLegs += (20 * dt);
+				RotateSGLegs += (40 * dt);
 			}
 		}
 		else if ( MoveSGLegs == false ) 
@@ -181,7 +166,7 @@ void SceneSP::UpdateSG(double dt)
 			if ( RotateSGLegs < -limit )
 				MoveSGLegs = true;
 			else
-				RotateSGLegs -= (20 * dt);
+				RotateSGLegs -= (40 * dt);
 		}
 	}
 

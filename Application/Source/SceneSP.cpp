@@ -47,6 +47,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	glfwSetCursorPos(m_window, xpos, ypos);
 
+	readFontSize();
 
 	// Init VBO here
 
@@ -86,14 +87,14 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	m_parameters[U_LIGHT0_KC] = glGetUniformLocation(m_programID, "lights[0].kC");
 	m_parameters[U_LIGHT0_KL] = glGetUniformLocation(m_programID, "lights[0].kL");
 	m_parameters[U_LIGHT0_KQ] = glGetUniformLocation(m_programID, "lights[0].kQ");
-	
+
 	m_parameters[U_LIGHT1_POSITION] = glGetUniformLocation(m_programID, "lights[1].position_cameraspace");
 	m_parameters[U_LIGHT1_COLOR] = glGetUniformLocation(m_programID, "lights[1].color");
 	m_parameters[U_LIGHT1_POWER] = glGetUniformLocation(m_programID, "lights[1].power");
 	m_parameters[U_LIGHT1_KC] = glGetUniformLocation(m_programID, "lights[1].kC");
 	m_parameters[U_LIGHT1_KL] = glGetUniformLocation(m_programID, "lights[1].kL");
 	m_parameters[U_LIGHT1_KQ] = glGetUniformLocation(m_programID, "lights[1].kQ");
-	
+
 	m_parameters[U_LIGHTENABLED] = glGetUniformLocation(m_programID, "lightEnabled");
 	m_parameters[U_NUMLIGHTS] = glGetUniformLocation(m_programID, "numLights");
 
@@ -114,7 +115,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	m_parameters[U_COLOR_TEXTURE] = glGetUniformLocation(m_programID, "colorTexture");	
 	m_parameters[U_TEXT_ENABLED] = glGetUniformLocation(m_programID, "textEnabled");
 	m_parameters[U_TEXT_COLOR] = glGetUniformLocation(m_programID, "textColor");
-	
+
 	// Use our shader
 	glUseProgram(m_programID);
 
@@ -149,7 +150,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	camera.Init(Vector3(0, 6, -40), Vector3(0, 6, 0), Vector3(0, 1, 0));
 
 	//After gluseprogram
-	
+
 	glUniform1i(m_parameters[U_LIGHT0_TYPE], lights[0].type);
 	glUniform3fv(m_parameters[U_LIGHT0_COLOR], 1, &lights[0].color.r);
 	glUniform1f(m_parameters[U_LIGHT0_POWER], lights[0].power);
@@ -159,7 +160,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	glUniform1f(m_parameters[U_LIGHT0_COSCUTOFF], lights[0].cosCutoff);
 	glUniform1f(m_parameters[U_LIGHT0_COSINNER], lights[0].cosInner);
 	glUniform1f(m_parameters[U_LIGHT0_EXPONENT], lights[0].exponent);
-	
+
 	glUniform1i(m_parameters[U_LIGHT1_TYPE], lights[1].type);
 	glUniform3fv(m_parameters[U_LIGHT1_COLOR], 1, &lights[1].color.r);
 	glUniform1f(m_parameters[U_LIGHT1_POWER], lights[1].power);
@@ -169,7 +170,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	glUniform1f(m_parameters[U_LIGHT1_COSCUTOFF], lights[1].cosCutoff);
 	glUniform1f(m_parameters[U_LIGHT1_COSINNER], lights[1].cosInner);
 	glUniform1f(m_parameters[U_LIGHT1_EXPONENT], lights[1].exponent);
-	
+
 
 
 	glUniform1i(m_parameters[U_NUMLIGHTS], 2);
@@ -194,22 +195,22 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	initSkybox();
 
 	//TEXT
-	meshList[GEO_MainMenuText] = MeshBuilder::GenerateText("text", 16, 16);
+	meshList[GEO_MainMenuText] = MeshBuilder::GenerateText("text", 16, 16 , fontSize );
 	meshList[GEO_MainMenuText]->textureID = LoadTGA("Image//ExportedFont.tga");
 
-	meshList[GEO_NPCText] = MeshBuilder::GenerateText("text", 16, 16);
+	meshList[GEO_NPCText] = MeshBuilder::GenerateText("text", 16, 16 , fontSize );
 	meshList[GEO_NPCText]->textureID = LoadTGA("Image//ExportedFont.tga");
 
 	meshList[GEO_SUPERMARKET] = MeshBuilder::GenerateOBJ("Supermarket", "OBJ//Supermarket.obj");
 	meshList[GEO_SUPERMARKET]->textureID = LoadTGA("Image//WallTxt.tga");
 
-	meshList[GEO_CUSTOMERTEXT] = MeshBuilder::GenerateText("Customer text", 16, 16);
+	meshList[GEO_CUSTOMERTEXT] = MeshBuilder::GenerateText("Customer text", 16, 16 , fontSize );
 	meshList[GEO_CUSTOMERTEXT]->textureID = LoadTGA("Image//ExportedFont.tga");
 
-	meshList[GEO_CASHIERTEXT] = MeshBuilder::GenerateText("Cashier text", 16, 16);
+	meshList[GEO_CASHIERTEXT] = MeshBuilder::GenerateText("Cashier text", 16, 16 , fontSize );
 	meshList[GEO_CASHIERTEXT]->textureID = LoadTGA("Image//ExportedFont.tga");
 
-	meshList[GEO_SECURITYTEXT] = MeshBuilder::GenerateText("Security guard text", 16, 16);
+	meshList[GEO_SECURITYTEXT] = MeshBuilder::GenerateText("Security guard text", 16, 16 , fontSize );
 	meshList[GEO_SECURITYTEXT]->textureID = LoadTGA("Image//ExportedFont.tga");
 
 	//Supermarket
@@ -294,34 +295,34 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	initNPC();
 	// inventory init 
 
-	meshList[GEO_INVENTORY] = MeshBuilder::GenerateText("Slots",1,1);
+	meshList[GEO_INVENTORY] = MeshBuilder::GeneratePicture("Slots",1,1);
 	meshList[GEO_INVENTORY]->textureID = LoadTGA("image//Inventory.tga");
 
-	meshList[GEO_TOBLERONE] = MeshBuilder::GenerateText("toblerone",1,1);
+	meshList[GEO_TOBLERONE] = MeshBuilder::GeneratePicture("toblerone",1,1);
 	meshList[GEO_TOBLERONE]->textureID = LoadTGA("image//InvenToblerone.tga");
 
-	meshList[GEO_MACARONI] = MeshBuilder::GenerateText("macaroni",1,1);
+	meshList[GEO_MACARONI] = MeshBuilder::GeneratePicture("macaroni",1,1);
 	meshList[GEO_MACARONI]->textureID = LoadTGA("image//Macaroni.tga");
 
-	meshList[GEO_REDITOS] = MeshBuilder::GenerateText("reditos",1,1);
+	meshList[GEO_REDITOS] = MeshBuilder::GeneratePicture("reditos",1,1);
 	meshList[GEO_REDITOS]->textureID = LoadTGA("image//Reditos.tga");
 
-	meshList[GEO_CAMPBELLA] = MeshBuilder::GenerateText("campbella",1,1);
+	meshList[GEO_CAMPBELLA] = MeshBuilder::GeneratePicture("campbella",1,1);
 	meshList[GEO_CAMPBELLA]->textureID = LoadTGA("image//campbella.tga");
 
-	meshList[GEO_CACTUS] = MeshBuilder::GenerateText("cactus",1,1);
+	meshList[GEO_CACTUS] = MeshBuilder::GeneratePicture("cactus",1,1);
 	meshList[GEO_CACTUS]->textureID = LoadTGA("image//CactusJuice.tga");
 
-	meshList[GEO_CHICKEN] = MeshBuilder::GenerateText("chicken",1,1);
+	meshList[GEO_CHICKEN] = MeshBuilder::GeneratePicture("chicken",1,1);
 	meshList[GEO_CHICKEN]->textureID = LoadTGA("image//Chicken.tga");
 
-	meshList[GEO_PIZZA] = MeshBuilder::GenerateText("pizza",1,1);
+	meshList[GEO_PIZZA] = MeshBuilder::GeneratePicture("pizza",1,1);
 	meshList[GEO_PIZZA]->textureID = LoadTGA("image//Pizza.tga");
 
-	meshList[GEO_MAGGI] = MeshBuilder::GenerateText("maggi",1,1);
+	meshList[GEO_MAGGI] = MeshBuilder::GeneratePicture("maggi",1,1);
 	meshList[GEO_MAGGI]->textureID = LoadTGA("image//Maggi.tga");
 
-	meshList[GEO_DEWTOS] = MeshBuilder::GenerateText("dewtos",1,1);
+	meshList[GEO_DEWTOS] = MeshBuilder::GeneratePicture("dewtos",1,1);
 	meshList[GEO_DEWTOS]->textureID = LoadTGA("image//Dewtos.tga");
 
 	//variables
@@ -343,7 +344,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	Passerby2.setType("Passerby");
 
 	DoorSlide = -0.75;
-	
+
 	time = 0;
 	translateX = 0 ;
 	PickUpItem = false;
@@ -353,7 +354,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	JumpState = false;
 
 	//interaction
-		//sink and toiletbowl
+	//sink and toiletbowl
 	TapSwitch = false;
 	TapTurn = false;
 	SinkDrain = false;
@@ -435,7 +436,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	nullthis.Set("lol","",0); 
 	InventoryData.push_back(nullthis);
 	CheckoutList.push_back(nullthis);
-	
+
 
 	// cashier slider init
 
@@ -444,6 +445,13 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	translateItemX = 0 ;
 	WhichCashier = 0 ;
 	Deletemah = false;
+
+	// checklist 
+	genCheckList();
+	toggleCheck = false;
+
+	meshList[GEO_CHECKLIST] = MeshBuilder::GeneratePicture("checklist",1,1);
+	meshList[GEO_CHECKLIST]->textureID = LoadTGA("image//checklist.tga");
 
 	Mtx44 projection;
 	projection.SetToPerspective(45.0f,4.0f/3.0f, 0.01f, 100000.0f);
@@ -458,7 +466,6 @@ void SceneSP::InitItemData()
 	string line;
 
 	string name , description ;
-	int counter = 0 ;
 
 	datafile.open("ItemData.txt");
 
@@ -472,10 +479,72 @@ void SceneSP::InitItemData()
 
 			CItem newitem(name, description , 0 ) ;
 			ItemData.push_back(newitem);
+			CheckoutList.push_back(newitem);
 		}
 
 		datafile.close();
 	}
+}
+
+void SceneSP::readFontSize()
+{
+	ifstream datafile;
+	string line;
+
+	string name , width ;
+	int WIDTH= 0;
+	int counter = 0 ;
+
+	datafile.open("fontSize.txt");
+
+	if(datafile.is_open() )
+	{ 
+
+		while (!datafile.eof())
+		{
+			getline(datafile, name, ',');
+			getline(datafile, width);
+
+			WIDTH = stoi(width);
+
+			fontSize[counter] = (float)WIDTH;
+
+			counter++;
+		}
+
+		datafile.close();
+	}
+}
+
+void SceneSP::genCheckList()
+{
+	checklistitem = ItemData[0] ; checklistitem.setItemCount(rand() % 11 ); // reditos
+	CheckList[0] = checklistitem;
+
+	checklistitem = ItemData[1] ; checklistitem.setItemCount(rand() % 2 ); // campbella
+	CheckList[1] = checklistitem;
+
+	checklistitem = ItemData[2] ; checklistitem.setItemCount(rand() % 9 ); // toblerone
+	CheckList[2] = checklistitem;
+
+	checklistitem = ItemData[3] ; checklistitem.setItemCount(rand() % 22 ); // dewtos
+	CheckList[3] = checklistitem;
+
+	checklistitem = ItemData[4] ; checklistitem.setItemCount(rand() % 6 ); // pizza
+	CheckList[4] = checklistitem;
+
+	checklistitem = ItemData[5] ; checklistitem.setItemCount(rand() % 2 ); // cactus juice
+	CheckList[5] = checklistitem;
+
+	checklistitem = ItemData[6] ; checklistitem.setItemCount(rand() % 5 ); // chicken soup
+	CheckList[6] = checklistitem;
+
+	checklistitem = ItemData[7] ; checklistitem.setItemCount(rand() % 6 ); // maggie mien
+	CheckList[7] = checklistitem;
+
+	checklistitem = ItemData[8] ; checklistitem.setItemCount(rand() % 12 ); // macaroni
+	CheckList[8] = checklistitem;
+
 }
 
 void SceneSP::collisionOBJinit()
@@ -573,10 +642,10 @@ void SceneSP::collisionOBJinit()
 	box1.set(Vector3(17.5,20,49),Vector3(15.8,0,36.8)); // right wall 
 	OBJ.push_back(box1);
 
-	box1.set(Vector3(29,20,38.5),Vector3(22,0,36.8)); // front left shelf 
+	box1.set(Vector3(29,20,38.5),Vector3(21.8,0,36.8)); // front left wall 
 	OBJ.push_back(box1);
 
-	box1.set(Vector3(18,20,38.5),Vector3(15.8,0,36.8)); // front right shelf 
+	box1.set(Vector3(18,20,38.5),Vector3(15.8,0,36.8)); // front right wall 
 	OBJ.push_back(box1);
 
 	// ******************************************* ( security room )
@@ -832,7 +901,7 @@ void SceneSP::initNPC()
 
 	meshList[GEO_CBODY] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//body.obj");
 	meshList[GEO_CBODY]->textureID = LoadTGA("image//NpcBlue.tga");
-	
+
 	meshList[GEO_CLEFTHAND] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//hand.obj");
 	meshList[GEO_CLEFTHAND]->textureID = LoadTGA("image//NpcBlue.tga");
 
@@ -851,7 +920,7 @@ void SceneSP::initNPC()
 
 	meshList[GEO_SBODY] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//body.obj");
 	meshList[GEO_SBODY]->textureID = LoadTGA("image//NpcBlack.tga");
-	
+
 	meshList[GEO_SLEFTHAND] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//hand.obj");
 	meshList[GEO_SLEFTHAND]->textureID = LoadTGA("image//NpcBlack.tga");
 
@@ -864,7 +933,6 @@ void SceneSP::initNPC()
 	meshList[GEO_SRIGHTLEG] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//leg.obj");
 	meshList[GEO_SRIGHTLEG]->textureID = LoadTGA("image//NpcBlack.tga");
 }
-
 
 void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 {
@@ -898,7 +966,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 
 	if (Application::IsKeyPressed(VK_SPACE) && JumpState == false)
 	{
-		
+
 		JumpState = true;
 		JumpDirection = true;
 	}
@@ -930,7 +998,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		lights[1].power = 3;
 		glUniform1f(m_parameters[U_LIGHT1_POWER], lights[1].power);
 	}
-	
+
 
 	if(Application::IsKeyPressed('Z'))
 	{
@@ -1095,7 +1163,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 				CashierText = false;
 			}
 		}
-		
+
 		if ( NoInteractableTargetcollision() == 11 && toiletDoor == false && time > 1)
 		{
 			toiletDoor = true;
@@ -1198,19 +1266,24 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 
 	ItemNo = Items[NoItemTargetcollision()].getNo();
 
-	if ( Application::IsKeyPressed('V'))
+	if ( Application::IsKeyPressed('K'))
+		genCheckList();
+
+	if ( Application::IsKeyPressed('B') && time > 1)
 	{
-		for ( int x = 0; x < CheckoutList.size() ; x++ )
-		{
-			cout << CheckoutList[x].getItemName() << " " << CheckoutList[x].getItemCount() << endl;
-		}
+		if ( toggleCheck == true )
+			toggleCheck = false;
+		else
+			toggleCheck = true;
+
+		time = 0 ;
 	}
 
 	if (ItemSlide == true)
 		updateItemSlide(dt,WhichCashier);
 
 
-	if (Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 15 && lights[0].power != 0 && lights[1].power != 0)
+	if (Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 15 && lights[0].power != 0 && lights[1].power != 0 && time > 1 )
 	{
 		//SWITCH OFF
 		lights[0].power = 0;
@@ -1219,13 +1292,25 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		lights[1].power = 0;
 		glUniform1f(m_parameters[U_LIGHT1_POWER], lights[1].power);
 
-		cout << " lights off " << endl;
+		time = 0 ;
 	}
 
-	
+	if (Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 15 && lights[0].power == 0 && lights[1].power == 0 && time > 1 )
+	{
+		lights[0].power = 0.5;
+		glUniform1f(m_parameters[U_LIGHT0_POWER], lights[0].power);
+
+		lights[1].power = 2;
+		glUniform1f(m_parameters[U_LIGHT1_POWER], lights[1].power);
+
+		time = 0 ;
+	}
+
 	UpdateSG(dt);
 	UpdateNPC(dt);
 	time += dt;
+
+	updateCheckList();
 
 	UpdateNPC(dt);
 	SlidingDoor(dt);
@@ -1236,9 +1321,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	right.Normalize();
 	camera.up = right.Cross(view).Normalized();
 	engine->setListenerPosition(vec3df(camera.position.x,camera.position.y,camera.position.z),vec3df(view.x,view.y,view.z),vec3df(0,0,0),vec3df(-camera.up.x,-camera.up.y,-camera.up.z));
-	//engine->setListenerPosition(vec3df(camera.position.x,camera.position.y,camera.position.z),vec3df(view.x,view.y,view.z),vec3df(0,0,0),vec3df(-camera.up.x,-camera.up.y,-camera.up.z));
 
-	cout << camera.position.x << " " << camera.position.y << " " << camera.position.z << endl;
 
 }
 
@@ -1373,13 +1456,13 @@ void SceneSP::Render()
 		string ctemp;
 		if ( CashierText == true )
 			temp = Cashier.getType() + " : " + Cashier.CashierWelcome();
-			RenderTextOnScreen(meshList[GEO_CASHIERTEXT], temp, (1, 0, 1), 2, 8, 23);
+		RenderTextOnScreen(meshList[GEO_CASHIERTEXT], temp, (1, 0, 1), 2, 8, 23);
 		if ( SecurityText == true ) 
 			stemp = Guard.getType() + " : " + Guard.SSpeech();
-			RenderTextOnScreen(meshList[GEO_SECURITYTEXT], stemp, (1, 0, 1), 2, 5, 23);
+		RenderTextOnScreen(meshList[GEO_SECURITYTEXT], stemp, (1, 0, 1), 2, 5, 23);
 		if ( CustomerText == true )
 			ctemp = Customer.getType() + " : " +  Guard.CSpeech();
-			RenderTextOnScreen(meshList[GEO_CUSTOMERTEXT], ctemp, (1, 0, 1), 2, 13, 23);
+		RenderTextOnScreen(meshList[GEO_CUSTOMERTEXT], ctemp, (1, 0, 1), 2, 13, 23);
 
 		if ( PickUpItem == true || PlaceItem == true )
 		{
@@ -1389,6 +1472,24 @@ void SceneSP::Render()
 
 		if ( Caught == true ) 
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "You have been caught", (1, 0, 1),2.5, 5, 16);
+
+		if ( toggleCheck == true )
+		{
+			RenderPictureOnScreen(meshList[GEO_CHECKLIST],100,40,0.47,0.7);
+
+			for ( int z = 0 ; z < 9 ; z++ )
+			{
+				RenderTextOnScreen(meshList[GEO_MainMenuText],CheckList[z].getItemName(), (1,0,0) , 2 , 10 , 20 - z );
+				RenderTextOnScreen(meshList[GEO_MainMenuText],Convert(CheckoutList[z].getItemCount()), (1,0,0) , 2 , 24 , 20 - z );
+				RenderTextOnScreen(meshList[GEO_MainMenuText],"/", (1,0,0) , 2 , 26 , 20 - z );
+				RenderTextOnScreen(meshList[GEO_MainMenuText],Convert(CheckList[z].getItemCount()), (1,0,0) , 2 , 27 , 20 - z );
+				if ( CheckCheckOut[z] == true ) 
+					RenderTextOnScreen(meshList[GEO_MainMenuText], "Done" , (1,0,0) , 2 , 30 , 20 - z );
+				else
+					RenderTextOnScreen(meshList[GEO_MainMenuText], "Not done" , (1,0,0) , 2 , 30 , 20 - z );
+
+			}
+		}
 
 	}
 }

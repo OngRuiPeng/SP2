@@ -20,7 +20,8 @@ public:
 	static Mesh* GenerateRing(const std::string &meshName, Color color ,unsigned numSlice,float outerR , float innerR);
 	static Mesh* GenerateSphere(const std::string &meshName, Color color , unsigned numStack ,unsigned numSlice,float radius);
 	static Mesh* GenerateOBJ(const std::string &meshName, const std::string &file_path) ;
-	static Mesh* GenerateText(const std::string &meshName, unsigned numRow, unsigned numCol);
+	static Mesh* GenerateText(const std::string &meshName, unsigned numRow, unsigned numCol , float font[]);
+	static Mesh* GeneratePicture(const std::string &meshName, unsigned numRow, unsigned numCol);
 	static Mesh* GenerateTriangle(const std::string &meshName, Color color , float lengthX, float lengthY);
 	static Mesh* GenerateStar(const std::string &meshName, Color color , float lengthX, float lengthY);
 	static Mesh* GenerateCylinder(const std::string &meshName, Color color , unsigned numStack ,unsigned numSlice,float height,float radius);
