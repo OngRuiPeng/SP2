@@ -358,7 +358,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	TapTurn = false;
 	SinkDrain = false;
 	SinkDrainDir = false;
-	sinkUp = 1.2;
+	sinkUp = 1.18;
 	waterTurn = 90;
 	waterScale = 2;
 	waterTrans = 1.68;
@@ -404,8 +404,12 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 
 	//Customer
 	CashRight = 0;
-	StareEnd = false;
-
+	CashTimer = 0;
+	CashWalk = false;
+	CashRotArm = 0;
+	ArmRaise = true;
+	ArmTransUp = -5;
+	ArmTransRight = 0;
 
 	//**********************************************************   collisions 
 	box1.set(camera.position + Vector3(1,1,1),camera.position - Vector3(1,1,1));
@@ -1127,18 +1131,16 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		WhichCashier = NoInteractableTargetcollision();
 	}
 	//Toilet
-	if(Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 2) //Tap water switch on
+	if(Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 2 && TapSwitch == false && TapTurn == false) //Tap water switch on
 	{
-		if (TapSwitch == false && TapTurn == false)
-		{
-			TapSwitch = true;
-			TapTurn = true;
-		}
-		
-		if (TapTurn == true)
-		{
-			TapTurn = false;
-		}
+		TapSwitch = true;
+		TapTurn = true;
+	}
+	
+	if (Application::IsKeyPressed('Q') && NoInteractableTargetcollision() == 2 && TapSwitch == true && TapTurn == true)
+	{
+		TapTurn = false;
+		TapSwitch = false;
 	}
 
 	if(Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 3  && Flush == false ) //Flush On
@@ -1207,11 +1209,6 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	if (ItemSlide == true)
 		updateItemSlide(dt,WhichCashier);
 
-	
-	if (Application::IsKeyPressed('L'))
-	{
-		StareEnd = true;
-	}
 
 	if (Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 15 && lights[0].power != 0 && lights[1].power != 0)
 	{
@@ -1225,16 +1222,6 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		cout << " lights off " << endl;
 	}
 
-	if (Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 15 && lights[0].power == 0 && lights[1].power == 0)
-	{
-		lights[0].power = 0.5;
-		glUniform1f(m_parameters[U_LIGHT0_POWER], lights[0].power);
-
-		lights[1].power = 2;
-		glUniform1f(m_parameters[U_LIGHT1_POWER], lights[1].power);
-
-		cout << " lights on " << endl;
-	}
 	
 	UpdateSG(dt);
 	UpdateNPC(dt);
@@ -1274,6 +1261,7 @@ int SceneSP::Renderirr()
 	engine->setListenerPosition(vec3df(camera.position.x,camera.position.y,camera.position.z),vec3df(view.x,view.y,view.z),vec3df(0,0,0),vec3df(-camera.up.x,-camera.up.y,-camera.up.z));
 	return 0;
 }
+
 void SceneSP::Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -1375,7 +1363,8 @@ void SceneSP::Render()
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Detectors successfully deactivated", (0, 1, 0), 2, 3, 25);
 		if ( PlaceItem == true ) 
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press Q to put back item", (1, 0, 1),2.5, 5, 4);
-
+		if (TapSwitch == true)
+			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press Q to turn off tap", (1, 0, 1),2.5, 5, 5);
 		if ( interactmah == true && ChooseWhich == false) 
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press E to interact", (1, 0, 1),2.5, 5, 4);
 

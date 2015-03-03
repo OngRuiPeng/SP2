@@ -317,7 +317,12 @@ public:
 	float Passerby2Dist;
 
 	float CashRight;
-	bool StareEnd;
+	float CashTimer;
+	bool CashWalk;
+	float CashRotArm;
+	bool ArmRaise;
+	float ArmTransUp;
+	float ArmTransRight;
 	//NPC interactions, // Variable to check whether NPC is interacted with
 	bool CashierText;  
 	bool SecurityText; 

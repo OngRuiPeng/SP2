@@ -216,14 +216,13 @@ void SceneSP::UpdateSG(double dt)
 
 		InitSGOnce = true;
 	}
-
-
-	
 }
 
 void SceneSP::UpdateCustomer(double dt)
 {
-	if (StareEnd == true)
+	CashTimer += dt;
+	cout << CashTimer << endl;
+	if (CashWalk == true)					//Legs anim
 	{
 		if ( CashROn == true )
 		{
@@ -242,5 +241,25 @@ void SceneSP::UpdateCustomer(double dt)
 			}
 		}
 	}
+	else									//Legs off
+	{
+		CashRight = 0;
+	}
 
+	if (CashTimer > 20)
+	{
+		//ArmTransRight = 4;
+		if (ArmRaise == true)
+		{
+			CashRotArm += (5 * dt);
+			if (CashRotArm > 60)
+			{
+				ArmRaise == false;
+			}
+		}
+		else
+		{
+			CashRotArm = 0;
+		}
+	}
 }

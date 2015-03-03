@@ -273,11 +273,9 @@ void SceneSP::RenderTapWater()
 		waterTrans = 1.68;
 	}
 
-	if (TapSwitch == true && TapTurn == false)
+	if (TapSwitch == false)
 	{
-		sinkUp -= 0.001;
 		waterScale -= 0.5;
-
 	}
 	
 	if (waterScale < 0.2)
@@ -285,14 +283,7 @@ void SceneSP::RenderTapWater()
 		waterScale = 0.1;
 	}
 
-
-	if (sinkUp < 1.1)
-	{
-		TapSwitch = false;
-		TapTurn = false;
-	}
-
-	if (TapSwitch == true && TapTurn == true)
+	if (TapTurn == true)
 	{
 		modelStack.PushMatrix();
 		modelStack.Scale(3.5, 2.5, 3.5);
@@ -303,21 +294,25 @@ void SceneSP::RenderTapWater()
 
 		modelStack.PushMatrix();
 		modelStack.Scale(2, 2.5, 2);
-		modelStack.Translate(6.6, sinkUp, 14.3);
+		modelStack.Translate(6.63, sinkUp, 14.3);
 		modelStack.Rotate(90, 0, 1, 0);
 		RenderMesh(meshList[GEO_BIGWATER], true);
 		modelStack.PopMatrix();
+	}
+
+
+	if (TapTurn == false)
+	{
+		if (TapSwitch == true)	
+		{
+			modelStack.PushMatrix();
+			modelStack.Scale(waterScale, 2.5, waterScale);
+			modelStack.Translate(6.6, sinkUp, 14.3);
+			modelStack.Rotate(90, 0, 1, 0);
+			RenderMesh(meshList[GEO_BIGWATER], true);
+			modelStack.PopMatrix();
+		}
+		
 	}
 	
-	if (TapTurn == false && TapSwitch == true)
-	{
-		modelStack.PushMatrix();
-		modelStack.Scale(waterScale, 2.5, waterScale);
-		modelStack.Translate(6.6, sinkUp, 14.3);
-		modelStack.Rotate(90, 0, 1, 0);
-		RenderMesh(meshList[GEO_BIGWATER], true);
-		modelStack.PopMatrix();
-	}
-
-
 }

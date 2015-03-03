@@ -8,7 +8,7 @@ void SceneSP::RenderCharacter()
 
 	//Customer
 	modelStack.PushMatrix();
-	modelStack.Translate(5, 4, 25);
+	modelStack.Translate(6, 4, 25);
 	modelStack.Rotate(90, 0, 1, 0);
 	RenderMesh(meshList[GEO_BODY], true);
 		
@@ -23,7 +23,10 @@ void SceneSP::RenderCharacter()
 		modelStack.PopMatrix();
 		
 		modelStack.PushMatrix();
-		modelStack.Translate(1, 0, 0);
+		modelStack.Translate(1, 0.4, -0.3);
+		modelStack.Rotate(CashRotArm, 1, 0, 0);
+		
+		//modelStack.Translate(0, ArmTransUp, ArmTransRight);
 		RenderMesh(meshList[GEO_RIGHTHAND], true);
 		modelStack.PopMatrix();
 
