@@ -1,10 +1,14 @@
 #include "SceneSP.h"
+#include "Camera.h"
+#include "Camera3.h"
+
 
 bool PB2LForward = true;
 bool PB2RForward = false;
 
 bool CashROn = false;
 
+ISoundEngine* engine3 = createIrrKlangDevice(ESOD_AUTO_DETECT,ESEO_MULTI_THREADED | ESEO_LOAD_PLUGINS | ESEO_USE_3D_BUFFERS);
 float WalkingSpeed = 10.f;
 float limit = 35;
 void SceneSP::UpdateNPC(double dt)
@@ -124,6 +128,13 @@ void SceneSP::UpdateNPC(double dt)
 		InitPBOnce = true;
 	}
 	UpdateCustomer(dt);
+	Vector3 view = (camera.target - camera.position).Normalized();
+	Vector3 right = view.Cross(camera.up);
+	right.y = 0;
+	right.Normalize();
+	camera.up = right.Cross(view).Normalized();
+	engine3->setListenerPosition(vec3df(camera.position.x,camera.position.y,camera.position.z),vec3df(view.x,view.y,view.z),vec3df(0,0,0),vec3df(-camera.up.x,-camera.up.y,-camera.up.z));
+	//ISound* walkwalk = engine3->play3D("../irrKlang/media/walkm.mp3",vec3df(0,0,0),false);
 }
 
 void SceneSP::UpdateSG(double dt)

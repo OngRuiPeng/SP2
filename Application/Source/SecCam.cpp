@@ -1,6 +1,6 @@
 #include "SceneSP.h"
 #include "Application.h"
-
+ISoundEngine* engine2 = createIrrKlangDevice(ESOD_AUTO_DETECT,ESEO_MULTI_THREADED | ESEO_LOAD_PLUGINS | ESEO_USE_3D_BUFFERS);
 void SceneSP::updateCam(double dt)
 {
 	if ( cam_state == NORMAL )
@@ -49,6 +49,7 @@ void SceneSP::updateCam(double dt)
 
 	if (Application::IsKeyPressed('N') && CamTime > 1 )
 	{
+        ISound* cameraswitch = engine2->play2D("../irrKlang/media/camera.mp3", false);
 		cam_state = (cam_state + 1 ) % 6 ;
 		CamTime = 0 ;
 		

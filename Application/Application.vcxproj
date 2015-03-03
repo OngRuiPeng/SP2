@@ -109,6 +109,7 @@
     <ClCompile Include="Source\SecCam.cpp" />
     <ClCompile Include="Source\shader.cpp" />
     <ClCompile Include="Source\SimpleInteractions.cpp" />
+    <ClCompile Include="Source\UpdateNPC.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -113,6 +113,9 @@
     <ClCompile Include="Source\RenderInventory.cpp">
       <Filter>Source Files\RenderStuff</Filter>
     </ClCompile>
+    <ClCompile Include="Source\UpdateNPC.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">

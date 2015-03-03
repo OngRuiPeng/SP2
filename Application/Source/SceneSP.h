@@ -18,9 +18,10 @@
 #include "Item.h"
 //Music include
 #pragma comment(lib, "irrKlang.lib")
+
+
 using namespace irrklang;
 using namespace std;
-
 static float pop;
 class SceneSP : public Scene
 {
@@ -419,8 +420,8 @@ public:
 	double* xposition;
 	double* yposition;
 	
+	//Music
 	bool music;
-	bool walkm;
 
 private:
 	unsigned m_vertexArrayID;
