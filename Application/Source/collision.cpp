@@ -110,7 +110,7 @@ void SceneSP::updatecollision(double dt)
 	}
 	else if (Application::IsKeyPressed('S') && gamestate != MAINMENU && gamestate != CHOOSEMODE && gamestate != GAMEWINCHECKOUT && gamestate != GAMEWINTHIEF && gamestate != GAMEBUSTED) 
 	{
-
+		walk->setAllSoundsPaused(false);
 		Vector3 view = (camera.target - camera.position).Normalize();
 		view.y = 0;
 		Vector3 backside = -view * dt * MOVE_SPEED;
@@ -119,7 +119,7 @@ void SceneSP::updatecollision(double dt)
 	}
 	else if (Application::IsKeyPressed('D') && gamestate != MAINMENU && gamestate != CHOOSEMODE && gamestate != GAMEWINCHECKOUT && gamestate != GAMEWINTHIEF && gamestate != GAMEBUSTED) 
 	{
-
+		walk->setAllSoundsPaused(false);
 		Vector3 view = (camera.target - camera.position).Normalize();
 		view.y = 0;
 		Vector3 right = view.Cross(camera.up);
@@ -129,7 +129,7 @@ void SceneSP::updatecollision(double dt)
 	}
 	else if (Application::IsKeyPressed('A') && gamestate != MAINMENU && gamestate != CHOOSEMODE && gamestate != GAMEWINCHECKOUT && gamestate != GAMEWINTHIEF && gamestate != GAMEBUSTED) 
 	{
-
+		walk->setAllSoundsPaused(false);
 		Vector3 view = (camera.target - camera.position).Normalize();
 		view.y = 0 ;
 		Vector3 left = view.Cross(camera.up);

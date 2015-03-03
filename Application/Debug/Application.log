@@ -1,422 +1,137 @@
-﻿Build started 3/3/2015 3:45:11 AM.
-     1>Project "G:\SP2 Backup\SP2 Backup (2nd March End)\Application\Application.vcxproj" on node 2 (build target(s)).
+﻿Build started 3/3/2015 3:18:25 PM.
+     1>Project "C:\Users\L532\Desktop\SP2 - Copy (2)\Application\Application.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\Application.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"G:\SP2 Backup\SP2 Backup (2nd March End)\\Common\Source" /I"G:\SP2 Backup\SP2 Backup (2nd March End)\\glfw\include" /I"G:\SP2 Backup\SP2 Backup (2nd March End)\\glew\include" /I"G:\SP2 Backup\SP2 Backup (2nd March End)\\irrKlang\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Source\Application.cpp Source\Camera.cpp Source\Camera3.cpp Source\collision.cpp Source\Inventory.cpp Source\Item.cpp Source\LoadOBJ.cpp Source\LoadTGA.cpp Source\main.cpp Source\Mesh.cpp Source\MeshBuilder.cpp Source\Npc.cpp Source\Obj.cpp Source\RenderCharacter.cpp Source\RenderChooseMode.cpp Source\RenderFunctions.cpp Source\RenderInteractableObjs.cpp Source\RenderInventory.cpp Source\RenderMainMenu.cpp Source\RenderPacks.cpp Source\RenderSkybox.cpp Source\RenderSupermarket.cpp Source\SceneSP.cpp Source\SecCam.cpp Source\shader.cpp Source\SimpleInteractions.cpp Source\UpdateNPC.cpp Source\Utility.cpp
-         Utility.cpp
-         UpdateNPC.cpp
-     1>c:\program files (x86)\microsoft sdks\windows\v7.0a\include\windef.h(126): warning C4005: 'APIENTRY' : macro redefinition
-                 g:\sp2 backup\sp2 backup (2nd march end)\glfw\include\glfw\glfw3.h(92) : see previous definition of 'APIENTRY'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\updatenpc.cpp(15): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\updatenpc.cpp(23): warning C4244: '-=' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\updatenpc.cpp(31): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\updatenpc.cpp(39): warning C4244: '-=' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\updatenpc.cpp(45): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\updatenpc.cpp(59): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\updatenpc.cpp(65): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\updatenpc.cpp(75): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\updatenpc.cpp(87): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\updatenpc.cpp(95): warning C4244: '-=' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\updatenpc.cpp(145): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\updatenpc.cpp(151): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\updatenpc.cpp(157): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\updatenpc.cpp(169): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\updatenpc.cpp(177): warning C4244: '-=' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\updatenpc.cpp(206): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\updatenpc.cpp(223): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\updatenpc.cpp(231): warning C4244: '-=' : conversion from 'double' to 'float', possible loss of data
-         SimpleInteractions.cpp
-     1>c:\program files (x86)\microsoft sdks\windows\v7.0a\include\windef.h(126): warning C4005: 'APIENTRY' : macro redefinition
-                 g:\sp2 backup\sp2 backup (2nd march end)\glfw\include\glfw\glfw3.h(92) : see previous definition of 'APIENTRY'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\simpleinteractions.cpp(34): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\simpleinteractions.cpp(35): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\simpleinteractions.cpp(36): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\simpleinteractions.cpp(43): warning C4244: '-=' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\simpleinteractions.cpp(44): warning C4244: '-=' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\simpleinteractions.cpp(45): warning C4244: '-=' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\simpleinteractions.cpp(72): warning C4018: '<' : signed/unsigned mismatch
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\simpleinteractions.cpp(104): warning C4018: '<' : signed/unsigned mismatch
-         shader.cpp
-         SecCam.cpp
-     1>c:\program files (x86)\microsoft sdks\windows\v7.0a\include\windef.h(126): warning C4005: 'APIENTRY' : macro redefinition
-                 g:\sp2 backup\sp2 backup (2nd march end)\glfw\include\glfw\glfw3.h(92) : see previous definition of 'APIENTRY'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\seccam.cpp(16): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\seccam.cpp(20): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\seccam.cpp(28): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\seccam.cpp(32): warning C4305: 'argument' : truncation from 'double' to 'float'
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\Users\L532\Desktop\SP2 - Copy (2)\\Common\Source" /I"C:\Users\L532\Desktop\SP2 - Copy (2)\\glfw\include" /I"C:\Users\L532\Desktop\SP2 - Copy (2)\\glew\include" /I"C:\Users\L532\Desktop\SP2 - Copy (2)\\irrKlang\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Source\SceneSP.cpp
          SceneSP.cpp
      1>c:\program files (x86)\microsoft sdks\windows\v7.0a\include\windef.h(126): warning C4005: 'APIENTRY' : macro redefinition
-                 g:\sp2 backup\sp2 backup (2nd march end)\glfw\include\glfw\glfw3.h(92) : see previous definition of 'APIENTRY'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(354): warning C4305: '=' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(357): warning C4305: '=' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(361): warning C4305: '=' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(506): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(509): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(564): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(564): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(567): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(570): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(570): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(574): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(574): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(577): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(577): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(577): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(580): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(603): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(603): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(609): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(609): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(611): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(611): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(613): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(613): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(613): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(624): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(624): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(624): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(624): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(624): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(624): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(634): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(634): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(636): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(636): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(638): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(638): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(643): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(643): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(645): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(645): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(647): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(647): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(652): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(652): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(654): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(654): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(656): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(656): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(666): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(666): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(672): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(672): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(679): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(679): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(679): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(679): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(687): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(687): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(695): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(695): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(695): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(695): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(700): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(700): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(703): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(706): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(710): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(710): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(710): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(710): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(712): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(712): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(712): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(714): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(714): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(714): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(714): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(730): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(733): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(736): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(736): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(739): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(739): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(757): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(757): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(760): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(760): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(1024): warning C4018: '<' : signed/unsigned mismatch
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(1206): warning C4018: '<' : signed/unsigned mismatch
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(1360): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(1361): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(1362): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(1365): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(1368): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(1370): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(1372): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(1375): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(1382): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(1385): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(1388): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(1392): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(1393): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\scenesp.cpp(1397): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-         RenderSupermarket.cpp
-     1>c:\program files (x86)\microsoft sdks\windows\v7.0a\include\windef.h(126): warning C4005: 'APIENTRY' : macro redefinition
-                 g:\sp2 backup\sp2 backup (2nd march end)\glfw\include\glfw\glfw3.h(92) : see previous definition of 'APIENTRY'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(7): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(8): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(8): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(8): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(44): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(45): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(50): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(61): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(67): warning C4305: 'initializing' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(83): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(90): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(95): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(100): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(108): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(108): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(113): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(113): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(114): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(114): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(124): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(124): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(129): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(129): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(130): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(130): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(248): warning C4305: '-=' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(255): warning C4305: '+=' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(268): warning C4305: '-=' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(273): warning C4305: '=' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(278): warning C4305: '-=' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(285): warning C4305: '=' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(300): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(306): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(306): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(316): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\rendersupermarket.cpp(316): warning C4305: 'argument' : truncation from 'double' to 'float'
-         RenderSkybox.cpp
-     1>c:\program files (x86)\microsoft sdks\windows\v7.0a\include\windef.h(126): warning C4005: 'APIENTRY' : macro redefinition
-                 g:\sp2 backup\sp2 backup (2nd march end)\glfw\include\glfw\glfw3.h(92) : see previous definition of 'APIENTRY'
-         RenderPacks.cpp
-     1>c:\program files (x86)\microsoft sdks\windows\v7.0a\include\windef.h(126): warning C4005: 'APIENTRY' : macro redefinition
-                 g:\sp2 backup\sp2 backup (2nd march end)\glfw\include\glfw\glfw3.h(92) : see previous definition of 'APIENTRY'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderpacks.cpp(22): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderpacks.cpp(31): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderpacks.cpp(53): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderpacks.cpp(62): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderpacks.cpp(84): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderpacks.cpp(93): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderpacks.cpp(117): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderpacks.cpp(139): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderpacks.cpp(148): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderpacks.cpp(192): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderpacks.cpp(201): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderpacks.cpp(210): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderpacks.cpp(223): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderpacks.cpp(250): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderpacks.cpp(259): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderpacks.cpp(268): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderpacks.cpp(281): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderpacks.cpp(290): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderpacks.cpp(299): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderpacks.cpp(343): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderpacks.cpp(353): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderpacks.cpp(362): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderpacks.cpp(375): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderpacks.cpp(384): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderpacks.cpp(393): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderpacks.cpp(415): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderpacks.cpp(424): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderpacks.cpp(433): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderpacks.cpp(446): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderpacks.cpp(455): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderpacks.cpp(464): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderpacks.cpp(473): warning C4305: 'argument' : truncation from 'double' to 'float'
-         RenderMainMenu.cpp
-     1>c:\program files (x86)\microsoft sdks\windows\v7.0a\include\windef.h(126): warning C4005: 'APIENTRY' : macro redefinition
-                 g:\sp2 backup\sp2 backup (2nd march end)\glfw\include\glfw\glfw3.h(92) : see previous definition of 'APIENTRY'
-         RenderInventory.cpp
-     1>c:\program files (x86)\microsoft sdks\windows\v7.0a\include\windef.h(126): warning C4005: 'APIENTRY' : macro redefinition
-                 g:\sp2 backup\sp2 backup (2nd march end)\glfw\include\glfw\glfw3.h(92) : see previous definition of 'APIENTRY'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(25): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(28): warning C4018: '<' : signed/unsigned mismatch
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(35): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(35): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(39): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(39): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(39): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(39): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(46): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(46): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(50): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(50): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(50): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(50): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(56): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(56): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(60): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(60): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(60): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(60): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(66): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(66): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(70): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(70): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(70): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(70): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(76): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(76): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(80): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(80): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(80): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(80): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(86): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(86): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(90): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(90): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(90): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(90): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(96): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(96): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(100): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(100): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(100): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(100): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(106): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(106): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(110): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(110): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(110): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(110): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(116): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(116): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(120): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(120): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(120): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinventory.cpp(120): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-         RenderInteractableObjs.cpp
-     1>c:\program files (x86)\microsoft sdks\windows\v7.0a\include\windef.h(126): warning C4005: 'APIENTRY' : macro redefinition
-                 g:\sp2 backup\sp2 backup (2nd march end)\glfw\include\glfw\glfw3.h(92) : see previous definition of 'APIENTRY'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinteractableobjs.cpp(7): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinteractableobjs.cpp(8): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinteractableobjs.cpp(8): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinteractableobjs.cpp(8): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinteractableobjs.cpp(14): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinteractableobjs.cpp(14): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinteractableobjs.cpp(19): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinteractableobjs.cpp(21): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinteractableobjs.cpp(21): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinteractableobjs.cpp(27): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinteractableobjs.cpp(35): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinteractableobjs.cpp(35): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinteractableobjs.cpp(37): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinteractableobjs.cpp(40): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinteractableobjs.cpp(46): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinteractableobjs.cpp(48): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinteractableobjs.cpp(48): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinteractableobjs.cpp(51): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinteractableobjs.cpp(66): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinteractableobjs.cpp(74): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinteractableobjs.cpp(106): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinteractableobjs.cpp(119): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinteractableobjs.cpp(127): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinteractableobjs.cpp(139): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinteractableobjs.cpp(147): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinteractableobjs.cpp(161): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinteractableobjs.cpp(188): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinteractableobjs.cpp(188): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinteractableobjs.cpp(196): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\renderinteractableobjs.cpp(205): warning C4305: 'argument' : truncation from 'double' to 'float'
-         RenderFunctions.cpp
-     1>c:\program files (x86)\microsoft sdks\windows\v7.0a\include\windef.h(126): warning C4005: 'APIENTRY' : macro redefinition
-                 g:\sp2 backup\sp2 backup (2nd march end)\glfw\include\glfw\glfw3.h(92) : see previous definition of 'APIENTRY'
-         RenderChooseMode.cpp
-     1>c:\program files (x86)\microsoft sdks\windows\v7.0a\include\windef.h(126): warning C4005: 'APIENTRY' : macro redefinition
-                 g:\sp2 backup\sp2 backup (2nd march end)\glfw\include\glfw\glfw3.h(92) : see previous definition of 'APIENTRY'
-         RenderCharacter.cpp
-     1>c:\program files (x86)\microsoft sdks\windows\v7.0a\include\windef.h(126): warning C4005: 'APIENTRY' : macro redefinition
-                 g:\sp2 backup\sp2 backup (2nd march end)\glfw\include\glfw\glfw3.h(92) : see previous definition of 'APIENTRY'
-         Obj.cpp
-         Npc.cpp
-         MeshBuilder.cpp
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\meshbuilder.cpp(664): warning C4018: '<' : signed/unsigned mismatch
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\meshbuilder.cpp(715): warning C4018: '<=' : signed/unsigned mismatch
-         Mesh.cpp
-         main.cpp
-         Generating Code...
-         Compiling...
-         LoadTGA.cpp
-         LoadOBJ.cpp
-         Item.cpp
-         Inventory.cpp
-     1>c:\program files (x86)\microsoft sdks\windows\v7.0a\include\windef.h(126): warning C4005: 'APIENTRY' : macro redefinition
-                 g:\sp2 backup\sp2 backup (2nd march end)\glfw\include\glfw\glfw3.h(92) : see previous definition of 'APIENTRY'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\inventory.cpp(9): warning C4018: '<' : signed/unsigned mismatch
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\inventory.cpp(38): warning C4018: '<' : signed/unsigned mismatch
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\inventory.cpp(51): warning C4018: '<' : signed/unsigned mismatch
-         collision.cpp
-     1>c:\program files (x86)\microsoft sdks\windows\v7.0a\include\windef.h(126): warning C4005: 'APIENTRY' : macro redefinition
-                 g:\sp2 backup\sp2 backup (2nd march end)\glfw\include\glfw\glfw3.h(92) : see previous definition of 'APIENTRY'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(36): warning C4018: '<' : signed/unsigned mismatch
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(56): warning C4018: '<' : signed/unsigned mismatch
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(107): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(116): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(126): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(136): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(154): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(154): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(155): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(155): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(160): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(160): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(164): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(164): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(164): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(168): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(168): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(172): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(172): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(172): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(197): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(197): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(197): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(197): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(197): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(197): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(199): warning C4018: '<' : signed/unsigned mismatch
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(226): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(226): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(226): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(226): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(226): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(226): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(228): warning C4018: '<' : signed/unsigned mismatch
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(261): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(261): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(261): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(261): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(261): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(261): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(263): warning C4018: '<' : signed/unsigned mismatch
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(290): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(290): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(290): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(290): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(290): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(290): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(292): warning C4018: '<' : signed/unsigned mismatch
-         Camera3.cpp
-         Camera.cpp
-         Application.cpp
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\application.cpp(26): warning C4390: ';' : empty controlled statement found; is this the intent?
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\application.cpp(113): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\application.cpp(113): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\application.cpp(118): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\application.cpp(118): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-         Generating Code...
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(214): warning C4715: 'SceneSP::ItemTargetcollision' : not all control paths return a value
-     1>g:\sp2 backup\sp2 backup (2nd march end)\application\source\collision.cpp(278): warning C4715: 'SceneSP::InteractableTargetcollision' : not all control paths return a value
+                 c:\users\l532\desktop\sp2 - copy (2)\glfw\include\glfw\glfw3.h(92) : see previous definition of 'APIENTRY'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(360): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(363): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(367): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(584): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(587): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(642): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(642): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(645): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(645): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(648): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(648): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(652): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(652): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(655): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(655): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(655): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(658): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(681): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(681): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(687): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(687): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(689): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(689): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(691): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(691): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(691): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(702): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(702): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(702): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(702): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(702): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(702): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(712): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(712): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(714): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(714): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(716): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(716): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(721): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(721): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(723): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(723): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(725): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(725): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(730): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(730): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(732): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(732): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(734): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(734): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(744): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(744): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(750): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(750): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(757): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(757): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(757): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(757): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(765): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(765): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(773): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(773): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(773): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(773): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(778): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(778): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(781): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(784): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(788): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(788): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(788): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(788): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(790): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(790): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(790): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(792): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(792): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(792): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(792): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(808): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(811): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(814): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(814): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(817): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(817): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(835): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(835): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(838): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(838): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(1106): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(1453): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(1454): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(1455): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(1458): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(1461): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(1463): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(1465): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(1467): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(1469): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(1476): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(1479): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(1482): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(1486): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(1487): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(1491): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(1495): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(1495): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(1499): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(1499): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(1500): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(1500): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(1500): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(1501): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(1501): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(1502): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(1502): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(1502): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(1504): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(1504): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(1506): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\l532\desktop\sp2 - copy (2)\application\source\scenesp.cpp(1506): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
        ManifestResourceCompile:
-         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\Application.exe.embed.manifest.res" Debug\Application_manifest.rc 
+         All outputs are up-to-date.
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"G:\SP2 Backup\SP2 Backup (2nd March End)\Debug\Application.exe" /INCREMENTAL /NOLOGO /LIBPATH:"G:\SP2 Backup\SP2 Backup (2nd March End)\\irrKlang\lib" /LIBPATH:"G:\SP2 Backup\SP2 Backup (2nd March End)\Debug" /LIBPATH:"G:\SP2 Backup\SP2 Backup (2nd March End)\\glfw\lib-msvc100" /LIBPATH:"G:\SP2 Backup\SP2 Backup (2nd March End)\\glew\lib" glew32.lib glfw3.lib opengl32.lib winmm.lib Common.lib irrKlang.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\Application.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"G:\SP2 Backup\SP2 Backup (2nd March End)\Debug\Application.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"G:\SP2 Backup\SP2 Backup (2nd March End)\Debug\Application.lib" /MACHINE:X86 Debug\Application.exe.embed.manifest.res
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\L532\Desktop\SP2 - Copy (2)\Debug\Application.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\L532\Desktop\SP2 - Copy (2)\\irrKlang\lib" /LIBPATH:"C:\Users\L532\Desktop\SP2 - Copy (2)\Debug" /LIBPATH:"C:\Users\L532\Desktop\SP2 - Copy (2)\\glfw\lib-msvc100" /LIBPATH:"C:\Users\L532\Desktop\SP2 - Copy (2)\\glew\lib" glew32.lib glfw3.lib opengl32.lib winmm.lib Common.lib irrKlang.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\Application.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\L532\Desktop\SP2 - Copy (2)\Debug\Application.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\L532\Desktop\SP2 - Copy (2)\Debug\Application.lib" /MACHINE:X86 Debug\Application.exe.embed.manifest.res
          Debug\Application.obj
          Debug\Camera.obj
          Debug\Camera3.obj
@@ -431,12 +146,11 @@
          Debug\Npc.obj
          Debug\Obj.obj
          Debug\RenderCharacter.obj
-         Debug\RenderChooseMode.obj
          Debug\RenderFunctions.obj
          Debug\RenderInteractableObjs.obj
          Debug\RenderInventory.obj
-         Debug\RenderMainMenu.obj
          Debug\RenderPacks.obj
+         Debug\RenderScreens.obj
          Debug\RenderSkybox.obj
          Debug\RenderSupermarket.obj
          Debug\SceneSP.obj
@@ -445,19 +159,17 @@
          Debug\SimpleInteractions.obj
          Debug\UpdateNPC.obj
          Debug\Utility.obj
-         LINK : G:\SP2 Backup\SP2 Backup (2nd March End)\Debug\Application.exe not found or not built by the last incremental link; performing full link
-     1>LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
        Manifest:
          C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\Application.exe.embed.manifest" /manifest Debug\Application.exe.intermediate.manifest
          All outputs are up-to-date.
        LinkEmbedManifest:
          All outputs are up-to-date.
-         Application.vcxproj -> G:\SP2 Backup\SP2 Backup (2nd March End)\Debug\Application.exe
+         Application.vcxproj -> C:\Users\L532\Desktop\SP2 - Copy (2)\Debug\Application.exe
        FinalizeBuildStatus:
          Deleting file "Debug\Application.unsuccessfulbuild".
          Touching "Debug\Application.lastbuildstate".
-     1>Done Building Project "G:\SP2 Backup\SP2 Backup (2nd March End)\Application\Application.vcxproj" (build target(s)).
+     1>Done Building Project "C:\Users\L532\Desktop\SP2 - Copy (2)\Application\Application.vcxproj" (build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:01:04.38
+Time Elapsed 00:00:01.56

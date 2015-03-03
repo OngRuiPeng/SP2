@@ -97,12 +97,11 @@
     <ClCompile Include="Source\Npc.cpp" />
     <ClCompile Include="Source\Obj.cpp" />
     <ClCompile Include="Source\RenderCharacter.cpp" />
-    <ClCompile Include="Source\RenderChooseMode.cpp" />
     <ClCompile Include="Source\RenderFunctions.cpp" />
     <ClCompile Include="Source\RenderInteractableObjs.cpp" />
     <ClCompile Include="Source\RenderInventory.cpp" />
-    <ClCompile Include="Source\RenderMainMenu.cpp" />
     <ClCompile Include="Source\RenderPacks.cpp" />
+    <ClCompile Include="Source\RenderScreens.cpp" />
     <ClCompile Include="Source\RenderSkybox.cpp" />
     <ClCompile Include="Source\RenderSupermarket.cpp" />
     <ClCompile Include="Source\SceneSP.cpp" />

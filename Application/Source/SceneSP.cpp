@@ -25,6 +25,8 @@
 
 ISoundEngine* engine = createIrrKlangDevice(ESOD_AUTO_DETECT,ESEO_MULTI_THREADED | ESEO_LOAD_PLUGINS | ESEO_USE_3D_BUFFERS);
 ISound* detectors = engine->play2D("../irrKlang/media/Darudepasu.mp3", false,true); // Main main menu	
+ISound* tap = engine->play2D("../irrKlang/media/Sink.mp3",true,true);
+ISound* SAD = engine->play2D("../irrKlang/media/2SAD4ME.mp3", true, true);
 using namespace std;
 
 SceneSP::SceneSP()
@@ -322,6 +324,13 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	meshList[GEO_DEWTOS] = MeshBuilder::GeneratePicture("dewtos",1,1);
 	meshList[GEO_DEWTOS]->textureID = LoadTGA("image//Dewtos.tga");
 
+	//Fun mode init~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	meshList[GEO_HITMARKER] = MeshBuilder::GeneratePicture("Hitmarker",1,1);
+	meshList[GEO_HITMARKER]->textureID = LoadTGA("image//Hitmarker.tga");
+
+	meshList[GEO_SNOOPDOG] = MeshBuilder::GenerateQuad("smoke weed everyday",Color(0,0,0),5,5);
+	meshList[GEO_SNOOPDOG]->textureID = LoadTGA("image//SnoopDogg.tga");
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//variables
 	gamestate = MAINMENU;
 
@@ -940,6 +949,8 @@ void SceneSP::initNPC()
 
 	meshList[GEO_SRIGHTLEG] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//leg.obj");
 	meshList[GEO_SRIGHTLEG]->textureID = LoadTGA("image//NpcBlack.tga");
+
+	
 }
 
 void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
@@ -989,16 +1000,12 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		music = true;
 		cout << " Music Start!" << endl;
 	}
-	if(Application::IsKeyPressed('X'))
-	{
-		music = false;
-		cout << "Music Stop!" << endl;
-	}
 
 	if(Application::IsKeyPressed(VK_ESCAPE) && ChooseWhich == false)
 	{
 		gamestate = MAINMENU;
 		DetectorsOn = true;
+
 
 		genCheckList();
 
@@ -1029,6 +1036,10 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		ItemsInInventory = false;
 		Inventorytimer = 0;
 		ItemsStolen = false;
+
+		tap->setIsPaused(true);
+		SAD->setIsPaused(true);
+
 	}
 
 	//Game states	 
@@ -1100,6 +1111,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 
 	if ( Caught == true ) // Caught by security guard in Thief Mode
 	{
+		SAD->setIsPaused(false);
 		gamestate = GAMEBUSTED;
 	}
 
@@ -1150,8 +1162,11 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	{
 		if ( Items[NoItemTargetcollision()].getEmpty() == false) 
 			Items[NoItemTargetcollision()].setEmpty(true);
-
-		ISound* pickup = engine->play2D("../irrKlang/media/Pickup.mp3", false); // pickup item
+		//if(gamestate == GAMETHIEF)
+		//{
+			//RenderPictureOnScreen(meshList[GEO_HITMARKER],15,15,7,6.5);
+		//}
+		ISound* pickup = engine->play2D("../irrKlang/media/pickup2.mp3", false); // pickup item
 
 		updateInventory(ItemData[Items[NoItemTargetcollision()].getNo()] , true ) ;
 	}
@@ -1266,15 +1281,18 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	//Toilet
 	if(Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 2 && TapSwitch == false && TapTurn == false) //Tap water switch on
 	{
+		tap->setIsPaused(false);	
 		TapSwitch = true;
 		TapTurn = true;
 	}
 
 	if (Application::IsKeyPressed('Q') && NoInteractableTargetcollision() == 2 && TapSwitch == true && TapTurn == true)
 	{
+		tap->setIsPaused(true);
 		TapTurn = false;
 		TapSwitch = false;
 	}
+	
 
 	if(Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 3  && Flush == false ) //Flush On
 	{
@@ -1495,7 +1513,7 @@ void SceneSP::Render()
 		RenderInteractableObjs();
 
 		RenderInventory();
-
+		
 		if(music == true)
 		{
 			Renderirr();

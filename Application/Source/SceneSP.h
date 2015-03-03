@@ -117,8 +117,13 @@ class SceneSP : public Scene
 		GEO_PIZZA,
 		GEO_MAGGI,
 		GEO_DEWTOS,
-		//
+		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		
+		//Fun Stuff~~~~~~~~~~~~~~~~~~~~~~~~~~
+		GEO_HITMARKER,
+		GEO_SNOOPDOG,
+		GEO_WEED,
+		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		GEO_LIGHTBALL,
 
 		GEO_SEE,

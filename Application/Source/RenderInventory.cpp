@@ -25,6 +25,11 @@ void SceneSP::RenderInventory()
 	RenderPictureOnScreen(meshList[GEO_INVENTORY],47.5,5.5,0.872,0.5);
 	modelStack.PopMatrix();
 
+	modelStack.PushMatrix();
+	modelStack.Translate(0,5,0);
+	RenderMesh(meshList[GEO_SNOOPDOG],false);
+	modelStack.PopMatrix();
+
 	for ( int x = 0 ; x < InventoryData.size() ; x++ )
 	{
 		if ( InventoryData[x].getItemCount() > 0 ) 
