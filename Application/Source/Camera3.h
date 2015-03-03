@@ -15,6 +15,7 @@ public:
 	Vector3 defaultPosition;
 	Vector3 defaultTarget;
 	Vector3 defaultUp;
+	Vector3 defaultTargetwhere;
 
 	Vector3 targetwhere;
 

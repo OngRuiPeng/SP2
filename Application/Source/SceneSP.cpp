@@ -345,7 +345,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	time = 0;
 	translateX = 0 ;
 	PickUpItem = false;
-	interactmah = false;
+	Interact = false;
 
 	JumpDirection = false;
 	JumpState = false;
@@ -965,7 +965,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 
 	if (Application::IsKeyPressed(VK_SPACE) && JumpState == false)
 	{
-		
+
 		ISound* jump = engine->play2D("../irrKlang/media/Jump2.mp3", false); // Jump duh
 		JumpState = true;
 		JumpDirection = true;
@@ -1011,6 +1011,28 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	{
 		gamestate = MAINMENU;
 		DetectorsOn = true;
+		genCheckList();
+
+		for ( int x = 0 ; x < InventoryData.size() ; x++ )
+		{
+			InventoryData[x].setItemCount(0);
+		}
+
+		for ( int x = 0 ; x < CheckoutList.size() ; x++ )
+		{
+			CheckoutList[x].setItemCount(0);
+		}
+
+		for ( int x = 0 ; x < 9 ; x++ )
+		{
+			CheckCheckOut[x] = false;
+		}
+
+		for ( int x = 0 ; x < Items.size() ; x++ )
+		{
+			Items[x].setEmpty(false);
+		}
+
 	}
 
 	//Game states	 
@@ -1021,13 +1043,13 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		int state = glfwGetMouseButton(m_window, GLFW_MOUSE_BUTTON_LEFT); // check for clicks
 		if( state == GLFW_PRESS && (*xposition > 285 && *xposition < 515 && *yposition > 185 && *yposition < 263) )
 		{
-			
+
 			ISound* mainmenu = engine->play2D("../irrKlang/media/MMbutt.mp3", false); // Main main menu
 			gamestate = CHOOSEMODE;
 		}
 		else if( state == GLFW_PRESS && (*xposition > 285 && *xposition < 515 && *yposition > 308 && *yposition < 383) )
 		{
-			
+
 			ISound* mainmenu = engine->play2D("../irrKlang/media/MMbutt.mp3", false); // Main main menu	
 			exit(0);
 		}
@@ -1119,11 +1141,11 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	}
 
 	//Talking with NPCs & door
-	if(Application::IsKeyPressed('E') && interactmah == true)
+	if(Application::IsKeyPressed('E') && Interact == true)
 	{
 		if ( NoInteractableTargetcollision() == 5 || NoInteractableTargetcollision() == 6 ) // Cashier
 		{
-            ISound* simlish = engine->play2D("../irrKlang/media/Simlishm.mp3", false); // Npc talking
+			ISound* simlish = engine->play2D("../irrKlang/media/Simlishm.mp3", false); // Npc talking
 			time = 0;
 			CashierText = true;
 			if ( SecurityText == true)
@@ -1137,7 +1159,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		}
 		if ( NoInteractableTargetcollision() == 7 ) // Security Guard
 		{
-            ISound* simlish = engine->play2D("../irrKlang/media/Simlishm.mp3", false); // Npc talking
+			ISound* simlish = engine->play2D("../irrKlang/media/Simlishm.mp3", false); // Npc talking
 			time = 0;
 			SecurityText = true;
 			if ( CashierText == true)
@@ -1151,8 +1173,8 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		}
 		if ( NoInteractableTargetcollision() == 8 || NoInteractableTargetcollision() == 9 || NoInteractableTargetcollision() == 10 )
 		{
-            
-            ISound* simlish = engine->play2D("../irrKlang/media/Simlishm.mp3", false); // Npc talking
+
+			ISound* simlish = engine->play2D("../irrKlang/media/Simlishm.mp3", false); // Npc talking
 			time = 0;
 			CustomerText = true;
 			if ( SecurityText == true)
@@ -1167,39 +1189,39 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 
 		if ( NoInteractableTargetcollision() == 11 && toiletDoor == false && time > 1)
 		{
-            
-            ISound* door = engine->play2D("../irrKlang/media/door.mp3", false); // back doors
-            //door->setIsPaused(false);
+
+			ISound* door = engine->play2D("../irrKlang/media/door.mp3", false); // back doors
+			//door->setIsPaused(false);
 			toiletDoor = true;
 			toiletDoorMove = -90;
 			time = 0;
 		}
 		if ( NoInteractableTargetcollision() == 11 && toiletDoor == true && time > 1)
 		{
-            
-            ISound* door = engine->play2D("../irrKlang/media/door.mp3", false); // back doors
-            //door->setIsPaused(false);
+
+			ISound* door = engine->play2D("../irrKlang/media/door.mp3", false); // back doors
+			//door->setIsPaused(false);
 			toiletDoor = false;
 			toiletDoorMove = 0;
 			time = 0;
 		}
 		if ( NoInteractableTargetcollision() == 12  && securityDoor == false && time > 0.5)
 		{
-            
-            ISound* door = engine->play2D("../irrKlang/media/door.mp3", false); // back doors
+
+			ISound* door = engine->play2D("../irrKlang/media/door.mp3", false); // back doors
 			securityDoor = true;
 			securityDoorMove = 90;
 			time = 0;
 		}
 		if ( NoInteractableTargetcollision() == 12 && securityDoor == true && time > 0.5)
 		{
-            
-            ISound* door = engine->play2D("../irrKlang/media/door.mp3", false); // back doors
+
+			ISound* door = engine->play2D("../irrKlang/media/door.mp3", false); // back doors
 			securityDoor = false;
 			securityDoorMove = 0;
 			time = 0;
 		}
-       
+
 	}
 
 	//Conveyor belt @ cashier
@@ -1216,7 +1238,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		TapSwitch = true;
 		TapTurn = true;
 	}
-	
+
 	if (Application::IsKeyPressed('Q') && NoInteractableTargetcollision() == 2 && TapSwitch == true && TapTurn == true)
 	{
 		TapTurn = false;
@@ -1250,8 +1272,8 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 
 	if (Application::IsKeyPressed('C') && ChooseWhich == true ) // choose camera 
 	{
-        
-        ISound* cameraswitch = engine->play2D("../irrKlang/media/camera.mp3", false); // Camera switch-eroo
+
+		ISound* cameraswitch = engine->play2D("../irrKlang/media/camera.mp3", false); // Camera switch-eroo
 		StorePos = camera.position ; 
 		StoreTarget1 = camera.target ;
 		StoreTarget2 = camera.targetwhere;
@@ -1301,8 +1323,8 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 
 	if (Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 15 && lights[0].power != 0 && lights[1].power != 0 && time > 1 )
 	{
-        
-        ISound* Switch = engine->play2D("../irrKlang/media/switchoff.mp3", false); // light switch
+
+		ISound* Switch = engine->play2D("../irrKlang/media/switchoff.mp3", false); // light switch
 		//SWITCH OFF
 		lights[0].power = 0;
 		glUniform1f(m_parameters[U_LIGHT0_POWER], lights[0].power);
@@ -1315,7 +1337,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 
 	if (Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 15 && lights[0].power == 0 && lights[1].power == 0 && time > 1 )
 	{
-        ISound* Switch = engine->play2D("../irrKlang/media/switchon.mp3", false); // light switch
+		ISound* Switch = engine->play2D("../irrKlang/media/switchon.mp3", false); // light switch
 		lights[0].power = 0.5;
 		glUniform1f(m_parameters[U_LIGHT0_POWER], lights[0].power);
 
@@ -1352,7 +1374,7 @@ int SceneSP::Renderirr()
 	{
 		return 0;
 	}
-	
+
 	ISound* sound = engine->play3D("../irrKlang/media/icejj.mp3",vec3df(0.f,0.f,20.f), false);
 
 	if(sound)
@@ -1456,18 +1478,18 @@ void SceneSP::Render()
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press G to deactivate detectors", (1, 0, 1),2, 5, 6);
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press T to escape", (1, 0, 1),2, 5, 5);
 		}
-		if ( PickUpItem == true ) 
+		if ( PickUpItem == true && Interact == false) 
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press E to pick up item", (1, 0, 1),2.5, 5, 4);
 
 		if ( cam_state != NORMAL ) 
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press N for next , Y for previous", (0, 1, 0),2, 3, 4);
 		if ( DetectorsOn == false)
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Detectors successfully deactivated", (0, 1, 0), 2, 3, 25);
-		if ( PlaceItem == true ) 
+		if ( PlaceItem == true && Interact == false) 
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press Q to put back item", (1, 0, 1),2.5, 5, 4);
 		if (TapSwitch == true)
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press Q to turn off tap", (1, 0, 1),2.5, 5, 5);
-		if ( interactmah == true && ChooseWhich == false) 
+		if ( Interact == true && ChooseWhich == false) 
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press E to interact", (1, 0, 1),2.5, 5, 4);
 
 		string temp;
@@ -1475,18 +1497,20 @@ void SceneSP::Render()
 		string ctemp;
 		if ( CashierText == true )
 			temp = Cashier.getType() + " : " + Cashier.CashierWelcome();
-		RenderTextOnScreen(meshList[GEO_CASHIERTEXT], temp, (1, 0, 1), 2, 8, 23);
+		RenderTextOnScreen(meshList[GEO_CASHIERTEXT], temp, (1, 0, 1), 1.6, 8, 23);
 		if ( SecurityText == true ) 
 			stemp = Guard.getType() + " : " + Guard.SSpeech();
-		RenderTextOnScreen(meshList[GEO_SECURITYTEXT], stemp, (1, 0, 1), 2, 5, 23);
+		RenderTextOnScreen(meshList[GEO_SECURITYTEXT], stemp, (1, 0, 1), 1.6, 5, 23);
 		if ( CustomerText == true )
 			ctemp = Customer.getType() + " : " +  Guard.CSpeech();
-		RenderTextOnScreen(meshList[GEO_CUSTOMERTEXT], ctemp, (1, 0, 1), 2, 13, 23);
+		RenderTextOnScreen(meshList[GEO_CUSTOMERTEXT], ctemp, (1, 0, 1), 1.6, 13, 23);
 
 		if ( PickUpItem == true || PlaceItem == true )
 		{
-			RenderTextOnScreen(meshList[GEO_MainMenuText], ItemData[ItemNo].getItemName() , (1, 0, 1),2.5, 2, 20);
-			RenderTextOnScreen(meshList[GEO_MainMenuText], ItemData[ItemNo].getItemDesc() , (1, 0, 1),2.5, 2, 19);
+			RenderTextOnScreen(meshList[GEO_MainMenuText], "Target :" , (1, 0, 1),2, 2, 28);
+			RenderTextOnScreen(meshList[GEO_MainMenuText], "Info   :", (1, 0, 1),2, 2, 27);
+			RenderTextOnScreen(meshList[GEO_MainMenuText], ItemData[ItemNo].getItemName() , (1, 0, 1),2, 10, 28);
+			RenderTextOnScreen(meshList[GEO_MainMenuText], ItemData[ItemNo].getItemDesc() , (1, 0, 1),2, 10, 27);
 		}
 
 		if ( Caught == true ) 

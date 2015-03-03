@@ -21,6 +21,8 @@ void Camera3::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
 	this->up = defaultUp = right.Cross(view).Normalized();
 	targetwhere = Vector3(0,target.y,-30);
 
+	this->targetwhere = defaultTargetwhere = targetwhere;
+
 }
 
 void Camera3::Update(double dt,float width, float height, double* xpos, double* ypos)
@@ -96,4 +98,5 @@ void Camera3::Reset()
 	position = defaultPosition;
 	target = defaultTarget;
 	up = defaultUp;
+	targetwhere = defaultTargetwhere;
 }

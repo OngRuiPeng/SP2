@@ -265,12 +265,12 @@ Obj SceneSP::InteractableTargetcollision() // returns the Interactable that the 
 		{
 			if ( AABBCheck(see,Interactables[x]) == true )
 			{
-				interactmah = true;
+				Interact = true;
 				return Interactables[x];
 			}
 			else
 			{
-				interactmah = false;
+				Interact = false;
 			}
 		}
 
@@ -294,12 +294,12 @@ int SceneSP::NoInteractableTargetcollision() // returns the Interactable that th
 		{
 			if ( AABBCheck(see,Interactables[x]) == true )
 			{
-				interactmah = true;
+				Interact = true;
 				return x;
 			}
 			else
 			{
-				interactmah = false;
+				Interact = false;
 			}
 		}
 

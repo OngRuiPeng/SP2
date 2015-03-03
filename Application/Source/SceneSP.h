@@ -306,7 +306,7 @@ public:
 
 	bool PlaceItem ;
 	bool PickUpItem; 
-	bool interactmah;
+	bool Interact;
 	bool DetectorsOn;
 	bool toiletDoor;
 	bool securityDoor;
