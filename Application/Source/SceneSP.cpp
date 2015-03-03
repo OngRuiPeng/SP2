@@ -407,9 +407,12 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	CashWalk = false;
 	CashRotArm = 0;
 	ArmRaise = true;
-	ArmTransUp = -5;
-	ArmTransRight = 0;
-
+	ArmTransUp = 0.2;
+	ArmTransRight = -0.3;
+	CashMovX = 6;
+	CashMovZ = 25;
+	RotBody = 90;
+	CycleOn = true;
 	//**********************************************************   collisions 
 	box1.set(camera.position + Vector3(1,1,1),camera.position - Vector3(1,1,1));
 	OBJ.push_back(box1);

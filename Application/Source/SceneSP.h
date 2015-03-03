@@ -327,6 +327,10 @@ public:
 	bool ArmRaise;
 	float ArmTransUp;
 	float ArmTransRight;
+	float CashMovX;
+	float CashMovZ;
+	float RotBody;
+	bool CycleOn;
 	//NPC interactions, // Variable to check whether NPC is interacted with
 	bool CashierText;  
 	bool SecurityText; 

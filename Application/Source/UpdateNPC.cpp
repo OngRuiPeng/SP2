@@ -88,7 +88,7 @@ void SceneSP::UpdateNPC(double dt)
 				MovePBLegs = true;
 			else
 				RotatePBLegs -= (20 * dt);
-				RotatePBHands += (20 * dt);
+			RotatePBHands += (20 * dt);
 		}
 	}
 
@@ -241,20 +241,92 @@ void SceneSP::UpdateCustomer(double dt)
 		CashRight = 0;
 	}
 
-	if (CashTimer > 20)
+	if (CycleOn == true)
 	{
-		//ArmTransRight = 4;
-		if (ArmRaise == true)
+		if (CashTimer > 20)
 		{
-			CashRotArm += (5 * dt);
-			if (CashRotArm > 60)
+			//ArmTransRight = 4;
+			if (ArmRaise == true)
 			{
-				ArmRaise == false;
+				if (CashRotArm < 50)
+				{
+					CashRotArm += (10 * dt);
+				}
+				if (CashRotArm > 45)
+				{
+					ArmRaise = false;
+				}
+			}
+			else
+			{
+				if (CashRotArm > 0)
+				{
+					CashRotArm -= (10 * dt);
+				}
+				if (CashRotArm < 0)
+				{
+					CashRotArm = 0;
+				}
 			}
 		}
-		else
+
+		if (CashTimer > 30 && CashTimer < 35)
 		{
-			CashRotArm = 0;
+			RotBody = 0;
+			ArmTransUp = 0;
+			ArmTransRight = 0;
 		}
+
+		if (CashTimer > 35 && CashTimer < 42)
+		{
+			CashWalk = true;
+			CashMovZ -= (4 * dt);
+			if (CashMovZ < 15)
+			{
+				CashMovZ = 15;
+				CashWalk = false;
+				RotBody = 90;	
+				CashWalk = true;
+				CashMovX -= (4 * dt);
+				if (CashMovX < -3.5)
+				{
+					CashMovX = -3.5;
+					CashWalk = false;
+					RotBody = 180;		
+				}
+			}
+		}
+
+		if (CashTimer > 40)
+		{
+			CashMovZ += (4 * dt);
+			CashWalk = true;
+			if (CashMovZ > 25)
+			{
+				CashMovZ = 25;
+				CashWalk = false;
+				RotBody = 270;
+				if (CashTimer > 50)
+				{
+					CycleOn = false;
+					CashTimer = 0;
+				}
+			}
+		}
+		
+	}
+	if (CycleOn == false)
+	{
+		CycleOn = true;
+		CashRight = 0;
+		CashTimer = 0;
+		CashWalk = false;
+		CashRotArm = 0;
+		ArmRaise = true;
+		ArmTransUp = 0.2;
+		ArmTransRight = -0.3;
+		CashMovX = 6;
+		CashMovZ = 25;
+		RotBody = 90;
 	}
 }
