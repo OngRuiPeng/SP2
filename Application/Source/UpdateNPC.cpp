@@ -7,6 +7,7 @@ bool PB2LForward = true;
 bool PB2RForward = false;
 
 bool CashROn = false;
+bool ArmROn = false;
 
 ISoundEngine* engine3 = createIrrKlangDevice(ESOD_AUTO_DETECT,ESEO_MULTI_THREADED | ESEO_LOAD_PLUGINS | ESEO_USE_3D_BUFFERS);
 float WalkingSpeed = 10.f;
@@ -216,117 +217,175 @@ void SceneSP::UpdateSG(double dt)
 
 void SceneSP::UpdateCustomer(double dt)
 {
-	CashTimer += dt;
-	if (CashWalk == true)					//Legs anim
-	{
-		if ( CashROn == true )
-		{
-			CashRight += (WalkingSpeed * dt);
-			if ( CashRight > limit )
-			{
-				CashROn = false;
-			}
-		}
-		else
-		{
-			CashRight -= (WalkingSpeed * dt);
-			if ( CashRight < -limit )
-			{
-				CashROn = true;
-			}
-		}
-	}
-	else									//Legs off
-	{
-		CashRight = 0;
-	}
+	Obj Customer(Vector3(CashMovX , 20, CashMovZ) + Vector3(1.5, 1, 1.5), Vector3(CashMovX, 0, CashMovZ) - Vector3(1.5, 1, 1.5));
 
-	if (CycleOn == true)
-	{
-		if (CashTimer > 20)
+	if (AABBCheck(OBJ[0],Customer) == false && AABBCheck(Customer,Interactables[9]) == false )
+	{	
+		CashTimer += dt;
+		if (CashWalk == true)					//Legs anim
 		{
-			//ArmTransRight = 4;
-			if (ArmRaise == true)
+			if ( CashROn == true )
 			{
-				if (CashRotArm < 50)
+				CashRight += (WalkingSpeed * dt);
+				if ( CashRight > limit )
 				{
-					CashRotArm += (10 * dt);
-				}
-				if (CashRotArm > 45)
-				{
-					ArmRaise = false;
+					CashROn = false;
 				}
 			}
 			else
 			{
-				if (CashRotArm > 0)
+				CashRight -= (WalkingSpeed * dt);
+				if ( CashRight < -limit )
 				{
-					CashRotArm -= (10 * dt);
+					CashROn = true;
 				}
-				if (CashRotArm < 0)
+			}
+		}
+		else									//Legs off
+		{
+			CashRight = 0;
+		}
+
+
+		if (CycleOn == true && CashTimer > 0)
+		{
+			if (CashTimer > 10)
+			{
+				ArmTransUp = 0.2;
+				ArmTransRight = -0.3;
+				if (ArmRaise == true)
 				{
-					CashRotArm = 0;
+					if (CashRotArm < 50)
+					{
+						CashRotArm += (20 * dt);
+					}
+					if (CashRotArm > 45)
+					{
+						ArmRaise = false;
+					}
+				}
+				else
+				{
+					if (CashRotArm > 0)
+					{
+						CashRotArm -= (20 * dt);
+					}
+					if (CashRotArm < 0)
+					{
+						CashRotArm = 0;
+					}
+				}
+			}				
+
+			if (CashTimer > 20 && CashTimer < 50)
+			{
+				ArmTransUp = 0;
+				ArmTransRight = 0;
+			}
+
+			if (CashTimer > 20 && CashTimer < 25)
+			{
+				RotBody = 0;
+			}
+
+			if (CashTimer > 25 && CashTimer < 30)
+			{
+				CashWalk = true;
+				CashMovZ -= (4 * dt);
+				if (CashMovZ < 15)
+				{
+					CashMovZ = 15;
+					CashWalk = false;
+					RotBody = 90;	
+					CashWalk = true;
+					CashMovX -= (4 * dt);
+					if (CashMovX < -3.5)
+					{
+						CashMovX = -3.5;
+						CashWalk = false;
+						RotBody = 180;		
+					}
+				}
+			}
+
+			if (CashTimer > 31)
+			{
+				CashMovZ += (4 * dt);
+				CashWalk = true;
+				if (CashMovZ > 25)
+				{
+					CashMovZ = 25;
+					CashWalk = false;
+					RotBody = 270;
+					if (CashTimer > 35)
+					{
+						CycleOn = false;
+						CashTimer = 0;
+					}
 				}
 			}
 		}
 
-		if (CashTimer > 30 && CashTimer < 35)
+		if (CycleOn == false && CashTimer > 0)
 		{
-			RotBody = 0;
-			ArmTransUp = 0;
-			ArmTransRight = 0;
-		}
-
-		if (CashTimer > 35 && CashTimer < 42)
-		{
-			CashWalk = true;
-			CashMovZ -= (4 * dt);
-			if (CashMovZ < 15)
+			if (CashTimer > 5 && CashTimer < 15)
 			{
-				CashMovZ = 15;
-				CashWalk = false;
-				RotBody = 90;	
+				RotBody = 90;
 				CashWalk = true;
 				CashMovX -= (4 * dt);
-				if (CashMovX < -3.5)
+				if (CashMovX < -7)
 				{
-					CashMovX = -3.5;
+					CashMovX = -7;
 					CashWalk = false;
-					RotBody = 180;		
+
 				}
 			}
-		}
 
-		if (CashTimer > 40)
-		{
-			CashMovZ += (4 * dt);
-			CashWalk = true;
-			if (CashMovZ > 25)
+			if (CashTimer > 15 && CashTimer < 20)
 			{
-				CashMovZ = 25;
-				CashWalk = false;
-				RotBody = 270;
-				if (CashTimer > 50)
+				RotBody = 0;
+				CashWalk = true;
+				CashMovZ -= (4 * dt);
+				if (CashMovZ < 15)
 				{
-					CycleOn = false;
+					CashMovZ = 15;
+					CashWalk = false;
+					RotBody = 270;
+				}
+			}
+			if (CashTimer > 20 && CashTimer < 35)
+			{
+				CashWalk = true;
+				CashMovX += (4 * dt);
+				if (CashMovX > 10)
+				{
+					CashMovX = 10;
+					CashWalk = false;
+					RotBody = 180;
+					CashWalk = true;
+					CashMovZ += (4 * dt);
+					if (CashMovZ > 25)
+					{
+						CashMovZ = 25;
+						CashWalk = false;
+						RotBody = 270;
+					}
+				}
+			}
+
+			if (CashTimer > 35)
+			{
+				RotBody = 90;
+				CashWalk = true;
+				CashMovX -= (4 * dt);
+				if (CashMovX < 6)
+				{
+					CashMovX = 6;
+					CashWalk = false;
+					CycleOn = true;
 					CashTimer = 0;
 				}
 			}
-		}
-		
-	}
-	if (CycleOn == false)
-	{
-		CycleOn = true;
-		CashRight = 0;
-		CashTimer = 0;
-		CashWalk = false;
-		CashRotArm = 0;
-		ArmRaise = true;
-		ArmTransUp = 0.2;
-		ArmTransRight = -0.3;
-		CashMovX = 6;
-		CashMovZ = 25;
-		RotBody = 90;
-	}
+		}	//False cycle
+	}//BB Check
 }

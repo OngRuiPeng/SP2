@@ -192,7 +192,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	meshList[GEO_CheckoutWinScreen]->textureID = LoadTGA("Image//WinCheckout.tga");
 
 	initSkybox();
-
+	
 	//TEXT
 	meshList[GEO_MainMenuText] = MeshBuilder::GenerateText("text", 16, 16 , fontSize );
 	meshList[GEO_MainMenuText]->textureID = LoadTGA("Image//ExportedFont.tga");
@@ -244,7 +244,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	meshList[GEO_DOOR]->textureID = LoadTGA("Image//Door.tga");
 
 	meshList[GEO_BACKDOOR] = MeshBuilder::GenerateOBJ("Backdoor", "OBJ//Backdoor.obj");
-	meshList[GEO_BACKDOOR]->textureID = LoadTGA("Image//Door.tga");
+	meshList[GEO_BACKDOOR]->textureID = LoadTGA("Image//BackDoor.tga");
 
 	meshList[GEO_SHELF] = MeshBuilder::GenerateOBJ("Shelf", "OBJ//Shelf.obj");
 	meshList[GEO_SHELF]->textureID = LoadTGA("Image//shelf.tga");
@@ -290,6 +290,10 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 
 	meshList[GEO_LIGHTSWITCH] = MeshBuilder::GenerateOBJ("Light Switch", "OBJ//LightSwitch.obj");
 	meshList[GEO_LIGHTSWITCH]->textureID = LoadTGA("Image//LightSwitch.tga");
+	
+	meshList[GEO_SECURITYCAM] = MeshBuilder::GenerateOBJ("TVScreen", "OBJ//SecurityCam.obj");
+	meshList[GEO_SECURITYCAM]->textureID = LoadTGA("Image//TVScreen.tga");	
+
 
 	initNPC();
 	// inventory init 
@@ -323,6 +327,11 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 
 	meshList[GEO_DEWTOS] = MeshBuilder::GeneratePicture("dewtos",1,1);
 	meshList[GEO_DEWTOS]->textureID = LoadTGA("image//Dewtos.tga");
+
+	meshList[GEO_TV] = MeshBuilder::GenerateQuad("TVSCreen", Color(1, 1, 1), 20.f , 20.f);
+	meshList[GEO_TV]->textureID = LoadTGA("Image//TVScreen.tga");
+
+
 
 	//Fun mode init~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	meshList[GEO_HITMARKER] = MeshBuilder::GeneratePicture("Hitmarker",1,1);
@@ -414,6 +423,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	CashRight = 0;
 	CashTimer = 0;
 	CashWalk = false;
+	ArmCycleOn = false;
 	CashRotArm = 0;
 	ArmRaise = true;
 	ArmTransUp = 0.2;
@@ -422,6 +432,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	CashMovZ = 25;
 	RotBody = 90;
 	CycleOn = true;
+	FullArmCycle = false;
 	//**********************************************************   collisions 
 	box1.set(camera.position + Vector3(1,1,1),camera.position - Vector3(1,1,1));
 	OBJ.push_back(box1);
@@ -833,7 +844,7 @@ void SceneSP::collisionInteractionsinit()
 	box1.set(Vector3(-10.5,20,1.5),Vector3(-13.5,0,-1.5)); // security guard     7
 	Interactables.push_back(box1);
 
-	box1.set(Vector3(-8.5,20,3.5),Vector3(-15.5,0,-3.5)); // security guard warning BB
+	box1.set(Vector3(-8.5,20,3.5),Vector3(-15.5,0,-3.5)); // security guard warning BB 
 	NpcBB.push_back(box1);
 	
 	box1.set(Vector3(6.5,20,26.5),Vector3(3.5,0,23.5)); // customer     8 
@@ -864,22 +875,22 @@ void SceneSP::collisionInteractionsinit()
 void SceneSP::initSkybox()
 {
 	meshList[GEO_RIGHT] = MeshBuilder::GenerateQuad("right", Color(1, 1, 1), 1.f , 1.f);
-	meshList[GEO_RIGHT]->textureID = LoadTGA("Image//right3.tga");
+	meshList[GEO_RIGHT]->textureID = LoadTGA("Image//Right.tga");
 
 	meshList[GEO_LEFT] = MeshBuilder::GenerateQuad("left", Color(1, 1, 1), 1.f , 1.f);
-	meshList[GEO_LEFT]->textureID = LoadTGA("Image//left3.tga");
+	meshList[GEO_LEFT]->textureID = LoadTGA("Image//Left.tga");
 
 	meshList[GEO_TOP] = MeshBuilder::GenerateQuad("top", Color(1, 1, 1), 1.f , 1.f);
-	meshList[GEO_TOP]->textureID = LoadTGA("Image//top3.tga");
+	meshList[GEO_TOP]->textureID = LoadTGA("Image//Top.tga");
 
 	meshList[GEO_BOTTOM] = MeshBuilder::GenerateQuad("bottom", Color(1, 1, 1), 0.3f , 0.3f);
 	meshList[GEO_BOTTOM]->textureID = LoadTGA("Image//Base.tga");
 
 	meshList[GEO_FRONT] = MeshBuilder::GenerateQuad("front", Color(1, 1, 1),1.f ,  1.f);
-	meshList[GEO_FRONT]->textureID = LoadTGA("Image//front3.tga");
+	meshList[GEO_FRONT]->textureID = LoadTGA("Image//Front.tga");
 
 	meshList[GEO_BACK] = MeshBuilder::GenerateQuad("back", Color(1, 1, 1), 1.f ,  1.f);
-	meshList[GEO_BACK]->textureID = LoadTGA("Image//back3.tga");
+	meshList[GEO_BACK]->textureID = LoadTGA("Image//Back.tga");
 
 }
 
@@ -946,7 +957,7 @@ void SceneSP::initNPC()
 	meshList[GEO_SRIGHTLEG] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//leg.obj");
 	meshList[GEO_SRIGHTLEG]->textureID = LoadTGA("image//NpcBlack.tga");
 
-	
+
 }
 
 void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
@@ -1159,7 +1170,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 			Items[NoItemTargetcollision()].setEmpty(true);
 		//if(gamestate == GAMETHIEF)
 		//{
-			//RenderPictureOnScreen(meshList[GEO_HITMARKER],15,15,7,6.5);
+		//RenderPictureOnScreen(meshList[GEO_HITMARKER],15,15,7,6.5);
 		//}
 		ISound* pickup = engine->play2D("../irrKlang/media/pickup2.mp3", false); // pickup item
 
@@ -1282,18 +1293,20 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		WhichCashier = NoInteractableTargetcollision();
 	}
 	//Toilet
-	if(Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 2 && TapSwitch == false && TapTurn == false) //Tap water switch on
+	if(Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 2 && time > 1) //Tap water switch on
 	{
-		tap->setIsPaused(false);	
-		TapSwitch = true;
-		TapTurn = true;
-	}
+		if (TapSwitch == false)
+		{
+			tap->setIsPaused(false);	
+			TapSwitch = true;
+		}
+		else
+		{
+			tap->setIsPaused(true);
+			TapSwitch = false;
+		}
 
-	if (Application::IsKeyPressed('Q') && NoInteractableTargetcollision() == 2 && TapSwitch == true && TapTurn == true)
-	{
-		tap->setIsPaused(true);
-		TapTurn = false;
-		TapSwitch = false;
+		time = 0 ;
 	}
 	
 	if(Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 3  && Flush == false ) //Flush On
@@ -1508,10 +1521,16 @@ void SceneSP::Render()
 		RenderSupermarket();
 		RenderCharacter();
 		RenderInteractableObjs();
+
 		if ( gamestate != GAMEROAM )
 		{
 			RenderInventory();
 		}
+
+		RenderTV();
+		
+
+
 		if(music == true)
 		{
 			Renderirr();
@@ -1533,9 +1552,7 @@ void SceneSP::Render()
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Detectors successfully deactivated", (0, 1, 0), 2, 3, 25);
 		if ( PlaceItem == true && Interact == false) 
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press Q to put back item", (1, 0, 1),2.5, 5, 4);
-		if (TapSwitch == true)
-			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press Q to turn off tap", (1, 0, 1),2.5, 5, 5);
-		if ( Interact == true && ChooseWhich == false && SecurityCam != true) 
+		if ( Interact == true && ChooseWhich == false) 
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press E to interact", (1, 0, 1),2.5, 5, 4);
 
 		string temp;

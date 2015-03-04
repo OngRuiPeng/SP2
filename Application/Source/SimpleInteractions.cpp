@@ -4,7 +4,7 @@ void SceneSP::SlidingDoor(double dt)
 {
 	if ((camera.position.x <= 9 && camera.position.x >= -7 && camera.position.z >= -16 && camera.position.z <= 2) || PBPos.x <= 9 && PBPos.x >= -7 && PBPos.z >= -16 && PBPos.z <= 2)
 	{
-		if (DoorSlide >= -5)
+		if (DoorSlide > -5)
 		{
 			DoorSlide -= (double)(3 * dt);
 		}
@@ -12,7 +12,7 @@ void SceneSP::SlidingDoor(double dt)
 
 	else
 	{
-		if (DoorSlide < -0.75  )
+		if (DoorSlide < -0.8)
 		{	
 			DoorSlide += (double)(3 * dt);
 		}

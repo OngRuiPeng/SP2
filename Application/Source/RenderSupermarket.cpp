@@ -230,7 +230,7 @@ void SceneSP::RenderSupermarket()
 		modelStack.PopMatrix();
 	}
 
-
+	RenderCams();
 	
 	modelStack.PopMatrix();
 	//All pop
@@ -263,7 +263,18 @@ void SceneSP::RenderFlush()
 
 void SceneSP::RenderTapWater()
 {
-	if (TapTurn == true)
+
+
+	if (TapSwitch == true)
+	{
+		TapTurn = true;
+	}
+	else
+	{
+		TapTurn = false;
+	}
+
+	if (TapSwitch == true)
 	{
 		waterTrans -= 0.005;
 	}
@@ -273,17 +284,7 @@ void SceneSP::RenderTapWater()
 		waterTrans = 1.68;
 	}
 
-	if (TapSwitch == false)
-	{
-		waterScale -= 0.5;
-	}
-	
-	if (waterScale < 0.2)
-	{
-		waterScale = 0.1;
-	}
-
-	if (TapTurn == true)
+	if (TapSwitch == true)
 	{
 		modelStack.PushMatrix();
 		modelStack.Scale(3.5, 2.5, 3.5);
@@ -298,21 +299,56 @@ void SceneSP::RenderTapWater()
 		modelStack.Rotate(90, 0, 1, 0);
 		RenderMesh(meshList[GEO_BIGWATER], true);
 		modelStack.PopMatrix();
-	}
-
-
-	if (TapTurn == false)
-	{
-		if (TapSwitch == true)	
-		{
-			modelStack.PushMatrix();
-			modelStack.Scale(waterScale, 2.5, waterScale);
-			modelStack.Translate(6.6, sinkUp, 14.3);
-			modelStack.Rotate(90, 0, 1, 0);
-			RenderMesh(meshList[GEO_BIGWATER], true);
-			modelStack.PopMatrix();
-		}
-		
-	}
 	
+	}
+}
+
+void SceneSP::RenderTV()
+{
+	modelStack.PushMatrix();
+	//scale, translate, rotate
+	modelStack.Rotate(-90, 1, 0, 0);
+	modelStack.Rotate(90, 0, 0, 1);
+	modelStack.Translate(-43, 24.5, 5);	//+x is fwd, +z is up, +y is right
+	modelStack.Scale(3.5, 3.5, 3.5);
+	RenderMesh(meshList[GEO_TV], false);
+	modelStack.PopMatrix();
+}
+
+void SceneSP::RenderCams()
+{
+	modelStack.PushMatrix();				//front left
+	//scale, translate, rotate
+	modelStack.Rotate(180, 1, 0, 0);
+	modelStack.Translate(24, -19.3, 4.3);			//+x is to left, -y is up, +z is fwd
+	RenderMesh(meshList[GEO_SECURITYCAM], false);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();				//toilet room top
+	//scale, translate, rotate
+	modelStack.Rotate(90, 0, 0, 1);
+	modelStack.Translate(17, -24.4, 34.2);			
+	RenderMesh(meshList[GEO_SECURITYCAM], false);
+	modelStack.PopMatrix();
+	
+	modelStack.PushMatrix();				//Security room top
+	//scale, translate, rotate
+	modelStack.Rotate(-90, 0, 0, 1);
+	modelStack.Translate(-17, -22.6, 34.2);
+	RenderMesh(meshList[GEO_SECURITYCAM], false);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();				//front right
+	//scale, translate, rotate
+	modelStack.Rotate(180, 1, 0, 0);
+	modelStack.Translate(-22, -19.3, 4.3);			//+x is to left, -y is up, +z is fwd
+	RenderMesh(meshList[GEO_SECURITYCAM], false);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();				//outside
+	//scale, translate, rotate
+	modelStack.Rotate(-90, 1, 0, 0);
+	modelStack.Translate(0, 6.5, 13.5);		//+y is forwards, +z is up, +x is right
+	RenderMesh(meshList[GEO_SECURITYCAM], false);
+	modelStack.PopMatrix();	
 }

@@ -13,19 +13,19 @@ void SceneSP::updateCam(double dt)
 	}
 	else if ( cam_state == CAM1 )
 	{
-		camera.position = Vector3(24.5,15,-4.7);
+		camera.position = Vector3(24.5,20,-4.7);
 	}
 	else if ( cam_state == CAM2 )
 	{
-		camera.position = Vector3(25.5,15,36.4);
+		camera.position = Vector3(25.5,20,38);
 	}
 	else if ( cam_state == CAM3 )
 	{
-		camera.position = Vector3(-23.5,15,36);
+		camera.position = Vector3(-23.5,20,38);
 	}
 	else if ( cam_state == CAM4 )
 	{
-		camera.position = Vector3(-23.5,15,-4.8);
+		camera.position = Vector3(-23.5,20,-4.8);
 	}
 	else if ( cam_state == CAM5 )
 	{

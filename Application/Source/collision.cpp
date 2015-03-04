@@ -182,6 +182,8 @@ void SceneSP::updateobj()
 	NpcBB[0].set(SGPos + Vector3(8,20,8),SGPos - Vector3(8,4,8));
 	Interactables[7].set(SGPos + Vector3(1.5,20,1.5),SGPos - Vector3(1.5,4,1.5));
 
+	Interactables[8].set(Vector3(CashMovX , 20, CashMovZ) + Vector3(1.5, 1, 1.5), Vector3(CashMovX, 0, CashMovZ) - Vector3(1.5, 1, 1.5)); 
+
 
 }
 

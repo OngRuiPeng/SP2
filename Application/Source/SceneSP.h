@@ -73,7 +73,12 @@ class SceneSP : public Scene
 		GEO_PACK3,
 		GEO_PACK4,
 		GEO_LIGHTSWITCH,
+		GEO_SECURITYCAM,
 		//Supermarket stuff=====================================
+		
+		//TV stuff=====================================
+		GEO_TV,
+		//TV stuff=====================================
 
 		//NPCs=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 		GEO_HEAD,
@@ -239,6 +244,7 @@ public:
 
 	//Functions---------------------------------------
 	void initSkybox();
+	void initTV();
 	void initSupermarket();
 	void initNPC();
 
@@ -248,6 +254,7 @@ public:
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
 	void RenderCharacter();
 	void RenderSkybox();
+	void RenderTV();
 	void RenderMainMenu();
 	void RenderChooseMode();
 	void RenderBusted();
@@ -261,6 +268,7 @@ public:
 	void RenderTapWater();
 	void RenderFlush();
 	int Renderirr();
+	void RenderCams();
 	
 	void UpdateNPC(double);
 	void UpdateCustomer(double);
@@ -336,6 +344,8 @@ public:
 	float CashMovZ;
 	float RotBody;
 	bool CycleOn;
+	bool ArmCycleOn;
+	bool FullArmCycle;
 	//NPC interactions, // Variable to check whether NPC is interacted with
 	bool CashierText;  
 	bool SecurityText; 

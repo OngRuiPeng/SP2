@@ -7,21 +7,7 @@ void SceneSP::RenderInteractableObjs()
 	modelStack.Translate(0, -0.1, 0);
 	modelStack.Scale(1.1, 1.1, 1.1);
 
-	//DOORS
-	modelStack.PushMatrix();
-	modelStack.Scale(3.5, 2.5, 3.5);
-	modelStack.Rotate(90, 0, 1, 0);
-	modelStack.Translate(1.9, 0, -DoorSlide + 0.6);
-	RenderMesh(meshList[GEO_DOOR], true);
-	modelStack.PopMatrix();
 
-	modelStack.PushMatrix();
-	modelStack.Scale(3.5, 2.5, 3.55);
-	modelStack.Rotate(90, 0, 1, 0);
-	modelStack.Translate(1.9, 0, DoorSlide);
-	RenderMesh(meshList[GEO_DOOR], true);
-	modelStack.PopMatrix();
-	//!DOORS
 	
 	modelStack.PushMatrix();
 	modelStack.Scale(3.5, 2.5, 3.55);
@@ -336,6 +322,23 @@ void SceneSP::RenderInteractableObjs()
 
 
 	RenderPacks();
+
+		//DOORS
+	modelStack.PushMatrix();
+	modelStack.Scale(3.5, 2.5, 3.5);
+	modelStack.Rotate(90, 0, 1, 0);
+	modelStack.Translate(1.9, 0, -DoorSlide + 0.68);
+	RenderMesh(meshList[GEO_DOOR], true);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Scale(3.5, 2.5, 3.55);
+	modelStack.Rotate(90, 0, 1, 0);
+	modelStack.Translate(1.9, 0, DoorSlide);
+	RenderMesh(meshList[GEO_DOOR], true);
+	modelStack.PopMatrix();
+	//!DOORS
+
 
 
 	modelStack.PopMatrix();			//ALL POP
