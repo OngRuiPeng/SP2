@@ -1,3 +1,13 @@
+/******************************************************************************/
+/*!
+\file	Obj.cpp
+\author SP'13 2015
+\par	nyp
+\brief
+Defining functions used to initialise OBJs for collision 
+*/
+/******************************************************************************/
+
 #include "Obj.h"
 
 Obj::Obj() 

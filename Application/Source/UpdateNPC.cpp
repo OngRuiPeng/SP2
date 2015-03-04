@@ -1,3 +1,13 @@
+/******************************************************************************/
+/*!
+\file	UpdateNPC.cpp
+\author SP'13 2015
+\par	nyp
+\brief
+CPP to define functions to update the AIs in the game 
+*/
+/******************************************************************************/
+
 #include "SceneSP.h"
 #include "Camera.h"
 #include "Camera3.h"

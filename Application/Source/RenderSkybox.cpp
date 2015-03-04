@@ -1,3 +1,13 @@
+/******************************************************************************/
+/*!
+\file	RenderSkybox.cpp
+\author SP'13 2015
+\par	nyp
+\brief
+CPP to render skybox 
+*/
+/******************************************************************************/
+
 #include "SceneSP.h"
 
 void SceneSP::RenderSkybox()

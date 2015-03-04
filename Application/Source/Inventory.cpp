@@ -1,3 +1,13 @@
+/******************************************************************************/
+/*!
+\file	SceneSP.cpp
+\author SP'13 2015
+\par	nyp
+\brief
+CPP to update inventory when you checkout,pick up and put back item
+*/
+/******************************************************************************/
+
 #include "SceneSP.h"
 
 void SceneSP::updateInventory( CItem a , bool b )

@@ -1,3 +1,13 @@
+/******************************************************************************/
+/*!
+\file	RenderInteractableObjs.cpp
+\author SP'13 2015
+\par	nyp
+\brief
+CPP to render interactable OBJs in the supermarket 
+*/
+/******************************************************************************/
+
 #include "SceneSP.h"
 
 

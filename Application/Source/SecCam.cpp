@@ -1,3 +1,13 @@
+/******************************************************************************/
+/*!
+\file	SecCam.cpp
+\author SP'13 2015
+\par	nyp
+\brief
+CPP to define functions for the security camera mode 
+*/
+/******************************************************************************/
+
 #include "SceneSP.h"
 #include "Application.h"
 ISoundEngine* engine2 = createIrrKlangDevice(ESOD_AUTO_DETECT,ESEO_MULTI_THREADED | ESEO_LOAD_PLUGINS | ESEO_USE_3D_BUFFERS);

@@ -1,3 +1,13 @@
+/******************************************************************************/
+/*!
+\file	RenderScreens.cpp
+\author SP'13 2015
+\par	nyp
+\brief
+CPP to render the different menu of the game states
+*/
+/******************************************************************************/
+
 #include "SceneSP.h"
 #include "Utility.h"
 

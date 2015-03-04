@@ -1,3 +1,13 @@
+/******************************************************************************/
+/*!
+\file	collision.cpp
+\author SP'13 2015
+\par	nyp
+\brief
+CPP to define collision functions , including collision detection + response 
+*/
+/******************************************************************************/
+
 #include "SceneSP.h"
 #include "Application.h"
 ISoundEngine* walk = createIrrKlangDevice(ESOD_AUTO_DETECT,ESEO_MULTI_THREADED | ESEO_LOAD_PLUGINS | ESEO_USE_3D_BUFFERS);

@@ -1,6 +1,15 @@
+/******************************************************************************/
+/*!
+\file	SceneSP.cpp
+\author SP'13 2015
+\par	nyp
+\brief
+CPP to initialise values and to call functions from other CPP 
+*/
+/******************************************************************************/
+
 #include <iostream>
 #include "SceneSP.h"
-
 
 #include "SceneSP.h"
 #include "GL\glew.h"
@@ -121,7 +130,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	lights[0].type = Light::LIGHT_DIRECTIONAL;
 	lights[0].position.Set(0, 1000, 0);
 	lights[0].color.Set(1, 1, 1);
-	lights[0].power = 0;
+	lights[0].power = 0.5;
 	lights[0].kC = 1.f;
 	lights[0].kL = 0.01f;
 	lights[0].kQ = 0.001f;
@@ -603,6 +612,8 @@ void SceneSP::collisionOBJinit()
 	box1.set(Vector3(30,25,-5),Vector3(9,0,-7.5)); // supermarket (front left)
 	OBJ.push_back(box1);
 
+	box1.set(Vector3(30,25,-5),Vector3(-27.5,7.5,-7.5)); // supermarket (front top)
+	OBJ.push_back(box1);
 
 	// *************************************(BLOCKAGE)
 	box1.set(Vector3(-7,10,2),Vector3(-8.2,0,-6)); // block right 
@@ -1164,7 +1175,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	updatecollision(dt) ;
 
 	//Interaction
-	if(Application::IsKeyPressed('E') && PickUpItem == true && SecurityCam == false)
+	if(Application::IsKeyPressed('E') && PickUpItem == true && SecurityCam == false) // Loot items 
 	{
 		if ( Items[NoItemTargetcollision()].getEmpty() == false) 
 			Items[NoItemTargetcollision()].setEmpty(true);
@@ -1177,13 +1188,13 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		updateInventory(ItemData[Items[NoItemTargetcollision()].getNo()] , true ) ;
 	}
 
-	if(Application::IsKeyPressed('Q') && PlaceItem == true && SecurityCam == false)
+	if(Application::IsKeyPressed('Q') && PlaceItem == true && SecurityCam == false) // Place back items 
 	{
-		if ( Items[NoItemTargetcollision()].getEmpty() == true) 
+		if ( Items[NoItemTargetcollision()].getEmpty() == true) // if the shelf is empty 
 		{
 			for ( int x = 0 ; x < InventoryData.size() ; x++)
 			{
-				if ( InventoryData[x].getItemName() == ItemData[ItemTargetcollision().getNo()].getItemName() &&  InventoryData[x].getItemCount() > 0)
+				if ( InventoryData[x].getItemName() == ItemData[ItemTargetcollision().getNo()].getItemName() &&  InventoryData[x].getItemCount() > 0) // if the inventory has the item
 				{
 					Items[NoItemTargetcollision()].setEmpty(false);
 					updateInventory(ItemData[Items[NoItemTargetcollision()].getNo()] , false ) ;

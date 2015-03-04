@@ -1,3 +1,13 @@
+/******************************************************************************/
+/*!
+\file	RenderCharacter.cpp
+\author SP'13 2015
+\par	nyp
+\brief
+CPP to render characters based on variables ( to animate ) 
+*/
+/******************************************************************************/
+
 #include "SceneSP.h"
 
 void SceneSP::RenderCharacter()

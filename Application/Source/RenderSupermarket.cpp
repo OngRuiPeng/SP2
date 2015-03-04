@@ -1,3 +1,13 @@
+/******************************************************************************/
+/*!
+\file	RenderSupermarket.cpp
+\author SP'13 2015
+\par	nyp
+\brief
+CPP to render most of the OBJs in the supermarket
+*/
+/******************************************************************************/
+
 #include "SceneSP.h"
 
 void SceneSP::RenderSupermarket()

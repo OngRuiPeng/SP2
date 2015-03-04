@@ -1,3 +1,13 @@
+/******************************************************************************/
+/*!
+\file	SimpleInteractions.cpp
+\author SP'13 2015
+\par	nyp
+\brief
+CPP to define functions of interactions in game 
+*/
+/******************************************************************************/
+
 #include "SceneSP.h"
 
 void SceneSP::SlidingDoor(double dt)
@@ -31,11 +41,14 @@ void SceneSP::Jump (double dt)
 
 	if (JumpDirection == true && JumpState == true)
 	{
+		if (AABBCheck(OBJ[0],OBJ[10]) == true )
+		{
+			JumpDirection = false;
+		}
 		camera.target.y += (double)(12 * dt);
 		camera.targetwhere.y += (double)(12 * dt);
 		camera.position.y += (double)(12 * dt);
 	}
-
 	else if (JumpDirection == false && JumpState == true)
 	{
 		if ( camera.position.y > 6 )

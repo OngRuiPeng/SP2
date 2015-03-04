@@ -1,3 +1,13 @@
+/******************************************************************************/
+/*!
+\file	RenderPacks.cpp
+\author SP'13 2015
+\par	nyp
+\brief
+CPP to render items on the shelves 
+*/
+/******************************************************************************/
+
 #include "SceneSP.h"
 
 void SceneSP::RenderPacks()

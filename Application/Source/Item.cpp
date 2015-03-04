@@ -1,3 +1,13 @@
+/******************************************************************************/
+/*!
+\file	Item.cpp
+\author SP'13 2015
+\par	nyp
+\brief
+CPP to define functions initialising CItem class objs
+*/
+/******************************************************************************/
+
 #include "Item.h"
 #include <iostream>
 

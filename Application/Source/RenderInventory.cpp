@@ -1,3 +1,13 @@
+/******************************************************************************/
+/*!
+\file	RenderInventory.cpp
+\author SP'13 2015
+\par	nyp
+\brief
+CPP to render inventory and also to update checklist 
+*/
+/******************************************************************************/
+
 #include "SceneSP.h"
 #include "Utility.h"
 
