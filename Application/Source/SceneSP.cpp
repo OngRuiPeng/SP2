@@ -1563,7 +1563,7 @@ void SceneSP::Render()
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Detectors successfully deactivated", (0, 1, 0), 2, 3, 25);
 		if ( PlaceItem == true && Interact == false) 
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press Q to put back item", (1, 0, 1),2.5, 5, 4);
-		if ( Interact == true && ChooseWhich == false) 
+		if ( Interact == true && ChooseWhich == false && SecurityCam == false) 
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press E to interact", (1, 0, 1),2.5, 5, 4);
 
 		string temp;
