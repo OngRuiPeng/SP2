@@ -111,7 +111,7 @@ void SceneSP::UpdateNPC(double dt)
 		}
 		if ( PBPoint == 2 )
 		{
-			PBTar = Vector3(-5,4,27);
+			PBTar = Vector3(-6,4,27);
 			RotatePB = 0;
 		}
 		if ( PBPoint == 3 )

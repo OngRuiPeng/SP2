@@ -434,6 +434,9 @@ public:
 	//Gamemode 
 	bool Alarm;
 	int ItemsStolen;
+	bool inSecurityRoom;
+	Vector3 VectorFromSG;
+	float DistFromSG;
 
 private:
 	unsigned m_vertexArrayID;

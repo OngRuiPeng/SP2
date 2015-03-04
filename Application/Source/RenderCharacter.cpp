@@ -2,10 +2,6 @@
 
 void SceneSP::RenderCharacter()
 {
-	modelStack.PushMatrix();
-	RenderMesh(meshList[GEO_DOORMAN], true);
-	modelStack.PopMatrix();
-
 	//Customer
 	modelStack.PushMatrix();
 	modelStack.Translate(CashMovX, 4, CashMovZ);

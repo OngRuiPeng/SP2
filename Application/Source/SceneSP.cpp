@@ -121,7 +121,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	lights[0].type = Light::LIGHT_DIRECTIONAL;
 	lights[0].position.Set(0, 1000, 0);
 	lights[0].color.Set(1, 1, 1);
-	lights[0].power = 0.5;
+	lights[0].power = 0;
 	lights[0].kC = 1.f;
 	lights[0].kL = 0.01f;
 	lights[0].kQ = 0.001f;
@@ -430,13 +430,12 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	collisionITEMSinit();
 	collisionInteractionsinit();
 
-	//************ Camera
-
+	//************ Control panel
 	SecurityCam = false;
 	cam_state = NORMAL;
 	CamTime = 0 ;
-
-	ChooseWhich = false ;
+	ChooseWhich = false;
+	inSecurityRoom = false;
 
 	//Inventory
 	ItemsInInventory = false;
@@ -444,16 +443,13 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 
 	// Items init 
 	InitItemData();
-	
 	ItemNo = 0;
-
 	nullthis.Set("lol","",0); 
 	InventoryData.push_back(nullthis);
 	CheckoutList.push_back(nullthis);
 
 
 	// cashier slider init
-
 	ItemSlide = false;
 	translateItemZ = 0 ;
 	translateItemX = 0 ;
@@ -839,7 +835,7 @@ void SceneSP::collisionInteractionsinit()
 
 	box1.set(Vector3(-8.5,20,3.5),Vector3(-15.5,0,-3.5)); // security guard warning BB
 	NpcBB.push_back(box1);
-
+	
 	box1.set(Vector3(6.5,20,26.5),Vector3(3.5,0,23.5)); // customer     8 
 	Interactables.push_back(box1);
 
@@ -977,16 +973,19 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	{
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
-
 	if(Application::IsKeyPressed('5'))
 	{
 		CheckListDone = true;
 	}
-
-	if (Application::IsKeyPressed(VK_SPACE) && JumpState == false)
+	if(Application::IsKeyPressed('6'))
 	{
+		gamestate = GAMEWINTHIEF;
+	}
 
-		ISound* jump = engine->play2D("../irrKlang/media/Jump2.mp3", false); // Jump duh
+	//Player actions
+	if (Application::IsKeyPressed(VK_SPACE) && JumpState == false && gamestate != ( MAINMENU || CHOOSEMODE || GAMEBUSTED || GAMEWINTHIEF || GAMEWINCHECKOUT )) //Space to jump
+	{
+		ISound* jump = engine->play2D("../irrKlang/media/Jump2.mp3", false); 
 		JumpState = true;
 		JumpDirection = true;
 	}
@@ -1001,12 +1000,9 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		cout << " Music Start!" << endl;
 	}
 
-	if(Application::IsKeyPressed(VK_ESCAPE) && ChooseWhich == false)
+	if(Application::IsKeyPressed(VK_ESCAPE) && ChooseWhich == false && SecurityCam == false) //Return to main menu and re-initialize variables
 	{
 		gamestate = MAINMENU;
-		DetectorsOn = true;
-
-
 		genCheckList();
 
 		for ( int x = 0 ; x < InventoryData.size() ; x++ )
@@ -1028,8 +1024,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		{
 			Items[x].setEmpty(false);
 		}
-
-
+		DetectorsOn = true;
 		Caught = false;
 		CheckListDone = false;
 		Alarm = false;
@@ -1106,21 +1101,21 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 
 	if ( gamestate == GAMEBUSTED )
 	{
+		SAD->setIsPaused(false);
 		camera.Reset();
 	}
 
-	if ( Caught == true ) // Caught by security guard in Thief Mode
+	if ( Caught == true && gamestate == GAMETHIEF) // Caught by security guard in Thief Mode
 	{
-		SAD->setIsPaused(false);
 		gamestate = GAMEBUSTED;
 	}
 
-	if ( CheckListDone == true )
+	if ( CheckListDone == true && gamestate == GAMECHECKOUT)
 	{
 		gamestate = GAMEWINCHECKOUT;
 		camera.Reset();
 	}
-	//Entering
+	//Entering supermarket
 	if ( camera.position.z > -7 && camera.position.z < 49 && camera.position.x < 28 && camera.position.x > -27 )
 	{
 		inSupermarket = true;
@@ -1130,7 +1125,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		inSupermarket = false;
 	}
 
-	if ( ItemsInInventory == true && inSupermarket == false && DetectorsOn == true ) // if players leave supermarket with items
+	if ( ItemsInInventory == true && inSupermarket == false && DetectorsOn == true && gamestate != GAMEROAM && gamestate != GAMEFUN) // if players leave supermarket with items
 	{
 		Alarm = true;
 		Inventorytimer += dt;
@@ -1189,7 +1184,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	//Talking with NPCs & door
 	if(Application::IsKeyPressed('E') && Interact == true)
 	{
-		if ( NoInteractableTargetcollision() == 5 || NoInteractableTargetcollision() == 6 ) // Cashier
+		if ( (NoInteractableTargetcollision() == 5 || NoInteractableTargetcollision() == 6) && time > 2) // Cashier
 		{
 			ISound* simlish = engine->play2D("../irrKlang/media/Simlishm.mp3", false); // Npc talking
 			time = 0;
@@ -1203,7 +1198,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 				CustomerText = false;
 			}
 		}
-		if ( NoInteractableTargetcollision() == 7 ) // Security Guard
+		if ( NoInteractableTargetcollision() == 7 && time > 2 ) // Security Guard
 		{
 			ISound* simlish = engine->play2D("../irrKlang/media/Simlishm.mp3", false); // Npc talking
 			time = 0;
@@ -1217,10 +1212,9 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 				CustomerText = false;
 			}
 		}
-		if ( NoInteractableTargetcollision() == 8 || NoInteractableTargetcollision() == 9 || NoInteractableTargetcollision() == 10 )
+		if ( (NoInteractableTargetcollision() == 8 || NoInteractableTargetcollision() == 9 || NoInteractableTargetcollision() == 10) && time > 2)
 		{
-
-			ISound* simlish = engine->play2D("../irrKlang/media/Simlishm.mp3", false); // Npc talking
+			ISound* simlish = engine->play2D("../irrKlang/media/Simlishm.mp3", false); // Npc talking	
 			time = 0;
 			CustomerText = true;
 			if ( SecurityText == true)
@@ -1233,41 +1227,50 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 			}
 		}
 
-		if ( NoInteractableTargetcollision() == 11 && toiletDoor == false && time > 1)
+		if ( NoInteractableTargetcollision() == 11 && toiletDoor == false && time > 0.1)
 		{
-
 			ISound* door = engine->play2D("../irrKlang/media/door.mp3", false); // back doors
 			//door->setIsPaused(false);
 			toiletDoor = true;
 			toiletDoorMove = -90;
 			time = 0;
 		}
-		if ( NoInteractableTargetcollision() == 11 && toiletDoor == true && time > 1)
+		if ( NoInteractableTargetcollision() == 11 && toiletDoor == true && time > 0.1)
 		{
-
 			ISound* door = engine->play2D("../irrKlang/media/door.mp3", false); // back doors
 			//door->setIsPaused(false);
 			toiletDoor = false;
 			toiletDoorMove = 0;
 			time = 0;
 		}
-		if ( NoInteractableTargetcollision() == 12  && securityDoor == false && time > 0.5)
+		if ( NoInteractableTargetcollision() == 12  && securityDoor == false && time > 0.1)
 		{
-
 			ISound* door = engine->play2D("../irrKlang/media/door.mp3", false); // back doors
 			securityDoor = true;
 			securityDoorMove = 90;
 			time = 0;
 		}
-		if ( NoInteractableTargetcollision() == 12 && securityDoor == true && time > 0.5)
+		if ( NoInteractableTargetcollision() == 12 && securityDoor == true && time > 0.1)
 		{
-
 			ISound* door = engine->play2D("../irrKlang/media/door.mp3", false); // back doors
 			securityDoor = false;
 			securityDoorMove = 0;
 			time = 0;
 		}
 
+	}
+	//Timer for NPC text
+	if ( time > 2 && CashierText == true)
+	{
+		CashierText = false;
+	}
+	if ( time > 2 && SecurityText == true)	
+	{
+		SecurityText = false;
+	}
+	if ( time > 2 && CustomerText == true)
+	{
+		CustomerText = false;
 	}
 
 	//Conveyor belt @ cashier
@@ -1293,18 +1296,17 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		TapSwitch = false;
 	}
 	
-
 	if(Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 3  && Flush == false ) //Flush On
 	{
-		ISound* flushT = engine->play2D("../irrKlang/media/flush.mp3", false); // Flush the loo loo, then eat da poo poo.
+		ISound* flushT = engine->play2D("../irrKlang/media/flush.mp3", false); // Flush toilet bowl
 		Flush = true;
 		FlushDir = true;
 	}
 
-	//Control panel
-	if(Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 4 && ChooseWhich == false && gamestate != GAMEROAM) 
+	//Security room
+	if(Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 4 && ChooseWhich == false ) 
 	{
-		ChooseWhich = true;
+		ChooseWhich = true; //Opens up control panel
 	}
 
 	if(Application::IsKeyPressed('G') && ChooseWhich == true && gamestate == GAMETHIEF) // choose to deactivate detectors
@@ -1314,14 +1316,13 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		ChooseWhich = false;
 	}
 
-	if (Application::IsKeyPressed('T') && ChooseWhich == true ) // choose to escape 
+	if (Application::IsKeyPressed('T') && ChooseWhich == true || inSecurityRoom == false) // choose to escape 
 	{
 		ChooseWhich = false;
 	}
 
 	if (Application::IsKeyPressed('C') && ChooseWhich == true ) // choose camera 
 	{
-
 		ISound* cameraswitch = engine->play2D("../irrKlang/media/camera.mp3", false); // Camera switch-eroo
 		StorePos = camera.position ; 
 		StoreTarget1 = camera.target ;
@@ -1333,48 +1334,10 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		ChooseWhich = false;
 	}
 
-	if ( SecurityCam == true )
-	{
-		updateCam(dt);
-	}
-	//Timer for NPC text
-	if ( time > 2 && CashierText == true)
-	{
-		CashierText = false;
-	}
-	if ( time > 2 && SecurityText == true)	
-	{
-		SecurityText = false;
-	}
-	if ( time > 2 && CustomerText == true)
-	{
-		CustomerText = false;
-	}
-
-	ItemNo = Items[NoItemTargetcollision()].getNo();
-
-	if ( Application::IsKeyPressed('B') && time > 1) // Checklist
-	{
-		if ( toggleCheck == true )
-			toggleCheck = false;
-		else
-			toggleCheck = true;
-
-		time = 0 ;
-	}
-
 	
-	if ( Application::IsKeyPressed('K')) // Randomize checklist
-		genCheckList();
-
-	if (ItemSlide == true) //Conveyor belt
-		updateItemSlide(dt,WhichCashier);
-
-
-	if (Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 15 && lights[0].power != 0 && lights[1].power != 0 && time > 1 )
+	if (Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 15 && lights[0].power != 0 && lights[1].power != 0 && time > 0.1 )
 	{
-
-		ISound* Switch = engine->play2D("../irrKlang/media/switchoff.mp3", false); // light switch
+		ISound* Switch = engine->play2D("../irrKlang/media/switchoff.mp3", false); // Light switch in security room
 		//SWITCH OFF
 		lights[0].power = 0;
 		glUniform1f(m_parameters[U_LIGHT0_POWER], lights[0].power);
@@ -1385,7 +1348,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		time = 0 ;
 	}
 
-	if (Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 15 && lights[0].power == 0 && lights[1].power == 0 && time > 1 )
+	if (Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 15 && lights[0].power == 0 && lights[1].power == 0 && time > 0.1 )
 	{
 		ISound* Switch = engine->play2D("../irrKlang/media/switchon.mp3", false); // light switch
 		lights[0].power = 0.5;
@@ -1397,14 +1360,48 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		time = 0 ;
 	}
 
+	if ( SecurityCam == true )
+	{
+		updateCam(dt);
+	}
+
+	if ( camera.position.z > 37 && camera.position.z < 46 && camera.position.x < -11.3 && camera.position.x > -20.4 )
+	{
+		inSecurityRoom = true;
+	}
+	else
+	{
+		inSecurityRoom = false;
+	}
+
+	//Checklist
+	ItemNo = Items[NoItemTargetcollision()].getNo();
+
+	if ( Application::IsKeyPressed('B') && time > 1 && gamestate == GAMECHECKOUT) // Opens/closes checklist
+	{
+		if ( toggleCheck == true )
+			toggleCheck = false;
+		else
+			toggleCheck = true;
+
+		time = 0 ;
+	}
+
+	if ( Application::IsKeyPressed('K') && gamestate == GAMECHECKOUT && toggleCheck == true) // Randomize checklist
+		genCheckList();
+
+	if (ItemSlide == true) //Conveyor belt
+		updateItemSlide(dt,WhichCashier);
+
+	//Updates
 	UpdateSG(dt);
 	UpdateNPC(dt);
+	SlidingDoor(dt);
 	time += dt;
-
+	VectorFromSG = camera.position - SGPos;
+	DistFromSG = VectorFromSG.Length();
 	updateCheckList();
 
-	UpdateNPC(dt);
-	SlidingDoor(dt);
 	//irrKlang
 	Vector3 view = (camera.target - camera.position).Normalized();
 	Vector3 right = view.Cross(camera.up);
@@ -1484,7 +1481,7 @@ void SceneSP::Render()
 		glUniform3fv(m_parameters[U_LIGHT1_POSITION], 1, &lightPosition_cameraspace.x);
 	}
 
-
+	//Render different gamestates
 	if ( gamestate == MAINMENU )
 	{
 		RenderMainMenu();
@@ -1511,21 +1508,23 @@ void SceneSP::Render()
 		RenderSupermarket();
 		RenderCharacter();
 		RenderInteractableObjs();
-
-		RenderInventory();
-		
+		if ( gamestate != GAMEROAM )
+		{
+			RenderInventory();
+		}
 		if(music == true)
 		{
 			Renderirr();
 			music = false;
 		}
-
-		if ( ChooseWhich == true ) 
+		 //Text for control panel
+		if ( ChooseWhich == true )
 		{
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press C to use camera", (1, 0, 1),2, 5, 4);
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press G to deactivate detectors", (1, 0, 1),2, 5, 6);
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press T to escape", (1, 0, 1),2, 5, 5);
 		}
+		//Text for interactions
 		if ( PickUpItem == true && Interact == false) 
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press E to pick up item", (1, 0, 1),2.5, 5, 4);
 		if ( cam_state != NORMAL ) 
@@ -1536,7 +1535,7 @@ void SceneSP::Render()
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press Q to put back item", (1, 0, 1),2.5, 5, 4);
 		if (TapSwitch == true)
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press Q to turn off tap", (1, 0, 1),2.5, 5, 5);
-		if ( Interact == true && ChooseWhich == false) 
+		if ( Interact == true && ChooseWhich == false && SecurityCam != true) 
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press E to interact", (1, 0, 1),2.5, 5, 4);
 
 		string temp;
@@ -1552,6 +1551,7 @@ void SceneSP::Render()
 			ctemp = Customer.getType() + " : " +  Guard.CSpeech();
 		RenderTextOnScreen(meshList[GEO_CUSTOMERTEXT], ctemp, (1, 0, 1), 1.6, 13, 23);
 
+		//Text for item name and information if player targets it
 		if ( PickUpItem == true || PlaceItem == true )
 		{
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Target :" , (1, 0, 1),2, 2, 28);
@@ -1559,10 +1559,18 @@ void SceneSP::Render()
 			RenderTextOnScreen(meshList[GEO_MainMenuText], ItemData[ItemNo].getItemName() , (1, 0, 1),2, 10, 28);
 			RenderTextOnScreen(meshList[GEO_MainMenuText], ItemData[ItemNo].getItemDesc() , (1, 0, 1),2, 10, 27);
 		}
-
+		//Distance from Security Guard
+		string temp2;
+		temp2 = "Distance: " + Convert(DistFromSG);
+		if ( gamestate == GAMETHIEF )
+		{
+			RenderTextOnScreen(meshList[GEO_MainMenuText], temp2, (1, 0, 1), 2, 2, 26);
+		}
+		//If player exits he supermarket when having an item
 		if ( Alarm == true ) 
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Please return in 5 seconds", (1, 0, 1),2, 5, 16);
 
+		//Render checklist
 		if ( toggleCheck == true )
 		{
 			RenderPictureOnScreen(meshList[GEO_CHECKLIST],100,40,0.47,0.7);

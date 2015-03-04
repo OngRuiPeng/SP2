@@ -170,7 +170,7 @@ void SceneSP::updateobj()
 	}
 	if ( securityDoor == true )
 	{
-		Interactables[12].set(Vector3(-11.5,20,42.7),Vector3(-12.4,0,37.2));
+		Interactables[12].set(Vector3(-10.5,20,42.7),Vector3(-12.5,0,37.2));
 	}
 
 	// thief mode
@@ -179,7 +179,7 @@ void SceneSP::updateobj()
 	else
 		Caught = false;
 
-	NpcBB[0].set(SGPos + Vector3(2,20,2),SGPos - Vector3(2,4,2));
+	NpcBB[0].set(SGPos + Vector3(8,20,8),SGPos - Vector3(8,4,8));
 	Interactables[7].set(SGPos + Vector3(1.5,20,1.5),SGPos - Vector3(1.5,4,1.5));
 
 

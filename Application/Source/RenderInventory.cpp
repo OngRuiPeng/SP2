@@ -151,6 +151,10 @@ void SceneSP::updateCheckList()
 		{
 			ItemsInInventory = true;
 		}
+		else
+		{
+			ItemsInInventory = false;
+		}
 	}
 	
 	int counter = 0;
