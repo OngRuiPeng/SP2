@@ -33,9 +33,13 @@ CPP to initialise values and to call functions from other CPP
 #define LSPEED 20.f 
 
 ISoundEngine* engine = createIrrKlangDevice(ESOD_AUTO_DETECT,ESEO_MULTI_THREADED | ESEO_LOAD_PLUGINS | ESEO_USE_3D_BUFFERS);
-ISound* detectors = engine->play2D("../irrKlang/media/Darudepasu.mp3", false,true); // Main main menu	
+ISound* detectors = engine->play2D("../irrKlang/media/Darudepasu.mp3", true,true);
 ISound* tap = engine->play2D("../irrKlang/media/Sink.mp3",true,true);
 ISound* SAD = engine->play2D("../irrKlang/media/2SAD4ME.mp3", true, true);
+ISound* alarm = engine->play2D("../irrKlang/media/Alarm.mp3", true, true);
+ISound* chime = engine->play2D("../irrKlang/media/chime.mp3", true, true);
+ISound* win = engine->play2D("../irrKlang/media/win.mp3", true, true);
+
 using namespace std;
 
 SceneSP::SceneSP()
@@ -340,7 +344,11 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	meshList[GEO_TV] = MeshBuilder::GenerateQuad("TVSCreen", Color(1, 1, 1), 20.f , 20.f);
 	meshList[GEO_TV]->textureID = LoadTGA("Image//TVScreen.tga");
 
+	meshList[GEO_MTNPIC] = MeshBuilder::GeneratePicture("Dat dew",1,1);
+	meshList[GEO_MTNPIC]->textureID = LoadTGA("image//InvenMountainDew.tga");
 
+	meshList[GEO_DORITOSPIC] = MeshBuilder::GeneratePicture("toblerone",1,1);
+	meshList[GEO_DORITOSPIC]->textureID = LoadTGA("image//InvenDoritos.tga");
 
 	//Fun mode init~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	meshList[GEO_HITMARKER] = MeshBuilder::GeneratePicture("Hitmarker",1,1);
@@ -348,6 +356,27 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 
 	meshList[GEO_SNOOPDOG] = MeshBuilder::GenerateQuad("smoke weed everyday",Color(0,0,0),5,5);
 	meshList[GEO_SNOOPDOG]->textureID = LoadTGA("image//SnoopDogg.tga");
+
+	meshList[GEO_WEED] = MeshBuilder::GenerateQuad("Weed",Color(0,0,0),5,5);
+	meshList[GEO_WEED]->textureID = LoadTGA("image//Weed.tga");
+
+	meshList[GEO_MTN] = MeshBuilder::GenerateOBJ("Mountain Dew", "OBJ//MountainDew.obj");
+	meshList[GEO_MTN]->textureID = LoadTGA("image//Mountain Dew.tga");
+
+	meshList[GEO_DORITOS] = MeshBuilder::GenerateOBJ("Mountain Dew", "OBJ//Doritos.obj");
+	meshList[GEO_DORITOS]->textureID = LoadTGA("image//Doritos.tga");
+
+	meshList[GEO_WEED] = MeshBuilder::GenerateQuad("Weed",Color(0,0,0),5,5);
+	meshList[GEO_WEED]->textureID = LoadTGA("image//WEED.tga");
+
+	meshList[GEO_ILLUMINATI] = MeshBuilder::GenerateQuad("the triangle",Color(0,0,0),5,5);
+	meshList[GEO_ILLUMINATI]->textureID = LoadTGA("image//illuminati.tga");
+
+	meshList[GEO_WEEDP] = MeshBuilder::GenerateQuad("Weed Poster",Color(0,0,0),5,5);
+	meshList[GEO_WEEDP]->textureID = LoadTGA("image//WeedHigh.tga");
+
+	meshList[GEO_DOGE] = MeshBuilder::GenerateQuad("DOGE",Color(0,0,0),5,5);
+	meshList[GEO_DOGE]->textureID = LoadTGA("image//doge.tga");
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//variables
 	gamestate = MAINMENU;
@@ -491,6 +520,12 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 
 	//Music
 	music = false;
+
+	hit = 0;
+	hitto = false;
+	hittimer = 0.25;
+	Supermarkettimer = 0;
+	bool EnterSound = 0;
 }
 
 void SceneSP::InitItemData()
@@ -708,7 +743,21 @@ void SceneSP::collisionITEMSinit()
 			}
 		}
 	}
-
+	//FOR FUN'S Collision
+	for(int p = 0; p < 3; p++)
+	{
+		for ( float x = 0.0f ; x < 2 ; x++ ) 
+		{
+			for ( float y = 0.0f ; y < 3 ; y++ )
+			{
+				for ( float z = 0.0f ; z < 3 ; z++ )
+				{
+					box1.set(Vector3(17.0f - x * 3.0f - p * 13.25,6.3f - y * 2.0f ,30.5f - z * 2.3f ),Vector3(15.5f - x * 3.0f - p * 13.25,5.3f - y * 2.0f ,29.0f - z * 2.3f));
+					Fun.push_back(box1);
+				}
+			}
+		}
+	}
 	//*********************************(middle shelf)
 	// top shelf
 	for ( float x = 0 ; x < 3 ; x++ )
@@ -770,45 +819,87 @@ void SceneSP::collisionITEMSinit()
 			Items.push_back(box1);
 		}
 	}
-
-	// ********************************* ( maggie shelves) 
-	for ( float y = 0 ; y < 3 ; y++ )
+	if(gamestate != GAMEFUN)
 	{
-		for ( float x = 0 ; x < 2 ; x++ )
+		// ********************************* ( maggie shelves) 
+		for ( float y = 0 ; y < 3 ; y++ )
 		{
-			box1.set(Vector3(6 - x * 4,7 - y * 3 ,46 ),Vector3(1.5 - x * 4 ,5.5 - y * 3,44));
+			for ( float x = 0 ; x < 2 ; x++ )
+			{
+				box1.set(Vector3(6 - x * 4,7 - y * 3 ,46 ),Vector3(1.5 - x * 4 ,5.5 - y * 3,44));
+				Items.push_back(box1);
+			}
+		}
+
+		//************************************ ( left display cabinet ) 
+		box1.set(Vector3(16.2,4.5,22),Vector3(15.7,4,20)) ;
+		Items.push_back(box1);
+
+		for ( float y = 0 ; y < 2 ; y++)
+		{
+			for ( float x = 0 ; x < 2 ; x++ )
+			{
+				box1.set(Vector3(16.2 - x * 1.4 ,3.5 - y * 1.5 ,22),Vector3(15.7 - x * 1.4 ,2.8 - y * 1.5 ,20)) ;
+				Items.push_back(box1);
+			}
+		}
+
+		//************************************* ( middle display cabinet)
+		for ( float y = 0 ; y < 2 ; y++)
+		{
+			box1.set(Vector3(2,3.7 - y * 1.5 ,21 ),Vector3(0.5,3 - y * 1.5 ,20));
+			Items.push_back(box1);
+		}
+
+		//************************************ ( right display cabinet) 
+
+		for ( float y = 0 ; y < 2 ; y++ )
+		{
+			box1.set(Vector3(-9.7, 5 - y * 1.4 ,21.5 ),Vector3(-10.7, 4 - y * 1.4 ,21));
 			Items.push_back(box1);
 		}
 	}
-
-	//************************************ ( left display cabinet ) 
-	box1.set(Vector3(16.2,4.5,22),Vector3(15.7,4,20)) ;
-	Items.push_back(box1);
-
-	for ( float y = 0 ; y < 2 ; y++)
+	else
 	{
-		for ( float x = 0 ; x < 2 ; x++ )
+		// ********************************* ( maggie shelves) 
+		for ( float y = 0 ; y < 3 ; y++ )
 		{
-			box1.set(Vector3(16.2 - x * 1.4 ,3.5 - y * 1.5 ,22),Vector3(15.7 - x * 1.4 ,2.8 - y * 1.5 ,20)) ;
+			for ( float x = 0 ; x < 2 ; x++ )
+			{
+				box1.set(Vector3(6 - x * 4,7 - y * 3 ,46 ),Vector3(1.5 - x * 4 ,5.5 - y * 3,44));
+				Items.push_back(box1);
+			}
+		}
+
+		//************************************ ( left display cabinet ) 
+		box1.set(Vector3(16.2,4.5,22),Vector3(15.7,4,20)) ;
+		Items.push_back(box1);
+
+		for ( float y = 0 ; y < 2 ; y++)
+		{
+			for ( float x = 0 ; x < 2 ; x++ )
+			{
+				box1.set(Vector3(16.2 - x * 1.4 ,3.5 - y * 1.5 ,22),Vector3(15.7 - x * 1.4 ,2.8 - y * 1.5 ,20)) ;
+				Items.push_back(box1);
+			}
+		}
+
+		//************************************* ( middle display cabinet)
+		for ( float y = 0 ; y < 2 ; y++)
+		{
+			box1.set(Vector3(2,3.7 - y * 1.5 ,21 ),Vector3(0.5,3 - y * 1.5 ,20));
 			Items.push_back(box1);
 		}
+
+		//************************************ ( right display cabinet) 
+
+		for ( float y = 0 ; y < 2 ; y++ )
+		{
+			box1.set(Vector3(-9.7, 5 - y * 1.4 ,21.5 ),Vector3(-10.7, 4 - y * 1.4 ,21));
+			Items.push_back(box1);
+		}
+
 	}
-
-	//************************************* ( middle display cabinet)
-	for ( float y = 0 ; y < 2 ; y++)
-	{
-		box1.set(Vector3(2,3.7 - y * 1.5 ,21 ),Vector3(0.5,3 - y * 1.5 ,20));
-		Items.push_back(box1);
-	}
-
-	//************************************ ( right display cabinet) 
-
-	for ( float y = 0 ; y < 2 ; y++ )
-	{
-		box1.set(Vector3(-9.7, 5 - y * 1.4 ,21.5 ),Vector3(-10.7, 4 - y * 1.4 ,21));
-		Items.push_back(box1);
-	}
-
 	//******************************** ( right side pizza shelf part 1 ) 
 	box1.set(Vector3(-20, 4.4 , 17 ),Vector3(-23.5, 3.95 ,14.5));
 	Items.push_back(box1);
@@ -880,6 +971,9 @@ void SceneSP::collisionInteractionsinit()
 	Interactables.push_back(box1);
 
 	box1.set(Vector3(-15,8,49),Vector3(-16,6,46)); // switch 15 
+	Interactables.push_back(box1);
+
+	box1.set(Vector3(30,2,28.6),Vector3(29,1,26.4)); // doge 16
 	Interactables.push_back(box1);
 }
 
@@ -968,7 +1062,6 @@ void SceneSP::initNPC()
 	meshList[GEO_SRIGHTLEG] = MeshBuilder::GenerateOBJ("NPC head", "OBJ//leg.obj");
 	meshList[GEO_SRIGHTLEG]->textureID = LoadTGA("image//NpcBlack.tga");
 
-
 }
 
 void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
@@ -1046,6 +1139,13 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		{
 			Items[x].setEmpty(false);
 		}
+		
+
+		for ( int x = 0 ; x < Fun.size() ; x++ )
+		{
+			Fun[x].setEmpty(false);
+		}
+
 		DetectorsOn = true;
 		Caught = false;
 		CheckListDone = false;
@@ -1056,6 +1156,8 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 
 		tap->setIsPaused(true);
 		SAD->setIsPaused(true);
+		alarm->setIsPaused(true);
+		win->setIsPaused(true);
 
 	}
 
@@ -1073,7 +1175,6 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		}
 		else if( state == GLFW_PRESS && (*xposition > 285 && *xposition < 515 && *yposition > 308 && *yposition < 383))
 		{
-
 			ISound* mainmenu = engine->play2D("../irrKlang/media/MMbutt.mp3", false); // Main main menu	
 			exit(0);
 		}
@@ -1109,6 +1210,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		else if( state == GLFW_PRESS && (*xposition > 54 && *xposition < 285 && *yposition > 466 && *yposition < 544))
 		{
 			ISound* mainmenu = engine->play2D("../irrKlang/media/MMbutt.mp3", false); // Main main menu	
+			ISound* SWE = engine->play2D("../irrKlang/media/SWE.mp3", false);
 			gamestate = GAMEFUN;
 			xpos = w / 2;
 			ypos = h / 2;
@@ -1137,15 +1239,29 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		gamestate = GAMEWINCHECKOUT;
 		camera.Reset();
 	}
-	//Entering supermarket
-	if ( camera.position.z > -7 && camera.position.z < 49 && camera.position.x < 28 && camera.position.x > -27 )
+	//Entering
+	if ( inSupermarket == false) 
 	{
-		inSupermarket = true;
+		if ( camera.position.z > -7 && camera.position.z < 49 && camera.position.x < 28 && camera.position.x > -27 )
+		{
+			chime->setIsPaused(false);
+			inSupermarket = true;
+			Supermarkettimer = 0 ;
+		}
 	}
-	else
+	if ( inSupermarket == true )
 	{
-		inSupermarket = false;
+		if ( camera.position.z < -7 || camera.position.z > 49 || camera.position.x > 28 || camera.position.x < -27 ) 
+		{
+			inSupermarket = false;
+		}
 	}
+	
+	Supermarkettimer += dt; 
+	if ( Supermarkettimer > 1.6 )
+	{
+		chime->setIsPaused(true);
+	}	
 
 	if ( ItemsInInventory == true && inSupermarket == false && DetectorsOn == true && gamestate != GAMEROAM && gamestate != GAMEFUN) // if players leave supermarket with items
 	{
@@ -1175,40 +1291,89 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	updatecollision(dt) ;
 
 	//Interaction
-	if(Application::IsKeyPressed('E') && PickUpItem == true && SecurityCam == false) // Loot items 
+	if(gamestate != GAMEFUN)
 	{
-		if ( Items[NoItemTargetcollision()].getEmpty() == false) 
-			Items[NoItemTargetcollision()].setEmpty(true);
-		//if(gamestate == GAMETHIEF)
-		//{
-		//RenderPictureOnScreen(meshList[GEO_HITMARKER],15,15,7,6.5);
-		//}
-		ISound* pickup = engine->play2D("../irrKlang/media/pickup2.mp3", false); // pickup item
-
-		updateInventory(ItemData[Items[NoItemTargetcollision()].getNo()] , true ) ;
-	}
-
-	if(Application::IsKeyPressed('Q') && PlaceItem == true && SecurityCam == false) // Place back items 
-	{
-		if ( Items[NoItemTargetcollision()].getEmpty() == true) // if the shelf is empty 
+		if(Application::IsKeyPressed('E') && PickUpItem == true && SecurityCam == false)
 		{
-			for ( int x = 0 ; x < InventoryData.size() ; x++)
+			
+			if ( Items[NoItemTargetcollision()].getEmpty() == false) 
+				Items[NoItemTargetcollision()].setEmpty(true);
+			
+			ISound* pickup = engine->play2D("../irrKlang/media/pickup2.mp3", false); // pickup item
+
+			updateInventory(ItemData[Items[NoItemTargetcollision()].getNo()] , true ) ;
+		}
+
+		if(Application::IsKeyPressed('Q') && PlaceItem == true && SecurityCam == false)
+		{
+			if ( Items[NoItemTargetcollision()].getEmpty() == true) 
 			{
-				if ( InventoryData[x].getItemName() == ItemData[ItemTargetcollision().getNo()].getItemName() &&  InventoryData[x].getItemCount() > 0) // if the inventory has the item
+				for ( int x = 0 ; x < InventoryData.size() ; x++)
 				{
-					Items[NoItemTargetcollision()].setEmpty(false);
-					updateInventory(ItemData[Items[NoItemTargetcollision()].getNo()] , false ) ;
+					if ( InventoryData[x].getItemName() == ItemData[ItemTargetcollision().getNo()].getItemName() &&  InventoryData[x].getItemCount() > 0)
+					{
+						Items[NoItemTargetcollision()].setEmpty(false);
+						updateInventory(ItemData[Items[NoItemTargetcollision()].getNo()] , false ) ;
+					}
 				}
 			}
 		}
 	}
+	// FOR FUN MODE
+	if ( gamestate == GAMEFUN)
+	{
+		if(Application::IsKeyPressed('E') && PickUpItem == true && SecurityCam == false)
+		{
 
+			if ( Fun[NoItemTargetcollision()].getEmpty() == false) 
+				Fun[NoItemTargetcollision()].setEmpty(true);
+			hittimer = 0.25;
+			hitto = true;
+			
+			
+			ISound* Hit = engine->play2D("../irrKlang/media/HITMARKER.mp3", false);
+			hit++;
+			if(hit == 3)
+			{
+				ISound* OBAT = engine->play2D("../irrKlang/media/OBAT.mp3", false);
+				hit = 0;
+			}
+
+
+			updateInventory(ItemData[Fun[NoItemTargetcollision()].getNo()] , true ) ;
+		}
+
+		if(Application::IsKeyPressed('Q') && PlaceItem == true && SecurityCam == false)
+		{
+			if ( Fun[NoItemTargetcollision()].getEmpty() == true) 
+			{
+				for ( int x = 0 ; x < InventoryData.size() ; x++)
+				{
+					if ( InventoryData[x].getItemName() == ItemData[ItemTargetcollision().getNo()].getItemName() &&  InventoryData[x].getItemCount() > 0)
+					{
+						Fun[NoItemTargetcollision()].setEmpty(false);
+						updateInventory(ItemData[Fun[NoItemTargetcollision()].getNo()] , false ) ;
+					}
+				}
+			}
+		}
+	}
+	hittimer -= dt;
+	if ( hittimer < 0 )
+	{
+		hitto = false;
+	}
 	//Talking with NPCs & door
 	if(Application::IsKeyPressed('E') && Interact == true)
 	{
 		if ( (NoInteractableTargetcollision() == 5 || NoInteractableTargetcollision() == 6) && time > 2) // Cashier
 		{
-			ISound* simlish = engine->play2D("../irrKlang/media/Simlishm.mp3", false); // Npc talking
+			if(gamestate== GAMEFUN)
+			{
+				ISound* waccasay = engine->play2D("../irrKlang/media/WhatchaSay.mp3", false);
+			}
+			else
+				ISound* simlish = engine->play2D("../irrKlang/media/Simlishm.mp3", false); // Npc talking
 			time = 0;
 			CashierText = true;
 			if ( SecurityText == true)
@@ -1222,7 +1387,12 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		}
 		if ( NoInteractableTargetcollision() == 7 && time > 2 ) // Security Guard
 		{
-			ISound* simlish = engine->play2D("../irrKlang/media/Simlishm.mp3", false); // Npc talking
+			if(gamestate== GAMEFUN)
+			{
+				ISound* waccasay = engine->play2D("../irrKlang/media/WhatchaSay.mp3", false);
+			}
+			else
+				ISound* simlish = engine->play2D("../irrKlang/media/Simlishm.mp3", false); // Npc talking
 			time = 0;
 			SecurityText = true;
 			if ( CashierText == true)
@@ -1236,7 +1406,13 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		}
 		if ( (NoInteractableTargetcollision() == 8 || NoInteractableTargetcollision() == 9 || NoInteractableTargetcollision() == 10) && time > 2)
 		{
-			ISound* simlish = engine->play2D("../irrKlang/media/Simlishm.mp3", false); // Npc talking	
+
+			if(gamestate== GAMEFUN)
+			{
+				ISound* waccasay = engine->play2D("../irrKlang/media/WhatchaSay.mp3", false);
+			}
+			else
+				ISound* simlish = engine->play2D("../irrKlang/media/Simlishm.mp3", false); // Npc talking
 			time = 0;
 			CustomerText = true;
 			if ( SecurityText == true)
@@ -1298,7 +1474,12 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	//Conveyor belt @ cashier
 	if ( Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 13 && InventoryData[0].getItemCount() != 0 && ItemSlide == false || Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 14 && InventoryData[0].getItemCount() != 0 && ItemSlide == false )
 	{
-		ISound* checkout = engine->play2D("../irrKlang/media/Cashregister.mp3", false); //checkout
+		if(gamestate == GAMEFUN)
+		{
+			ISound* wow = engine->play2D("../irrKlang/media/wow.mp3", false);
+		}
+		else
+			ISound* checkout = engine->play2D("../irrKlang/media/Cashregister.mp3", false); //checkout
 		ItemSlide = true;
 		Deletemah = true;
 		WhichCashier = NoInteractableTargetcollision();
@@ -1319,10 +1500,15 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 
 		time = 0 ;
 	}
-	
+
 	if(Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 3  && Flush == false ) //Flush On
 	{
-		ISound* flushT = engine->play2D("../irrKlang/media/flush.mp3", false); // Flush toilet bowl
+		if(gamestate== GAMEFUN)
+		{
+			ISound* nuke = engine->play2D("../irrKlang/media/Nuke.mp3", false);
+		}
+		else
+			ISound* flushT = engine->play2D("../irrKlang/media/flush.mp3", false); // Flush the loo loo, then eat da poo poo.
 		Flush = true;
 		FlushDir = true;
 	}
@@ -1330,7 +1516,9 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	//Security room
 	if(Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 4 && ChooseWhich == false ) 
 	{
-		ChooseWhich = true; //Opens up control panel
+		if(gamestate == GAMEFUN)
+			ISound* MGTC = engine->play2D("../irrKlang/media/MGTC.mp3", false);
+		ChooseWhich = true;
 	}
 
 	if(Application::IsKeyPressed('G') && ChooseWhich == true && gamestate == GAMETHIEF) // choose to deactivate detectors
@@ -1347,7 +1535,12 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 
 	if (Application::IsKeyPressed('C') && ChooseWhich == true ) // choose camera 
 	{
-		ISound* cameraswitch = engine->play2D("../irrKlang/media/camera.mp3", false); // Camera switch-eroo
+		if(gamestate== GAMEFUN)
+		{
+			ISound* shoot = engine->play2D("../irrKlang/media/shoot.mp3", false);
+		}
+		else
+			ISound* cameraswitch = engine->play2D("../irrKlang/media/camera.mp3", false); // Camera switch-eroo
 		StorePos = camera.position ; 
 		StoreTarget1 = camera.target ;
 		StoreTarget2 = camera.targetwhere;
@@ -1397,10 +1590,12 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	{
 		inSecurityRoom = false;
 	}
-
-	//Checklist
+	
+	if ( gamestate != GAMEFUN)
 	ItemNo = Items[NoItemTargetcollision()].getNo();
-
+	else
+		ItemNo = Fun[NoItemTargetcollision()].getNo();
+	//Checklist
 	if ( Application::IsKeyPressed('B') && time > 1 && gamestate == GAMECHECKOUT) // Opens/closes checklist
 	{
 		if ( toggleCheck == true )
@@ -1417,6 +1612,42 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	if (ItemSlide == true) //Conveyor belt
 		updateItemSlide(dt,WhichCashier);
 
+
+	if (Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 15 && lights[0].power != 0 && lights[1].power != 0 && time > 1 )
+	{
+		if(gamestate == GAMEFUN)
+		{
+			ISound* illuminati = engine->play2D("../irrKlang/media/SPOOKY.mp3", false);
+		}
+		else
+		{
+			ISound* Switch = engine->play2D("../irrKlang/media/switchoff.mp3", false); // light switch
+			//SWITCH OFF
+			lights[0].power = 0;
+			glUniform1f(m_parameters[U_LIGHT0_POWER], lights[0].power);
+
+			lights[1].power = 0;
+			glUniform1f(m_parameters[U_LIGHT1_POWER], lights[1].power);
+		}
+		time = 0 ;
+	}
+
+	if (Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 15 && lights[0].power == 0 && lights[1].power == 0 && time > 1 )
+	{
+		ISound* Switch = engine->play2D("../irrKlang/media/switchon.mp3", false); // light switch
+		lights[0].power = 0.5;
+		glUniform1f(m_parameters[U_LIGHT0_POWER], lights[0].power);
+
+		lights[1].power = 2;
+		glUniform1f(m_parameters[U_LIGHT1_POWER], lights[1].power);
+
+		time = 0 ;
+	}
+
+	if(Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 16 && gamestate == GAMEFUN)
+	{	
+		ISound* damn = engine->play2D("../irrKlang/media/damn.mp3", false); //for doge
+	}
 	//Updates
 	UpdateSG(dt);
 	UpdateNPC(dt);
@@ -1520,27 +1751,30 @@ void SceneSP::Render()
 	}
 	else if ( gamestate == GAMEWINTHIEF )
 	{
+		win->setIsPaused(false);
 		RenderThiefWin();
 	}
 	else if ( gamestate == GAMEBUSTED )
 	{
 		RenderBusted();
 	}
-	else 
+	else if ( gamestate == GAMEFUN )
 	{
 		RenderSkybox();
-		RenderSupermarket();
 		RenderCharacter();
-		RenderInteractableObjs();
+		RenderFunSMarket();
+		//RenderInteractableObjs();
+		RenderTV();
 
 		if ( gamestate != GAMEROAM )
 		{
 			RenderInventory();
 		}
 
-		RenderTV();
-		
-
+		if (hitto == true )
+		{
+			RenderPictureOnScreen(meshList[GEO_HITMARKER],3,3,13.35,9.9);
+		}
 
 		if(music == true)
 		{
@@ -1587,6 +1821,79 @@ void SceneSP::Render()
 			RenderTextOnScreen(meshList[GEO_MainMenuText], ItemData[ItemNo].getItemName() , (1, 0, 1),2, 10, 28);
 			RenderTextOnScreen(meshList[GEO_MainMenuText], ItemData[ItemNo].getItemDesc() , (1, 0, 1),2, 10, 27);
 		}
+
+		if ( Alarm == true )
+		{
+
+			detectors->setIsPaused(false);
+			RenderTextOnScreen(meshList[GEO_MainMenuText], "Please return in 5 seconds", (1, 0, 1),2, 5, 16);
+		}
+		else
+			detectors->setIsPaused(true);
+
+		
+	}
+	else //game modes except for fun
+	{
+		RenderSkybox();
+		RenderSupermarket();
+		RenderCharacter();
+		RenderInteractableObjs();
+		RenderTV();
+
+		if ( gamestate != GAMEROAM )
+		{
+			RenderInventory();
+		}
+		
+
+		if(music == true)
+		{
+			Renderirr();
+			music = false;
+		}
+
+		if ( ChooseWhich == true ) 
+		{
+			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press C to use camera", (1, 0, 1),2, 5, 4);
+			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press G to deactivate detectors", (1, 0, 1),2, 5, 6);
+			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press T to escape", (1, 0, 1),2, 5, 5);
+		}
+		if ( PickUpItem == true && Interact == false) 
+			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press E to pick up item", (1, 0, 1),2.5, 5, 4);
+		if ( cam_state != NORMAL ) 
+			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press N for next , Y for previous", (0, 1, 0),2, 3, 4);
+		if ( DetectorsOn == false)
+			RenderTextOnScreen(meshList[GEO_MainMenuText], "Detectors successfully deactivated", (0, 1, 0), 2, 3, 25);
+		if ( PlaceItem == true && Interact == false) 
+			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press Q to put back item", (1, 0, 1),2.5, 5, 4);
+		if (TapSwitch == true)
+			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press Q to turn off tap", (1, 0, 1),2.5, 5, 5);
+		if ( Interact == true && ChooseWhich == false && NoInteractableTargetcollision() != 16) 
+			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press E to interact", (1, 0, 1),2.5, 5, 4);
+
+		string temp;
+		string stemp;
+		string ctemp;
+		if ( CashierText == true )
+			temp = Cashier.getType() + " : " + Cashier.CashierWelcome();
+		RenderTextOnScreen(meshList[GEO_CASHIERTEXT], temp, (1, 0, 1), 1.6, 8, 23);
+		if ( SecurityText == true ) 
+			stemp = Guard.getType() + " : " + Guard.SSpeech();
+		RenderTextOnScreen(meshList[GEO_SECURITYTEXT], stemp, (1, 0, 1), 1.6, 5, 23);
+		if ( CustomerText == true )
+			ctemp = Customer.getType() + " : " +  Guard.CSpeech();
+		RenderTextOnScreen(meshList[GEO_CUSTOMERTEXT], ctemp, (1, 0, 1), 1.6, 13, 23);
+
+		if ( PickUpItem == true || PlaceItem == true )
+		{
+			RenderTextOnScreen(meshList[GEO_MainMenuText], "Target :" , (1, 0, 1),2, 2, 28);
+			RenderTextOnScreen(meshList[GEO_MainMenuText], "Info   :", (1, 0, 1),2, 2, 27);
+			RenderTextOnScreen(meshList[GEO_MainMenuText], ItemData[ItemNo].getItemName() , (1, 0, 1),2, 10, 28);
+			RenderTextOnScreen(meshList[GEO_MainMenuText], ItemData[ItemNo].getItemDesc() , (1, 0, 1),2, 10, 27);
+		}
+
+
 		//Distance from Security Guard
 		string temp2;
 		temp2 = "Distance: " + Convert(DistFromSG);
@@ -1596,26 +1903,30 @@ void SceneSP::Render()
 		}
 		//If player exits he supermarket when having an item
 		if ( Alarm == true ) 
+		{
+			alarm->setIsPaused(false);
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Please return in 5 seconds", (1, 0, 1),2, 5, 16);
 
-		//Render checklist
-		if ( toggleCheck == true )
-		{
-			RenderPictureOnScreen(meshList[GEO_CHECKLIST],100,40,0.47,0.7);
-
-			for ( int z = 0 ; z < 9 ; z++ )
-			{
-				RenderTextOnScreen(meshList[GEO_MainMenuText],CheckList[z].getItemName(), (1,0,0) , 2 , 10 , 20 - z );
-				RenderTextOnScreen(meshList[GEO_MainMenuText],Convert(CheckoutList[z].getItemCount()), (1,0,0) , 2 , 24 , 20 - z );
-				RenderTextOnScreen(meshList[GEO_MainMenuText],"/", (1,0,0) , 2 , 26 , 20 - z );
-				RenderTextOnScreen(meshList[GEO_MainMenuText],Convert(CheckList[z].getItemCount()), (1,0,0) , 2 , 27 , 20 - z );
-				if ( CheckCheckOut[z] == true ) 
-					RenderTextOnScreen(meshList[GEO_MainMenuText], "Done" , (1,0,0) , 2 , 30 , 20 - z );
-				else
-					RenderTextOnScreen(meshList[GEO_MainMenuText], "Not done" , (1,0,0) , 2 , 30 , 20 - z );
-
-			}
 		}
+		else
+			alarm->setIsPaused(true);
+			if ( toggleCheck == true )
+			{
+				RenderPictureOnScreen(meshList[GEO_CHECKLIST],100,40,0.47,0.7);
+
+				for ( int z = 0 ; z < 9 ; z++ )
+				{
+					RenderTextOnScreen(meshList[GEO_MainMenuText],CheckList[z].getItemName(), (1,0,0) , 2 , 10 , 20 - z );
+					RenderTextOnScreen(meshList[GEO_MainMenuText],Convert(CheckoutList[z].getItemCount()), (1,0,0) , 2 , 24 , 20 - z );
+					RenderTextOnScreen(meshList[GEO_MainMenuText],"/", (1,0,0) , 2 , 26 , 20 - z );
+					RenderTextOnScreen(meshList[GEO_MainMenuText],Convert(CheckList[z].getItemCount()), (1,0,0) , 2 , 27 , 20 - z );
+					if ( CheckCheckOut[z] == true ) 
+						RenderTextOnScreen(meshList[GEO_MainMenuText], "Done" , (1,0,0) , 2 , 30 , 20 - z );
+					else
+						RenderTextOnScreen(meshList[GEO_MainMenuText], "Not done" , (1,0,0) , 2 , 30 , 20 - z );
+
+				}
+			}
 
 	}
 }

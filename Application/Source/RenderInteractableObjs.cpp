@@ -49,8 +49,7 @@ void SceneSP::RenderInteractableObjs()
 		modelStack.PopMatrix();
 	modelStack.PopMatrix();
 
-
-
+    
 	modelStack.PushMatrix();		//LEFT DISPLAY CABINET
 
 	modelStack.PushMatrix();		//Bottom layer

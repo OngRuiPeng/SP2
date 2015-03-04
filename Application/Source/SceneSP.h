@@ -122,12 +122,19 @@ class SceneSP : public Scene
 		GEO_PIZZA,
 		GEO_MAGGI,
 		GEO_DEWTOS,
+        GEO_MTNPIC,
+        GEO_DORITOSPIC,
 		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		
 		//Fun Stuff~~~~~~~~~~~~~~~~~~~~~~~~~~
 		GEO_HITMARKER,
 		GEO_SNOOPDOG,
 		GEO_WEED,
+        GEO_MTN,
+        GEO_DORITOS,
+        GEO_WEEDP,
+        GEO_ILLUMINATI,
+        GEO_DOGE,
 		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		GEO_LIGHTBALL,
 
@@ -175,6 +182,8 @@ class SceneSP : public Scene
 		Chicken, // CAN1
 		Maggi, // PACK3
 		Macaroni, // GEO_BOX2
+        Doritos,
+        MountainDew,
 		MAX_ITEM,
 	};
 
@@ -269,7 +278,10 @@ public:
 	void RenderFlush();
 	int Renderirr();
 	void RenderCams();
-	
+	void RenderFunSMarket();
+    void RenderFunPic();
+    void RenderFunStuff();
+
 	void UpdateNPC(double);
 	void UpdateCustomer(double);
 	//collision
@@ -285,9 +297,11 @@ public:
 	vector <Obj> OBJ ;
 	vector <Obj> Items ;
 	vector <Obj> Interactables ;
+	vector <Obj> Fun;
 
 	Obj box1 ;
 	Obj seewhere;
+	
 
 
 	int ItemNo;
@@ -440,13 +454,18 @@ public:
 	
 	//Music
 	bool music;
-
+	bool hitto;
+    int hit;
+	double hittimer;
 	//Gamemode 
 	bool Alarm;
 	int ItemsStolen;
+
 	bool inSecurityRoom;
 	Vector3 VectorFromSG;
 	float DistFromSG;
+	double Supermarkettimer;
+	
 
 private:
 	unsigned m_vertexArrayID;

@@ -97,21 +97,21 @@ void SceneSP::updatecollision(double dt)
 	float MOVE_SPEED = 20.0f;
 
 	updateobj();
-	
+
 	if (Application::IsKeyPressed('W') && gamestate != MAINMENU && gamestate != CHOOSEMODE && gamestate != GAMEWINCHECKOUT && gamestate != GAMEWINTHIEF && gamestate != GAMEBUSTED) 
 	{
-		
+
 		walk->setAllSoundsPaused(false);
 
-	
-	
-	if(sound)
+
+
+		if(sound)
 		{
 			//walk->setDefault3DSoundMaxDistance(1000000000.f);
 			sound->setMinDistance(0.f);
 		}
-			
-		
+
+
 		Vector3 view = (camera.target - camera.position).Normalize();
 		view.y = 0;
 		Vector3 precollide = view * dt * MOVE_SPEED; // if it moved it will be here 
@@ -203,27 +203,50 @@ Obj SceneSP::ItemTargetcollision() // returns the item that the target has colli
 	Vector3 view = (camera.targetwhere - camera.position).Normalized();
 	view *= 0.5;
 	Obj see ;
-
-	for ( int z = 0 ; z < 20 ; z++) 
+	if(gamestate != GAMEFUN)
 	{
-		targetline += view;
-		see.set(targetline + Vector3(0.2,0.2,0.2),targetline - Vector3(0.2,0.2,0.2));
-
-		for ( int x = 0 ; x < Items.size() ; x++ )
+		for ( int z = 0 ; z < 20 ; z++) 
 		{
-			if ( AABBCheck(see,Items[x]) == true )
+			targetline += view;
+			see.set(targetline + Vector3(0.2,0.2,0.2),targetline - Vector3(0.2,0.2,0.2));
+
+			for ( int x = 0 ; x < Items.size() ; x++ )
 			{
-				PickUpItem = true;
-				return Items[x];
+				if ( AABBCheck(see,Items[x]) == true )
+				{
+					PickUpItem = true;
+					return Items[x];
+				}
+				else
+				{
+					PickUpItem = false;
+				}
 			}
-			else
-			{
-				PickUpItem = false;
-			}
+
 		}
-
 	}
+	if(gamestate == GAMEFUN)
+	{
+		for ( int z = 0 ; z < 20 ; z++) 
+		{
+			targetline += view;
+			see.set(targetline + Vector3(0.2,0.2,0.2),targetline - Vector3(0.2,0.2,0.2));
 
+			for ( int x = 0 ; x < Fun.size() ; x++ )
+			{
+				if ( AABBCheck(see,Fun[x]) == true )
+				{
+					PickUpItem = true;
+					return Fun[x];
+				}
+				else
+				{
+					PickUpItem = false;
+				}
+			}
+
+		}
+	}
 }
 
 int SceneSP::NoItemTargetcollision() // returns the item that the target has collided with ( Obj format)
@@ -232,32 +255,76 @@ int SceneSP::NoItemTargetcollision() // returns the item that the target has col
 	Vector3 view = (camera.targetwhere - camera.position).Normalized();
 	view *= 0.5;
 	Obj see ;
-
-	for ( int z = 0 ; z < 20 ; z++) 
+	if(gamestate != GAMEFUN)
 	{
-		targetline += view;
-		see.set(targetline + Vector3(0.2,0.2,0.2),targetline - Vector3(0.2,0.2,0.2));
-
-		for ( int x = 0 ; x < Items.size() ; x++ )
+		for ( int z = 0 ; z < 20 ; z++) 
 		{
-			if ( AABBCheck(see,Items[x]) == true )
+			targetline += view;
+			see.set(targetline + Vector3(0.2,0.2,0.2),targetline - Vector3(0.2,0.2,0.2));
+
+			for ( int x = 0 ; x < Items.size() ; x++ )
 			{
-				if ( Items[x].getEmpty() == false )
-					PickUpItem = true;
+				if ( AABBCheck(see,Items[x]) == true )
+				{
+					if ( Items[x].getEmpty() == false )
+						PickUpItem = true;
+					else
+					{
+						for ( int y = 0 ; y < ItemData.size() ; y++ ) 
+						{
+							for ( int p = 0 ; p < InventoryData.size() ; p++ )
+							{
+								if ( InventoryData[p].getItemName() == ItemData[y].getItemName() && ItemData[Items[x].getNo()].getItemName() == InventoryData[p].getItemName() && InventoryData[p].getItemCount() > 0)
+									PlaceItem = true ; 
+							}
+						}
+					}
+					return x ;
+				}
 				else
-					PlaceItem = true ; 
+				{
+					PickUpItem = false;
+					PlaceItem = false;
+				}
+			}
 
-				return x ;
-			}
-			else
-			{
-				PickUpItem = false;
-				PlaceItem = false;
-			}
 		}
-
 	}
+	if(gamestate == GAMEFUN)
+	{
+		for ( int z = 0 ; z < 20 ; z++) 
+		{
+			targetline += view;
+			see.set(targetline + Vector3(0.2,0.2,0.2),targetline - Vector3(0.2,0.2,0.2));
 
+			for ( int x = 0 ; x < Fun.size() ; x++ )
+			{
+				if ( AABBCheck(see,Fun[x]) == true )
+				{
+					if ( Fun[x].getEmpty() == false )
+						PickUpItem = true;
+					else
+					{
+						for ( int y = 0 ; y < ItemData.size() ; y++ ) 
+						{
+							for ( int p = 0 ; p < InventoryData.size() ; p++ )
+							{
+								if ( InventoryData[p].getItemName() == ItemData[y].getItemName() && ItemData[Fun[x].getNo()].getItemName() == InventoryData[p].getItemName() && InventoryData[p].getItemCount() > 0)
+									PlaceItem = true ; 
+							}
+						}
+					}
+					return x ;
+				}
+				else
+				{
+					PickUpItem = false;
+					PlaceItem = false;
+				}
+			}
+
+		}
+	}
 	return 0 ;
 }
 

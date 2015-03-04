@@ -46,6 +46,12 @@ void SceneSP::updateCam(double dt)
 
 	if (Application::IsKeyPressed('Y') && CamTime > 1 )
 	{
+        if(gamestate== GAMEFUN)
+            {
+                ISound* shoot = engine2->play2D("../irrKlang/media/shoot.mp3", false);
+            }
+            else
+        ISound* cameraswitch = engine2->play2D("../irrKlang/media/camera.mp3", false);
 		cam_state = (cam_state - 1 ) % 6 ;
 		CamTime = 0 ;
 
@@ -59,6 +65,11 @@ void SceneSP::updateCam(double dt)
 
 	if (Application::IsKeyPressed('N') && CamTime > 1 )
 	{
+        if(gamestate== GAMEFUN)
+            {
+                ISound* shoot = engine2->play2D("../irrKlang/media/shoot.mp3", false);
+            }
+            else
         ISound* cameraswitch = engine2->play2D("../irrKlang/media/camera.mp3", false);
 		cam_state = (cam_state + 1 ) % 6 ;
 		CamTime = 0 ;
