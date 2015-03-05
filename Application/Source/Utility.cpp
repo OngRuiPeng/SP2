@@ -1,3 +1,13 @@
+/******************************************************************************/
+/*!
+\file	Utility.cpp
+\author SP'13 2015
+\par	nyp
+\brief
+CPP to define functions for operation and also to convert float to string 
+*/
+/******************************************************************************/
+
 #include "Utility.h"
 
 Position operator*(const Mtx44& lhs, const Position& rhs)

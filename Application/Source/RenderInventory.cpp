@@ -1,7 +1,7 @@
 /******************************************************************************/
 /*!
 \file	RenderInventory.cpp
-\author SP'13 2015
+\author Jun Yan , Jun Sen
 \par	nyp
 \brief
 CPP to render inventory and also to update checklist 

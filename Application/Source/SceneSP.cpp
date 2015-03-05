@@ -1096,6 +1096,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	if(Application::IsKeyPressed('6'))
 	{
 		gamestate = GAMEWINTHIEF;
+		wintimer = 0 ;
 	}
 
 	//Player actions
@@ -1234,8 +1235,8 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	if ( CheckListDone == true && gamestate == GAMECHECKOUT)
 	{
 		gamestate = GAMEWINCHECKOUT;
-		wintimer += dt;
 		camera.Reset();
+		wintimer = 0;
 	}
 	
 	if ( ItemsInInventory == true && inSupermarket == false && DetectorsOn == true && gamestate != GAMEROAM && gamestate != GAMEFUN & SecurityCam == false) // if players leave supermarket with items
@@ -1251,13 +1252,15 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	if ( ItemsInInventory == true && inSupermarket == false && DetectorsOn == false && gamestate == GAMETHIEF && SecurityCam == false)
 	{
 		gamestate = GAMEWINTHIEF;
-		wintimer += dt;
+
 		for ( int x = 0; x < InventoryData.size(); ++x )
 		{
 			ItemsStolen += InventoryData[x].getItemCount();
 		}
 		cout << ItemsStolen << endl;
 		camera.Reset();
+		
+		wintimer = 0;
 	}
 	if ( ItemsInInventory == true && inSupermarket == true ) // if players return to the supermarket
 	{
@@ -1662,6 +1665,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	UpdateNPC(dt);
 	SlidingDoor(dt);
 	time += dt;
+	wintimer += dt;
 	VectorFromSG = camera.position - SGPos;
 	DistFromSG = VectorFromSG.Length();
 	updateCheckList();
@@ -1756,18 +1760,24 @@ void SceneSP::Render()
 	}
 	else if ( gamestate == GAMEWINCHECKOUT )
 	{
-		if ( wintimer < 0.1 ) 
+		if ( wintimer < 2 ) 
 		{
 			win->setIsPaused(false);
 		}
+		else
+			win->setIsPaused(true);
+
 		RenderCheckoutWin();
 	}
 	else if ( gamestate == GAMEWINTHIEF )
 	{
-		if ( wintimer < 0.1 )
+		if ( wintimer < 2 )
 		{
 			win->setIsPaused(false);
 		}
+		else
+			win->setIsPaused(true);
+
 		RenderThiefWin();
 	}
 	else if ( gamestate == GAMEBUSTED )

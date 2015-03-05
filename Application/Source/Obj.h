@@ -1,3 +1,13 @@
+/******************************************************************************/
+/*!
+\file	Obj.h
+\author Jun Sen
+\par	nyp
+\brief
+CPP to declare Obj members and functions 
+*/
+/******************************************************************************/
+
 #include <iostream>
 
 #include "Vector3.h"

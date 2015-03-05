@@ -1,6 +1,16 @@
 #ifndef VERTEX_H
 #define VERTEX_H
 
+/******************************************************************************/
+/*!
+\file	Vertex.h
+\author SP'13 2015
+\par	nyp
+\brief
+CPP to declare functions and members for vertex
+*/
+/******************************************************************************/
+
 #include "Vector3.h"
 
 struct Position

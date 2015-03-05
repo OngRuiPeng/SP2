@@ -1,7 +1,7 @@
 /******************************************************************************/
 /*!
 \file	RenderSkybox.cpp
-\author SP'13 2015
+\author Job
 \par	nyp
 \brief
 CPP to render skybox 

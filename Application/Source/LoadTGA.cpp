@@ -1,3 +1,13 @@
+/******************************************************************************/
+/*!
+\file	LoadTGA.cpp
+\author SP'13 2015
+\par	nyp
+\brief
+CPP to define functions to load TGA files  
+*/
+/******************************************************************************/
+
 
 #include <iostream>
 #include <fstream>

@@ -1,6 +1,16 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
+/******************************************************************************/
+/*!
+\file	Camera.h
+\author SP'13 2015
+\par	nyp
+\brief
+CPP to declare functions and members for camera
+*/
+/******************************************************************************/
+
 #include "Vector3.h"
 
 class Camera

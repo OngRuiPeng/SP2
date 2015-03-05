@@ -1,7 +1,7 @@
 /******************************************************************************/
 /*!
 \file	SimpleInteractions.cpp
-\author SP'13 2015
+\author Job , Rui Peng , Jun Sen
 \par	nyp
 \brief
 CPP to define functions of interactions in game 

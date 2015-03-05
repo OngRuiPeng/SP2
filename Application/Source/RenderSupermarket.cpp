@@ -1,10 +1,10 @@
 /******************************************************************************/
 /*!
 \file	RenderSupermarket.cpp
-\author SP'13 2015
+\author Job , Jun Sen
 \par	nyp
 \brief
-CPP to render most of the OBJs in the supermarket
+CPP to render most of the OBJs in the supermarket , also render the conveyor belt animation
 */
 /******************************************************************************/
 

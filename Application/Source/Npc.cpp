@@ -1,7 +1,7 @@
 /******************************************************************************/
 /*!
 \file	Npc.cpp
-\author SP'13 2015
+\author Rui Peng
 \par	nyp
 \brief
 CPP to define functions initialising Npc class objs

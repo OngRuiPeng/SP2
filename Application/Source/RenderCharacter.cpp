@@ -1,7 +1,7 @@
 /******************************************************************************/
 /*!
 \file	RenderCharacter.cpp
-\author SP'13 2015
+\author Rui peng , Job , Jun Sen
 \par	nyp
 \brief
 CPP to render characters based on variables ( to animate ) 

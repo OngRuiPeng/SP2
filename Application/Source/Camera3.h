@@ -1,6 +1,16 @@
 #ifndef CAMERA_3_H
 #define CAMERA_3_H
 
+/******************************************************************************/
+/*!
+\file	Camera3.h
+\author SP'13 2015
+\par	nyp
+\brief
+CPP to declare functions and members for camera
+*/
+/******************************************************************************/
+
 #include "Camera.h"
 
 class Camera3 : public Camera

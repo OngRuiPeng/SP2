@@ -1,6 +1,15 @@
-
 #ifndef APPLICATION_H
 #define APPLICATION_H
+
+/******************************************************************************/
+/*!
+\file	Application.h
+\author SP'13 2015
+\par	nyp
+\brief
+CPP to declare Application members and functions
+*/
+/******************************************************************************/
 
 #include "timer.h"
 

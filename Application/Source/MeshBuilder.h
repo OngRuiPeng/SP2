@@ -1,6 +1,16 @@
 #ifndef MESH_BUILDER_H
 #define MESH_BUILDER_H
 
+/******************************************************************************/
+/*!
+\file	MeshBuilder.h
+\author SP'13 2015
+\par	nyp
+\brief
+CPP to declare functions and members for building meshes
+*/
+/******************************************************************************/
+
 #include "Mesh.h"
 #include "Vertex.h"
 

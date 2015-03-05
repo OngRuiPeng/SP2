@@ -1,7 +1,7 @@
 /******************************************************************************/
 /*!
 \file	SecCam.cpp
-\author SP'13 2015
+\author Jun Sen , Jun Yan
 \par	nyp
 \brief
 CPP to define functions for the security camera mode 

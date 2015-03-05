@@ -1,3 +1,13 @@
+/******************************************************************************/
+/*!
+\file	shader.cpp
+\author SP'13 2015
+\par	nyp
+\brief
+CPP to define functions for loading shaders
+*/
+/******************************************************************************/
+
 #include <stdio.h>
 #include <string>
 #include <vector>

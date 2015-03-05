@@ -1,4 +1,15 @@
 #pragma once
+
+/******************************************************************************/
+/*!
+\file	Npc.h
+\author SP'13 2015
+\par	nyp
+\brief
+CPP to declare functions and members for CNpc class
+*/
+/******************************************************************************/
+
 #include <string>
 using namespace std;
 

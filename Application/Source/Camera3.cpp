@@ -1,3 +1,13 @@
+/******************************************************************************/
+/*!
+\file	Camera3.cpp
+\author SP'13 2015
+\par	nyp
+\brief
+Camera functions with mouse controls 
+*/
+/******************************************************************************/
+
 #include "Camera3.h"
 #include "Application.h"
 #include "Mtx44.h"

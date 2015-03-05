@@ -1,7 +1,7 @@
 /******************************************************************************/
 /*!
-\file	SceneSP.cpp
-\author SP'13 2015
+\file	Inventory.cpp
+\author Jun Yan
 \par	nyp
 \brief
 CPP to update inventory when you checkout,pick up and put back item

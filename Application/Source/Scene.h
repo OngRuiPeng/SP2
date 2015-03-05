@@ -1,6 +1,16 @@
 #ifndef SCENE_H
 #define SCENE_H
 
+/******************************************************************************/
+/*!
+\file	Scene.h
+\author SP'13 2015
+\par	nyp
+\brief
+CPP to declare functions and members for Scene
+*/
+/******************************************************************************/
+
 #include "GL\glew.h"
 #include "GLFW\glfw3.h"
 

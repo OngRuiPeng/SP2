@@ -1,3 +1,13 @@
+/******************************************************************************/
+/*!
+\file	MeshBuilder.cpp
+\author SP'13 2015
+\par	nyp
+\brief
+CPP to define functions that builds the mesh 
+*/
+/******************************************************************************/
+
 #include "MeshBuilder.h"
 #include <GL\glew.h>
 #include <vector>

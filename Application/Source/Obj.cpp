@@ -1,7 +1,7 @@
 /******************************************************************************/
 /*!
 \file	Obj.cpp
-\author SP'13 2015
+\author Jun Sen
 \par	nyp
 \brief
 Defining functions used to initialise OBJs for collision 

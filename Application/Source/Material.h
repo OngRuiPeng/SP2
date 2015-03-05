@@ -1,6 +1,16 @@
 #ifndef MATERIAL_H
 #define MATERIAL_H
 
+/******************************************************************************/
+/*!
+\file	Material.h
+\author SP'13 2015
+\par	nyp
+\brief
+CPP to declare members for material
+*/
+/******************************************************************************/
+
 struct Component
 {
 	float r, g, b;

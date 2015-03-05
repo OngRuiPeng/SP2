@@ -1,3 +1,13 @@
+/******************************************************************************/
+/*!
+\file	RenderFunctions.cpp
+\author SP'13 2015
+\par	nyp
+\brief
+CPP to define functions for rendering
+*/
+/******************************************************************************/
+
 #include "SceneSP.h"
 
 #include "GL\glew.h"

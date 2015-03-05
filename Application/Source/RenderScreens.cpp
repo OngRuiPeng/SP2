@@ -1,7 +1,7 @@
 /******************************************************************************/
 /*!
 \file	RenderScreens.cpp
-\author SP'13 2015
+\author Rui Peng
 \par	nyp
 \brief
 CPP to render the different menu of the game states

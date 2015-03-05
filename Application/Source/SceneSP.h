@@ -1,6 +1,16 @@
 #ifndef SCENE_SP_H
 #define SCENE_SP_H
 
+/******************************************************************************/
+/*!
+\file	SceneSP.h
+\author SP'13 2015
+\par	nyp
+\brief
+CPP to declare SceneSP members and functions
+*/
+/******************************************************************************/
+
 #include "Scene.h"
 #include "Camera3.h"
 #include "MeshBuilder.h"

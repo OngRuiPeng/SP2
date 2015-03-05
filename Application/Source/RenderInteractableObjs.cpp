@@ -1,7 +1,7 @@
 /******************************************************************************/
 /*!
 \file	RenderInteractableObjs.cpp
-\author SP'13 2015
+\author Job , Jun Sen
 \par	nyp
 \brief
 CPP to render interactable OBJs in the supermarket 

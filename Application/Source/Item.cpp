@@ -1,7 +1,7 @@
 /******************************************************************************/
 /*!
 \file	Item.cpp
-\author SP'13 2015
+\author Jun Yan
 \par	nyp
 \brief
 CPP to define functions initialising CItem class objs

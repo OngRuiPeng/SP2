@@ -1,7 +1,7 @@
 /******************************************************************************/
 /*!
 \file	UpdateNPC.cpp
-\author SP'13 2015
+\author Rui Peng , Job , Jun Sen
 \par	nyp
 \brief
 CPP to define functions to update the AIs in the game 

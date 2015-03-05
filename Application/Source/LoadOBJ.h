@@ -1,6 +1,16 @@
 #ifndef LOAD_OBJ_H
 #define LOAD_OBJ_H
 
+/******************************************************************************/
+/*!
+\file	LoadOBJ.h
+\author SP'13 2015
+\par	nyp
+\brief
+CPP to declare functions and members for loading Objs
+*/
+/******************************************************************************/
+
 #include <vector>
 #include "Vertex.h"
 #include "Vector3.h"
