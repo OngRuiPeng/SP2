@@ -1141,7 +1141,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 
 	FPS = 1.0 / dt ; 
 	UpdateNPC(dt);
-	if(Application::IsKeyPressed('1'))
+	/*if(Application::IsKeyPressed('1'))
 	{
 		glEnable(GL_CULL_FACE);
 	}
@@ -1164,7 +1164,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	if(Application::IsKeyPressed('6'))
 	{
 		gamestate = GAMEWINTHIEF;
-	}
+	}*/
 
 	//Player actions
 	if (Application::IsKeyPressed(VK_SPACE) && JumpState == false && gamestate != MAINMENU && gamestate != CHOOSEMODE && gamestate != GAMEBUSTED && gamestate != GAMEWINTHIEF && gamestate != GAMEWINCHECKOUT && SecurityCam == false) //Space to jump
@@ -1184,7 +1184,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		cout << " Music Start!" << endl;
 	}
 
-	if(Application::IsKeyPressed(VK_ESCAPE) && ChooseWhich == false && SecurityCam == false) //Return to main menu and re-initialize variables
+	if(Application::IsKeyPressed('1') && ChooseWhich == false && SecurityCam == false) //Return to main menu and re-initialize variables
 	{
 		gamestate = MAINMENU;
 		genCheckList();
@@ -1316,6 +1316,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 			gamestate = GAMEBUSTED;
 		}
 	}
+	
 	if ( ItemsInInventory == true && inSupermarket == false && DetectorsOn == false && gamestate == GAMETHIEF && SecurityCam == false)
 	{
 		gamestate = GAMEWINTHIEF;
@@ -1342,7 +1343,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	//Entering the supermarket and playing chime
 	if ( inSupermarket == false ) 
 	{
-		if ( camera.position.z > -7 && camera.position.z < 49 && camera.position.x < 28 && camera.position.x > -27 /*&& SecurityCam == false*/)
+		if ( camera.position.z > -7 && camera.position.z < 49 && camera.position.x < 28 && camera.position.x > -27)
 		{
 			if ( inSecurityRoom == false )
 			{
@@ -1352,9 +1353,9 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 			Supermarkettimer = 0 ;
 		}
 	}
-	if ( inSupermarket == true )
+	if ( inSupermarket == true && SecurityCam == false)
 	{
-		if ( camera.position.z < -7 || camera.position.z > 49 || camera.position.x > 28 || camera.position.x < -27 /*&& SecurityCam == false*/) 
+		if ( camera.position.z < -7 || camera.position.z > 49 || camera.position.x > 28 || camera.position.x < -27 ) 
 		{
 			inSupermarket = false;
 		}
@@ -1967,7 +1968,7 @@ void SceneSP::Render()
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Detectors successfully deactivated", (0, 1, 0), 2, 3, 25);
 		if ( PlaceItem == true && Interact == false) 
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press Q to put back item", (1, 0, 1),2.5, 5, 4);
-		if ( Interact == true && ChooseWhich == false && NoInteractableTargetcollision() != 16) 
+		if ( Interact == true && ChooseWhich == false && NoInteractableTargetcollision() != 16 && SecurityCam == false) 
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press E to interact", (1, 0, 1),2.5, 5, 4);
 
 		string temp;

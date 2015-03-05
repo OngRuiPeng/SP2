@@ -190,6 +190,7 @@ void SceneSP::updateCheckList()
 		if ( InventoryData[x].getItemCount() > 0 )
 		{
 			ItemsInInventory = true;
+			break;
 		}
 		else
 		{
