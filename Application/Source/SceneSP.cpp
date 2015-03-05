@@ -1504,7 +1504,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 			}
 		}
 
-		if ( NoInteractableTargetcollision() == 11 && toiletDoor == false && time > 0.1)
+		if ( NoInteractableTargetcollision() == 11 && toiletDoor == false && time > 0.2)
 		{
 			ISound* door = engine->play2D("../irrKlang/media/door.mp3", false); // back doors
 			//door->setIsPaused(false);
@@ -1512,7 +1512,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 			toiletDoorMove = -90;
 			time = 0;
 		}
-		if ( NoInteractableTargetcollision() == 11 && toiletDoor == true && time > 0.1)
+		if ( NoInteractableTargetcollision() == 11 && toiletDoor == true && time > 0.2)
 		{
 			ISound* door = engine->play2D("../irrKlang/media/door.mp3", false); // back doors
 			//door->setIsPaused(false);
@@ -1520,14 +1520,14 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 			toiletDoorMove = 0;
 			time = 0;
 		}
-		if ( NoInteractableTargetcollision() == 12  && securityDoor == false && time > 0.1)
+		if ( NoInteractableTargetcollision() == 12  && securityDoor == false && time > 0.2)
 		{
 			ISound* door = engine->play2D("../irrKlang/media/door.mp3", false); // back doors
 			securityDoor = true;
 			securityDoorMove = 90;
 			time = 0;
 		}
-		if ( NoInteractableTargetcollision() == 12 && securityDoor == true && time > 0.1)
+		if ( NoInteractableTargetcollision() == 12 && securityDoor == true && time > 0.2)
 		{
 			ISound* door = engine->play2D("../irrKlang/media/door.mp3", false); // back doors
 			securityDoor = false;

@@ -95,10 +95,7 @@ void Camera3::Update(double dt,float width, float height, double* xpos, double* 
 			targetwhere = rotation * (targetwhere - position) + position;
 	}
 
-	if(Application::IsKeyPressed('R'))
-	{
-		Reset();
-	}
+	
 
 	/*std::cout << position.x << "\t" << position.y << "\t" << position.z << std::endl;*/
 }
