@@ -719,6 +719,9 @@ void SceneSP::collisionOBJinit()
 	box1.set(Vector3(18,20,38.5),Vector3(15.8,0,36.8)); // front right wall 
 	OBJ.push_back(box1);
 
+	box1.set(Vector3(29,20,38.5),Vector3(15,7,36.8)); // front top wall 
+	OBJ.push_back(box1);
+
 	// ******************************************* ( security room )
 	box1.set(Vector3(-8.6,20,49),Vector3(-11,0,36.8)); // left wall 
 	OBJ.push_back(box1);
@@ -727,6 +730,9 @@ void SceneSP::collisionOBJinit()
 	OBJ.push_back(box1);
 
 	box1.set(Vector3(-16,20,39),Vector3(-26,0,36.8)); // front right wall 
+	OBJ.push_back(box1);
+
+	box1.set(Vector3(-8.6,20,39),Vector3(-26,7,36.8)); // front top wall 
 	OBJ.push_back(box1);
 }
 
@@ -1887,8 +1893,6 @@ void SceneSP::Render()
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Detectors successfully deactivated", (0, 1, 0), 2, 3, 25);
 		if ( PlaceItem == true && Interact == false) 
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press Q to put back item", (1, 0, 1),2.5, 5, 4);
-		if (TapSwitch == true)
-			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press Q to turn off tap", (1, 0, 1),2.5, 5, 5);
 		if ( Interact == true && ChooseWhich == false && NoInteractableTargetcollision() != 16) 
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press E to interact", (1, 0, 1),2.5, 5, 4);
 

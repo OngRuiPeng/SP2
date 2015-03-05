@@ -41,7 +41,8 @@ void SceneSP::Jump (double dt)
 
 	if (JumpDirection == true && JumpState == true)
 	{
-		if (AABBCheck(OBJ[0],OBJ[10]) == true )
+
+		if (AABBCheck(OBJ[0],OBJ[10]) == true || AABBCheck(OBJ[0],OBJ[31]) == true || AABBCheck(OBJ[0],OBJ[35]) == true)
 		{
 			JumpDirection = false;
 		}
