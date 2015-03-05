@@ -1291,10 +1291,11 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		camera.Update(dt, w / 2, h / 2, &xpos, &ypos);
 	}
 
-	if ( Caught == true && gamestate == GAMETHIEF) // Caught by security guard in Thief Mode
+	if ( Caught == true && gamestate == GAMETHIEF && SecurityCam == false) // Caught by security guard in Thief Mode while not in camera mode
 	{
 		detectors->setIsPaused(true);
 		gamestate = GAMEBUSTED;
+		camera.Reset();
 	}
 
 	if ( CheckListDone == true && gamestate == GAMECHECKOUT)
