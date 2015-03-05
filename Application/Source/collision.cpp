@@ -13,6 +13,13 @@ CPP to define collision functions , including collision detection + response
 ISoundEngine* walk = createIrrKlangDevice(ESOD_AUTO_DETECT,ESEO_MULTI_THREADED | ESEO_LOAD_PLUGINS | ESEO_USE_3D_BUFFERS);
 ISound* sound = walk->play2D("../irrKlang/media/walkm2.mp3", true,true);
 
+/******************************************************************************/
+/*!
+\par const OBJs
+\brief
+return true if collision occurs
+*/
+/******************************************************************************/
 bool SceneSP::AABBCheck(const Obj &box1,const Obj &box2)
 {
 
@@ -26,6 +33,13 @@ bool SceneSP::AABBCheck(const Obj &box1,const Obj &box2)
 
 }
 
+/******************************************************************************/
+/*!
+\par OBJ vector , a vector3 and another OBJ vector
+\brief
+this is called when you move and prevent collision by sliding 
+*/
+/******************************************************************************/
 void SceneSP::collisionprevent(vector<Obj> a, Vector3 camerathing , vector<Obj> b ) 
 {
 	bool moveX = true ;
@@ -92,6 +106,13 @@ void SceneSP::collisionprevent(vector<Obj> a, Vector3 camerathing , vector<Obj> 
 
 }
 
+/******************************************************************************/
+/*!
+\par dt 
+\brief
+updates collision 
+*/
+/******************************************************************************/
 void SceneSP::updatecollision(double dt)
 {
 	float MOVE_SPEED = 20.0f;
@@ -156,6 +177,12 @@ void SceneSP::updatecollision(double dt)
 
 }
 
+/******************************************************************************/
+/*!
+\brief
+Updates the bounding box of moving OBJs
+*/
+/******************************************************************************/
 void SceneSP::updateobj()
 {
 	OBJ[0].max = camera.position + Vector3(1,1,1);
@@ -197,6 +224,13 @@ void SceneSP::updateobj()
 
 }
 
+/******************************************************************************/
+/*!
+\par void
+\brief
+returns the item that the target has collided with
+*/
+/******************************************************************************/
 Obj SceneSP::ItemTargetcollision() // returns the item that the target has collided with ( Obj format)
 {
 	Vector3 targetline = camera.position;
@@ -249,6 +283,13 @@ Obj SceneSP::ItemTargetcollision() // returns the item that the target has colli
 	}
 }
 
+/******************************************************************************/
+/*!
+\par void
+\brief
+returns the number of the item that the target has collided with 
+*/
+/******************************************************************************/
 int SceneSP::NoItemTargetcollision() // returns the item that the target has collided with ( Obj format)
 {
 	Vector3 targetline = camera.position;
@@ -328,6 +369,13 @@ int SceneSP::NoItemTargetcollision() // returns the item that the target has col
 	return 0 ;
 }
 
+/******************************************************************************/
+/*!
+\par void
+\brief
+returns the interactable that target has collided with 
+*/
+/******************************************************************************/
 Obj SceneSP::InteractableTargetcollision() // returns the Interactable that the target has collided with ( Obj format)
 {
 	Vector3 targetline = camera.position;
@@ -357,6 +405,13 @@ Obj SceneSP::InteractableTargetcollision() // returns the Interactable that the 
 
 }
 
+/******************************************************************************/
+/*!
+\par void
+\brief
+returns the number of the interactable that target has collided with 
+*/
+/******************************************************************************/
 int SceneSP::NoInteractableTargetcollision() // returns the Interactable that the target has collided with ( Obj format)
 {
 	Vector3 targetline = camera.position;

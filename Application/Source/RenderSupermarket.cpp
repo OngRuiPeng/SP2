@@ -10,6 +10,12 @@ CPP to render most of the OBJs in the supermarket , also render the conveyor bel
 
 #include "SceneSP.h"
 
+/******************************************************************************/
+/*!
+\brief
+renders the supermarket
+*/
+/******************************************************************************/
 void SceneSP::RenderSupermarket()
 {
 	//All push
@@ -246,6 +252,12 @@ void SceneSP::RenderSupermarket()
 	//All pop
 }
 
+/******************************************************************************/
+/*!
+\brief
+renders the flush ( animates when interact)
+*/
+/******************************************************************************/
 void SceneSP::RenderFlush()
 {
 	if (flushUp < -0.1)
@@ -271,6 +283,12 @@ void SceneSP::RenderFlush()
 	}
 }
 
+/******************************************************************************/
+/*!
+\brief
+renders tap water animation ( when interacted)
+*/
+/******************************************************************************/
 void SceneSP::RenderTapWater()
 {
 
@@ -313,6 +331,12 @@ void SceneSP::RenderTapWater()
 	}
 }
 
+/******************************************************************************/
+/*!
+\brief
+renders tv in security room
+*/
+/******************************************************************************/
 void SceneSP::RenderTV()
 {
 	modelStack.PushMatrix();
@@ -325,6 +349,12 @@ void SceneSP::RenderTV()
 	modelStack.PopMatrix();
 }
 
+/******************************************************************************/
+/*!
+\brief
+renders the security camera in supermarket
+*/
+/******************************************************************************/
 void SceneSP::RenderCams()
 {
 	modelStack.PushMatrix();				//front left

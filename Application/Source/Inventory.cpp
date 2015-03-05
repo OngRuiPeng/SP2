@@ -10,6 +10,13 @@ CPP to update inventory when you checkout,pick up and put back item
 
 #include "SceneSP.h"
 
+/******************************************************************************/
+/*!
+\par item , and bool 
+\brief
+updates inventory by passing in an item and a bool to indicate whether to add that item or remove one item of the type
+*/
+/******************************************************************************/
 void SceneSP::updateInventory( CItem a , bool b )
 {
 	// to add item

@@ -22,6 +22,14 @@ bool ArmROn = false;
 ISoundEngine* engine3 = createIrrKlangDevice(ESOD_AUTO_DETECT,ESEO_MULTI_THREADED | ESEO_LOAD_PLUGINS | ESEO_USE_3D_BUFFERS);
 float WalkingSpeed = 10.f;
 float limit = 35;
+
+/******************************************************************************/
+/*!
+\par double dt (time)
+\brief
+updates npc's movement
+*/
+/******************************************************************************/
 void SceneSP::UpdateNPC(double dt)
 {
 	//Passerby2
@@ -150,6 +158,13 @@ void SceneSP::UpdateNPC(double dt)
 	//ISound* walkwalk = engine3->play3D("../irrKlang/media/walkm.mp3",vec3df(0,0,0),false);
 }
 
+/******************************************************************************/
+/*!
+\par double dt (time)
+\brief
+updates security guard's movement
+*/
+/******************************************************************************/
 void SceneSP::UpdateSG(double dt)
 {
 	Obj SG(SGPos + Vector3(1,20,1),SGPos - Vector3(1,4,1)); 
@@ -227,6 +242,13 @@ void SceneSP::UpdateSG(double dt)
 	}
 }
 
+/******************************************************************************/
+/*!
+\par double dt (time)
+\brief
+updates customer's movement
+*/
+/******************************************************************************/
 void SceneSP::UpdateCustomer(double dt)
 {
 	Obj Customer(Vector3(CashMovX , 20, CashMovZ) + Vector3(1.5, 1, 1.5), Vector3(CashMovX, 0, CashMovZ) - Vector3(1.5, 1, 1.5));

@@ -10,6 +10,12 @@ CPP to render characters based on variables ( to animate )
 
 #include "SceneSP.h"
 
+/******************************************************************************/
+/*!
+\brief
+function to render character 
+*/
+/******************************************************************************/
 void SceneSP::RenderCharacter()
 {
 	//Customer

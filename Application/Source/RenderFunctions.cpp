@@ -130,6 +130,12 @@ void SceneSP::RenderTextOnScreen(Mesh* mesh, std::string text, Color color, floa
 	glEnable(GL_DEPTH_TEST);
 }
 
+/******************************************************************************/
+/*!
+\brief
+renders a picture on screen
+*/
+/******************************************************************************/
 void SceneSP::RenderPictureOnScreen(Mesh* mesh, float sizeX , float sizeY, float x, float y)
 {
 	if(!mesh || mesh->textureID <= 0) //Proper error check

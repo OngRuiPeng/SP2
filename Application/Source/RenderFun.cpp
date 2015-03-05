@@ -4,13 +4,20 @@
 \author Jun Yan
 \par	nyp
 \brief
-CPP to define collision functions , including collision detection + response 
+CPP to define functions to render fun mode 
 */
 /******************************************************************************/
 
 #include "SceneSP.h"
 #include "Application.h"
 //ISoundEngine* engine4 = createIrrKlangDevice(ESOD_AUTO_DETECT,ESEO_MULTI_THREADED | ESEO_LOAD_PLUGINS | ESEO_USE_3D_BUFFERS);
+
+/******************************************************************************/
+/*!
+\brief
+Render the market, doors in fun mode
+*/
+/******************************************************************************/
 void SceneSP::RenderFunSMarket()
 {
 
@@ -235,6 +242,13 @@ void SceneSP::RenderFunSMarket()
 
 
 }
+
+/******************************************************************************/
+/*!
+\brief
+Render the "MLG" pictures and set position
+*/
+/******************************************************************************/
 void SceneSP::RenderFunPic()
 {
 	modelStack.PushMatrix();
@@ -278,6 +292,12 @@ void SceneSP::RenderFunPic()
 
 }
 
+/******************************************************************************/
+/*!
+\brief
+Render the shelf items in the correct position
+*/
+/******************************************************************************/
 void SceneSP::RenderFunStuff()
 {
 	for(int k= 0; k < 27; k++)

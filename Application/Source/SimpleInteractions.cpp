@@ -10,6 +10,13 @@ CPP to define functions of interactions in game
 
 #include "SceneSP.h"
 
+/******************************************************************************/
+/*!
+\par double dt (time)
+\brief
+for sliding of supermarket main door
+*/
+/******************************************************************************/
 void SceneSP::SlidingDoor(double dt)
 {
 	if ((camera.position.x <= 9 && camera.position.x >= -7 && camera.position.z >= -16 && camera.position.z <= 2) || PBPos.x <= 9 && PBPos.x >= -7 && PBPos.z >= -16 && PBPos.z <= 2)
@@ -31,6 +38,13 @@ void SceneSP::SlidingDoor(double dt)
 
 }
 
+/******************************************************************************/
+/*!
+\par double dt (time)
+\brief
+character jump
+*/
+/******************************************************************************/
 void SceneSP::Jump (double dt)
 {
 
@@ -66,6 +80,13 @@ void SceneSP::Jump (double dt)
 
 }
 
+/******************************************************************************/
+/*!
+\par double dt (time) and int
+\brief
+update function for items to slide on the conveyor belt
+*/
+/******************************************************************************/
 void SceneSP::updateItemSlide(double dt, int a )
 {
 	// to see which cashier table to render

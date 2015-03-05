@@ -51,6 +51,13 @@ SceneSP::~SceneSP()
 {
 }
 
+/******************************************************************************/
+/*!
+\par m_window and also size of console
+\brief
+initialises values declared in .h
+*/
+/******************************************************************************/
 void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 {
 	xpos = w / 2;
@@ -529,6 +536,12 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	wintimer = 0;
 }
 
+/******************************************************************************/
+/*!
+\brief
+reads item data from txt file and put data into a vector 
+*/
+/******************************************************************************/
 void SceneSP::InitItemData()
 {
 	ifstream datafile;
@@ -555,6 +568,12 @@ void SceneSP::InitItemData()
 	}
 }
 
+/******************************************************************************/
+/*!
+\brief
+reads font size from txt file into a vector
+*/
+/******************************************************************************/
 void SceneSP::readFontSize()
 {
 	ifstream datafile;
@@ -585,6 +604,12 @@ void SceneSP::readFontSize()
 	}
 }
 
+/******************************************************************************/
+/*!
+\brief
+generates a random check list for the checklist game mode 
+*/
+/******************************************************************************/
 void SceneSP::genCheckList()
 {
 	checklistitem = ItemData[0] ; checklistitem.setItemCount(rand() % 5 ); // reditos
@@ -616,6 +641,12 @@ void SceneSP::genCheckList()
 
 }
 
+/******************************************************************************/
+/*!
+\brief
+init bounding boxes for non-moving OBJs
+*/
+/******************************************************************************/
 void SceneSP::collisionOBJinit()
 {
 	//*****************************************(SKYBOX)
@@ -736,6 +767,12 @@ void SceneSP::collisionOBJinit()
 	OBJ.push_back(box1);
 }
 
+/******************************************************************************/
+/*!
+\brief
+init bounding boxes for items that can be picked up 
+*/
+/******************************************************************************/
 void SceneSP::collisionITEMSinit()
 {
 	// ******************************** (left shelf)
@@ -927,6 +964,12 @@ void SceneSP::collisionITEMSinit()
 
 }
 
+/******************************************************************************/
+/*!
+\brief
+init bounding boxes for items that is interactable
+*/
+/******************************************************************************/
 void SceneSP::collisionInteractionsinit()
 {
 	box1.set(Vector3(10,20,-5.5),Vector3(0.5,0,-7.5)); // left sliding door  0
@@ -984,6 +1027,12 @@ void SceneSP::collisionInteractionsinit()
 	Interactables.push_back(box1);
 }
 
+/******************************************************************************/
+/*!
+\brief
+init the skybox
+*/
+/******************************************************************************/
 void SceneSP::initSkybox()
 {
 	meshList[GEO_RIGHT] = MeshBuilder::GenerateQuad("right", Color(1, 1, 1), 1.f , 1.f);
@@ -1006,6 +1055,12 @@ void SceneSP::initSkybox()
 
 }
 
+/******************************************************************************/
+/*!
+\brief
+init npcs
+*/
+/******************************************************************************/
 void SceneSP::initNPC()
 {
 	//NPC
@@ -1071,6 +1126,13 @@ void SceneSP::initNPC()
 
 }
 
+/******************************************************************************/
+/*!
+\par time , m_window and console size
+\brief
+updates everything
+*/
+/******************************************************************************/
 void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 {
 	glfwGetCursorPos(m_window, &xpos, &ypos);
@@ -1683,6 +1745,12 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	engine->setListenerPosition(vec3df(camera.position.x,camera.position.y,camera.position.z),vec3df(view.x,view.y,view.z),vec3df(0,0,0),vec3df(-camera.up.x,-camera.up.y,-camera.up.z));
 }
 
+/******************************************************************************/
+/*!
+\brief
+for sounds
+*/
+/******************************************************************************/
 int SceneSP::Renderirr()
 {
 
@@ -1703,6 +1771,12 @@ int SceneSP::Renderirr()
 	return 0;
 }
 
+/******************************************************************************/
+/*!
+\brief
+render everything
+*/
+/******************************************************************************/
 void SceneSP::Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

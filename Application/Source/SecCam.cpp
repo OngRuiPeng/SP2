@@ -11,6 +11,14 @@ CPP to define functions for the security camera mode
 #include "SceneSP.h"
 #include "Application.h"
 ISoundEngine* engine2 = createIrrKlangDevice(ESOD_AUTO_DETECT,ESEO_MULTI_THREADED | ESEO_LOAD_PLUGINS | ESEO_USE_3D_BUFFERS);
+
+/******************************************************************************/
+/*!
+\par double dt ( time)
+\brief
+updates player to use security camera
+*/
+/******************************************************************************/
 void SceneSP::updateCam(double dt)
 {
 	if ( cam_state == NORMAL )

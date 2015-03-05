@@ -10,6 +10,12 @@ CPP to render items on the shelves
 
 #include "SceneSP.h"
 
+/******************************************************************************/
+/*!
+\brief
+render packs on shelves
+*/
+/******************************************************************************/
 void SceneSP::RenderPacks()
 {
 	modelStack.PushMatrix();		//ALL PUSH

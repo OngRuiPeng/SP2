@@ -10,7 +10,12 @@ CPP to render interactable OBJs in the supermarket
 
 #include "SceneSP.h"
 
-
+/******************************************************************************/
+/*!
+\brief
+renders OBJs that are interactable
+*/
+/******************************************************************************/
 void SceneSP::RenderInteractableObjs()
 {
 	modelStack.PushMatrix();					

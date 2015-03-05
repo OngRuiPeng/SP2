@@ -11,6 +11,12 @@ CPP to render inventory and also to update checklist
 #include "SceneSP.h"
 #include "Utility.h"
 
+/******************************************************************************/
+/*!
+\brief
+renders inventory 
+*/
+/******************************************************************************/
 void SceneSP::RenderInventory()
 {
 	GLfloat alpha = 0;
@@ -157,6 +163,12 @@ void SceneSP::RenderInventory()
 	}
 }
 
+/******************************************************************************/
+/*!
+\brief
+updates checklist when checking stuffs out at the cashier
+*/
+/******************************************************************************/
 void SceneSP::updateCheckList()
 {
 	for ( int y = 0 ; y < 9 ; y++ )

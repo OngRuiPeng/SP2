@@ -11,6 +11,12 @@ CPP to render the different menu of the game states
 #include "SceneSP.h"
 #include "Utility.h"
 
+/******************************************************************************/
+/*!
+\brief
+renders main menu
+*/
+/******************************************************************************/
 void SceneSP::RenderMainMenu()
 {
 	modelStack.PushMatrix();
@@ -22,6 +28,12 @@ void SceneSP::RenderMainMenu()
 	modelStack.PopMatrix();
 }
 
+/******************************************************************************/
+/*!
+\brief
+renders choose mode
+*/
+/******************************************************************************/
 void SceneSP::RenderChooseMode()
 {
 	modelStack.PushMatrix();
@@ -33,6 +45,12 @@ void SceneSP::RenderChooseMode()
 	modelStack.PopMatrix();
 }
 
+/******************************************************************************/
+/*!
+\brief
+renders busted screen
+*/
+/******************************************************************************/
 void SceneSP::RenderBusted()
 {
 	modelStack.PushMatrix();
@@ -44,6 +62,12 @@ void SceneSP::RenderBusted()
 	modelStack.PopMatrix();
 }
 
+/******************************************************************************/
+/*!
+\brief
+renders thief win screen
+*/
+/******************************************************************************/
 void SceneSP::RenderThiefWin()
 {
 	modelStack.PushMatrix();
@@ -57,6 +81,12 @@ void SceneSP::RenderThiefWin()
 	RenderTextOnScreen(meshList[GEO_MainMenuText], Convert(ItemsStolen), (1, 0, 1),2.5, 20.1, 15.3);
 }
 
+/******************************************************************************/
+/*!
+\brief
+renders check out win screen
+*/
+/******************************************************************************/
 void SceneSP::RenderCheckoutWin()
 {
 	modelStack.PushMatrix();
