@@ -1183,7 +1183,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		music = true;
 		cout << " Music Start!" << endl;
 	}
-
+	
 	if(Application::IsKeyPressed('1') && ChooseWhich == false && SecurityCam == false) //Return to main menu and re-initialize variables
 	{
 		gamestate = MAINMENU;
@@ -1229,25 +1229,23 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		win->setIsPaused(true);
 
 	}
-
+	
 	//Game states	 
 	if ( gamestate == MAINMENU )
 	{
 		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL); //enable cursor
 		camera.Reset();
 		int state = glfwGetMouseButton(m_window, GLFW_MOUSE_BUTTON_LEFT); // check for clicks
-		if( state == GLFW_PRESS && (*xposition > 481 && *xposition < 877 && *yposition > 220 && *yposition < 308) )
+		if( state == GLFW_PRESS && (*xposition > 479 && *xposition < 872 && *yposition > 306 && *yposition < 402) )
 		{
-
 			ISound* mainmenu = engine->play2D("../irrKlang/media/MMbutt.mp3", false); // Main main menu
 			gamestate = CHOOSEMODE;
 		}
-		else if( state == GLFW_PRESS && (*xposition > 481 && *xposition < 877 && *yposition > 360 && *yposition < 447))
+		else if( state == GLFW_PRESS && (*xposition > 479 && *xposition < 872 && *yposition > 471 && *yposition < 569))
 		{
 			ISound* mainmenu = engine->play2D("../irrKlang/media/MMbutt.mp3", false); // Main main menu	
 			exit(0);
 		}
-
 	}
 	
 	if ( gamestate == CHOOSEMODE ) // if game is in choosing mode screen
@@ -1255,7 +1253,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL); //enable cursor
 		/*camera.Update(dt, w / 2, h / 2, &xpos, &ypos);*/
 		int state = glfwGetMouseButton(m_window, GLFW_MOUSE_BUTTON_LEFT); // check for clicks
-		if( state == GLFW_PRESS && (*xposition > 92 && *xposition < 489 && *yposition > 119 && *yposition < 209))
+		if( state == GLFW_PRESS && (*xposition > 92 && *xposition < 489 && *yposition > 128 && *yposition < 228))
 		{
 
 			ISound* mainmenu = engine->play2D("../irrKlang/media/MMbutt.mp3", false); //sound when clicking the buttons
@@ -1263,21 +1261,21 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 			xpos = w / 2;
 			ypos = h / 2;
 		}
-		else if( state == GLFW_PRESS && (*xposition > 92 && *xposition < 489 && *yposition > 257 && *yposition < 347))
+		else if( state == GLFW_PRESS && (*xposition > 92 && *xposition < 489 && *yposition > 281 && *yposition < 381))
 		{
 			ISound* mainmenu = engine->play2D("../irrKlang/media/MMbutt.mp3", false); // Main main menu	
 			gamestate =	GAMECHECKOUT;
 			xpos = w / 2;
 			ypos = h / 2;
 		}
-		else if( state == GLFW_PRESS && (*xposition > 92 && *xposition < 489 && *yposition > 399 && *yposition < 488))
+		else if( state == GLFW_PRESS && (*xposition > 92 && *xposition < 489 && *yposition > 438 && *yposition < 538))
 		{
 			ISound* mainmenu = engine->play2D("../irrKlang/media/MMbutt.mp3", false); // Main main menu	
 			gamestate = GAMETHIEF;
 			xpos = w / 2;
 			ypos = h / 2;
 		}
-		else if( state == GLFW_PRESS && (*xposition > 92 && *xposition < 489 && *yposition > 543 && *yposition < 632))
+		else if( state == GLFW_PRESS && (*xposition > 92 && *xposition < 489 && *yposition > 596 && *yposition < 696))
 		{
 			ISound* mainmenu = engine->play2D("../irrKlang/media/MMbutt.mp3", false); // Main main menu	
 			ISound* SWE = engine->play2D("../irrKlang/media/SWE.mp3", false);
