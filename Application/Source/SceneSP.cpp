@@ -1184,7 +1184,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		cout << " Music Start!" << endl;
 	}
 	
-	if(Application::IsKeyPressed('1') && ChooseWhich == false && SecurityCam == false) //Return to main menu and re-initialize variables
+	if(Application::IsKeyPressed(VK_ESCAPE) && ChooseWhich == false && SecurityCam == false) //Return to main menu and re-initialize variables
 	{
 		gamestate = MAINMENU;
 		genCheckList();
@@ -1593,26 +1593,26 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	}
 
 	//Security room
-	if(Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 4 && ChooseWhich == false ) 
+	if(Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 4 && ChooseWhich == false )  //Opens up control panel
 	{
 		if(gamestate == GAMEFUN)
 			ISound* MGTC = engine->play2D("../irrKlang/media/MGTC.mp3", false);
 		ChooseWhich = true;
 	}
 
-	if(Application::IsKeyPressed('G') && ChooseWhich == true && gamestate == GAMETHIEF) // choose to deactivate detectors
+	if(Application::IsKeyPressed('G') && ChooseWhich == true && gamestate == GAMETHIEF) // Choose to deactivate detectors
 	{
 		ISound* button = engine->play2D("../irrKlang/media/Button.mp3", false); // Main main menu	
 		DetectorsOn = false;
 		ChooseWhich = false;
 	}
 
-	if (Application::IsKeyPressed('T') && ChooseWhich == true || inSecurityRoom == false) // choose to escape 
+	if (Application::IsKeyPressed('T') && ChooseWhich == true || inSecurityRoom == false) // Choose to escape 
 	{
 		ChooseWhich = false;
 	}
 
-	if (Application::IsKeyPressed('C') && ChooseWhich == true ) // choose camera 
+	if (Application::IsKeyPressed('C') && ChooseWhich == true ) // Choose camera 
 	{
 		if(gamestate== GAMEFUN)
 		{
@@ -1629,22 +1629,26 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		SecurityCam = true ;
 		ChooseWhich = false;
 	}
-
-	/*
-	if (Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 15 && lights[0].power != 0 && lights[1].power != 0 && time > 0.1 )
+	if (Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 15 && lights[0].power != 0 && lights[1].power != 0 && time > 1 )
 	{
-		ISound* Switch = engine->play2D("../irrKlang/media/switchoff.mp3", false); // Light switch in security room
-		//SWITCH OFF
-		lights[0].power = 0;
-		glUniform1f(m_parameters[U_LIGHT0_POWER], lights[0].power);
+		if(gamestate == GAMEFUN)
+		{
+			ISound* illuminati = engine->play2D("../irrKlang/media/SPOOKY.mp3", false); //Light switch in fun mode
+		}
+		else
+		{
+			ISound* Switch = engine->play2D("../irrKlang/media/switchoff.mp3", false); 
+			//SWITCH OFF
+			lights[0].power = 0;
+			glUniform1f(m_parameters[U_LIGHT0_POWER], lights[0].power);
 
-		lights[1].power = 0;
-		glUniform1f(m_parameters[U_LIGHT1_POWER], lights[1].power);
-
+			lights[1].power = 0;
+			glUniform1f(m_parameters[U_LIGHT1_POWER], lights[1].power);
+		}
 		time = 0 ;
 	}
 
-	if (Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 15 && lights[0].power == 0 && lights[1].power == 0 && time > 0.1 )
+	if (Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 15 && lights[0].power == 0 && lights[1].power == 0 && time > 1 )
 	{
 		ISound* Switch = engine->play2D("../irrKlang/media/switchon.mp3", false); // light switch
 		lights[0].power = 0.5;
@@ -1654,13 +1658,14 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		glUniform1f(m_parameters[U_LIGHT1_POWER], lights[1].power);
 
 		time = 0 ;
-	}*/
+	}
 
+	//Go into security camera mode
 	if ( SecurityCam == true )
 	{
 		updateCam(dt);
 	}
-
+	//Bool to check whether player is in security room or not
 	if ( camera.position.z > 37 && camera.position.z < 46 && camera.position.x < -11.3 && camera.position.x > -20.4 )
 	{
 		inSecurityRoom = true;
@@ -1691,37 +1696,6 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	if (ItemSlide == true) //Conveyor belt
 		updateItemSlide(dt,WhichCashier);
 
-
-	if (Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 15 && lights[0].power != 0 && lights[1].power != 0 && time > 1 )
-	{
-		if(gamestate == GAMEFUN)
-		{
-			ISound* illuminati = engine->play2D("../irrKlang/media/SPOOKY.mp3", false); //Light switch in fun mode
-		}
-		else
-		{
-			ISound* Switch = engine->play2D("../irrKlang/media/switchoff.mp3", false); // 
-			//SWITCH OFF
-			lights[0].power = 0;
-			glUniform1f(m_parameters[U_LIGHT0_POWER], lights[0].power);
-
-			lights[1].power = 0;
-			glUniform1f(m_parameters[U_LIGHT1_POWER], lights[1].power);
-		}
-		time = 0 ;
-	}
-
-	if (Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 15 && lights[0].power == 0 && lights[1].power == 0 && time > 1 )
-	{
-		ISound* Switch = engine->play2D("../irrKlang/media/switchon.mp3", false); // light switch
-		lights[0].power = 0.5;
-		glUniform1f(m_parameters[U_LIGHT0_POWER], lights[0].power);
-
-		lights[1].power = 2;
-		glUniform1f(m_parameters[U_LIGHT1_POWER], lights[1].power);
-
-		time = 0 ;
-	}
 
 	if(Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 16 && gamestate == GAMEFUN)
 	{	
@@ -1883,10 +1857,6 @@ void SceneSP::Render()
 		if ( ChooseWhich == true )
 		{
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press C to use camera", (1, 0, 1),2, 5, 6);
-			if ( gamestate == GAMETHIEF )
-			{
-				RenderTextOnScreen(meshList[GEO_MainMenuText], "Press G to deactivate detectors", (1, 0, 1),2, 5, 5);
-			}
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press T to escape", (1, 0, 1),2, 5, 4);
 		}
 		//Text for interactions
@@ -1956,7 +1926,10 @@ void SceneSP::Render()
 		if ( ChooseWhich == true ) 
 		{
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press C to use camera", (1, 0, 1),2, 5, 4);
-			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press G to deactivate detectors", (1, 0, 1),2, 5, 6);
+			if ( gamestate == GAMETHIEF )
+			{
+				RenderTextOnScreen(meshList[GEO_MainMenuText], "Press G to deactivate detectors", (1, 0, 1),2, 5, 6);
+			}
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press T to escape", (1, 0, 1),2, 5, 5);
 		}
 		if ( PickUpItem == true && Interact == false) 

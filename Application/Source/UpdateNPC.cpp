@@ -20,7 +20,7 @@ bool CashROn = false;
 bool ArmROn = false;
 
 ISoundEngine* engine3 = createIrrKlangDevice(ESOD_AUTO_DETECT,ESEO_MULTI_THREADED | ESEO_LOAD_PLUGINS | ESEO_USE_3D_BUFFERS);
-float WalkingSpeed = 10.f;
+float WalkingSpeed = 25.f;
 float limit = 35;
 
 /******************************************************************************/
@@ -52,7 +52,7 @@ void SceneSP::UpdateNPC(double dt)
 
 	if ( (AABBCheck(OBJ[0], Interactables[10])) == false)
 	{
-		Passerby2Dist += (5 * dt);
+		Passerby2Dist += (2.5 * dt);
 		if ( Passerby2Dist > 100 )
 		{
 			Passerby2Dist = 0;
