@@ -1227,7 +1227,8 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		SAD->setIsPaused(true);
 		alarm->setIsPaused(true);
 		win->setIsPaused(true);
-
+		securityDoorMove = 0;
+		toiletDoorMove = 0;
 	}
 	
 	//Game states	 
