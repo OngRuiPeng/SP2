@@ -22,7 +22,7 @@ void SceneSP::SlidingDoor(double dt)
 
 	else
 	{
-		if (DoorSlide < -0.8)
+		if (DoorSlide < -0.78)
 		{	
 			DoorSlide += (double)(3 * dt);
 		}
