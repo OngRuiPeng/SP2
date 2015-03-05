@@ -615,7 +615,7 @@ void SceneSP::genCheckList()
 	checklistitem = ItemData[0] ; checklistitem.setItemCount(rand() % 5 ); // reditos
 	CheckList[0] = checklistitem;
 
-	checklistitem = ItemData[1] ; checklistitem.setItemCount(rand() % 5 ); // campbella
+	checklistitem = ItemData[1] ; checklistitem.setItemCount(rand() % 2 ); // campbella
 	CheckList[1] = checklistitem;
 
 	checklistitem = ItemData[2] ; checklistitem.setItemCount(rand() % 5 ); // toblerone
@@ -627,13 +627,13 @@ void SceneSP::genCheckList()
 	checklistitem = ItemData[4] ; checklistitem.setItemCount(rand() % 5 ); // pizza
 	CheckList[4] = checklistitem;
 
-	checklistitem = ItemData[5] ; checklistitem.setItemCount(rand() % 5 ); // cactus juice
+	checklistitem = ItemData[5] ; checklistitem.setItemCount(rand() % 2 ); // cactus juice
 	CheckList[5] = checklistitem;
 
 	checklistitem = ItemData[6] ; checklistitem.setItemCount(rand() % 5 ); // chicken soup
 	CheckList[6] = checklistitem;
 
-	checklistitem = ItemData[7] ; checklistitem.setItemCount(rand() % 5 ); // maggie mien
+	checklistitem = ItemData[7] ; checklistitem.setItemCount(rand() % 5 ); // maggie noodles
 	CheckList[7] = checklistitem;
 
 	checklistitem = ItemData[8] ; checklistitem.setItemCount(rand() % 5 ); // macaroni
