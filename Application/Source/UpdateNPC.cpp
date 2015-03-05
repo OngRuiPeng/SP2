@@ -113,6 +113,7 @@ void SceneSP::UpdateNPC(double dt)
 			PBPos = Vector3(-55,4,-15);
 			PBTar = Vector3(-55, 4, -15);
 			RotatePB = 90;
+			PBStay = 9;
 		}
 		if ( PBPoint == 1 )
 		{
@@ -135,6 +136,7 @@ void SceneSP::UpdateNPC(double dt)
 		{
 			PBTar = Vector3(55,4,-15);
 			RotatePB = 90;	
+			PBStay = 9;
 		}
 		InitPBOnce = true;
 	}

@@ -1168,25 +1168,26 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL); //enable cursor
 		camera.Reset();
 		int state = glfwGetMouseButton(m_window, GLFW_MOUSE_BUTTON_LEFT); // check for clicks
-		if( state == GLFW_PRESS && (*xposition > 285 && *xposition < 515 && *yposition > 185 && *yposition < 263) )
+		if( state == GLFW_PRESS && (*xposition > 481 && *xposition < 877 && *yposition > 220 && *yposition < 308) )
 		{
 
 			ISound* mainmenu = engine->play2D("../irrKlang/media/MMbutt.mp3", false); // Main main menu
 			gamestate = CHOOSEMODE;
 		}
-		else if( state == GLFW_PRESS && (*xposition > 285 && *xposition < 515 && *yposition > 308 && *yposition < 383))
+		else if( state == GLFW_PRESS && (*xposition > 481 && *xposition < 877 && *yposition > 360 && *yposition < 447))
 		{
 			ISound* mainmenu = engine->play2D("../irrKlang/media/MMbutt.mp3", false); // Main main menu	
 			exit(0);
 		}
 
 	}
+	
 	if ( gamestate == CHOOSEMODE ) // if game is in choosing mode screen
 	{
 		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL); //enable cursor
 		/*camera.Update(dt, w / 2, h / 2, &xpos, &ypos);*/
 		int state = glfwGetMouseButton(m_window, GLFW_MOUSE_BUTTON_LEFT); // check for clicks
-		if( state == GLFW_PRESS && (*xposition > 54 && *xposition < 285 && *yposition > 101 && *yposition < 179))
+		if( state == GLFW_PRESS && (*xposition > 92 && *xposition < 489 && *yposition > 119 && *yposition < 209))
 		{
 
 			ISound* mainmenu = engine->play2D("../irrKlang/media/MMbutt.mp3", false); //sound when clicking the buttons
@@ -1194,21 +1195,21 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 			xpos = w / 2;
 			ypos = h / 2;
 		}
-		else if( state == GLFW_PRESS && (*xposition > 54 && *xposition < 285 && *yposition > 221 && *yposition < 279))
+		else if( state == GLFW_PRESS && (*xposition > 92 && *xposition < 489 && *yposition > 257 && *yposition < 347))
 		{
 			ISound* mainmenu = engine->play2D("../irrKlang/media/MMbutt.mp3", false); // Main main menu	
 			gamestate =	GAMECHECKOUT;
 			xpos = w / 2;
 			ypos = h / 2;
 		}
-		else if( state == GLFW_PRESS && (*xposition > 54 && *xposition < 285 && *yposition > 341 && *yposition < 419))
+		else if( state == GLFW_PRESS && (*xposition > 92 && *xposition < 489 && *yposition > 399 && *yposition < 488))
 		{
 			ISound* mainmenu = engine->play2D("../irrKlang/media/MMbutt.mp3", false); // Main main menu	
 			gamestate = GAMETHIEF;
 			xpos = w / 2;
 			ypos = h / 2;
 		}
-		else if( state == GLFW_PRESS && (*xposition > 54 && *xposition < 285 && *yposition > 466 && *yposition < 544))
+		else if( state == GLFW_PRESS && (*xposition > 92 && *xposition < 489 && *yposition > 543 && *yposition < 632))
 		{
 			ISound* mainmenu = engine->play2D("../irrKlang/media/MMbutt.mp3", false); // Main main menu	
 			ISound* SWE = engine->play2D("../irrKlang/media/SWE.mp3", false);
@@ -1236,16 +1237,17 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		camera.Reset();
 	}
 	
-	if ( ItemsInInventory == true && inSupermarket == false && DetectorsOn == true && gamestate != GAMEROAM && gamestate != GAMEFUN) // if players leave supermarket with items
+	if ( ItemsInInventory == true && inSupermarket == false && DetectorsOn == true && gamestate != GAMEROAM && gamestate != GAMEFUN & SecurityCam == false) // if players leave supermarket with items
 	{
 		Alarm = true;
 		Inventorytimer += dt;
 		if ( Inventorytimer > 5 && gamestate != GAMEBUSTED)
 		{
+			Alarm = false;
 			gamestate = GAMEBUSTED;
 		}
 	}
-	if ( ItemsInInventory == true && inSupermarket == false && DetectorsOn == false && gamestate == GAMETHIEF)
+	if ( ItemsInInventory == true && inSupermarket == false && DetectorsOn == false && gamestate == GAMETHIEF && SecurityCam == false)
 	{
 		gamestate = GAMEWINTHIEF;
 		wintimer += dt;
@@ -1264,14 +1266,15 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 
 	if ( gamestate == GAMEBUSTED )
 	{
+		alarm->setIsPaused(true);
 		SAD->setIsPaused(false);
 		camera.Reset();
 	}
 
 	//Entering the supermarket and playing chime
-	if ( inSupermarket == false) 
+	if ( inSupermarket == false ) 
 	{
-		if ( camera.position.z > -7 && camera.position.z < 49 && camera.position.x < 28 && camera.position.x > -27 )
+		if ( camera.position.z > -7 && camera.position.z < 49 && camera.position.x < 28 && camera.position.x > -27 && SecurityCam == false)
 		{
 			chime->setIsPaused(false);
 			inSupermarket = true;
@@ -1280,7 +1283,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	}
 	if ( inSupermarket == true )
 	{
-		if ( camera.position.z < -7 || camera.position.z > 49 || camera.position.x > 28 || camera.position.x < -27 ) 
+		if ( camera.position.z < -7 || camera.position.z > 49 || camera.position.x > 28 || camera.position.x < -27 && SecurityCam == false) 
 		{
 			inSupermarket = false;
 		}
@@ -1796,9 +1799,12 @@ void SceneSP::Render()
 		 //Text for control panel
 		if ( ChooseWhich == true )
 		{
-			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press C to use camera", (1, 0, 1),2, 5, 4);
-			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press G to deactivate detectors", (1, 0, 1),2, 5, 6);
-			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press T to escape", (1, 0, 1),2, 5, 5);
+			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press C to use camera", (1, 0, 1),2, 5, 6);
+			if ( gamestate == GAMETHIEF )
+			{
+				RenderTextOnScreen(meshList[GEO_MainMenuText], "Press G to deactivate detectors", (1, 0, 1),2, 5, 5);
+			}
+			RenderTextOnScreen(meshList[GEO_MainMenuText], "Press T to escape", (1, 0, 1),2, 5, 4);
 		}
 		//Text for interactions
 		if ( PickUpItem == true && Interact == false) 
@@ -1836,7 +1842,6 @@ void SceneSP::Render()
 
 		if ( Alarm == true )
 		{
-
 			detectors->setIsPaused(false);
 			RenderTextOnScreen(meshList[GEO_MainMenuText], "Please return in 5 seconds", (1, 0, 1),2, 5, 16);
 		}

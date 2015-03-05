@@ -207,18 +207,14 @@ void SceneSP::RenderFunSMarket()
 	}
 
 	modelStack.PushMatrix();
-	modelStack.Translate(0, -0.1, 0);
-	modelStack.Scale(1.1, 1.1, 1.1);
-	modelStack.Scale(3.5, 2.5, 3.5);
+	modelStack.Scale(3.5, 2.5, 3.2);
 	modelStack.Rotate(90, 0, 1, 0);
-	modelStack.Translate(1.9, 0, -DoorSlide + 0.6);
+	modelStack.Translate(1.9, 0, -DoorSlide + 0.68);
 	RenderMesh(meshList[GEO_DOOR], true);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(0, -0.1, 0);
-	modelStack.Scale(1.1, 1.1, 1.1);
-	modelStack.Scale(3.5, 2.5, 3.55);
+	modelStack.Scale(3.5, 2.5, 3.2);
 	modelStack.Rotate(90, 0, 1, 0);
 	modelStack.Translate(1.9, 0, DoorSlide);
 	RenderMesh(meshList[GEO_DOOR], true);
