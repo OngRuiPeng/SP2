@@ -1099,7 +1099,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	}
 
 	//Player actions
-	if (Application::IsKeyPressed(VK_SPACE) && JumpState == false && gamestate != MAINMENU && gamestate != CHOOSEMODE && gamestate != GAMEBUSTED && gamestate != GAMEWINTHIEF && gamestate != GAMEWINCHECKOUT ) //Space to jump
+	if (Application::IsKeyPressed(VK_SPACE) && JumpState == false && gamestate != MAINMENU && gamestate != CHOOSEMODE && gamestate != GAMEBUSTED && gamestate != GAMEWINTHIEF && gamestate != GAMEWINCHECKOUT && SecurityCam == false) //Space to jump
 	{
 		ISound* jump = engine->play2D("../irrKlang/media/Jump2.mp3", false); 
 		JumpState = true;
@@ -1227,6 +1227,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 
 	if ( Caught == true && gamestate == GAMETHIEF) // Caught by security guard in Thief Mode
 	{
+		detectors->setIsPaused(true);
 		gamestate = GAMEBUSTED;
 	}
 
@@ -1559,7 +1560,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		ChooseWhich = false;
 	}
 
-	
+	/*
 	if (Application::IsKeyPressed('E') && NoInteractableTargetcollision() == 15 && lights[0].power != 0 && lights[1].power != 0 && time > 0.1 )
 	{
 		ISound* Switch = engine->play2D("../irrKlang/media/switchoff.mp3", false); // Light switch in security room
@@ -1583,7 +1584,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		glUniform1f(m_parameters[U_LIGHT1_POWER], lights[1].power);
 
 		time = 0 ;
-	}
+	}*/
 
 	if ( SecurityCam == true )
 	{
@@ -1683,7 +1684,7 @@ int SceneSP::Renderirr()
 		return 0;
 	}
 
-	ISound* sound = engine->play3D("../irrKlang/media/icejj.mp3",vec3df(0.f,0.f,20.f), false);
+	ISound* sound = engine->play3D("../irrKlang/media/darudepasu.mp3",vec3df(0.f,0.f,20.f), false);
 
 	if(sound)
 	{

@@ -98,7 +98,7 @@ void SceneSP::updatecollision(double dt)
 
 	updateobj();
 
-	if (Application::IsKeyPressed('W') && gamestate != MAINMENU && gamestate != CHOOSEMODE && gamestate != GAMEWINCHECKOUT && gamestate != GAMEWINTHIEF && gamestate != GAMEBUSTED) 
+	if (Application::IsKeyPressed('W') && gamestate != MAINMENU && gamestate != CHOOSEMODE && gamestate != GAMEWINCHECKOUT && gamestate != GAMEWINTHIEF && gamestate != GAMEBUSTED && SecurityCam == false) 
 	{
 
 		walk->setAllSoundsPaused(false);
@@ -118,7 +118,7 @@ void SceneSP::updatecollision(double dt)
 
 		collisionprevent(OBJ,precollide,Interactables);
 	}
-	else if (Application::IsKeyPressed('S') && gamestate != MAINMENU && gamestate != CHOOSEMODE && gamestate != GAMEWINCHECKOUT && gamestate != GAMEWINTHIEF && gamestate != GAMEBUSTED) 
+	else if (Application::IsKeyPressed('S') && gamestate != MAINMENU && gamestate != CHOOSEMODE && gamestate != GAMEWINCHECKOUT && gamestate != GAMEWINTHIEF && gamestate != GAMEBUSTED && SecurityCam == false) 
 	{
 		walk->setAllSoundsPaused(false);
 		Vector3 view = (camera.target - camera.position).Normalize();
@@ -127,7 +127,7 @@ void SceneSP::updatecollision(double dt)
 
 		collisionprevent(OBJ,backside,Interactables);
 	}
-	else if (Application::IsKeyPressed('D') && gamestate != MAINMENU && gamestate != CHOOSEMODE && gamestate != GAMEWINCHECKOUT && gamestate != GAMEWINTHIEF && gamestate != GAMEBUSTED) 
+	else if (Application::IsKeyPressed('D') && gamestate != MAINMENU && gamestate != CHOOSEMODE && gamestate != GAMEWINCHECKOUT && gamestate != GAMEWINTHIEF && gamestate != GAMEBUSTED && SecurityCam == false) 
 	{
 		walk->setAllSoundsPaused(false);
 		Vector3 view = (camera.target - camera.position).Normalize();
@@ -137,7 +137,7 @@ void SceneSP::updatecollision(double dt)
 
 		collisionprevent(OBJ,right,Interactables);
 	}
-	else if (Application::IsKeyPressed('A') && gamestate != MAINMENU && gamestate != CHOOSEMODE && gamestate != GAMEWINCHECKOUT && gamestate != GAMEWINTHIEF && gamestate != GAMEBUSTED) 
+	else if (Application::IsKeyPressed('A') && gamestate != MAINMENU && gamestate != CHOOSEMODE && gamestate != GAMEWINCHECKOUT && gamestate != GAMEWINTHIEF && gamestate != GAMEBUSTED && SecurityCam == false) 
 	{
 		walk->setAllSoundsPaused(false);
 		Vector3 view = (camera.target - camera.position).Normalize();

@@ -209,14 +209,14 @@ void SceneSP::RenderFunSMarket()
 	modelStack.PushMatrix();
 	modelStack.Scale(3.5, 2.5, 3.2);
 	modelStack.Rotate(90, 0, 1, 0);
-	modelStack.Translate(1.9, 0, -DoorSlide + 0.68);
+	modelStack.Translate(2.1, 0, -DoorSlide + 0.68);
 	RenderMesh(meshList[GEO_DOOR], true);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Scale(3.5, 2.5, 3.2);
 	modelStack.Rotate(90, 0, 1, 0);
-	modelStack.Translate(1.9, 0, DoorSlide);
+	modelStack.Translate(2.1, 0, DoorSlide);
 	RenderMesh(meshList[GEO_DOOR], true);
 	modelStack.PopMatrix();
 
@@ -230,6 +230,7 @@ void SceneSP::RenderFunPic()
 	modelStack.PushMatrix();
 	modelStack.Translate(15,5,-6.75);
 	modelStack.Rotate(-90,1,0,0);
+	modelStack.Rotate(180,0,0,1);
 	modelStack.Scale(4,4,4);
 	RenderMesh(meshList[GEO_SNOOPDOG],false);
 	modelStack.PopMatrix();
