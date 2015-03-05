@@ -119,7 +119,7 @@ void SceneSP::RenderInventory()
 				RenderTextOnScreen(meshList[GEO_MainMenuText],Convert(InventoryData[x].getItemCount()), (1,0,0) , 1.5 , base + x * width , 0.65);
 				modelStack.PopMatrix();
 			}
-			else if ( InventoryData[x].getItemName() == "Maggie mien" )
+			else if ( InventoryData[x].getItemName() == "Maggie Noodles" )
 			{
 				modelStack.PushMatrix();
 				RenderPictureOnScreen(meshList[GEO_MAGGI],7, 4.5, 2.875 + x * 0.75, 0.65);

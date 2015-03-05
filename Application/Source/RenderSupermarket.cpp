@@ -231,7 +231,7 @@ void SceneSP::RenderSupermarket()
 		RenderMesh(meshList[GEO_CAN1], true);
 		modelStack.PopMatrix();
 	}
-	else if ( whichItem.getItemName() == "Maggie mien" )
+	else if ( whichItem.getItemName() == "Maggie Noodles" )
 	{
 		modelStack.PushMatrix();
 		modelStack.Translate(12 + translateItemX , 4 , 12 - translateItemZ) ;

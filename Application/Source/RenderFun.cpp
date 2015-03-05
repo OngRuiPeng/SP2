@@ -10,7 +10,6 @@ CPP to define functions to render fun mode
 
 #include "SceneSP.h"
 #include "Application.h"
-//ISoundEngine* engine4 = createIrrKlangDevice(ESOD_AUTO_DETECT,ESEO_MULTI_THREADED | ESEO_LOAD_PLUGINS | ESEO_USE_3D_BUFFERS);
 
 /******************************************************************************/
 /*!
