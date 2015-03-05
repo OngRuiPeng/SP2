@@ -526,6 +526,7 @@ void SceneSP::Init(GLFWwindow* m_window, float w, float h)
 	hittimer = 0.25;
 	Supermarkettimer = 0;
 	bool EnterSound = 0;
+	wintimer = 0;
 }
 
 void SceneSP::InitItemData()
@@ -586,31 +587,31 @@ void SceneSP::readFontSize()
 
 void SceneSP::genCheckList()
 {
-	checklistitem = ItemData[0] ; checklistitem.setItemCount(rand() % 11 ); // reditos
+	checklistitem = ItemData[0] ; checklistitem.setItemCount(rand() % 5 ); // reditos
 	CheckList[0] = checklistitem;
 
-	checklistitem = ItemData[1] ; checklistitem.setItemCount(rand() % 2 ); // campbella
+	checklistitem = ItemData[1] ; checklistitem.setItemCount(rand() % 5 ); // campbella
 	CheckList[1] = checklistitem;
 
-	checklistitem = ItemData[2] ; checklistitem.setItemCount(rand() % 9 ); // toblerone
+	checklistitem = ItemData[2] ; checklistitem.setItemCount(rand() % 5 ); // toblerone
 	CheckList[2] = checklistitem;
 
-	checklistitem = ItemData[3] ; checklistitem.setItemCount(rand() % 22 ); // dewtos
+	checklistitem = ItemData[3] ; checklistitem.setItemCount(rand() % 5 ); // dewtos
 	CheckList[3] = checklistitem;
 
-	checklistitem = ItemData[4] ; checklistitem.setItemCount(rand() % 6 ); // pizza
+	checklistitem = ItemData[4] ; checklistitem.setItemCount(rand() % 5 ); // pizza
 	CheckList[4] = checklistitem;
 
-	checklistitem = ItemData[5] ; checklistitem.setItemCount(rand() % 2 ); // cactus juice
+	checklistitem = ItemData[5] ; checklistitem.setItemCount(rand() % 5 ); // cactus juice
 	CheckList[5] = checklistitem;
 
 	checklistitem = ItemData[6] ; checklistitem.setItemCount(rand() % 5 ); // chicken soup
 	CheckList[6] = checklistitem;
 
-	checklistitem = ItemData[7] ; checklistitem.setItemCount(rand() % 6 ); // maggie mien
+	checklistitem = ItemData[7] ; checklistitem.setItemCount(rand() % 5 ); // maggie mien
 	CheckList[7] = checklistitem;
 
-	checklistitem = ItemData[8] ; checklistitem.setItemCount(rand() % 12 ); // macaroni
+	checklistitem = ItemData[8] ; checklistitem.setItemCount(rand() % 5 ); // macaroni
 	CheckList[8] = checklistitem;
 
 }
@@ -1098,7 +1099,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	}
 
 	//Player actions
-	if (Application::IsKeyPressed(VK_SPACE) && JumpState == false && gamestate != ( MAINMENU || CHOOSEMODE || GAMEBUSTED || GAMEWINTHIEF || GAMEWINCHECKOUT )) //Space to jump
+	if (Application::IsKeyPressed(VK_SPACE) && JumpState == false && gamestate != MAINMENU && gamestate != CHOOSEMODE && gamestate != GAMEBUSTED && gamestate != GAMEWINTHIEF && gamestate != GAMEWINCHECKOUT ) //Space to jump
 	{
 		ISound* jump = engine->play2D("../irrKlang/media/Jump2.mp3", false); 
 		JumpState = true;
@@ -1140,12 +1141,12 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 			Items[x].setEmpty(false);
 		}
 		
-
 		for ( int x = 0 ; x < Fun.size() ; x++ )
 		{
 			Fun[x].setEmpty(false);
 		}
 
+		toggleCheck = false;
 		DetectorsOn = true;
 		Caught = false;
 		CheckListDone = false;
@@ -1153,7 +1154,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		ItemsInInventory = false;
 		Inventorytimer = 0;
 		ItemsStolen = false;
-
+		wintimer = 0;
 		tap->setIsPaused(true);
 		SAD->setIsPaused(true);
 		alarm->setIsPaused(true);
@@ -1180,7 +1181,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		}
 
 	}
-	if ( gamestate == CHOOSEMODE )
+	if ( gamestate == CHOOSEMODE ) // if game is in choosing mode screen
 	{
 		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL); //enable cursor
 		/*camera.Update(dt, w / 2, h / 2, &xpos, &ypos);*/
@@ -1188,7 +1189,7 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		if( state == GLFW_PRESS && (*xposition > 54 && *xposition < 285 && *yposition > 101 && *yposition < 179))
 		{
 
-			ISound* mainmenu = engine->play2D("../irrKlang/media/MMbutt.mp3", false); // Main main menu	
+			ISound* mainmenu = engine->play2D("../irrKlang/media/MMbutt.mp3", false); //sound when clicking the buttons
 			gamestate = GAMEROAM;
 			xpos = w / 2;
 			ypos = h / 2;
@@ -1223,12 +1224,6 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		camera.Update(dt, w / 2, h / 2, &xpos, &ypos);
 	}
 
-	if ( gamestate == GAMEBUSTED )
-	{
-		SAD->setIsPaused(false);
-		camera.Reset();
-	}
-
 	if ( Caught == true && gamestate == GAMETHIEF) // Caught by security guard in Thief Mode
 	{
 		gamestate = GAMEBUSTED;
@@ -1237,9 +1232,43 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	if ( CheckListDone == true && gamestate == GAMECHECKOUT)
 	{
 		gamestate = GAMEWINCHECKOUT;
+		wintimer += dt;
 		camera.Reset();
 	}
-	//Entering
+	
+	if ( ItemsInInventory == true && inSupermarket == false && DetectorsOn == true && gamestate != GAMEROAM && gamestate != GAMEFUN) // if players leave supermarket with items
+	{
+		Alarm = true;
+		Inventorytimer += dt;
+		if ( Inventorytimer > 5 && gamestate != GAMEBUSTED)
+		{
+			gamestate = GAMEBUSTED;
+		}
+	}
+	if ( ItemsInInventory == true && inSupermarket == false && DetectorsOn == false && gamestate == GAMETHIEF)
+	{
+		gamestate = GAMEWINTHIEF;
+		wintimer += dt;
+		for ( int x = 0; x < InventoryData.size(); ++x )
+		{
+			ItemsStolen += InventoryData[x].getItemCount();
+		}
+		cout << ItemsStolen << endl;
+		camera.Reset();
+	}
+	if ( ItemsInInventory == true && inSupermarket == true ) // if players return to the supermarket
+	{
+		Alarm = false;
+		Inventorytimer = 0;
+	}
+
+	if ( gamestate == GAMEBUSTED )
+	{
+		SAD->setIsPaused(false);
+		camera.Reset();
+	}
+
+	//Entering the supermarket and playing chime
 	if ( inSupermarket == false) 
 	{
 		if ( camera.position.z > -7 && camera.position.z < 49 && camera.position.x < 28 && camera.position.x > -27 )
@@ -1263,30 +1292,6 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		chime->setIsPaused(true);
 	}	
 
-	if ( ItemsInInventory == true && inSupermarket == false && DetectorsOn == true && gamestate != GAMEROAM && gamestate != GAMEFUN) // if players leave supermarket with items
-	{
-		Alarm = true;
-		Inventorytimer += dt;
-		if ( Inventorytimer > 5 && gamestate != GAMEBUSTED)
-		{
-			gamestate = GAMEBUSTED;
-		}
-	}
-	if ( ItemsInInventory == true && inSupermarket == false && DetectorsOn == false && gamestate == GAMETHIEF)
-	{
-		gamestate = GAMEWINTHIEF;
-		for ( int x = 0; x < InventoryData.size(); ++x )
-		{
-			ItemsStolen += InventoryData[x].getItemCount();
-		}
-		cout << ItemsStolen << endl;
-		camera.Reset();
-	}
-	if ( ItemsInInventory == true && inSupermarket == true ) // if players return to the supermarket
-	{
-		Alarm = false;
-		Inventorytimer = 0;
-	}
 
 	updatecollision(dt) ;
 
@@ -1617,11 +1622,11 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	{
 		if(gamestate == GAMEFUN)
 		{
-			ISound* illuminati = engine->play2D("../irrKlang/media/SPOOKY.mp3", false);
+			ISound* illuminati = engine->play2D("../irrKlang/media/SPOOKY.mp3", false); //Light switch in fun mode
 		}
 		else
 		{
-			ISound* Switch = engine->play2D("../irrKlang/media/switchoff.mp3", false); // light switch
+			ISound* Switch = engine->play2D("../irrKlang/media/switchoff.mp3", false); // 
 			//SWITCH OFF
 			lights[0].power = 0;
 			glUniform1f(m_parameters[U_LIGHT0_POWER], lights[0].power);
@@ -1747,11 +1752,18 @@ void SceneSP::Render()
 	}
 	else if ( gamestate == GAMEWINCHECKOUT )
 	{
+		if ( wintimer < 0.1 ) 
+		{
+			win->setIsPaused(false);
+		}
 		RenderCheckoutWin();
 	}
 	else if ( gamestate == GAMEWINTHIEF )
 	{
-		win->setIsPaused(false);
+		if ( wintimer < 0.1 )
+		{
+			win->setIsPaused(false);
+		}
 		RenderThiefWin();
 	}
 	else if ( gamestate == GAMEBUSTED )

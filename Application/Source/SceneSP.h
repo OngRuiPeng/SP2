@@ -465,7 +465,7 @@ public:
 	Vector3 VectorFromSG;
 	float DistFromSG;
 	double Supermarkettimer;
-	
+	double wintimer;
 
 private:
 	unsigned m_vertexArrayID;

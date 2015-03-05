@@ -44,8 +44,8 @@ Application::~Application()
 
 void Application::Init()
 {
-	width = 800;
-	height = 600;
+	width = 1366;
+	height = 700;
 
 	//Set the error callback
 	glfwSetErrorCallback(error_callback);
@@ -65,7 +65,7 @@ void Application::Init()
 
 
 	//Create a window and create its OpenGL context
-	m_window = glfwCreateWindow(800, 600, "Computer Graphics", NULL, NULL);
+	m_window = glfwCreateWindow(width, height, "Computer Graphics", NULL, NULL);
 
 	//If the window couldn't be created
 	if (!m_window)
