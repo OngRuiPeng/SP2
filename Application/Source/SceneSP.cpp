@@ -1257,7 +1257,6 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 		{
 			ItemsStolen += InventoryData[x].getItemCount();
 		}
-		cout << ItemsStolen << endl;
 		camera.Reset();
 		
 		wintimer = 0;
@@ -1278,16 +1277,19 @@ void SceneSP::Update(double dt, GLFWwindow* m_window, float w, float h)
 	//Entering the supermarket and playing chime
 	if ( inSupermarket == false ) 
 	{
-		if ( camera.position.z > -7 && camera.position.z < 49 && camera.position.x < 28 && camera.position.x > -27 && SecurityCam == false)
+		if ( camera.position.z > -7 && camera.position.z < 49 && camera.position.x < 28 && camera.position.x > -27 /*&& SecurityCam == false*/)
 		{
-			chime->setIsPaused(false);
+			if ( inSecurityRoom == false )
+			{
+				chime->setIsPaused(false);
+			}
 			inSupermarket = true;
 			Supermarkettimer = 0 ;
 		}
 	}
 	if ( inSupermarket == true )
 	{
-		if ( camera.position.z < -7 || camera.position.z > 49 || camera.position.x > 28 || camera.position.x < -27 && SecurityCam == false) 
+		if ( camera.position.z < -7 || camera.position.z > 49 || camera.position.x > 28 || camera.position.x < -27 /*&& SecurityCam == false*/) 
 		{
 			inSupermarket = false;
 		}
